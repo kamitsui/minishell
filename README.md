@@ -1,15 +1,11 @@
 let's add useful links and information
 
-Program name
-minishell
-Turn in files
-Makefile, *.h, *.c
-Makefile
-NAME, all, clean, fclean, re
-Arguments
+Program name minishell
+Turn in files Makefile, *.h, *.c
+Makefile NAME, all, clean, fclean, re
 
 External functs.
-readline, rl_clear_history, rl_on_new_line,
+``` readline, rl_clear_history, rl_on_new_line,
 rl_replace_line, rl_redisplay, add_history,
 printf, malloc, free, write, access, open, read,
 close, fork, wait, waitpid, wait3, wait4, signal,
@@ -18,7 +14,7 @@ getcwd, chdir, stat, lstat, fstat, unlink, execve,
 dup, dup2, pipe, opendir, readdir, closedir,
 strerror, perror, isatty, ttyname, ttyslot, ioctl,
 getenv, tcsetattr, tcgetattr, tgetent, tgetflag,
-tgetnum, tgetstr, tgoto, tputs
+tgetnum, tgetstr, tgoto, tputs ```
 
 Libft authorized Yes
 
@@ -31,7 +27,7 @@ Your shell should:
 • Not use more than one global variable. Think about it. You will have to explain its purpose.
 • Not interpret unclosed quotes or special characters which are not required by the subject such as \ (backslash) or ; (semicolon).
 • Handle ’ (single quote) which should prevent the shell from interpreting the meta- characters in the quoted sequence.
-• Handle " (double quote) which should prevent the shell from interpreting the meta- characters in the quoted sequence except for $ (dollar sign).
+• Handle " (double quote) which should prevent the shell from interpreting the meta- characters in clesrthe quoted sequence except for $ (dollar sign).
 5
  Minishell As beautiful as a shell
 • Implement redirections:
