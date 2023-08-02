@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/07/26 13:15:48 by mogawa           ###   ########.fr        #
+#    Updated: 2023/08/02 14:52:35 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,10 @@ FILES		=	ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint ft_strlen ft_mem
 				ft_lstnew ft_lstadd_front ft_lstsize ft_lstlast ft_lstadd_back ft_lstdelone \
 				ft_lstclear ft_lstiter ft_lstmap \
 				ft_strcmp ft_strndup ft_cntchar ft_free_null ft_isspace ft_swap ft_get_int \
-				ft_lalloc ft_lalloc_utils ft_lstcalloc
+				ft_lalloc ft_lalloc_utils ft_lstcalloc \
+				ft_count_words ft_islower ft_isupper ft_isxdigit \
+				ft_itoa_binary ft_strdel ft_strjoin_free \
+				ft_strncat ft_strnequ ft_strnew ft_strnlen ft_strtok ft_strtol
 SRCS_DIR	=	./
 SRCS		=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS		=	$(SRCS:.c=.o)
@@ -58,6 +61,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: debug all clean fclean re
-
-
-

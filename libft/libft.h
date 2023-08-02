@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:40:49 by mogawa            #+#    #+#             */
-/*   Updated: 2023/07/26 14:58:39 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/08/02 14:52:53 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,19 @@ void	ft_lalloc_destroy(t_list *head);
 //* ft_lstcalloc.c
 void	*ft_lstcalloc(size_t count, size_t size, t_list **head);
 void	ft_free_lstcalloc(t_list **head);
+//*additional functions from kamitsui
+size_t	ft_count_words(char *str, char delimiter);
+int		ft_islower(int c);
+int		ft_isupper(int c);
+int		ft_isxdigit(int c);
+char	*ft_itoa_binary(int n);
+void	ft_strdel(char **as);
+char	*ft_strjoin_free(char const *s1, char const *s2);
+char	*ft_strncat(char *s1, const char *s2, size_t n);
+bool	ft_strnequ(char *s1, const char *s2, int n);
+char	*ft_strnew(size_t size);
+size_t	ft_strnlen(const char *s, size_t max_len);
+char	*ft_strtok(char *str, char const *sep);
+long	ft_strtol(const char *str, char **endptr, int base);
 
 #endif
