@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:40:49 by mogawa            #+#    #+#             */
-/*   Updated: 2023/07/26 22:24:18 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/07/26 14:58:39 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		ft_isdigit_hex(int c);//ft_isdigit.c
 //* ft_lcalloc.c & ft_lalloc_utils.c
 void	*ft_lalloc(size_t count, size_t size, t_list **head, int grp);
 void	ft_lfree(t_list **head, int grp);
-int		ft_lalloc_init(t_list *head);
+t_list	*ft_lalloc_init(void);
 void	ft_lalloc_destroy(t_list *head);
 //* ft_lstcalloc.c
 void	*ft_lstcalloc(size_t count, size_t size, t_list **head);

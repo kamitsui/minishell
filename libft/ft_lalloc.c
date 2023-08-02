@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:56:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/07/27 21:03:41 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/07/26 14:56:07 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ static void	ft_lfree_content(void *content)
 	t_mem	*heap;
 
 	heap = (t_mem *) content;
-	ft_free_null(heap->adr);
-	ft_free_null(heap);
+	free (heap->adr);
+	heap->adr = NULL;
+	free (heap);
+	heap = NULL;
 }
 
 /*
@@ -97,8 +99,8 @@ void	*ft_lalloc(size_t count, size_t size, t_list **head, int grp)
 	elem = ft_lstnew(mem);
 	if (!elem)
 	{
-		ft_free_null(mem->adr);
-		ft_free_null(mem);
+		free(mem->adr);
+		free(mem);
 		return (NULL);
 	}
 	ft_lstadd_back(head, elem);
