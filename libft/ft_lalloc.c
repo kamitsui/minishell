@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:56:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/07/26 14:56:07 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/08/03 16:57:49 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,14 @@ static t_mem	*ft_get_tmem_struct(size_t count, size_t size, int grp)
 }
 
 /*
-*param #1:	エレメント数
-*param #2:	各エレメントのサイズ
-*param #3:	ft_lalloc_init()で初期化されたリストの先頭
-!			ft_lalloc_init()で初期化し、ft_lalloc_destroy()で終了処理が必要
-*return:	確保された領域へのポインタ
-*func:		Allocates memory and fills it with zeros
-*			address is stored to adrs linked list
-*free:		必要
+* @brief			０埋めされたメモリ領域を確保し、その住所をリストに格納
+* @param[in]		count number of elements
+* @param[in]		size size of each element
+* @param[in,out]	**head ft_lalloc_init()で初期化されたリストの先頭
+* @param[in]		grp リストに確保した領域の所属グループ
+* @return			確保された領域へのポインタ
+* @attention 		ft_lalloc_init()で初期化し、ft_lalloc_destroy()で終了処理が必要
+* @attention		Free必要
 */
 void	*ft_lalloc(size_t count, size_t size, t_list **head, int grp)
 {

@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:50:40 by mogawa            #+#    #+#             */
-/*   Updated: 2023/07/24 17:05:44 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/08/03 16:42:23 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,34 +73,34 @@ static long	ft_check_overflow_atoi(bool is_minus, long num, int base, char c)
 *func	CHAR型の数値をLONG型の数値に変換。前のスペースは無視
 *		2, 8, 10, 16進数に対応
 */
-long	ft_strtol(const char *str, char **endptr, int base_num)
-{
-	bool		is_minus;
-	long		num;
-	long		vetted_num;
-	const char	*s;
-	int			base;
+// long	ft_strtol(const char *str, char **endptr, int base_num)
+// {
+// 	bool		is_minus;
+// 	long		num;
+// 	long		vetted_num;
+// 	const char	*s;
+// 	int			base;
 
-	base = base_num;
-	is_minus = false;
-	s = ft_prefix_atoi(str, &is_minus, &base);
-	num = 0;
-	while (ft_isdigit_hex(*s) && *s)
-	{
-		vetted_num = ft_check_overflow_atoi(is_minus, num, base, *s);
-		if (vetted_num == LONG_MAX || vetted_num == LONG_MIN)
-			return (vetted_num);
-		else
-			num = vetted_num;
-		s++;
-	}
-	if (endptr)
-		*endptr = (char *)s;
-	if (is_minus == true)
-		return (num * -1);
-	else
-		return (num);
-}
+// 	base = base_num;
+// 	is_minus = false;
+// 	s = ft_prefix_atoi(str, &is_minus, &base);
+// 	num = 0;
+// 	while (ft_isdigit_hex(*s) && *s)
+// 	{
+// 		vetted_num = ft_check_overflow_atoi(is_minus, num, base, *s);
+// 		if (vetted_num == LONG_MAX || vetted_num == LONG_MIN)
+// 			return (vetted_num);
+// 		else
+// 			num = vetted_num;
+// 		s++;
+// 	}
+// 	if (endptr)
+// 		*endptr = (char *)s;
+// 	if (is_minus == true)
+// 		return (num * -1);
+// 	else
+// 		return (num);
+// }
 
 /*
 *param 	CHAR型の数値(char *str)
