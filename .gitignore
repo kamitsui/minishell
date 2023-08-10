@@ -3,5 +3,6 @@
 !Makefile
 !*.c
 !*.h
+!*.sh
 !.gitignore
 !.vscode
