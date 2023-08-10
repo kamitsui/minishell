@@ -1,0 +1,99 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expansion.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/10 12:22:57 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/08/10 12:24:57 by kamitsui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/**
+ * @brief Expansion 展開
+ *
+ * @param head
+ * @param Unknown
+ *
+ * @return 
+ */
+t_list	*expansion(t_ast *head, )
+{
+	// メモ　展開の順序
+	// ブレース展開、チルダ展開、パラメータ・ 変数・算術式展開、コマンド置換 (左から右へ)、単語分割、パス名展開
+	// プロセス置換もサポートするバージョンがある。
+	//
+	// 1. Parameter and Variable Expansion　変数展開
+	//      before:$VAR  after:variable
+	//
+	// 2. Brace Expansion  中括弧の展開 {}
+	//      before: pre{one,two,three}post
+	//      after : preonepost pretwopost prethreepost
+	//
+	// 3. Word_split  単語区切り
+	//      変数展開の時に、デフォルト(unset IFS)なら' 'スペースで区切られる。
+	//      区切り文字(IFS="s")がセットされていると、' 'スペースではなく"s"で
+	//
+	//      デフォルト(unset IFS)  ' 'で区切られる。
+	//             VAR="sss-a   -l"
+	//             bash-3.2$ VAR="sss-a   -l"
+	//             bash-3.2$ ls $VAR
+	//             ls: -l: No such file or directory
+	//             ls: sss-a: No such file or directory
+	//
+	//      IFS="s"  's'で区切られる。 ' 'は単語の文字続きとして認識される。
+	//             VAR="sss-a   -l"  IFS="s"
+	//             bash-3.2$ ls $VAR
+	//             ls: : No such file or directory
+	//             ls: : No such file or directory
+	//             ls: : No such file or directory
+	//             ls: -a   -l: No such file or directory
+	// 4. 
+	//
+	//       memo
+	//             bash-3.2$ VAR="sss-asss-l"
+	//             bash-3.2$ $VAR
+	//             bash: sss-asss-l: command not found
+	//             bash-3.2$ ls $VAR
+	//             ls: sss-asss-l: No such file or directory
+	//             bash-3.2$ IFS="s"
+	//             bash-3.2$ $VAR
+	//             bash: : command not found
+	//             bash-3.2$ echo $VAR
+	//                -a   -l
+	//
+	//             bash-3.2$ ls $VAR
+	//             ls: : No such file or directory
+	//             ls: : No such file or directory
+	//             ls: : No such file or directory
+	//             ls: : No such file or directory
+	//             ls: : No such file or directory
+	//             ls: -a: No such file or directory
+	//             ls: -l: No such file or directory
+	//             bash-3.2$ unset IFS
+	//             bash-3.2$ echo $VAR
+	//             sss-asss-l
+	//             bash-3.2$ ls $VAR
+	//             ls: sss-asss-l: No such file or directory
+	//
+	//             bash-3.2$ VAR="sss-a   -lss"
+	//             bash-3.2$ ls $VAR
+	//             ls: : No such file or directory
+	//             ls: : No such file or directory
+	//             ls: : No such file or directory
+	//             ls: : No such file or directory
+	//             ls: -a   -l: No such file or directory
+	//
+	//             bash-3.2$ ls " " " " " " "-a" " " " " " " "-l"
+	//             ls:  : No such file or directory
+	//             ls:  : No such file or directory
+	//             ls:  : No such file or directory
+	//             ls:  : No such file or directory
+	//             ls:  : No such file or directory
+	//             ls:  : No such file or directory
+	//             ls: -a: No such file or directory
+	//             ls: -l: No such file or directory
+	//
+	// return(ast);
+}
