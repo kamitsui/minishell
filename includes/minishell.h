@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/10 13:09:01 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/10 22:24:40 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,36 +40,32 @@ typedef struct s_token
 	int		type;
 }	t_token ;
 
-
 /**
- * @brief list の構造体。
+ * @brief 環境変数のハッシュテーブル
  */
-typedef struct s_list
+typedef struct s_hash
 {
-	void	*contents;
-	t_list	*next;
-}	t_list;
+	char			*key;
+	char			*value;
+	struct s_hash	*next;
+}	t_hash;
 
 /**
  * @brief 実行や展開の時に必要なデータ構造
  */
 typedef struct s_data
 {
-	t_hash	env;
+	t_hash	*env;
 	char	*current_dir;
 	// ...追加していくかも。。。
 }	t_data;
 
-/**
- * @brief 環境変数のハッシュテーブル
- */
-typedef struct s_hash
-{
-	char	*key;
-	char	*value;
-	t_hash	*next;
-}	t_hash;
 
+/**
+ * @brief minishellで使う関数
+ */
+//char	**input(void);
+char	*input(void);
 #endif
 
 // void

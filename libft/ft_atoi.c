@@ -6,63 +6,63 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:50:40 by mogawa            #+#    #+#             */
-/*   Updated: 2023/08/03 16:42:23 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/08/10 22:07:24 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static const char	*ft_prefix_atoi(const char *s, bool *is_minus, int *base)
-{
-	while (ft_isspace(*s))
-		s++;
-	if (*s == '-')
-		*is_minus = true;
-	if (*s == '-' || *s == '+')
-		s++;
-	if (*base != 10 && *s == '0')
-	{
-		s++;
-		if (*s == 'x')
-			*base = 16;
-		if (*s == 'b')
-			*base = 2;
-		if (*s == 'o')
-			*base = 8;
-		s++;
-	}
-	return (s);
-}
+//static const char	*ft_prefix_atoi(const char *s, bool *is_minus, int *base)
+//{
+//	while (ft_isspace(*s))
+//		s++;
+//	if (*s == '-')
+//		*is_minus = true;
+//	if (*s == '-' || *s == '+')
+//		s++;
+//	if (*base != 10 && *s == '0')
+//	{
+//		s++;
+//		if (*s == 'x')
+//			*base = 16;
+//		if (*s == 'b')
+//			*base = 2;
+//		if (*s == 'o')
+//			*base = 8;
+//		s++;
+//	}
+//	return (s);
+//}
 
-static long	get_digit_atoi(char c)
-{
-	if (ft_isdigit(c))
-		return (c - '0');
-	else if ('A' <= c && c <= 'F')
-		return (c - 'A' + 10);
-	else if ('a' <= c && c <= 'f')
-		return (c - 'a' + 10);
-	else
-		return (0);
-}
+//static long	get_digit_atoi(char c)
+//{
+//	if (ft_isdigit(c))
+//		return (c - '0');
+//	else if ('A' <= c && c <= 'F')
+//		return (c - 'A' + 10);
+//	else if ('a' <= c && c <= 'f')
+//		return (c - 'a' + 10);
+//	else
+//		return (0);
+//}
 
-static long	ft_check_overflow_atoi(bool is_minus, long num, int base, char c)
-{
-	long	digit;
-
-	if (!is_minus && num > LONG_MAX / base)
-		return (LONG_MAX);
-	if (is_minus && num > LONG_MAX / base)
-		return (LONG_MIN);
-	num = num * base;
-	digit = get_digit_atoi(c);
-	if (!is_minus && num > LONG_MAX - digit)
-		return (LONG_MAX);
-	if (is_minus && num - 1 > LONG_MAX - digit)
-		return (LONG_MIN);
-	num = num + digit;
-	return (num);
-}
+//static long	ft_check_overflow_atoi(bool is_minus, long num, int base, char c)
+//{
+//	long	digit;
+//
+//	if (!is_minus && num > LONG_MAX / base)
+//		return (LONG_MAX);
+//	if (is_minus && num > LONG_MAX / base)
+//		return (LONG_MIN);
+//	num = num * base;
+//	digit = get_digit_atoi(c);
+//	if (!is_minus && num > LONG_MAX - digit)
+//		return (LONG_MAX);
+//	if (is_minus && num - 1 > LONG_MAX - digit)
+//		return (LONG_MIN);
+//	num = num + digit;
+//	return (num);
+//}
 
 /*
 *param	CHAR型(char *str)
