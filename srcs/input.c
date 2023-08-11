@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/10 22:24:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/11 21:18:50 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 char	*input(void)
 {
 	char	*line;
-	int		i;
+//	int		i;
 
-	i = 0;
+//	i = 0;
 	while (1)
 	{
 		//*lines[i] = *readline("minishell> ");
@@ -43,7 +43,7 @@ char	*input(void)
 //		}
 		//lines[i] = readline("minishell> ");
 //		printf("%s\n", lines[i]);
-		printf("%s\n", line);
+		printf("%s\t%p\n", line, line);
 		if (ft_strcmp(line, "exit") == 0) {
 			free(line);
 			break;
@@ -53,7 +53,7 @@ char	*input(void)
 //			break;
 //		}
 //		system(*input); // execute command
-		i++;
+//		i++;
 //		printf("%s\n", lines[i]);
 		printf("%s\n", line);
 	}
