@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/08/11 21:38:24 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/11 23:12:16 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ RM			=	rm -f
 
 # Sources
 FILES		=	main \
-				input
+				input \
+				error
 BONUS_FILES	=	
 SRCS_DIR	=	./srcs/
 BONUS_DIR	=	./srcs_bonus/
@@ -40,7 +41,7 @@ SRCS		=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 SRCS_B		=	$(addprefix $(BONUS_DIR), $(addsuffix .c, $(BONUS_FILES)))
 
 # Include Header
-INC			=	-Iincludes -Ilibft
+INC			=	-Iincludes
 
 # Objects
 OBJS		=	$(SRCS:.c=.o)

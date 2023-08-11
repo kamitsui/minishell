@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/10 22:24:40 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/11 23:09:13 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,9 @@ typedef struct s_data
 /**
  * @brief minishellで使う関数
  */
-//char	**input(void);
-char	*input(void);
+char	**input(char **line);
+void	line_free(char **line);
+//char	*input(void);
 #endif
 
 // void

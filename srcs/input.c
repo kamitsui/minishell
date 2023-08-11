@@ -6,13 +6,14 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/11 21:18:50 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/11 23:09:56 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #define BUFFER_SIZE 1024
 
 #include "minishell.h"
+#include "error_minishell.h"
 #include "libft.h"
 #include <readline/readline.h>
 
@@ -21,44 +22,32 @@
  *
  * @return 型：char *
  */
-char	*input(void)
+char	**input(char **line)
 {
-	char	*line;
-//	int		i;
+//	char	*line[100];
+//	char	*line;
+	int		i;
 
-//	i = 0;
+	i = 0;
 	while (1)
 	{
-		//*lines[i] = *readline("minishell> ");
-		line = readline("minishell> ");
-		if (line == NULL)
+		line[i] = readline("minishell> ");
+//		line = readline("minishell> ");
+		if (line[i] == NULL)
 		{
 			printf("line == NULL\n");
-			exit (1);
+			line_free(line);
+			error_code(ERR_READLINE);
 		}
-//		if (lines[i] == NULL)
-//		{
-//			printf("lines[i] == NULL\n");
-//			exit (1);
-//		}
-		//lines[i] = readline("minishell> ");
-//		printf("%s\n", lines[i]);
-		printf("%s\t%p\n", line, line);
-		if (ft_strcmp(line, "exit") == 0) {
-			free(line);
+		if (ft_strcmp(line[i], "exit") == 0) {
+			free(line[i]);
 			break;
 		}
-//		if (ft_strcmp(lines[i], "exit") == 0) {
-//			free(lines[i]);
-//			break;
-//		}
-//		system(*input); // execute command
-//		i++;
-//		printf("%s\n", lines[i]);
-		printf("%s\n", line);
+		printf("%s\t%p\n", line[i], line[i]);
+		i++;
 	}
+	line[i] = NULL;
 	return (line);
-//	return (lines);
 }
 
 	// char	**lines;
