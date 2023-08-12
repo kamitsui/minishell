@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/11 23:09:13 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/11 23:32:37 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define TOK_DQUOTED	0x00001000
 # define TOK_SQUOTED	0x00002000
 # define TOK_VAR		0x00004000
+
+# define BUFFER_SIZE	100
 
 /**
  * @brief tokenizeで使う構造体

@@ -6,11 +6,9 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/11 23:09:56 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/12 15:08:44 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#define BUFFER_SIZE 1024
 
 #include "minishell.h"
 #include "error_minishell.h"
@@ -24,18 +22,14 @@
  */
 char	**input(char **line)
 {
-//	char	*line[100];
-//	char	*line;
 	int		i;
 
 	i = 0;
 	while (1)
 	{
 		line[i] = readline("minishell> ");
-//		line = readline("minishell> ");
 		if (line[i] == NULL)
 		{
-			printf("line == NULL\n");
 			line_free(line);
 			error_code(ERR_READLINE);
 		}
@@ -43,7 +37,8 @@ char	**input(char **line)
 			free(line[i]);
 			break;
 		}
-		printf("%s\t%p\n", line[i], line[i]);
+		printf("%s\t%p\n", line[i], line[i]);// for debug
+		// if (i == BUFF_SIZE)  .....
 		i++;
 	}
 	line[i] = NULL;
@@ -53,10 +48,10 @@ char	**input(char **line)
 	// char	**lines;
 	// 例　下記をリードラインする。　\0までの文字列を返す。
 	//
-	// lines[0]  echo "aaa"\n
-	// lines[1]  ls -l\n
-	// lines[2]  | cat -e\n
-	// lines[3]  '\0'<-ここまで
-	// lines[4]  NULL
+	// lines[0]  "echo aaa\"
+	// lines[1]  "ls -l\"
+	// lines[2]  "| cat -e\"
+	// lines[3]  "exit" or '\n' or ^D <-ここまで
+	// lines[3]  NULL
 	//
 	// return(lines);
