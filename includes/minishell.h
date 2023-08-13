@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/11 23:32:37 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/13 17:44:03 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
  */
 typedef struct s_token
 {
-	char	**var;
+	char	*var;
 	int		type;
 }	t_token ;
 
