@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inc_connect.c                                      :+:      :+:    :+:   */
+/*   ft_substr_exist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:27:09 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/14 12:28:11 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:08:59 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenize.h"
 #include "libft.h"
 #include <stdlib.h>
 #include <stdbool.h>
 
 /**
- * @brief lineの中に <connector> があるか調べる
+ * @brief 文字列(haystack)の内に文字列(needle)の存在を調べる関数
  *
- * @param line readlineで読み込んだ <command-line> １行分
+ * @param haystack　検索する場所
+ * @param needle　　調べる部分文字列
  *
- * @return true or false (bool型)
+ * @return true:存在する  false:存在しない
  */
-bool	inc_connect(char *line)
+bool	ft_substr_exist(char *haystack, char *needle)
 {
 	size_t	len;
 
-	len = ft_strlen(line);
-	return (ft_strnstr(line, CONNECT_AND, len) != NULL ||
-			ft_strnstr(line, CONNECT_OR, len) != NULL);
+	len = ft_strlen(haystack);
+	return (ft_strnstr(haystack, needle, len) != NULL ||
+			ft_strnstr(haystack, needle, len) != NULL);
 }

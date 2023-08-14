@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:26:16 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/14 13:04:10 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:26:52 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  *
  * @param line readlineで読み込んだ <command-line> １行分
  *
- * @return 構造体tokens
+ * @return 構造体tokens (呼び出し側でfree)
  */
 t_token	*tokenize(char *line)
 {
@@ -33,11 +33,12 @@ t_token	*tokenize(char *line)
 	tokens = (t_token *)malloc(sizeof(t_token) * (size + 1));
 	i = 0;
 	tokens[i].var = get_next_token(line, CONNECT_AND);
-//	tokens[i].type = get_type(tokens[i].var);
+	tokens[i].type = get_token_type(tokens[i].var);
 	while (tokens[i].var != NULL)
 	{
 		i++;
 		tokens[i].var = get_next_token(NULL, CONNECT_AND);
+		tokens[i].type = get_token_type(tokens[i].var);
 	}
 	return (tokens);
 }

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:04:36 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/14 10:58:50 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:00:03 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ void	debug_tokenize(t_token *tokens)
 	i = 0;
 	while (tokens[i].var != NULL)
 	{
-		ft_printf("tokens[%d].var %p [%s]\n", i, tokens[i].var, tokens[i].var);
+		ft_printf("tokens[%d].var %p [%s]\ttokens[%d].type %d\n"
+				, i, tokens[i].var, tokens[i].var
+				, i, tokens[i].type);
 		i++;
 	}
 	ft_printf("\x1B[0m\n\n"); // Reset colors to default

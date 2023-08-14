@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:22:39 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/14 12:24:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:13:45 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ size_t	count_tokens(char *line)
 	size = 0;
 	if (*line == '\0')
 		return (size);
-	if (inc_connect(line))
+	if (ft_substr_exist(line, CONNECT_AND))
 	{
 		size++;
-		while (inc_connect(line))
+		while (ft_substr_exist(line, CONNECT_AND))
 		{
 			if (ft_strnequ(line, CONNECT_AND, connect_len) == false)
 				size++;

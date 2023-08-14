@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/08/14 13:17:29 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/14 15:10:00 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ SRCS = main.c \
 	   input.c \
 	   tokenize.c \
 	   get_next_token.c \
+	   get_token_type.c \
 	   count_tokens.c \
-	   inc_connect.c \
 	   error.c \
 	   util_free.c \
 	   debug.c
@@ -33,7 +33,8 @@ SRCS_B =
 
 # Directories
 SRCS_DIR = srcs \
-		   srcs/tokenize_utils
+		   srcs/tokenize_utils \
+		   srcs/debug
 SRCS_B_DIR = srcs_bonus
 OBJS_DIR = objs
 OBJS_B_DIR = objs_b
@@ -48,7 +49,7 @@ CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 LFLAGS		=	-lreadline
 DEP_CF		=	-MMD -MP -MF $(@:$(OBJS_DIR)/%.o=$(DEPS_DIR)/%.d)
-LD_CD = -g -fsanitize=address
+LD_CF = -g -fsanitize=address
 INC = -Iincludes
 
 # Command
@@ -65,6 +66,7 @@ $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(DEPS_DIR)
 	$(CC) $(CFLAGS) $(INC) $(DEP_CF) -c $< -o $@
+#	$(CC) $(CFLAGS) $(INC) $(DEP_CF) $(LD_CF) -c $< -o $@
 
 $(DEPS_DIR)/%.d: %.c
 	@mkdir -p $(DEPS_DIR)
@@ -75,6 +77,7 @@ all: $(NAME)
 # Mandatory Target
 $(NAME): $(LIBFT) $(LIB_PRINTF) $(OBJS)
 	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(LIB_PRINTF) -o $(NAME)
+#	$(CC) $(CFLAGS) $(LFLAGS) $(LD_CF) $(OBJS) $(LIB_PRINTF) -o $(NAME)
 
 # Bonus Target
 bonus: $(NAME)_bonus
