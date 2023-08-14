@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:40:49 by mogawa            #+#    #+#             */
-/*   Updated: 2023/08/14 15:09:39 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:22:17 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ size_t	ft_strnlen(const char *s, size_t max_len);
 char	*ft_strtok(char *str, char const *sep);
 long	ft_strtol(const char *str, char **endptr, int base);
 bool	ft_substr_exist(char *haystack, char *needle);
+bool	ft_isenclosed(const char *str, char start, char end);
 
 #endif
