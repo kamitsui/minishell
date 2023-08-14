@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 13:49:51 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/14 15:14:12 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:51:14 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,36 @@
 #include "libft.h"
 #include "ft_printf.h"
 
+/**
+ * @brief 文字列のタイプを調べて分類分けする。
+ *
+ * @param var 文字列 <connecotor> か <command> のいずれか
+ *
+ * @return 該当するタイプのbitを立てる
+ */
 int	get_token_type(char *var)
 {
+	int	type;
+
+	type = 0;
 	if (var == NULL)
 		return (TOK_END);
-	if (ft_substr_exist(var, CONNECT_AND))
-		return (TOK_CON_AND);
-	if (ft_strnstr(var, "|", ft_strlen(var)))
-		return (TOK_PIPE_COM);
-	return (TOK_COMMAND);
+	if (ft_substr_exist(var, CONNECT_AND) || ft_substr_exist(var, CONNECT_OR))
+	{
+		type |= TOK_CONNECT;
+		if (ft_substr_exist(var, CONNECT_AND))
+			type |= TOK_CON_AND;
+		else
+			type |= TOK_CON_OR;
+	}
+	else
+		type |= TOK_COMMAND;
+	return (type);
 }
+// (NGなケース)
+// line [echo "&&"]
+//  本来は var[0] [echo "&&"]  type = TOK_COMMAND
+//  現状は var[0] [echo "]     type = TOK_COMMAND
+//         var[1] [&&]         type = TOK_CON_AND
+//         var[2] ["]          type = TOK_CON_AND
+// 他にもNGなケースはあると思う。。。
