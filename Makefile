@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/08/11 23:12:16 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/14 13:17:29 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,54 +19,69 @@ LIBFT = $(LIBFT_DIR)/libft.a
 LIB_PRINTF_DIR = ft_printf
 LIB_PRINTF = $(LIB_PRINTF_DIR)/libftprintf.a
 
+# Sources files
+SRCS = main.c \
+	   input.c \
+	   tokenize.c \
+	   get_next_token.c \
+	   count_tokens.c \
+	   inc_connect.c \
+	   error.c \
+	   util_free.c \
+	   debug.c
+SRCS_B =
+
+# Directories
+SRCS_DIR = srcs \
+		   srcs/tokenize_utils
+SRCS_B_DIR = srcs_bonus
+OBJS_DIR = objs
+OBJS_B_DIR = objs_b
+DEPS_DIR = .deps
+DEPS_B_DIR = .deps_b
+
+# vpath for serching source files in multiple directories
+vpath %.c $(SRCS_DIR) $(SRCS_B_DIR)
+
 # Compile
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 LFLAGS		=	-lreadline
-DEP_CF = -MMD -MP -MF $(@:%.o=%.d)
+DEP_CF		=	-MMD -MP -MF $(@:$(OBJS_DIR)/%.o=$(DEPS_DIR)/%.d)
 LD_CD = -g -fsanitize=address
+INC = -Iincludes
 
 # Command
 RM			=	rm -f
 
-
-# Sources
-FILES		=	main \
-				input \
-				error
-BONUS_FILES	=	
-SRCS_DIR	=	./srcs/
-BONUS_DIR	=	./srcs_bonus/
-SRCS		=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
-SRCS_B		=	$(addprefix $(BONUS_DIR), $(addsuffix .c, $(BONUS_FILES)))
-
-# Include Header
-INC			=	-Iincludes
-
-# Objects
-OBJS		=	$(SRCS:.c=.o)
-OBJS_B		=	$(SRCS_B:.c=.o)
-
-# Dependency files
-DEPS = $(SRCS:.c=.d)
+# Object files and dependency files
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
+OBJS_B = $(addprefix $(OBJS_B_DIR)/, $(SRCS_B:.c=.o))
+DEPS = $(addprefix $(DEPS_DIR)/, $(SRCS:.c=.d))
+DEPS_B = $(addprefix $(DEPS_B_DIR)/, $(SRCS_B:.c=.d))
 
 # Rules for building object files
-%.o : %.c
+$(OBJS_DIR)/%.o: %.c
+	@mkdir -p $(OBJS_DIR)
+	@mkdir -p $(DEPS_DIR)
 	$(CC) $(CFLAGS) $(INC) $(DEP_CF) -c $< -o $@
 
-# Target
+$(DEPS_DIR)/%.d: %.c
+	@mkdir -p $(DEPS_DIR)
+
+# Default target
+all: $(NAME)
+
+# Mandatory Target
 $(NAME): $(LIBFT) $(LIB_PRINTF) $(OBJS)
 	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(LIB_PRINTF) -o $(NAME)
 
 # Bonus Target
-$(NAME)_bonus: $(OBJS_B)
-	$(CC) $(CFLAGS) $(OBJS_B) $(LIBFT) -o $(NAME)_bonus
-
-# Bonus Target
 bonus: $(NAME)_bonus
 
-# Default target
-all: $(NAME)
+# Bonus Target
+$(NAME)_bonus: $(LIBFT) $(LIB_PRINTF) $(OBJS_B)
+	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS_B) $(LIBFT_PRINTF) -o $(NAME)_bonus
 
 # Library target
 $(LIB_PRINTF): $(LIBFT)
@@ -82,12 +97,12 @@ asan: fclean
 
 # Clean target
 clean:
-	$(RM) $(OBJS) $(DEPS) $(OBJS_BONUS)
+	rm -rf $(OBJS_DIR) $(DEPS_DIR)
 	make -C ./libft clean
 
 # Clean and remove target
 fclean: clean
-	$(RM) $(LIBFT)
+	$(RM) $(LIBFT) $(LIB_PRINTF)
 	$(RM) $(NAME)
 #	$(RM) $(NAME)_bonus
 

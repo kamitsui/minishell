@@ -6,180 +6,82 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:26:16 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/14 09:44:20 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:04:10 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "tokenize.h"
 #include "libft.h"
-
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-
-# define CONNECT_AND "&&"
-
-bool	inc_connect(char *line)
-{
-	return (strstr(line, "&&") != NULL ||
-			strstr(line, "||") != NULL);
-}
-
-char	*get_next_token(char *str, char const *sep)
-{
-	static char	*next_token;
-	char		*start;
-	size_t		sep_len;
-
-	sep_len = ft_strlen(sep);
-	if (str != NULL)
-		next_token = str;
-	if (next_token == NULL || *next_token == '\0')
-		return (NULL);
-	start = next_token;
-	if (ft_strnequ(start, sep, sep_len))
-	{
-		next_token += sep_len;
-		return (ft_strndup(start, sep_len));
-	}
-	next_token += strcspn(start, sep);
-	return (ft_strndup(start, next_token - start));
-}
 
 /**
- * @brief line１行あたりのトークン数（<connector> "&&" も含めてカウントする）
- *        "||"の対応は未実装
+ * @brief １行の文字列を受け取って、
+ *        <connector> "&&" や "||" で区切り構造体tokenに格納する。
  *
- * @param line
+ * @param line readlineで読み込んだ <command-line> １行分
  *
- * @return 
+ * @return 構造体tokens
  */
-size_t	count_tokens(char *line)
-{
-	size_t	size;
-	size_t	connect_len;
-
-	connect_len = ft_strlen(CONNECT_AND);
-	size = 0;
-	if (*line == '\0')
-		return (size);
-	if (inc_connect(line))
-	{
-		size++;
-		while (inc_connect(line))
-		{
-			if (ft_strnequ(line, CONNECT_AND, connect_len) == false)
-				size++;
-			line += strcspn(line, CONNECT_AND) + connect_len;
-			if (*line != '\0')
-				size++;
-		}
-	}
-	return (size);
-}
-//	char *line = "ls \"-a\" | grep $VAR&&echo 42 > file"
-//		--> 3
-//	char *line = "ls \"-a\" | grep $VAR&&echo 42 > file && ls"
-//		--> 5
-//	char *line = "ls \"-a\" | grep $VAR&&echo 42 > file && ls&&");
-//		--> 6
-//	char *line = "&&ls \"-a\" | grep $VAR&&echo 42 > file && ls&&&&");
-//		--> 7
-//	char *line = "ls \"-a\" | grep $VAR"
-//		--> 1
-
-
-/**
- * @brief 文字列1行を受け取って、トークン単位に分けていく。
- *
- * @param line : type (char *)
- *
- * @return type (t_token *)
- */
-//void	tokenize_var(char *line, size_t size, t_token *tokens)
-//char **tokenize_line(char *line)
-//{
-//	// line_trim = ft_strtrim(line, " \t");// don't check
-//	// error handle if (*line == '\0')??
-//	size_t	size;
-//	char	**tokens;
-//	int		i;
-//
-//	size = count_tokens(line);
-//	tokens = (char **)malloc(sizeof(char *) * (size + 1));
-//	i = 0;
-//	tokens[i] = get_next_token(line, CONNECT_AND);
-//	while (tokens[i] != NULL)
-//	{
-//		i++;
-//		tokens[i] = get_next_token(NULL, CONNECT_AND);
-//		//if (tokens[i] == NULL)
-//		//	error_....
-//	}
-//	free(line);
-//	return (tokens);
-//}
-
-//t_token	*tokenize(char *line, t_token *tokens)
 t_token	*tokenize(char *line)
 {
-//	t_token	tokens[100];
 	t_token	*tokens;
-	t_token	*tokens_head;
 	size_t	size;
 	int		i;
 
 	size = count_tokens(line);
 	tokens = (t_token *)malloc(sizeof(t_token) * (size + 1));
-	tokens_head = tokens;
 	i = 0;
 	tokens[i].var = get_next_token(line, CONNECT_AND);
+//	tokens[i].type = get_type(tokens[i].var);
 	while (tokens[i].var != NULL)
 	{
 		i++;
-		//char *tmp = get_next_token(NULL, CONNECT_AND);
 		tokens[i].var = get_next_token(NULL, CONNECT_AND);
 	}
-	return (tokens_head);
+	return (tokens);
 }
 
-#define STR1 "ls \"-a\" | grep $VAR&&echo 42 > file"				// 3
-#define STR2 "ls \"-a\" | grep $VAR&&echo 42 > file && ls"			// 5
-#define STR3 "ls \"-a\" | grep $VAR&&echo 42 > file && ls&&"		// 6
-#define STR4 "&&ls \"-a\" | grep $VAR&&echo 42 > file && ls&&&&"	// 8
-#define STR5 "ls \"-a\" | grep $VAR"								// 1
-/**
- * @brief tokenize()の動作確認用
- *
- * @return 
- */
-int main()
-{
-	char *line = strdup(STR3);
-	t_token *tokens = NULL;
-	printf("line %s\n", line);
-	tokens = tokenize(line);
-	free(line);
-
-	int	i;
-	i = 0;
-	while (tokens[i].var != NULL)
-	{
-		printf("tokens[%d].var %p %s\n", i, tokens[i].var, tokens[i].var);
-		i++;
-	}
-
-// Free memory
-	i = 0;
-	while (tokens[i].var != NULL)
-	{
-		free(tokens[i].var);
-		i++;
-	}
-//	system("leaks a.out");
-	return (0);
-}
+//#define STR1 "ls \"-a\" | grep $VAR&&echo 42 > file"				// 3
+//#define STR2 "ls \"-a\" | grep $VAR&&echo 42 > file && ls"		// 5
+//#define STR3 "ls \"-a\" | grep $VAR&&echo 42 > file && ls&&"		// 6
+//#define STR4 "&&ls \"-a\" | grep $VAR&&echo 42 > file && ls&&&&"	// 8
+//#define STR5 "ls \"-a\" | grep $VAR"								// 1
+//#define STR6 "12345"												// 1
+//#define STR7 "ls \"-a\" | grep $VAR&&echo 42 > file && ls&&&"		// segfault
+//#include <stdio.h>
+//#include <string.h>
+///**
+// * @brief tokenize()の動作確認用
+// *
+// * @return 
+// */
+//int main()
+//{
+//	char *line = strdup(STR6);
+//	t_token *tokens = NULL;
+//	printf("line %s\n", line);
+//	tokens = tokenize(line);
+//	free(line);
+//
+//	int	i;
+//	i = 0;
+//	while (tokens[i].var != NULL)
+//	{
+//		printf("tokens[%d].var %p %s\n", i, tokens[i].var, tokens[i].var);
+//		i++;
+//	}
+//
+//// Free memory
+//	i = 0;
+//	while (tokens[i].var != NULL)
+//	{
+//		free(tokens[i].var);
+//		i++;
+//	}
+////	system("leaks a.out");
+//	return (0);
+//}
 
 // 例　line[0]  "ls -a | grep "$VAR" && echo 42 > file"
 //
