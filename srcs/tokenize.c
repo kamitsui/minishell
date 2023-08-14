@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:26:16 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/13 19:42:34 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/14 09:44:20 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*get_next_token(char *str, char const *sep)
 	char		*start;
 	size_t		sep_len;
 
-//	printf("next_token |%s| %p\n", next_token, next_token);
 	sep_len = ft_strlen(sep);
 	if (str != NULL)
 		next_token = str;
@@ -123,70 +122,59 @@ size_t	count_tokens(char *line)
 //}
 
 //t_token	*tokenize(char *line, t_token *tokens)
-t_token	**tokenize(char *line)
+t_token	*tokenize(char *line)
 {
 //	t_token	tokens[100];
-	t_token	**tokens;
-	t_token	**tokens_head;
+	t_token	*tokens;
+	t_token	*tokens_head;
 	size_t	size;
 	int		i;
 
 	size = count_tokens(line);
-	printf("size + 1  %zu\n", size + 1);
-	tokens = (t_token **)malloc(sizeof(t_token **) * (size + 1));
+	tokens = (t_token *)malloc(sizeof(t_token) * (size + 1));
 	tokens_head = tokens;
 	i = 0;
-	printf("%p tokens[%d]\n", tokens, i);
-	tokens[i]->var = get_next_token(line, CONNECT_AND);
-	printf("%p %s %d\n", tokens[i]->var, tokens[i]->var, i);
-	while (tokens[i]->var != NULL)
+	tokens[i].var = get_next_token(line, CONNECT_AND);
+	while (tokens[i].var != NULL)
 	{
 		i++;
-		printf("%p tokens[%d]\n", tokens[i], i);
-		char *tmp = get_next_token(NULL, CONNECT_AND);
-		printf("%p %s %d\n", tmp, tmp, i);
-		tokens[i]->var = tmp;
-//		printf("%p %s %d\n", tokens->var, tokens->var, i);
-//		printf("%p [%s] %d\n", tokens[i].var, tokens[i].var, i);
-//		printf("%s\n", tokens[i]->var
+		//char *tmp = get_next_token(NULL, CONNECT_AND);
+		tokens[i].var = get_next_token(NULL, CONNECT_AND);
 	}
-	free(line);
 	return (tokens_head);
 }
 
+#define STR1 "ls \"-a\" | grep $VAR&&echo 42 > file"				// 3
+#define STR2 "ls \"-a\" | grep $VAR&&echo 42 > file && ls"			// 5
+#define STR3 "ls \"-a\" | grep $VAR&&echo 42 > file && ls&&"		// 6
+#define STR4 "&&ls \"-a\" | grep $VAR&&echo 42 > file && ls&&&&"	// 8
+#define STR5 "ls \"-a\" | grep $VAR"								// 1
 /**
  * @brief tokenize()の動作確認用
  *
  * @return 
  */
-int main() {
-
-//	char *line = strdup("ls \"-a\" | grep $VAR&&echo 42 > file");
-//	char *line = strdup("ls \"-a\" | grep $VAR&&echo 42 > file && ls");
-	char *line = strdup("ls \"-a\" | grep $VAR&&echo 42 > file && ls&&");
-//	char *line = strdup("&&ls \"-a\" | grep $VAR&&echo 42 > file && ls&&&&");
-//	char *line = strdup("ls \"-a\" | grep $VAR");
-//	char **tokens = tokenize_line(line);
-	t_token **tokens = NULL;
-//	tokens = tokenize(line, tokens);
-//	t_token	tokens[100];
+int main()
+{
+	char *line = strdup(STR3);
+	t_token *tokens = NULL;
+	printf("line %s\n", line);
 	tokens = tokenize(line);
+	free(line);
 
 	int	i;
-// Print tokens
 	i = 0;
-	while (tokens[i]->var != NULL)
+	while (tokens[i].var != NULL)
 	{
-		printf("tokens[%d] %p\n", i, tokens[i]->var);
-		//printf("tokens[%d] %s\n", i, tokens[i].var);
+		printf("tokens[%d].var %p %s\n", i, tokens[i].var, tokens[i].var);
 		i++;
 	}
 
 // Free memory
 	i = 0;
-	while (tokens[i]->var != NULL)
+	while (tokens[i].var != NULL)
 	{
-		free(tokens[i]->var);
+		free(tokens[i].var);
 		i++;
 	}
 //	system("leaks a.out");
