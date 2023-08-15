@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:14:02 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/14 16:33:50 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:19:56 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 # define TOK_CONNECT	0x00000001
 # define TOK_CON_AND	0x00000002
 # define TOK_CON_OR		0x00000004
-//# define TOK_			0x00000008
-# define TOK_COMMAND	0x00000010
-# define TOK_SIMPLE_COM	0x00000020
-# define TOK_PIPE_COM	0x00000040
-//# define TOK_			0x00000080
+# define TOK_COMMAND	0x00000008
+# define TOK_SIMPLE_COM	0x00000010
+# define TOK_PIPE_COM	0x00000020
+# define TOK_PIPE_OUT	0x00000040
+# define TOK_PIPE_IN	0x00000080
 # define TOK_IO_RED		0x00000100
 # define TOK_IN_RED		0x00000200
 # define TOK_HERE_DOC	0x00000400
