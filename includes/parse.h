@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/16 15:11:33 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/16 18:47:06 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 typedef enum e_NodeType {
     NODE_COMMAND,
     NODE_ARGUMENT,
-    NODE_OPERATOR
+    NODE_OPERATOR,
+	NODE_END
 } t_NodeType;
 
 typedef struct s_ASTNode t_ASTNode;
@@ -29,7 +30,11 @@ struct s_ASTNode {
     size_t num_children;
 };
 
-t_ASTNode* parse(char** tokens);
-void free_ast(t_ASTNode* node);
+t_ASTNode	*parse(char** tokens);
+void		free_ast(t_ASTNode* node);
+t_ASTNode	*create_node(t_NodeType type, char* value);
+void		traverse_ast(t_ASTNode* node);
+
+typedef int	(*t_handle_node)(t_ASTNode *node);
 
 #endif

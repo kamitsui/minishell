@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/16 17:19:44 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/16 17:58:06 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,19 +14,17 @@
 NAME = a.out
 
 # Sources files
-SRCS = exec_pipe_cmd.c \
-	   exec_file.c \
-	   error.c \
-	   substr_env.c \
+SRCS = traverse_ast.c \
+	   parse.c \
+	   debug.c \
+	   debug_ast.c \
 	   \
-	   test_exec_pipe_cmd.c
+	   test_traverse_ast.c
 
 # Directories
 PROJ_DIR = ../../..
 SRCS_DIR = $(PROJ_DIR)/srcs \
-		   $(PROJ_DIR)/srcs/tokenize_utils \
-		   $(PROJ_DIR)/srcs/execute_utils \
-		   $(PROJ_DIR)/srcs/environ_utils \
+		   $(PROJ_DIR)/srcs/parse_utils \
 		   $(PROJ_DIR)/srcs/debug \
 		   srcs
 OBJS_DIR = objs
