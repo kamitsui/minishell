@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/16 12:41:34 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/16 15:11:33 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ typedef enum e_NodeType {
     NODE_OPERATOR
 } t_NodeType;
 
-typedef struct s_ASTNode {
+typedef struct s_ASTNode t_ASTNode;
+struct s_ASTNode {
     t_NodeType type;
     char* value;
-    struct s_ASTNode** children;
+    t_ASTNode** children;
     size_t num_children;
-} t_ASTNode;
+};
 
-t_ASTNode* parse_program(char** tokens);
+t_ASTNode* parse(char** tokens);
 void free_ast(t_ASTNode* node);
 
 #endif

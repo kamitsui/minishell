@@ -6,16 +6,17 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/16 12:24:56 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/16 17:02:40 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Target name
-NAME = test_parse
+NAME = a.out
 
 # Sources files
 SRCS = parse.c \
 	   debug.c \
+	   debug_ast.c \
 	   \
 	   test_parse.c
 
