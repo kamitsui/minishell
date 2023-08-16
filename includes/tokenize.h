@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:14:02 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/14 17:19:56 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/16 12:39:28 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,16 @@
 # define DQUOT			"\""
 # define SQUOT			"\'"
 # define VAR			"$"
+
+/**
+ * @brief tokenizeで使う構造体
+ * <command> or <connector> ごとに１つのtokenとして構造体に格納する。
+ */
+typedef struct s_token
+{
+	char	*var;
+	int		type;
+}	t_token ;
 
 size_t	count_tokens(char *line);
 char	*get_next_token(char *str, char const *sep);

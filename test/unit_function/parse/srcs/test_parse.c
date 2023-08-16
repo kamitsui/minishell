@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.h                                            :+:      :+:    :+:   */
+/*   test_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 10:06:24 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/16 12:37:38 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/08/16 12:35:41 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEBUG_H
-# define DEBUG_H
+#include "debug.h"
+#include "parse.h"
 
-#include "tokenize.h"
+int main() {
+    char* tokens[] = { "ls", "-l", "file.txt", "operator", "cat", "file.txt", NULL };
+	debug_token(tokens);
+    t_ASTNode* ast = parse_program(tokens);
 
-void	debug_input(char *line);
-void	debug_tokenize(t_token *tokens);
-void	debug_token(char **tokens);
+    // Traverse the AST and execute the commands (implementation not shown here)
 
-#endif
+    // Free the allocated memory for the AST
+    free_ast(ast);
+
+    return 0;
+}

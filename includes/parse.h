@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.h                                            :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 10:06:24 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/16 12:37:38 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/08/16 12:41:34 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEBUG_H
-# define DEBUG_H
+#ifndef PARSE_H
+# define PARSE_H
 
-#include "tokenize.h"
+#include <stdlib.h>
 
-void	debug_input(char *line);
-void	debug_tokenize(t_token *tokens);
-void	debug_token(char **tokens);
+typedef enum e_NodeType {
+    NODE_COMMAND,
+    NODE_ARGUMENT,
+    NODE_OPERATOR
+} t_NodeType;
+
+typedef struct s_ASTNode {
+    t_NodeType type;
+    char* value;
+    struct s_ASTNode** children;
+    size_t num_children;
+} t_ASTNode;
+
+t_ASTNode* parse_program(char** tokens);
+void free_ast(t_ASTNode* node);
 
 #endif
