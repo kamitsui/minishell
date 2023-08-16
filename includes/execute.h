@@ -6,12 +6,14 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:59:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/15 14:06:06 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/16 22:21:52 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTE_H
 # define EXECUTE_H
+
+# include "parse.h"
 
 # define MAX_SIZE 32
 # define READ_END	0
@@ -33,5 +35,8 @@ typedef struct s_cmdstack
 }	t_cmdstack;
 
 int	exec_pipe_cmd(t_cmdstack *cmdstack);
+int	execute_pipeline(t_ASTNode **commands, size_t num_commands);
+void	set_cmd_stack(t_cmdstack *cmdstack,
+		t_ASTNode **commands, size_t num_commands);
 
 #endif

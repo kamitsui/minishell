@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/16 18:47:06 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/16 20:32:07 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_ASTNode	*parse(char** tokens);
 void		free_ast(t_ASTNode* node);
 t_ASTNode	*create_node(t_NodeType type, char* value);
 void		traverse_ast(t_ASTNode* node);
+int			handle_operator(t_ASTNode* operator_node);
 
 typedef int	(*t_handle_node)(t_ASTNode *node);
 

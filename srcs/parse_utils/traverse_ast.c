@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/16 18:58:17 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/16 20:31:45 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int	process_argument(t_ASTNode *node)
 	return (0);
 }
 
-int	handle_operator(t_ASTNode *node)
-{
-	if (node->type != NODE_OPERATOR)
-		return (1);
-	ft_printf("\tOPERATOR\t[%s]\n", node->value);
-	return (0);
-}
+//int	handle_operator(t_ASTNode *node)
+//{
+//	if (node->type != NODE_OPERATOR)
+//		return (1);
+//	ft_printf("\tOPERATOR\t[%s]\n", node->value);
+//	return (0);
+//}
 
 void traverse_ast(t_ASTNode* node) {
 	int	i;
