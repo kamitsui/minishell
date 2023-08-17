@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/16 12:40:29 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/17 10:13:37 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 #include "tokenize.h"
 
+# define PROMPT "minishell> "
 /**
  * @brief 環境変数のハッシュテーブル
  */

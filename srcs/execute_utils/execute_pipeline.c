@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:39:39 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/16 22:08:02 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/17 10:21:03 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	child_process(t_command command, int pipefd[2], int i, int num_commands)
 	}
 	close(pipefd[WRITE_END]);
 	exec_file(file, command.args, command.env);
-	ft_fprintf(STDERR_FILENO, "bash: %s: command not found\n", file);
+	ft_fprintf(STDERR_FILENO, "%s: %s: command not found\n", NAME, file);
 	exit (127);
 }
 
@@ -51,7 +51,7 @@ void	parent_process(int pipefd[2])
 	return ;
 }
 
-// BUS ERROR
+//// BUS ERROR
 //static void	free_args(char **cmd_args)
 //{
 //	int		j;
@@ -84,8 +84,10 @@ static int	wait_process(pid_t pid, int num_commands)
 	return (status);
 }
 
-//int	exec_pipe_cmd(t_cmdstack *cmdstack)
-int	execute_pipeline(t_ASTNode **commands, size_t num_commands)
+// debug code
+//#include "debug.h"//for debug
+//		debug_token(cmd_args);// for debug (insert after cmd_args line)
+int	execute_pipeline(t_ASTNode **commands, size_t num_commands, char **env)
 {
 	int		pipefd[2];
 	int		i;
@@ -94,6 +96,7 @@ int	execute_pipeline(t_ASTNode **commands, size_t num_commands)
 	t_cmdstack	cmdstack;
 
 	set_cmd_stack(&cmdstack, commands, num_commands);
+	set_environ(&cmdstack, env);
 	i = 0;
 	while (i < cmdstack.num_commands)
 	{
@@ -109,7 +112,8 @@ int	execute_pipeline(t_ASTNode **commands, size_t num_commands)
 			child_process(cmdstack.commands[i], pipefd, i, cmdstack.num_commands);
 		else
 			parent_process(pipefd);
-//		free_args(cmdstack->commands[i].args);
+//		the below is BUS error
+//		free_args(cmdstack.commands[i].args);
 		i++;
 	}
 	return (wait_process(pid, cmdstack.num_commands));

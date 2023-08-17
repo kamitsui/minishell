@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/14 11:45:13 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/17 10:13:00 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	input(char **line)
 	i = 0;
 	while (1)
 	{
-		line[i] = readline("minishell> ");
+		line[i] = readline(PROMPT);
 		if (line[i] == NULL)
 		{
 			free_line(line);

@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/16 22:24:03 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/17 09:08:28 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS = handle_operator.c \
 	   substr_env.c \
 	   set_cmd_stack.c \
 	   parse.c \
+	   debug.c \
 	   debug_ast.c \
 	   \
 	   test_handle_operator.c
