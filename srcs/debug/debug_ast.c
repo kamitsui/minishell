@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:41:58 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/16 20:57:33 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/17 12:12:27 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	display_children(t_ASTNode *node)
 {
 	size_t	i;
 
+	if (node->num_children == 0)
+		return ;
 	ft_printf("\n\n");
 	ft_printf("\tparent[%s]\ttype[%d]\n", node->value, (int)node->type);
 	i = 0;
@@ -34,6 +36,12 @@ void	display_children(t_ASTNode *node)
 		ft_printf("\t\tchildren[%d]\t[%s]",
 			i, node->children[i]->value);
 		ft_printf("\ttype\t[%d]\n", (int)node->children[i]->type);
+		i++;
+	}
+	i = 0;
+	while (i < node->num_children)
+	{
+		display_children(node->children[i]);
 		i++;
 	}
 }
@@ -47,7 +55,7 @@ void	debug_ast(t_ASTNode *ast)
 	ft_printf("---- AST debug  ----\n");
 	display_children(ast);
 	node = ast;
-	i = 0;
+	i = 1;
 	while (i < ast->num_children)
 	{
 		display_children(node->children[i]);
