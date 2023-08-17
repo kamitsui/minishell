@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/17 09:08:28 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/17 14:41:49 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,24 +14,17 @@
 NAME = a.out
 
 # Sources files
-SRCS = handle_operator.c \
-	   execute_pipeline.c \
-	   exec_file.c \
-	   error.c \
-	   substr_env.c \
-	   set_cmd_stack.c \
+SRCS = traverse_ast.c \
 	   parse.c \
 	   debug.c \
 	   debug_ast.c \
 	   \
-	   test_handle_operator.c
+	   test_traverse_ast.c
 
 # Directories
 PROJ_DIR = ../../..
 SRCS_DIR = $(PROJ_DIR)/srcs \
 		   $(PROJ_DIR)/srcs/parse_utils \
-		   $(PROJ_DIR)/srcs/execute_utils \
-		   $(PROJ_DIR)/srcs/environ_utils \
 		   $(PROJ_DIR)/srcs/debug \
 		   srcs
 OBJS_DIR = objs

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/17 13:13:25 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/17 13:55:08 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	set_test_ast(t_ASTNode *ast)
 int main(int argc, char *argv[], char *env[])
 {
 //	assumption
-//	char* tokens[] = { "ls", "-l", "file.txt", "|", "cat", "file.txt", NULL };
+//	char* tokens[] = { "ls", "-a", "-l", "|", "cat", "file.txt", NULL };
 //	debug_token(tokens);
 
 	t_ASTNode *ast;
