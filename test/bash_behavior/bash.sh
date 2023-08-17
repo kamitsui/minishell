@@ -69,3 +69,22 @@ printf "> file\n"
 
 # <file> ::= <word> | <quoted-string>
 
+printf "\n\n---- \"42\"\"tokyo\" ---- \033[32m\"\"が連続するトークン\033[0m\n"
+printf "\n> echo \"42\" \"tokyo\"\n"
+echo "42" "tokyo"
+printf "\n> echo \"42\"\"tokyo\"\n"
+echo "42""tokyo"
+printf "\n> ls \"-a\" \"l\"\n"
+ls "-a" "l"
+printf "\n> ls \"-a\"\"l\"\n"
+ls "-a""l"
+
+printf "\n\n---- \033[32m変数展開\033[0m ---- 複数続いた時も展開を忘れずに\n"
+printf "\n> hoge\n"
+printf "> expr \$? + \$?\n"
+hoge
+expr $? + $?
+printf "\n> hoge\n"
+printf "> echo \$? \$?\n"
+hoge
+echo $? $?
