@@ -3,13 +3,20 @@
 #### Compile check
 > ```make``` : all target
 >
-> ```make num``` : chose target
+> ```make N``` : chose target
 >
-> chose num from the below
+> chose N from the below
 > * ```1``` : handle_operator
 > * ```2``` : traverse
 > * ```3``` : parse
 >
 
 #### Run check
-> ```make run``` : Run Target
+> ```make run``` : Run all test
+>
+> ```make runN``` : chose target
+>
+> chose N from the below
+> * ```1``` : handle_operator
+> * ```2``` : traverse
+> * ```3``` : parse

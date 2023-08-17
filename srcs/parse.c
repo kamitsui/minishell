@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/17 22:43:03 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/18 08:52:15 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 
 t_ASTNode	*parse_argument(char ***tokens)
 {
-	if (**tokens && strcmp(**tokens, "argument") == 0)
+	//if (**tokens && strcmp(**tokens, "argument") == 0)
+	if (**tokens && strcmp(**tokens, "&&") != 0)
 	{
 		(*tokens)++; // Move to the next token (argument)
 		return (create_node(NODE_ARGUMENT, *(*tokens - 1)));
@@ -35,7 +36,7 @@ t_ASTNode	*parse_command(char ***tokens)
 
 	node = create_node(NODE_COMMAND, **tokens);
 	(*tokens)++; // Move to the next token (command_name)
-	while (**tokens && strcmp(**tokens, "operator") != 0)
+	while (**tokens && strcmp(**tokens, "&&") != 0)
 	{
 		arg_node = parse_argument(tokens);
 		if (arg_node == NULL)
@@ -55,7 +56,7 @@ t_ASTNode	*parse_command(char ***tokens)
 
 t_ASTNode	*parse_operator(char ***tokens)
 {
-	if (**tokens && strcmp(**tokens, "operator") == 0)
+	if (**tokens && strcmp(**tokens, "&&") == 0)
 	{
 		(*tokens)++; // Move to the next token (operator)
 		return (create_node(NODE_OPERATOR, *(*tokens - 1)));
@@ -126,10 +127,10 @@ t_ASTNode	*parse(char **tokens)
 	t_ASTNode	*operator_node;
 	t_ASTNode	*command_node;
 
-	ast = create_node(NODE_OPERATOR, "program");
+	ast = create_node(NODE_OPERATOR, PROGRAM_NAME);
 	while (*tokens)
 	{
-		if (strcmp(*tokens, "operator") == 0)
+		if (strcmp(*tokens, "&&") == 0)
 		{
 			operator_node = parse_operator(&tokens);
 			if (operator_node)

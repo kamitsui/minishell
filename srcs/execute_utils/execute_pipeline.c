@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:39:39 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/17 10:21:03 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/18 07:40:57 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,6 @@ int	execute_pipeline(t_ASTNode **commands, size_t num_commands, char **env)
 }
 // how to test this function
 // |
-// cd minishell/test/unit_function/test_handle_operator.c
-// make
-// ./a.out
+// cd minishell/test/unit_function
+// make 1
+// make run1

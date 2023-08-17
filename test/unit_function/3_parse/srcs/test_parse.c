@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/16 16:55:59 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/18 08:50:18 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "parse.h"
 
 int main() {
-//    char* tokens[] = { "ls", "-l", "file.txt", "operator", "cat", "file.txt", NULL };
-    char* tokens[] = { "ls", "argument", "argument", "operator", "cat", "argument", NULL };
+    char* tokens[] = { "ls", "-l", "file.txt", "&&", "cat", "file.txt", NULL };
+//    char* tokens[] = { "ls", "argument", "argument", "operator", "cat", "argument", NULL };
 	debug_token(tokens);
     t_ASTNode* ast = parse(tokens);
 	debug_ast(ast);

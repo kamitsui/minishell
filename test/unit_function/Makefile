@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/17 13:58:25 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/17 18:33:49 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/18 08:05:23 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,17 +29,20 @@ RUN3 = ./$(NAME3) ; echo "\n\n"
 all : $(NAME1) $(NAME2) $(NAME3)
 
 # First Target
-1 : $(NAME1)
+1 :
+	make -C $(DIR1)
 $(NAME1) :
 	make -C $(DIR1)
 
 # Second Target
-2 : $(NAME2)
+2 :
+	make -C $(DIR2)
 $(NAME2) :
 	make -C $(DIR2)
 
 # Third Target
-3 : $(NAME3)
+3 :
+	make -C $(DIR3)
 $(NAME3) :
 	make -C $(DIR3)
 
