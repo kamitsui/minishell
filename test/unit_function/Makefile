@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/17 13:58:25 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/17 14:56:30 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/17 18:33:49 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,14 @@ run :
 	$(RUN2)
 	$(RUN3)
 
+# Run choose Target
+run1 :
+	$(RUN1)
+run2 :
+	$(RUN2)
+run3 :
+	$(RUN3)
+
 # Clean target
 clean:
 	rm -f $(NAME1) $(NAME2) $(NAME3)
@@ -59,4 +67,4 @@ fclean: clean
 # Rebuild target
 re: fclean all
 
-.PHONY: all 1 2 3 fclean clean re run
+.PHONY: all 1 2 3 fclean clean re run run1 run2 run3

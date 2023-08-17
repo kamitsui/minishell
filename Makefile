@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/08/14 15:10:00 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/17 15:56:47 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,17 @@ LIB_PRINTF = $(LIB_PRINTF_DIR)/libftprintf.a
 
 # Sources files
 SRCS = main.c \
+	   \
 	   input.c \
+	   \
 	   tokenize.c \
 	   get_next_token.c \
 	   get_token_type.c \
 	   count_tokens.c \
+	   \
+	   parse.c \
+	   create_node.c \
+	   \
 	   error.c \
 	   util_free.c \
 	   debug.c
@@ -34,6 +40,7 @@ SRCS_B =
 # Directories
 SRCS_DIR = srcs \
 		   srcs/tokenize_utils \
+		   srcs/parse_utils \
 		   srcs/debug
 SRCS_B_DIR = srcs_bonus
 OBJS_DIR = objs

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/16 17:02:22 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/17 22:43:03 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,87 +18,157 @@
 #include <stdlib.h>
 #include <string.h>
 
-t_ASTNode* create_node(t_NodeType type, char* value) {
-    t_ASTNode* node = (t_ASTNode*)malloc(sizeof(t_ASTNode));
-    node->type = type;
-    node->value = strdup(value);
-    node->children = NULL;
-    node->num_children = 0;
-    return node;
+t_ASTNode	*parse_argument(char ***tokens)
+{
+	if (**tokens && strcmp(**tokens, "argument") == 0)
+	{
+		(*tokens)++; // Move to the next token (argument)
+		return (create_node(NODE_ARGUMENT, *(*tokens - 1)));
+	}
+	return (NULL);
 }
 
-t_ASTNode* parse_argument(char*** tokens) {
-    if (**tokens && strcmp(**tokens, "argument") == 0) {
-        (*tokens)++; // Move to the next token (argument)
-        return create_node(NODE_ARGUMENT, *(*tokens - 1));
-    }
-    return NULL;
-}
+t_ASTNode	*parse_command(char ***tokens)
+{
+	t_ASTNode	*node;
+	t_ASTNode	*arg_node;
 
-t_ASTNode* parse_command(char*** tokens) {
-    t_ASTNode* node = create_node(NODE_COMMAND, **tokens);
-    (*tokens)++; // Move to the next token (command_name)
-
-    while (**tokens && strcmp(**tokens, "operator") != 0) {
-        t_ASTNode* arg_node = parse_argument(tokens);
-        if (arg_node == NULL)
+	node = create_node(NODE_COMMAND, **tokens);
+	(*tokens)++; // Move to the next token (command_name)
+	while (**tokens && strcmp(**tokens, "operator") != 0)
+	{
+		arg_node = parse_argument(tokens);
+		if (arg_node == NULL)
 		{
 			(*tokens)++;
 			break ;
 		}
-		else {
-            node->num_children++;
-            node->children = (t_ASTNode**)realloc(node->children, node->num_children * sizeof(t_ASTNode*));
-            node->children[node->num_children - 1] = arg_node;
-        }
-    }
-
-    return node;
+		else
+		{
+			node->num_children++;
+			node->children = (t_ASTNode**)realloc(node->children, node->num_children * sizeof(t_ASTNode *));
+			node->children[node->num_children - 1] = arg_node;
+		}
+	}
+	return (node);
 }
 
-t_ASTNode* parse_operator(char*** tokens) {
-    if (**tokens && strcmp(**tokens, "operator") == 0) {
-        (*tokens)++; // Move to the next token (operator)
-        return create_node(NODE_OPERATOR, *(*tokens - 1));
-    }
-    return NULL;
+t_ASTNode	*parse_operator(char ***tokens)
+{
+	if (**tokens && strcmp(**tokens, "operator") == 0)
+	{
+		(*tokens)++; // Move to the next token (operator)
+		return (create_node(NODE_OPERATOR, *(*tokens - 1)));
+	}
+	return (NULL);
 }
 
-t_ASTNode* parse(char** tokens) {
-    t_ASTNode* ast = create_node(NODE_OPERATOR, "program");
+//t_ASTNode	*parse_default(t_ASTNode *ast, char ***tokens, t_NodeType *state)
+//{
+//	if (**tokens && strcmp(**tokens, "&&") == 0)
+//		*state = NODE_CONNECTOR;
+//	else if (**tokens)// 要改良 is_command() letter,word,...
+//	{
+//		//node->flag = BIT_COMMAND;
+//		node = (t_ASTNode *)
+//		*state = NODE_COMMAND;
+//	}
+//	else
+//		*state = NODE_END;
+//	printf("**tokens [%s] state[%d]\n", **tokens, state);
+//	return (ast);
+//}
 
-    while (*tokens) {
-        if (strcmp(*tokens, "operator") == 0) {
-            t_ASTNode* operator_node = parse_operator(&tokens);
-            if (operator_node) {
-                ast->num_children++;
-                ast->children = (t_ASTNode**)realloc(ast->children, ast->num_children * sizeof(t_ASTNode*));
-                ast->children[ast->num_children - 1] = operator_node;
-            }
-        } else {
-            t_ASTNode* command_node = parse_command(&tokens);
-            if (command_node) {
-                ast->num_children++;
-                ast->children = (t_ASTNode**)realloc(ast->children, ast->num_children * sizeof(t_ASTNode*));
-                ast->children[ast->num_children - 1] = command_node;
-            }
-        }
-    }
+//t_ASTNode	*parse_command(t_ASTNode *node, char ***tokens)
+//{
+//	if (node->type & NODE_COMMAND > 0 &&
+//		node->flag & BIT_SIMPLE_COM == 0)
+//		node->num_children = count_element(NOODE_ARGUMENT, token);
+//
+//	if (node->type != NODE_COMMAND)
+//	{
+//		// Traverse the children of the current node
+//		size_t	j;
+//		j = 0;
+//		while (j < node->num_children)
+//		{
+//			parse_command(node->children[j], tokens);
+//			j++;
+//		}
+//	}
+//	return (node);
+//}
 
-    return ast;
+
+//t_ASTNode	*parse(char **tokens)
+//{
+//	t_ASTNode	*ast;
+//	t_NodeType	state;
+//	size_t		i;
+//	static t_parse_type	parse_type[NODE_END] = {
+//		parse_command, parse_operator, parse_default};
+//
+//	state = NODE_DEFAULT;
+//	i = 0;
+//	ast = create_node(NODE_OPERATOR, PROGRAM_NAME);
+//	while (*tokens != NULL)
+//	{
+//		ast = parse_type[state](ast, &tokens, &state);
+//	}
+//	return (ast);
+//}
+
+
+// void code
+t_ASTNode	*parse(char **tokens)
+{
+	t_ASTNode	*ast;
+	t_ASTNode	*operator_node;
+	t_ASTNode	*command_node;
+
+	ast = create_node(NODE_OPERATOR, "program");
+	while (*tokens)
+	{
+		if (strcmp(*tokens, "operator") == 0)
+		{
+			operator_node = parse_operator(&tokens);
+			if (operator_node)
+			{
+				ast->num_children++;
+				ast->children = (t_ASTNode**)realloc(ast->children, ast->num_children * sizeof(t_ASTNode *));
+				ast->children[ast->num_children - 1] = operator_node;
+			}
+		}
+		else
+		{
+			command_node = parse_command(&tokens);
+			if (command_node)
+			{
+				ast->num_children++;
+				ast->children = (t_ASTNode **)realloc(ast->children, ast->num_children * sizeof(t_ASTNode *));
+				ast->children[ast->num_children - 1] = command_node;
+			}
+		}
+	}
+	return (ast);
 }
 
-void free_ast(t_ASTNode* node) {
-    if (!node)
-        return;
-
-    for (size_t i = 0; i < node->num_children; i++) {
-        free_ast(node->children[i]);
-    }
-    free(node->children);
-    free(node->value);
-    free(node);
-}
+//void	free_ast(t_ASTNode *node)
+//{
+//	size_t	i;
+//
+//	if (!node)
+//		return ;
+//	i = 0;
+//	while (i <node->num_children)
+//	{
+//		free_ast(node->children[i]);
+//		i++;
+//	}
+//	free(node->children);
+//	free(node->value);
+//	free(node);
+//}
 
 // The way of test parse function
 // |
@@ -108,6 +178,7 @@ void free_ast(t_ASTNode* node) {
 
 
 
+// void code
 /**
  * @brief 各トークンをリスト構造のデータ構造に入れる。
  *

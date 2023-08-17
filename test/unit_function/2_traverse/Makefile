@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/17 14:41:49 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/17 18:35:02 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME = a.out
 
 # Sources files
 SRCS = traverse_ast.c \
-	   parse.c \
+	   create_node.c \
+	   free_ast.c \
 	   debug.c \
 	   debug_ast.c \
 	   \
