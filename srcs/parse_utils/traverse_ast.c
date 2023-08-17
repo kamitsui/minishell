@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/17 13:47:25 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/17 15:18:16 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	execute_command(t_ASTNode *node, char **env)
 		return (-1);
 	ft_printf("node [%p]", node);
 	ft_printf("\tCOMMAND\t\t[%s]\n", node->value);
+	// Handle execute command  (execute_pipelineでもOK?)
 	(void)env;
 	return (0);
 }
@@ -29,6 +30,8 @@ int	process_argument(t_ASTNode *node, char **env)
 		return (-1);
 	ft_printf("node [%p]", node);
 	ft_printf("\tARGUMENT\t[%s]\n", node->value);
+    // Handle variable expansion $VAR
+    // Handle tilde expansion  ~/Document
 	(void)env;
 	return (0);
 }
