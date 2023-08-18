@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/17 18:20:09 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/18 22:47:23 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,3 @@ void	free_line(char **line);
 void	free_tokens(t_token *tokens);
 
 #endif
-
-// void
-///**
-// * @brief Double Queue の構造体。
-// */
-//typedef struct s_deque
-//{
-//	t_deq_node	*node;
-//	int			size;
-//}	t_deque;
-//
-///**
-// * @brief １つのコンテンツを持ち、前後のノードアドレスを持つ。
-// */
-//typedef struct s_deq_node
-//{
-//	void		content;
-//	t_deq_node	*next;
-//	t_deq_node	*prev;
-//}	t_deq_node;
-

@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/17 18:30:19 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/18 22:46:07 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,16 +17,20 @@ NAME = a.out
 SRCS = handle_operator.c \
 	   execute_pipeline.c \
 	   exec_file.c \
-	   error.c \
-	   substr_env.c \
 	   set_cmd_stack.c \
+	   get_arguments.c \
+	   wait_process.c \
+	   \
+	   substr_env.c \
+	   \
+	   error.c \
+	   \
 	   create_node.c \
 	   free_ast.c \
 	   debug.c \
 	   debug_ast.c \
 	   \
 	   test_handle_operator.c
-#	   parse.c \
 
 # Directories
 PROJ_DIR = ../../..

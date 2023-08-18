@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/08/17 15:56:47 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/18 22:48:57 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS = main.c \
 	   \
 	   parse.c \
 	   create_node.c \
+	   is_pipe_command.c \
 	   \
 	   error.c \
 	   util_free.c \
