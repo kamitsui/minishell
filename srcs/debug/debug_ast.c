@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:41:58 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/18 08:42:37 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:10:37 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ void	display_children(t_ASTNode *node)
 {
 	size_t	i;
 
-	if (node->num_children == 0)
+	if (node->type == NODE_ARGUMENT)
 		return ;
+	ft_printf("\n\n");
+	ft_printf("\tparent[%s]\ttype[%d]\n",
+			node->value, (int)node->type);
 	i = 0;
 	while (i < node->num_children)
 	{
@@ -49,23 +52,45 @@ void	display_children(t_ASTNode *node)
 		i++;
 	}
 }
+//void	display_children(t_ASTNode *node)
+//{
+//	size_t	i;
+//
+//	if (node->num_children == 0)
+//		return ;
+//	i = 0;
+//	while (i < node->num_children)
+//	{
+//		ft_printf("\t\tchildren[%d]\t[%s]",
+//			i, node->children[i]->value);
+//		ft_printf("\ttype\t[%d]\n", (int)node->children[i]->type);
+//		i++;
+//	}
+//	i = 0;
+//	while (i < node->num_children)
+//	{
+//		display_children(node->children[i]);
+//		i++;
+//	}
+//}
 
 void	debug_ast(t_ASTNode *ast)
 {
-	size_t	i;
+//	size_t	i;
 	t_ASTNode	*node;
 
 	ft_printf("\n\x1B[100m\x1B[37m");
 	ft_printf("---- AST debug  ----\n");
-	display_head(ast);
+//	display_head(ast);
 	node = ast;
-	i = 0;
-	while (i < ast->num_children)
-	{
-		ft_printf("\n\n");
-		ft_printf("\tparent[%s]\ttype[%d]\n", node->children[i]->value, (int)node->children[i]->type);
-		display_children(node->children[i]);
-		i++;
-	}
+	display_children(node);
+//	i = 0;
+//	while (i < ast->num_children)
+//	{
+//		ft_printf("\n\n");
+//		ft_printf("\tparent[%s]\ttype[%d]\n", node->children[i]->value, (int)node->children[i]->type);
+//		display_children(node->children[i]);
+//		i++;
+//	}
 	ft_printf("\x1B[0m\n\n");
 }

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/17 22:28:27 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:12:56 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ struct s_ASTNode
 t_ASTNode	*parse(char** tokens);
 void		free_ast(t_ASTNode* node);
 t_ASTNode	*create_node(t_NodeType type, char* value);
+size_t	is_pipe_command(char **tokens);
 void		traverse_ast(t_ASTNode* node, char **env);
 int			handle_operator(t_ASTNode* operator_node, char **env);
 
