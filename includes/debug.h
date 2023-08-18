@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:06:24 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/16 14:51:58 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/18 21:35:26 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 #include "tokenize.h"
 #include "parse.h"
+#include "execute.h"
 
 void	debug_input(char *line);
 void	debug_tokenize(t_token *tokens);
 void	debug_token(char **tokens);
 void	debug_ast(t_ASTNode *ast);
+void	debug_command(t_command *command);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/18 19:14:35 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/18 22:26:41 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ t_ASTNode	*parse_operator(char ***tokens)
 }
 
 
-#include "ft_printf.h"// debug
 // void code
 t_ASTNode	*parse(char **tokens)
 {
@@ -90,11 +89,10 @@ t_ASTNode	*parse(char **tokens)
 		{
 			// <pipe-command> [ls] [-a] [-l] [|] [cat] | [grep] [Make] .... num_pipe = 2
 			size_t num_pipe = is_pipe_command(tokens);
-			ft_printf("num_pipe = [%d]\n", num_pipe);
 			if (num_pipe > 0)
 			{
 				//t_ASTNode	*pipe_node = parse_pipe(&tokens);
-				exit (0);
+				exit (1);
 			}
 			// <simple-command>  [ls] [-a] [-l]
 			command_node = parse_command(&tokens);

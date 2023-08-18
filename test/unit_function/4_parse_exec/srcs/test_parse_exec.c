@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/18 20:28:18 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/18 22:39:32 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,53 @@
 #include "parse.h"
 #include "execute.h"
 #include "ft_printf.h"
+#include "libft.h"
+
+// test 2 patern
+#define LINE1 "ls -l -a"
+#define LINE2 "hoge1 hoge2 hoge3"
 
 int main(int argc, char *argv[], char *env[])
 {
-	int	status;
-	char* tokens[] = {
-		"ls", "-l", "-a", NULL };
-	debug_token(tokens);
-	t_ASTNode* ast = parse(tokens);
-	debug_ast(ast);
+	int		status;
+	char	*line1 = LINE1;// exit status 0
+	char	*line2 = LINE2;// exit status 127
+	char	**tokens1 = ft_split(line1, ' ');
+	char	**tokens2 = ft_split(line2, ' ');
+	t_ASTNode* ast1 = parse(tokens1);
+	t_ASTNode* ast2 = parse(tokens2);
 
 	// Traverse the AST and execute the commands (implementation not shown here)
-	ft_printf("execute_command() start\n");
-	status = execute_command(ast, env);
-	ft_printf("execute_command() end\n");
+	ft_printf("> minishell %s\n", LINE1);
+	debug_token(tokens1);
+	debug_ast(ast1);
+	status = execute_command(ast1, env);
+	ft_printf("(%d) ... exit status from handle_operator(pipe_node, env)\n\n", status);
+	ft_printf("> minishell %s\n", LINE2);
+	debug_token(tokens2);
+	debug_ast(ast2);
+	status = execute_command(ast2, env);
 	ft_printf("(%d) ... exit status from handle_operator(pipe_node, env)\n", status);
 
 	// Free the allocated memory for the AST
-	free_ast(ast);
+	free_ast(ast1);
+	free_ast(ast2);
 
+	int	i;
+	i = 0;
+	while (tokens1[i] != NULL)
+	{
+		free(tokens1[i]);
+		i++;
+	}
+	free(tokens1);
+	i = 0;
+	while (tokens2[i] != NULL)
+	{
+		free(tokens2[i]);
+		i++;
+	}
+	free(tokens2);
 	(void)argv[argc];
 	return (status);
 }
-		//"ls", "-l", "-a", "&&", "echo", "\n", "42", "tokyo", NULL };

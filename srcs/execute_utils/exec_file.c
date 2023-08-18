@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:47:01 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/15 13:22:46 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/18 22:25:44 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void	exec_file(char *file, char *arguments[], char *env[])
 	else
 		search_exec_file(file, arguments, env);
 }
+//	要修正！！ ↓これができない。
 //	else if ("./")
 //	else if ("../")
