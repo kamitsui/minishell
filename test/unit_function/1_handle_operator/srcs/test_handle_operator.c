@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:39:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/17 10:07:31 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/18 19:28:48 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "debug.h"
 
 int main(int argc, char *argv[], char *env[]) {
-    // Example usage
+    // tokens = { "ls", "-a", "-l", "|", "cat", "-e", "|", "grep", "Make", NULL }
 	t_ASTNode* pipe_node = create_node(NODE_OPERATOR, "|");
 	pipe_node->num_children = 3;
 	pipe_node->children = (t_ASTNode**)malloc(3 * sizeof(t_ASTNode*));

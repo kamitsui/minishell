@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/18 11:16:30 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/18 20:23:54 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,14 @@ SRCS = parse.c \
 	   free_ast.c \
 	   is_pipe_command.c \
 	   \
+	   execute_command.c \
+	   get_arguments.c \
+	   wait_process.c \
+	   exec_file.c \
+	   \
+	   error.c \
+	   substr_env.c \
+	   \
 	   debug.c \
 	   debug_ast.c \
 	   \
@@ -28,6 +36,8 @@ SRCS = parse.c \
 PROJ_DIR = ../../..
 SRCS_DIR = $(PROJ_DIR)/srcs \
 		   $(PROJ_DIR)/srcs/parse_utils \
+		   $(PROJ_DIR)/srcs/execute_utils \
+		   $(PROJ_DIR)/srcs/environ_utils \
 		   $(PROJ_DIR)/srcs/debug \
 		   srcs
 OBJS_DIR = objs

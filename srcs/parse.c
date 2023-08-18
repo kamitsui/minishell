@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/18 11:26:57 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/18 19:14:35 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,61 +64,6 @@ t_ASTNode	*parse_operator(char ***tokens)
 	return (NULL);
 }
 
-//t_ASTNode	*parse_default(t_ASTNode *ast, char ***tokens, t_NodeType *state)
-//{
-//	if (**tokens && strcmp(**tokens, "&&") == 0)
-//		*state = NODE_CONNECTOR;
-//	else if (**tokens)// 要改良 is_command() letter,word,...
-//	{
-//		//node->flag = BIT_COMMAND;
-//		node = (t_ASTNode *)
-//		*state = NODE_COMMAND;
-//	}
-//	else
-//		*state = NODE_END;
-//	printf("**tokens [%s] state[%d]\n", **tokens, state);
-//	return (ast);
-//}
-
-//t_ASTNode	*parse_command(t_ASTNode *node, char ***tokens)
-//{
-//	if (node->type & NODE_COMMAND > 0 &&
-//		node->flag & BIT_SIMPLE_COM == 0)
-//		node->num_children = count_element(NOODE_ARGUMENT, token);
-//
-//	if (node->type != NODE_COMMAND)
-//	{
-//		// Traverse the children of the current node
-//		size_t	j;
-//		j = 0;
-//		while (j < node->num_children)
-//		{
-//			parse_command(node->children[j], tokens);
-//			j++;
-//		}
-//	}
-//	return (node);
-//}
-
-
-//t_ASTNode	*parse(char **tokens)
-//{
-//	t_ASTNode	*ast;
-//	t_NodeType	state;
-//	size_t		i;
-//	static t_parse_type	parse_type[NODE_END] = {
-//		parse_command, parse_operator, parse_default};
-//
-//	state = NODE_DEFAULT;
-//	i = 0;
-//	ast = create_node(NODE_OPERATOR, PROGRAM_NAME);
-//	while (*tokens != NULL)
-//	{
-//		ast = parse_type[state](ast, &tokens, &state);
-//	}
-//	return (ast);
-//}
-
 
 #include "ft_printf.h"// debug
 // void code
@@ -143,7 +88,7 @@ t_ASTNode	*parse(char **tokens)
 		}
 		else
 		{
-			// <pipe-command> [ls] [-a] [-l] [|] [cat] | [grep] [Make]
+			// <pipe-command> [ls] [-a] [-l] [|] [cat] | [grep] [Make] .... num_pipe = 2
 			size_t num_pipe = is_pipe_command(tokens);
 			ft_printf("num_pipe = [%d]\n", num_pipe);
 			if (num_pipe > 0)
@@ -164,29 +109,17 @@ t_ASTNode	*parse(char **tokens)
 	return (ast);
 }
 
-//void	free_ast(t_ASTNode *node)
-//{
-//	size_t	i;
-//
-//	if (!node)
-//		return ;
-//	i = 0;
-//	while (i <node->num_children)
-//	{
-//		free_ast(node->children[i]);
-//		i++;
-//	}
-//	free(node->children);
-//	free(node->value);
-//	free(node);
-//}
-
 // The way of test parse function
 // |
-// cd minishell/test/unit_function/parse
-// make
-// ./a.out
-
+// cd minishell/test/unit_function
+// |
+// parse test ...  tokens = { "ls", "-l", "file.txt", "&&", "cat", "file.txt", NULL }
+// make 3
+// make run3
+// |
+// parse & execute ... tokens = { "ls", "-l", "-a", "&&", "echo", "\n", "42", "tokyo", NULL }
+// make 4
+// make run4
 
 
 // void code
