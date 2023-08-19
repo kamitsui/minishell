@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 13:26:26 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 16:30:59 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int main(int argc, char *argv[], char *env[])
 	char	*line2 = LINE2;// exit status 127
 	char	**tokens1 = ft_split(line1, ' ');
 	char	**tokens2 = ft_split(line2, ' ');
-	t_ASTNode* ast1 = parse(tokens1);
-	t_ASTNode* ast2 = parse(tokens2);
+	t_ast* ast1 = parse(tokens1);
+	t_ast* ast2 = parse(tokens2);
 
 	// Traverse the AST and execute the commands (implementation not shown here)
 	ft_printf("> minishell %s\n", LINE1);

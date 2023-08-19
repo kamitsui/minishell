@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/19 13:54:36 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/19 16:29:21 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS = parse.c \
 	   wait_process.c \
 	   exec_file.c \
 	   \
-	   free_ast.c \
+	   free_utils.c \
 	   \
 	   error.c \
 	   substr_env.c \

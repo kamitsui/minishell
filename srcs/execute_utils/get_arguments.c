@@ -6,14 +6,14 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 20:13:59 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/18 20:15:02 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:21:27 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "execute.h"
 
-void	get_arguments(t_command *commands, t_ASTNode *node)
+void	get_arguments(t_command *commands, t_ast *node)
 {
 	size_t	i;
 

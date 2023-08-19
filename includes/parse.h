@@ -6,14 +6,14 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 10:30:45 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:10:34 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-#include <stdlib.h>
+# include <stdlib.h>
 
 # define BIT_COMMAND	0x00000001
 # define BIT_ARGUMENT	0x00000002
@@ -38,28 +38,28 @@
 //# define BIT_			0x00080000
 //# define BIT_END		0x00100000
 
-typedef enum e_NodeType
+enum	e_NodeType
 {
 	NODE_COMMAND,
 	NODE_ARGUMENT,
 	NODE_OPERATOR,
-//	NODE_DEFAULT,
 	NODE_END
-} t_NodeType;
+};
 
-typedef struct	s_ASTNode t_ASTNode;
-struct s_ASTNode
+typedef struct s_ast	t_ast;
+
+struct s_ast
 {
-	t_NodeType	type;
-	int			flag;
-	char		*value;
-	t_ASTNode	**children;
-	size_t		num_children;
-} ;
+	enum e_NodeType	type;
+	int				flag;
+	char			*value;
+	t_ast			**children;
+	size_t			num_children;
+};
 
-t_ASTNode	*parse(char** tokens);
-void		free_ast(t_ASTNode* node);
-t_ASTNode	*create_node(t_NodeType type, char* value);
-size_t		is_pipe_command(char **tokens);
+t_ast	*parse(char **tokens);
+void	free_ast(t_ast *node);
+t_ast	*create_node(enum e_NodeType type, char *value);
+size_t	is_pipe_command(char **tokens);
 
 #endif

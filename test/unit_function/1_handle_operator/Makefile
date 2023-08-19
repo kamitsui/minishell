@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/19 13:52:06 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/19 16:01:19 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS = handle_operator.c \
 	   \
 	   create_node.c \
 	   \
-	   free_ufils.c \
+	   free_utils.c \
 	   \
 	   debug.c \
 	   debug_ast.c \
@@ -38,6 +38,7 @@ SRCS = handle_operator.c \
 PROJ_DIR = ../../..
 SRCS_DIR = $(PROJ_DIR)/srcs \
 		   $(PROJ_DIR)/srcs/parse_utils \
+		   $(PROJ_DIR)/srcs/traverse_utils \
 		   $(PROJ_DIR)/srcs/execute_utils \
 		   $(PROJ_DIR)/srcs/environ_utils \
 		   $(PROJ_DIR)/srcs/debug \

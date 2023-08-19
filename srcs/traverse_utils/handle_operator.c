@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:39:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 13:09:27 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:20:29 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "execute.h"
 #include "debug.h"
 
-int	handle_operator(t_ASTNode* operator_node, char **env, int status)
+int	handle_operator(t_ast* operator_node, char **env, int status)
 {
 
 	if (operator_node->type != NODE_OPERATOR)
@@ -31,7 +31,7 @@ int	handle_operator(t_ASTNode* operator_node, char **env, int status)
 //	status = 0;
 	if (strcmp(operator_node->value, "|") == 0)
 	{
-		t_ASTNode** commands = operator_node->children;
+		t_ast** commands = operator_node->children;
 		// Execute the pipeline
 		status = execute_pipeline(commands, operator_node->num_children, env);
 	}

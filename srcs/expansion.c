@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:22:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/10 12:24:57 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:27:14 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
  *
  * @return 
  */
-t_list	*expansion(t_ast *head, )
-{
+//t_list	*expansion(t_ast *head, char **env)
+//{
+//	return(ast);
+//}
 	// メモ　展開の順序
 	// ブレース展開、チルダ展開、パラメータ・ 変数・算術式展開、コマンド置換 (左から右へ)、単語分割、パス名展開
 	// プロセス置換もサポートするバージョンがある。
@@ -95,5 +97,3 @@ t_list	*expansion(t_ast *head, )
 	//             ls: -a: No such file or directory
 	//             ls: -l: No such file or directory
 	//
-	// return(ast);
-}

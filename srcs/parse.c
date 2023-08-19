@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 09:38:50 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:18:17 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-t_ASTNode	*parse_argument(char ***tokens)
+t_ast	*parse_argument(char ***tokens)
 {
 	//if (**tokens && strcmp(**tokens, "argument") == 0)
 	if (**tokens && strcmp(**tokens, "&&") != 0)
@@ -29,10 +29,10 @@ t_ASTNode	*parse_argument(char ***tokens)
 	return (NULL);
 }
 
-t_ASTNode	*parse_command(char ***tokens)
+t_ast	*parse_command(char ***tokens)
 {
-	t_ASTNode	*node;
-	t_ASTNode	*arg_node;
+	t_ast	*node;
+	t_ast	*arg_node;
 
 	node = create_node(NODE_COMMAND, **tokens);
 	(*tokens)++; // Move to the next token (command_name)
@@ -47,14 +47,14 @@ t_ASTNode	*parse_command(char ***tokens)
 		else
 		{
 			node->num_children++;
-			node->children = (t_ASTNode**)realloc(node->children, node->num_children * sizeof(t_ASTNode *));
+			node->children = (t_ast**)realloc(node->children, node->num_children * sizeof(t_ast *));
 			node->children[node->num_children - 1] = arg_node;
 		}
 	}
 	return (node);
 }
 
-t_ASTNode	*parse_operator(char ***tokens)
+t_ast	*parse_operator(char ***tokens)
 {
 	if (**tokens && strcmp(**tokens, "&&") == 0)
 	{
@@ -65,11 +65,11 @@ t_ASTNode	*parse_operator(char ***tokens)
 }
 
 
-t_ASTNode	*parse(char **tokens)
+t_ast	*parse(char **tokens)
 {
-	t_ASTNode	*ast;
-	t_ASTNode	*operator_node;
-	t_ASTNode	*command_node;
+	t_ast	*ast;
+	t_ast	*operator_node;
+	t_ast	*command_node;
 
 	ast = create_node(NODE_OPERATOR, PROGRAM_NAME);
 	while (*tokens)
@@ -80,7 +80,7 @@ t_ASTNode	*parse(char **tokens)
 			if (operator_node)
 			{
 				ast->num_children++;
-				ast->children = (t_ASTNode**)realloc(ast->children, ast->num_children * sizeof(t_ASTNode *));
+				ast->children = (t_ast**)realloc(ast->children, ast->num_children * sizeof(t_ast *));
 				ast->children[ast->num_children - 1] = operator_node;
 			}
 		}
@@ -90,7 +90,7 @@ t_ASTNode	*parse(char **tokens)
 			size_t num_pipe = is_pipe_command(tokens);
 			if (num_pipe > 0)
 			{
-				//t_ASTNode	*pipe_node = parse_pipe(&tokens);
+				//t_ast	*pipe_node = parse_pipe(&tokens);
 				exit (1);
 			}
 			// <simple-command>  [ls] [-a] [-l]
@@ -98,7 +98,7 @@ t_ASTNode	*parse(char **tokens)
 			if (command_node)
 			{
 				ast->num_children++;
-				ast->children = (t_ASTNode **)realloc(ast->children, ast->num_children * sizeof(t_ASTNode *));
+				ast->children = (t_ast **)realloc(ast->children, ast->num_children * sizeof(t_ast *));
 				ast->children[ast->num_children - 1] = command_node;
 			}
 		}

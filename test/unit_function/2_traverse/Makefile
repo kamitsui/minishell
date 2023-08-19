@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/19 13:53:54 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/19 16:27:02 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,20 @@ NAME = a.out
 # Sources files
 SRCS = traverse_ast.c \
 	   create_node.c \
+	   handle_operator.c \
+	   \
+	   execute_command.c \
+	   exec_file.c \
+	   get_arguments.c \
+	   wait_process.c \
+	   execute_pipeline.c \
+	   set_cmd_stack.c \
+	   \
+	   substr_env.c \
 	   \
 	   free_utils.c \
+	   \
+	   error.c \
 	   \
 	   debug.c \
 	   debug_ast.c \
@@ -28,6 +40,9 @@ SRCS = traverse_ast.c \
 PROJ_DIR = ../../..
 SRCS_DIR = $(PROJ_DIR)/srcs \
 		   $(PROJ_DIR)/srcs/parse_utils \
+		   $(PROJ_DIR)/srcs/traverse_utils \
+		   $(PROJ_DIR)/srcs/execute_utils \
+		   $(PROJ_DIR)/srcs/environ_utils \
 		   $(PROJ_DIR)/srcs/debug \
 		   srcs
 OBJS_DIR = objs

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 13:27:57 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:20:08 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 #include "execute.h"
 #include "ft_printf.h"//for debug
 
-//int	process_command(t_ASTNode *node, char **env, int status)
+//int	process_command(t_ast *node, char **env, int status)
 //{
 //	execute_command(node, env, status);
 //	return (status);
 //}
 
-int	process_argument(t_ASTNode *node, char **env, int status)
+int	process_argument(t_ast *node, char **env, int status)
 {
 //	if (node->type != NODE_ARGUMENT)
 //		return (-1);
@@ -35,7 +35,7 @@ int	process_argument(t_ASTNode *node, char **env, int status)
 	return (status);
 }
 
-int	traverse_ast(t_ASTNode* node, char **env, int status)
+int	traverse_ast(t_ast* node, char **env, int status)
 {
 	int						i;
 	enum e_NodeType			state;

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 11:45:38 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:21:00 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	child_process(t_command command)
 	exit (127);
 }
 
-int	execute_command(t_ASTNode *command_node, char **env, int status)
+int	execute_command(t_ast *command_node, char **env, int status)
 {
 	t_command	command;
 	size_t		i;

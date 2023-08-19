@@ -6,19 +6,19 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:41:58 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 11:46:28 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:25:07 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"ft_printf.h"
 #include	"parse.h"
 
-void	display_head(t_ASTNode *node)
+void	display_head(t_ast *node)
 {
 	ft_printf("\tTop Node [%s]\n", node->value);
 }
 
-void	display_children(t_ASTNode *node)
+void	display_children(t_ast *node)
 {
 	size_t	i;
 
@@ -43,9 +43,9 @@ void	display_children(t_ASTNode *node)
 	}
 }
 
-void	debug_ast(t_ASTNode *ast)
+void	debug_ast(t_ast *ast)
 {
-	t_ASTNode	*node;
+	t_ast	*node;
 
 	ft_printf("\n\x1B[100m\x1B[37m");
 	ft_printf("---- AST debug  ----\n");

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:29:22 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 13:57:30 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:29:50 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 
 void	free_line(char **line)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (line[i] != NULL)
 	{
 		free(line[i]);
@@ -51,14 +52,14 @@ void	free_tokens(char **tokens)
 //	free(tokens);
 //}
 
-void	free_ast(t_ASTNode *node)
+void	free_ast(t_ast *node)
 {
 	size_t	i;
 
 	if (!node)
 		return ;
 	i = 0;
-	while (i <node->num_children)
+	while (i < node->num_children)
 	{
 		free_ast(node->children[i]);
 		i++;

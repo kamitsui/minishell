@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 14:11:13 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:39:43 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include "traverse.h"
 #include "error_minishell.h"
 #include "libft.h"
-#include <readline/readline.h>
 #include "debug.h"
+#include <readline/readline.h>
 
 /**
  * @brief read_lineを使って終端文字 '\0' まで文字列を返す。
@@ -27,9 +27,8 @@ void	input(char **line, char **env)
 {
 	int		i;
 	int		status;
-	//t_token	*tokens;
 	char	**tokens;
-	t_ASTNode	*ast;
+	t_ast	*ast;
 
 	i = 0;
 	while (1)
@@ -40,15 +39,14 @@ void	input(char **line, char **env)
 			free_line(line);
 			error_code(ERR_READLINE);
 		}
-		if (ft_strcmp(line[i], "exit") == 0) {
+		if (ft_strcmp(line[i], "exit") == 0)
+		{
 			free(line[i]);
 			break;
 		}
 		// if (^Dがきたら)  .....
 		// if (lineの最後の文字がエスケープ文字'\'だったら）.....
-		//tokens = tokenize(line[i]);
-		//debug_input(line[i]);// debug
-		//debug_tokenize(tokens);// debug
+		debug_input(line[i]);// debug
 		tokens = tokenize(line[i]);
 		debug_token(tokens);
 		ast = parse(tokens);
@@ -63,6 +61,7 @@ void	input(char **line, char **env)
 	line[i] = NULL;
 	//	erro handle (^D が２回続いて入力された場合)
 }
+// debug code
 // エスケープ文字'\'がきたときの挙動(将来対応)
 // 例　下記をリードラインする。　\0までの文字列を返す。
 //
@@ -71,5 +70,3 @@ void	input(char **line, char **env)
 // lines[2]  "| cat -e\"
 // lines[3]  "exit" or '\n' or ^D <-ここまで
 // lines[3]  NULL
-//
-// return(lines);

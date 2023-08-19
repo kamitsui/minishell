@@ -6,14 +6,10 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 20:07:43 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/18 20:15:22 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:22:35 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <unistd.h>
-//#include <sys/types.h>
 #include <sys/wait.h>
 
 int	wait_process(pid_t pid, int num_commands)

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:39:39 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 11:07:16 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:21:54 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	parent_process(int pipefd[2])
 // debug code
 //#include "debug.h"//for debug
 //		debug_token(cmd_args);// for debug (insert after cmd_args line)
-int	execute_pipeline(t_ASTNode **commands, size_t num_commands, char **env)
+int	execute_pipeline(t_ast **commands, size_t num_commands, char **env)
 {
 	int		pipefd[2];
 	int		i;
