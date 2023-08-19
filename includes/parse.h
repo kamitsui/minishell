@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/18 11:12:56 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 10:30:45 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef enum e_NodeType
 	NODE_COMMAND,
 	NODE_ARGUMENT,
 	NODE_OPERATOR,
-	NODE_DEFAULT,
+//	NODE_DEFAULT,
 	NODE_END
 } t_NodeType;
 
@@ -60,10 +60,6 @@ struct s_ASTNode
 t_ASTNode	*parse(char** tokens);
 void		free_ast(t_ASTNode* node);
 t_ASTNode	*create_node(t_NodeType type, char* value);
-size_t	is_pipe_command(char **tokens);
-void		traverse_ast(t_ASTNode* node, char **env);
-int			handle_operator(t_ASTNode* operator_node, char **env);
-
-typedef int	(*t_handle_node)(t_ASTNode *node, char **env);
+size_t		is_pipe_command(char **tokens);
 
 #endif

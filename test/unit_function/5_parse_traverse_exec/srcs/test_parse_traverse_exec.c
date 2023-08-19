@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_parse_exec.c                                  :+:      :+:    :+:   */
+/*   test_parse_traverse_exec.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 11:41:49 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 13:26:26 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "debug.h"
 #include "parse.h"
+#include "traverse.h"
 #include "execute.h"
 #include "ft_printf.h"
 #include "libft.h"
@@ -22,28 +23,27 @@
 
 int main(int argc, char *argv[], char *env[])
 {
-	int		status = 0;
+	int		status;
 	char	*line1 = LINE1;// exit status 0
 	char	*line2 = LINE2;// exit status 127
 	char	**tokens1 = ft_split(line1, ' ');
 	char	**tokens2 = ft_split(line2, ' ');
-	t_ASTNode	*ast1 = parse(tokens1);
-	t_ASTNode	*ast2 = parse(tokens2);
-	t_ASTNode	*command_node;
+	t_ASTNode* ast1 = parse(tokens1);
+	t_ASTNode* ast2 = parse(tokens2);
 
-	// Parse the tokens and execute the commands (simple-command AST Node)
+	// Traverse the AST and execute the commands (implementation not shown here)
 	ft_printf("> minishell %s\n", LINE1);
 	debug_token(tokens1);
-	command_node = ast1->children[0];
-	debug_ast(command_node);
-	status = execute_command(command_node, env, status);
-	ft_printf("return(%d) ... from execute_command(command_node, env)\n\n", status);
+	debug_ast(ast1);
+	status = -1;
+	status = traverse_ast(ast1, env, status);
+	ft_printf("return(%d) ... from traverse(ast, env)\n\n", status);
 	ft_printf("> minishell %s\n", LINE2);
 	debug_token(tokens2);
-	command_node = ast2->children[0];
-	debug_ast(command_node);
-	status = execute_command(command_node, env, status);
-	ft_printf("return(%d) ... from execute_command(command_node,enc)\n", status);
+	debug_ast(ast2);
+	status = -1;
+	status = traverse_ast(ast2, env, status);
+	ft_printf("return(%d) ... from traverse(ast, env)\n", status);
 
 	// Free the allocated memory for the AST
 	free_ast(ast1);

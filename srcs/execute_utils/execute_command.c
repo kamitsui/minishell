@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/18 22:38:45 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 11:45:38 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 #include "ft_printf.h"
 #include <unistd.h>
 
-void	child_process(t_command command)
+// debug code
+//#include "debug.h"
+//	debug_command(&command);
+
+static void	child_process(t_command command)
 {
 	char	*file;
 
@@ -26,19 +30,20 @@ void	child_process(t_command command)
 	exit (127);
 }
 
-int	execute_command(t_ASTNode *command_node, char **env)
+int	execute_command(t_ASTNode *command_node, char **env, int status)
 {
 	t_command	command;
-	t_ASTNode	*argument_node;
 	size_t		i;
 	pid_t		pid;
 
+	(void)status;
+	if (command_node->type != NODE_COMMAND)
+		return (-1);
 	command.cmd_name = command_node->value;
 	i = 0;
 	while (i < command_node->num_children)
 	{
-		argument_node = command_node->children[i];
-		get_arguments(&command, argument_node);
+		get_arguments(&command, command_node);
 		i++;
 	}
 	command.env = env;

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:39:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/17 10:24:34 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 13:09:27 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@
 #include "execute.h"
 #include "debug.h"
 
-int	handle_operator(t_ASTNode* operator_node, char **env) {
-	int		status;
+int	handle_operator(t_ASTNode* operator_node, char **env, int status)
+{
 
-	status = -1;
 	if (operator_node->type != NODE_OPERATOR)
+	{
+//		status = -1;
 		return (status);
+	}
+//	status = 0;
 	if (strcmp(operator_node->value, "|") == 0)
 	{
 		t_ASTNode** commands = operator_node->children;

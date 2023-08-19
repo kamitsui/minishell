@@ -6,63 +6,57 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/17 15:18:16 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 13:27:57 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+#include "traverse.h"
+#include "execute.h"
 #include "ft_printf.h"//for debug
 
-int	execute_command(t_ASTNode *node, char **env)
-{
-	if (node->type != NODE_COMMAND)
-		return (-1);
-	ft_printf("node [%p]", node);
-	ft_printf("\tCOMMAND\t\t[%s]\n", node->value);
-	// Handle execute command  (execute_pipelineでもOK?)
-	(void)env;
-	return (0);
-}
+//int	process_command(t_ASTNode *node, char **env, int status)
+//{
+//	execute_command(node, env, status);
+//	return (status);
+//}
 
-int	process_argument(t_ASTNode *node, char **env)
+int	process_argument(t_ASTNode *node, char **env, int status)
 {
-	if (node->type != NODE_ARGUMENT)
-		return (-1);
-	ft_printf("node [%p]", node);
-	ft_printf("\tARGUMENT\t[%s]\n", node->value);
+//	if (node->type != NODE_ARGUMENT)
+//		return (-1);
+//	ft_printf("node [%p]", node);
+//	ft_printf("\tARGUMENT\t[%s]\n", node->value);
     // Handle variable expansion $VAR
     // Handle tilde expansion  ~/Document
 	(void)env;
-	return (0);
+	(void)node;
+	ft_printf("process arg status[%d]\n", status);
+	return (status);
 }
 
-int	handle_operator(t_ASTNode *node, char **env)
-{
-	if (node->type != NODE_OPERATOR)
-		return (-1);
-	ft_printf("node [%p]", node);
-	ft_printf("\tOPERATOR\t[%s]\n", node->value);
-	(void)env;
-	return (0);
-}
-
-void	traverse_ast(t_ASTNode* node, char **env)
+int	traverse_ast(t_ASTNode* node, char **env, int status)
 {
 	int						i;
-	int						ret;
-	static t_handle_node	handle_node[NODE_END] = {
+	enum e_NodeType			state;
+	static t_handle_node	handle_node[3] = {
 		execute_command, process_argument, handle_operator};
+		//process_command, process_argument, handle_operator};
 
 	if (node == NULL)
-		return ;
+		return (1);
 
 	// Depth-First search (DFS) approach
 	i = 0;
-	ret = -1;
-	while (i < NODE_END && ret < 0)
+	state = NODE_COMMAND;
+	while (state != NODE_END)
 	{
-		ret = handle_node[i](node, env);
-		i ++;
+//		ft_printf("node value[%s] type[%d]\n", node->value, node->type);
+		if (node->type == state)
+			status = handle_node[i](node, env, status);
+//		ft_printf("status[%d] ... value[%s] type[%d] num while[%d]\n",
+//				status, node->value, node->type, state);
+		state++;
 	}
 
 	// Traverse the children of the current node
@@ -70,7 +64,8 @@ void	traverse_ast(t_ASTNode* node, char **env)
 	j = 0;
 	while (j < node->num_children)
 	{
-		traverse_ast(node->children[j], env);
+		status = traverse_ast(node->children[j], env, status);
 		j++;
 	}
+	return (status);
 }

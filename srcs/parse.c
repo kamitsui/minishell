@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/18 22:26:41 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 09:38:50 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ t_ASTNode	*parse_operator(char ***tokens)
 }
 
 
-// void code
 t_ASTNode	*parse(char **tokens)
 {
 	t_ASTNode	*ast;

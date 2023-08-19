@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:39:39 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/18 20:07:22 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 11:07:16 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "execute.h"
 #include "parse.h"
 
-void	child_process(t_command command, int pipefd[2], int i, int num_commands)
+static void	child_process(t_command command, int pipefd[2], int i, int num_commands)
 {
 	char	*file;
 
@@ -63,25 +63,6 @@ void	parent_process(int pipefd[2])
 //		j++;
 //	}
 //	free(cmd_args);
-//}
-
-//int	wait_process(pid_t pid, int num_commands)
-//{
-//	int	i;
-//	int	status;
-//
-//	i = 0;
-//	while (i < num_commands - 1)
-//	{
-//		waitpid(-1, &status, 0);
-//		i++;
-//	}
-//	waitpid(pid, &status, 0);
-//	if (WIFEXITED(status))
-//		status = WEXITSTATUS(status);
-//	else if (WIFSIGNALED(status))
-//		status = WTERMSIG(status);
-//	return (status);
 //}
 
 // debug code
