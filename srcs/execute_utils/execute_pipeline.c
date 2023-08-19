@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:39:39 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 15:21:54 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:10:13 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 #include "execute.h"
 #include "parse.h"
 
-static void	child_process(t_command command, int pipefd[2], int i, int num_commands)
+static void	child_process(t_command command, int pipefd[2], int i,
+		int num_commands)
 {
 	char	*file;
 
@@ -40,7 +41,7 @@ static void	child_process(t_command command, int pipefd[2], int i, int num_comma
 	exit (127);
 }
 
-void	parent_process(int pipefd[2])
+static void	parent_process(int pipefd[2])
 {
 	close(pipefd[WRITE_END]);
 	if (dup2(pipefd[READ_END], STDIN_FILENO) == -1)
@@ -65,15 +66,29 @@ void	parent_process(int pipefd[2])
 //	free(cmd_args);
 //}
 
+pid_t	create_process(t_cmdstack *cmdstack, int *pipefd,
+		int i, int num_commands)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		ft_perror_exit("fork");
+	else if (pid == 0)
+		child_process(cmdstack->commands[i], pipefd, i, num_commands);
+	else
+		parent_process(pipefd);
+	return (pid);
+}
+
 // debug code
 //#include "debug.h"//for debug
 //		debug_token(cmd_args);// for debug (insert after cmd_args line)
 int	execute_pipeline(t_ast **commands, size_t num_commands, char **env)
 {
-	int		pipefd[2];
-	int		i;
-	char	**cmd_args;
-	pid_t	pid;
+	int			pipefd[2];
+	int			i;
+	pid_t		pid;
 	t_cmdstack	cmdstack;
 
 	set_cmd_stack(&cmdstack, commands, num_commands);
@@ -81,20 +96,12 @@ int	execute_pipeline(t_ast **commands, size_t num_commands, char **env)
 	i = 0;
 	while (i < cmdstack.num_commands)
 	{
-		cmd_args = cmdstack.commands[i].args;
 		if (cmdstack.commands[i].args == NULL)
 			ft_perror_exit("ft_split");
 		if (pipe(pipefd) == -1)
 			ft_perror_exit("pipe");
-		pid = fork();
-		if (pid == -1)
-			ft_perror_exit("fork");
-		else if (pid == 0)
-			child_process(cmdstack.commands[i], pipefd, i, cmdstack.num_commands);
-		else
-			parent_process(pipefd);
-//		the below is BUS error
-//		free_args(cmdstack.commands[i].args);
+		pid = create_process(&cmdstack, pipefd, i, cmdstack.num_commands);
+//		free_args(cmdstack.commands[i].args);//BUS ERROR
 		i++;
 	}
 	return (wait_process(pid, cmdstack.num_commands));

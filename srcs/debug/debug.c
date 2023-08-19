@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:04:36 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 14:12:53 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:43:35 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,6 @@ void	debug_input(char *line)
 	ft_printf("line %p [%s]\n", line, line);
 	ft_printf("\x1B[0m\n\n");
 }
-
-//void	debug_tokenize(t_token *tokens)
-//{
-//	int		i;
-//	char	*type;
-//
-//	ft_printf("\n\x1B[100m\x1B[37m");
-//	ft_printf("---- debug tokens ----\n");
-//	i = 0;
-//	while (tokens[i].var != NULL)
-//	{
-//		type = ft_itoa_binary(tokens[i].type);
-//		ft_printf("tokens[%d].var %p [%s]\ttokens[%d].type 0x%s\n",
-//			i, tokens[i].var, tokens[i].var, i, type);
-//		free(type);
-//		i++;
-//	}
-//	ft_printf("\x1B[0m\n\n");
-//}
-
 
 void	debug_token(char **tokens)
 {

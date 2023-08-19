@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 15:39:43 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:38:58 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,34 @@
 #include "debug.h"
 #include <readline/readline.h>
 
-/**
- * @brief read_lineを使って終端文字 '\0' まで文字列を返す。
- *
- * @return 型：char *
- */
-void	input(char **line, char **env)
+int	lets_go_shell(char *line, char **env)
 {
-	int		i;
 	int		status;
 	char	**tokens;
 	t_ast	*ast;
+
+	debug_input(line);// debug
+	tokens = tokenize(line);
+	debug_token(tokens);// debug
+	ast = parse(tokens);
+	debug_ast(ast);// debug
+	status = -1;
+	status = traverse_ast(ast, env, status);
+	free(line);
+	free_tokens(tokens);
+	free_ast(ast);
+	return (status);
+}
+
+/**
+ * @brief read_lineを使って終端文字 '\0' まで文字列を返す。
+ *
+ * @return 型：int 値：コマンドラインの終了ステータス
+ */
+int	input(char **line, char **env)
+{
+	int	i;
+	int	status;
 
 	i = 0;
 	while (1)
@@ -42,24 +59,16 @@ void	input(char **line, char **env)
 		if (ft_strcmp(line[i], "exit") == 0)
 		{
 			free(line[i]);
-			break;
+			break ;
 		}
 		// if (^Dがきたら)  .....
 		// if (lineの最後の文字がエスケープ文字'\'だったら）.....
-		debug_input(line[i]);// debug
-		tokens = tokenize(line[i]);
-		debug_token(tokens);
-		ast = parse(tokens);
-		debug_ast(ast);
-		status = -1;
-		traverse_ast(ast, env, status);
-		free(line[i]);
-		free_tokens(tokens);
-		free_ast(ast);
+		status = lets_go_shell(line[i], env);
 		i++;
 	}
 	line[i] = NULL;
 	//	erro handle (^D が２回続いて入力された場合)
+	return (status);
 }
 // debug code
 // エスケープ文字'\'がきたときの挙動(将来対応)

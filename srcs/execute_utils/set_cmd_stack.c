@@ -6,14 +6,15 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:17:11 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 15:22:20 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:11:03 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "execute.h"
 
-void	set_cmd_stack(t_cmdstack *cmdstack, t_ast **commands, size_t num_commands)
+void	set_cmd_stack(t_cmdstack *cmdstack, t_ast **commands,
+		size_t num_commands)
 {
 	size_t	i;
 

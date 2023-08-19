@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:41:58 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 15:25:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:43:57 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	display_children(t_ast *node)
 		return ;
 	ft_printf("\n\n");
 	ft_printf("\tparent[%s]\ttype[%d]\n",
-			node->value, (int)node->type);
+		node->value, (int)node->type);
 	i = 0;
 	while (i < node->num_children)
 	{

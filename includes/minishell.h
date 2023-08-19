@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 14:59:56 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:19:26 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 /**
  * @brief mainからで使う関数
  */
-void	input(char **line, char **env);
+int		input(char **line, char **env);
 void	free_line(char **line);
 
 #endif
