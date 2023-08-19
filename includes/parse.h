@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 15:10:34 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:33:17 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ struct s_ast
 };
 
 t_ast	*parse(char **tokens);
+t_ast	*parse_argument(char ***tokens);
+t_ast	*parse_command(t_ast *ast, char ***tokens);
+t_ast	*parse_simple_command(char ***tokens);
 void	free_ast(t_ast *node);
 t_ast	*create_node(enum e_NodeType type, char *value);
 size_t	is_pipe_command(char **tokens);
