@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/19 10:43:47 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/19 13:55:12 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ NAME = a.out
 # Sources files
 SRCS = parse.c \
 	   create_node.c \
-	   free_ast.c \
 	   is_pipe_command.c \
 	   \
 	   execute_command.c \
@@ -30,6 +29,7 @@ SRCS = parse.c \
 	   traverse_ast.c \
 	   handle_operator.c \
 	   \
+	   free_utils.c \
 	   error.c \
 	   substr_env.c \
 	   \

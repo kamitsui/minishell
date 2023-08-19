@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/18 11:17:23 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/19 13:54:15 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,9 @@ NAME = a.out
 # Sources files
 SRCS = parse.c \
 	   create_node.c \
-	   free_ast.c \
 	   is_pipe_command.c \
+	   \
+	   free_utils.c \
 	   \
 	   debug.c \
 	   debug_ast.c \

@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/08/18 22:48:57 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/19 14:19:58 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,23 +25,42 @@ SRCS = main.c \
 	   input.c \
 	   \
 	   tokenize.c \
-	   get_next_token.c \
-	   get_token_type.c \
-	   count_tokens.c \
 	   \
 	   parse.c \
 	   create_node.c \
 	   is_pipe_command.c \
 	   \
+	   traverse_ast.c \
+	   handle_operator.c \
+	   \
+	   exec_file.c \
+	   execute_command.c \
+	   get_arguments.c \
+	   wait_process.c \
+	   \
+	   execute_pipeline.c \
+	   set_cmd_stack.c \
+	   \
+	   substr_env.c \
+	   \
 	   error.c \
-	   util_free.c \
-	   debug.c
+	   free_utils.c \
+	   \
+	   debug.c \
+	   debug_ast.c
+#	   get_next_token.c \
+#	   get_token_type.c \
+#	   count_tokens.c \
+
 SRCS_B =
 
 # Directories
 SRCS_DIR = srcs \
 		   srcs/tokenize_utils \
 		   srcs/parse_utils \
+		   srcs/execute_utils \
+		   srcs/traverse_utils \
+		   srcs/environ_utils \
 		   srcs/debug
 SRCS_B_DIR = srcs_bonus
 OBJS_DIR = objs

@@ -6,11 +6,13 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/17 10:13:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 14:11:13 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parse.h"
+#include "traverse.h"
 #include "error_minishell.h"
 #include "libft.h"
 #include <readline/readline.h>
@@ -21,10 +23,13 @@
  *
  * @return 型：char *
  */
-void	input(char **line)
+void	input(char **line, char **env)
 {
 	int		i;
-	t_token	*tokens;
+	int		status;
+	//t_token	*tokens;
+	char	**tokens;
+	t_ASTNode	*ast;
 
 	i = 0;
 	while (1)
@@ -41,12 +46,18 @@ void	input(char **line)
 		}
 		// if (^Dがきたら)  .....
 		// if (lineの最後の文字がエスケープ文字'\'だったら）.....
+		//tokens = tokenize(line[i]);
+		//debug_input(line[i]);// debug
+		//debug_tokenize(tokens);// debug
 		tokens = tokenize(line[i]);
-		debug_input(line[i]);// debug
-		debug_tokenize(tokens);// debug
-//		parse(tokens);
+		debug_token(tokens);
+		ast = parse(tokens);
+		debug_ast(ast);
+		status = -1;
+		traverse_ast(ast, env, status);
 		free(line[i]);
 		free_tokens(tokens);
+		free_ast(ast);
 		i++;
 	}
 	line[i] = NULL;

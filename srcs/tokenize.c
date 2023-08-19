@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:26:16 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/14 15:26:52 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 14:11:45 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 #include "libft.h"
 #include <stdlib.h>
 
+char	**tokenize(char *line)
+{
+	char	**tokens;
+
+	tokens = ft_split(line, ' ');
+	return (tokens);
+}
+//void code
 /**
  * @brief １行の文字列を受け取って、
  *        <connector> "&&" や "||" で区切り構造体tokenに格納する。
@@ -23,25 +31,25 @@
  *
  * @return 構造体tokens (呼び出し側でfree)
  */
-t_token	*tokenize(char *line)
-{
-	t_token	*tokens;
-	size_t	size;
-	int		i;
-
-	size = count_tokens(line);
-	tokens = (t_token *)malloc(sizeof(t_token) * (size + 1));
-	i = 0;
-	tokens[i].var = get_next_token(line, CONNECT_AND);
-	tokens[i].type = get_token_type(tokens[i].var);
-	while (tokens[i].var != NULL)
-	{
-		i++;
-		tokens[i].var = get_next_token(NULL, CONNECT_AND);
-		tokens[i].type = get_token_type(tokens[i].var);
-	}
-	return (tokens);
-}
+//t_token	*tokenize(char *line)
+//{
+//	t_token	*tokens;
+//	size_t	size;
+//	int		i;
+//
+//	size = count_tokens(line);
+//	tokens = (t_token *)malloc(sizeof(t_token) * (size + 1));
+//	i = 0;
+//	tokens[i].var = get_next_token(line, CONNECT_AND);
+//	tokens[i].type = get_token_type(tokens[i].var);
+//	while (tokens[i].var != NULL)
+//	{
+//		i++;
+//		tokens[i].var = get_next_token(NULL, CONNECT_AND);
+//		tokens[i].type = get_token_type(tokens[i].var);
+//	}
+//	return (tokens);
+//}
 
 //#define STR1 "ls \"-a\" | grep $VAR&&echo 42 > file"				// 3
 //#define STR2 "ls \"-a\" | grep $VAR&&echo 42 > file && ls"		// 5

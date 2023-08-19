@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 20:41:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/14 10:48:51 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/19 14:09:57 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char *argv[], char *env[])
 
 	if (argc != 1)
 		error_code(ERR_ARG);
-	input(line);
+	input(line, env);
 	(void)argv[argc];
 	(void)env[0];
 	system("leaks minishell");

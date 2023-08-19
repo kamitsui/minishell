@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/18 22:46:07 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/19 13:52:06 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ SRCS = handle_operator.c \
 	   error.c \
 	   \
 	   create_node.c \
-	   free_ast.c \
+	   \
+	   free_ufils.c \
+	   \
 	   debug.c \
 	   debug_ast.c \
 	   \
