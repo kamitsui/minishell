@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 13:49:51 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/14 16:51:14 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/20 16:48:15 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 /**
  * @brief 文字列のタイプを調べて分類分けする。
  *
- * @param var 文字列 <connecotor> か <command> のいずれか
+ * @param var 文字列<connecotor>か<command> のいずれか。
  *
- * @return 該当するタイプのbitを立てる
+ * @return type 該当するタイプのbitを立てる。
  */
 int	get_token_type(char *var)
 {

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 18:38:58 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/20 17:04:34 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 #include "debug.h"
 #include <readline/readline.h>
 
+/**
+ * @brief lets_go_shell関数では、引数のline文字列に対して、
+ * tokenize関数ー＞parse関数ー＞traverse_ast関数の順番で処理する。
+ *
+ * @param line readline関数から読みとった文字列。
+ * @param env 環境変数。
+ *
+ * @return status 終了ステータス
+ */
 int	lets_go_shell(char *line, char **env)
 {
 	int		status;
@@ -38,9 +47,12 @@ int	lets_go_shell(char *line, char **env)
 }
 
 /**
- * @brief read_lineを使って終端文字 '\0' まで文字列を返す。
+ * @brief input関数は入力文字列lineの取り出しと、次の処理へ渡す。
  *
- * @return 型：int 値：コマンドラインの終了ステータス
+ * @param line readline関数によって読み取った文字列。
+ * @param env 環境変数。
+ *
+ * @return status 終了ステータスを返す。
  */
 int	input(char **line, char **env)
 {

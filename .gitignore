@@ -7,3 +7,6 @@
 !*.md
 !.gitignore
 !.vscode
+!*.html
+!*.js
+!doxyfile

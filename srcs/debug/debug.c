@@ -6,16 +6,25 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:04:36 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 18:43:35 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/20 20:53:16 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file debug.c
+ * @brief 各データ構造のデバッグ出力　抽象構文木(ast)以外
+ */
 #include "minishell.h"
 #include "execute.h"
 #include "ft_printf.h"
 #include "libft.h"
 #include <stdlib.h>
 
+/**
+ * @brief 文字列をデバッグ出力
+ *
+ * @param line readline関数で読み込まれた文字列
+ */
 void	debug_input(char *line)
 {
 	ft_printf("\n\x1B[100m\x1B[37m");
@@ -24,6 +33,11 @@ void	debug_input(char *line)
 	ft_printf("\x1B[0m\n\n");
 }
 
+/**
+ * @brief tokenize関数で生成されたトークンをデバッグ出力
+ *
+ * @param tokens 複数の文字列要素もつ二次元配列（最後の要素はNULL）
+ */
 void	debug_token(char **tokens)
 {
 	int		i;
@@ -39,6 +53,11 @@ void	debug_token(char **tokens)
 	ft_printf("\x1B[0m\n\n");
 }
 
+/**
+ * @brief execute関数内で実行するコマンドの要素をデバッグ出力します。
+ *
+ * @param command デバッグ対象の
+ */
 void	debug_command(t_command *command)
 {
 	int		i;

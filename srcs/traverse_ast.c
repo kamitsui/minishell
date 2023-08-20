@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 18:41:59 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/20 18:50:22 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,30 @@
 #include "traverse.h"
 #include "execute.h"
 
+/**
+ * @brief シンプルコマンドのノードに対しての処理
+ *
+ * @param node 処理対象のノード
+ * @param env 環境変数
+ * @param status 再帰前のノードから渡される終了ステータス
+ *
+ * @return status ノードの処理結果を終了ステータスとして返す
+ */
 int	process_command(t_ast *node, char **env, int status)
 {
-	execute_command(node, env, status);
+	status = execute_command(node, env, status);
 	return (status);
 }
 
+/**
+ * @brief コマンド引数のノードに対しての処理
+ *
+ * @param node 処理対象のノード
+ * @param env 環境変数
+ * @param status 再帰前のノードから渡される終了ステータス
+ *
+ * @return status コマンドのノードから受け取った終了ステータスをそのまま返す
+ */
 int	process_argument(t_ast *node, char **env, int status)
 {
 	(void)env;
@@ -27,6 +45,15 @@ int	process_argument(t_ast *node, char **env, int status)
 	return (status);
 }
 
+/**
+ * @brief 抽象構文木のノード全てを走査して、順番に実行していく再帰関数
+ *
+ * @param node 走査対象のノード（子ノードを再帰させる）
+ * @param env 環境変数
+ * @param status 再帰前のノードから渡される終了ステータス
+ *
+ * @return status ノードの処理結果を終了ステータスとして返す
+ */
 int	traverse_ast(t_ast *node, char **env, int status)
 {
 	int						i;

@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>minishell: srcs/execute_utils/exec_file.c ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">minishell
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b73b02d482d1c4a3db20c3d9ad52d395.html">srcs</a></li><li class="navelem"><a class="el" href="dir_b33940ba020ba1c61759cc14ffcf439f.html">execute_utils</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">関数</a>  </div>
+  <div class="headertitle"><div class="title">exec_file.c ファイル</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>コマンドにPATHを通して実行する関数  
+<a href="#details">[詳解]</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="environ_8h_source.html">environ.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="libft_8h_source.html">libft.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="error__minishell_8h_source.html">error_minishell.h</a>&quot;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:ae0e23084412c8c7df297f58ff4f7f971"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exec__file_8c.html#ae0e23084412c8c7df297f58ff4f7f971">exec_file</a> (char *file, char *arguments[], char *env[])</td></tr>
+<tr class="memdesc:ae0e23084412c8c7df297f58ff4f7f971"><td class="mdescLeft">&#160;</td><td class="mdescRight">コマンドにPATHを通して実行する関数  <br /></td></tr>
+<tr class="separator:ae0e23084412c8c7df297f58ff4f7f971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><p>コマンドにPATHを通して実行する関数 </p>
+<dl class="bug"><dt><b><a class="el" href="bug.html#_bug000001">バグ:</a></b></dt><dd>要修正："./file" や "../file" などの実行ができない </dd></dl>
+</div><h2 class="groupheader">関数詳解</h2>
+<a id="ae0e23084412c8c7df297f58ff4f7f971" name="ae0e23084412c8c7df297f58ff4f7f971"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0e23084412c8c7df297f58ff4f7f971">&#9670;&#160;</a></span>exec_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void exec_file </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>arguments</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>env</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>コマンドにPATHを通して実行する関数 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file</td><td>実行するファイル（コマンド名） </td></tr>
+    <tr><td class="paramname">arguments[]</td><td>コマンドとコマンド引数 </td></tr>
+    <tr><td class="paramname">env[]</td><td>環境変数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="lineno">   90</span>{</div>
+<div class="line"><span class="lineno">   91</span>    <span class="keywordflow">if</span> (file == NULL || arguments == NULL || env == NULL)</div>
+<div class="line"><span class="lineno">   92</span>        return ;</div>
+<div class="line"><span class="lineno">   93</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="libft_8h.html#a74788fa99fb6c63ef751ec50dc03e7e6">ft_strnequ</a>(file, <span class="stringliteral">&quot;/&quot;</span>, 1) == <span class="keyword">true</span>)</div>
+<div class="line"><span class="lineno">   94</span>    {</div>
+<div class="line"><span class="lineno">   95</span>        <span class="keywordflow">if</span> (access(file, F_OK | X_OK) == 0)</div>
+<div class="line"><span class="lineno">   96</span>            execve(file, arguments, env);</div>
+<div class="line"><span class="lineno">   97</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">   98</span>            <a class="code hl_function" href="error_8c.html#a6eb1fe86f4dd8f3ec8fcf0eff2a62b22">ft_errno_exit</a>(file);</div>
+<div class="line"><span class="lineno">   99</span>    }</div>
+<div class="line"><span class="lineno">  100</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  101</span>        search_exec_file(file, arguments, env);</div>
+<div class="line"><span class="lineno">  102</span>}</div>
+<div class="ttc" id="aerror_8c_html_a6eb1fe86f4dd8f3ec8fcf0eff2a62b22"><div class="ttname"><a href="error_8c.html#a6eb1fe86f4dd8f3ec8fcf0eff2a62b22">ft_errno_exit</a></div><div class="ttdeci">void ft_errno_exit(char *cause)</div><div class="ttdoc">システムコール失敗時のエラーメッセージ出力とexitを行う関数。</div><div class="ttdef"><b>Definition</b> error.c:49</div></div>
+<div class="ttc" id="alibft_8h_html_a74788fa99fb6c63ef751ec50dc03e7e6"><div class="ttname"><a href="libft_8h.html#a74788fa99fb6c63ef751ec50dc03e7e6">ft_strnequ</a></div><div class="ttdeci">bool ft_strnequ(char *s1, const char *s2, int n)</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+構築:&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

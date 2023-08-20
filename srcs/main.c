@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 20:41:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 14:58:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/20 16:46:40 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 #include "error_minishell.h"
 #include "ft_printf.h"
 
+/**
+ * @brief minishellのmain関数。
+ *
+ * @param argc コマンドライン引数の個数。
+ * @param argv[] コマンドライン引数の文字列。
+ * @param env[] 環境変数。
+ *
+ * @return 
+ */
 int	main(int argc, char *argv[], char *env[])
 {
 	char	*line[100];

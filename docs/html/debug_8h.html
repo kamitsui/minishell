@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>minishell: includes/debug.h ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">minishell
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_09e761304027c904456130627fd4dcf5.html">includes</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">関数</a>  </div>
+  <div class="headertitle"><div class="title">debug.h ファイル</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>各種デバッグ関数を使用するための関数宣言  
+<a href="#details">[詳解]</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="tokenize_8h_source.html">tokenize.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="parse_8h_source.html">parse.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="execute_8h_source.html">execute.h</a>&quot;</code><br />
+</div>
+<p><a href="debug_8h_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:ac9758278a1d7db6a16e3550e23220c59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#ac9758278a1d7db6a16e3550e23220c59">debug_input</a> (char *line)</td></tr>
+<tr class="memdesc:ac9758278a1d7db6a16e3550e23220c59"><td class="mdescLeft">&#160;</td><td class="mdescRight">文字列をデバッグ出力  <br /></td></tr>
+<tr class="separator:ac9758278a1d7db6a16e3550e23220c59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b56f59248dd0daebf5b3254ad913fbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#a7b56f59248dd0daebf5b3254ad913fbe">debug_token</a> (char **tokens)</td></tr>
+<tr class="memdesc:a7b56f59248dd0daebf5b3254ad913fbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">tokenize関数で生成されたトークンをデバッグ出力  <br /></td></tr>
+<tr class="separator:a7b56f59248dd0daebf5b3254ad913fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71d83645c1c2a18adcc06bcb8e252716"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#a71d83645c1c2a18adcc06bcb8e252716">debug_ast</a> (<a class="el" href="parse_8h.html#a5fd329b243c6cd036f7b9ecbc86a9344">t_ast</a> *ast)</td></tr>
+<tr class="memdesc:a71d83645c1c2a18adcc06bcb8e252716"><td class="mdescLeft">&#160;</td><td class="mdescRight">parse関数で生成されたASTをデバッグ出力<br  />
+全てのノードと子ノードをデバッグ出力する  <br /></td></tr>
+<tr class="separator:a71d83645c1c2a18adcc06bcb8e252716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff443ea46659c7de3bde18cf177230a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#aff443ea46659c7de3bde18cf177230a1">debug_command</a> (<a class="el" href="execute_8h.html#a343be1e180affa75a4a3b4bb5b2225e3">t_command</a> *command)</td></tr>
+<tr class="memdesc:aff443ea46659c7de3bde18cf177230a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">execute関数内で実行するコマンドの要素をデバッグ出力  <br /></td></tr>
+<tr class="separator:aff443ea46659c7de3bde18cf177230a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><p>各種デバッグ関数を使用するための関数宣言 </p>
+</div><h2 class="groupheader">関数詳解</h2>
+<a id="a71d83645c1c2a18adcc06bcb8e252716" name="a71d83645c1c2a18adcc06bcb8e252716"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71d83645c1c2a18adcc06bcb8e252716">&#9670;&#160;</a></span>debug_ast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void debug_ast </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="parse_8h.html#a5fd329b243c6cd036f7b9ecbc86a9344">t_ast</a> *&#160;</td>
+          <td class="paramname"><em>ast</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>parse関数で生成されたASTをデバッグ出力<br  />
+全てのノードと子ノードをデバッグ出力する </p>
+<p>parse関数で生成されたASTをデバッグ出力<br  />
+全てのノードと子ノードをデバッグ出力する</p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ast</td><td>parseで生成された抽象構文木ASTのデータ </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="lineno">   68</span>{</div>
+<div class="line"><span class="lineno">   69</span>    <a class="code hl_struct" href="structs__ast.html">t_ast</a>   *node;</div>
+<div class="line"><span class="lineno">   70</span> </div>
+<div class="line"><span class="lineno">   71</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\n\x1B[100m\x1B[37m&quot;</span>);</div>
+<div class="line"><span class="lineno">   72</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;---- AST debug  ----\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   73</span>    display_head(ast);</div>
+<div class="line"><span class="lineno">   74</span>    node = ast;</div>
+<div class="line"><span class="lineno">   75</span>    display_children(node);</div>
+<div class="line"><span class="lineno">   76</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\x1B[0m\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   77</span>}</div>
+<div class="ttc" id="aft__printf_8h_html_a3f28c451c2d97475afa585712287a400"><div class="ttname"><a href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a></div><div class="ttdeci">int ft_printf(const char *input,...)</div></div>
+<div class="ttc" id="astructs__ast_html"><div class="ttname"><a href="structs__ast.html">s_ast</a></div><div class="ttdef"><b>Definition</b> parse.h:52</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aff443ea46659c7de3bde18cf177230a1" name="aff443ea46659c7de3bde18cf177230a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff443ea46659c7de3bde18cf177230a1">&#9670;&#160;</a></span>debug_command()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void debug_command </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="execute_8h.html#a343be1e180affa75a4a3b4bb5b2225e3">t_command</a> *&#160;</td>
+          <td class="paramname"><em>command</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>execute関数内で実行するコマンドの要素をデバッグ出力 </p>
+<p>execute関数内で実行するコマンドの要素をデバッグ出力</p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">command</td><td>デバッグ対象の </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="lineno">   62</span>{</div>
+<div class="line"><span class="lineno">   63</span>    <span class="keywordtype">int</span>     i;</div>
+<div class="line"><span class="lineno">   64</span> </div>
+<div class="line"><span class="lineno">   65</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\n\x1B[100m\x1B[37m&quot;</span>);</div>
+<div class="line"><span class="lineno">   66</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;---- command ----\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   67</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\tcmd_name [%s]\n&quot;</span>, command-&gt;<a class="code hl_variable" href="structs__command.html#a4db4297862213646402ca90de9d15473">cmd_name</a>);</div>
+<div class="line"><span class="lineno">   68</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\t&quot;</span>);</div>
+<div class="line"><span class="lineno">   69</span>    i = 0;</div>
+<div class="line"><span class="lineno">   70</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;args&quot;</span>);</div>
+<div class="line"><span class="lineno">   71</span>    <span class="keywordflow">while</span> (command-&gt;<a class="code hl_variable" href="structs__command.html#ab71d3325f497817c691ace8e476427cc">args</a>[i] != NULL)</div>
+<div class="line"><span class="lineno">   72</span>    {</div>
+<div class="line"><span class="lineno">   73</span>        <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot; [%s]&quot;</span>, command-&gt;<a class="code hl_variable" href="structs__command.html#ab71d3325f497817c691ace8e476427cc">args</a>[i]);</div>
+<div class="line"><span class="lineno">   74</span>        i++;</div>
+<div class="line"><span class="lineno">   75</span>    }</div>
+<div class="line"><span class="lineno">   76</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   77</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\tnum_args [%d]\n&quot;</span>, command-&gt;<a class="code hl_variable" href="structs__command.html#a6acbf35efc8e953c74b0d48750325aa4">num_args</a>);</div>
+<div class="line"><span class="lineno">   78</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   79</span>    i = 0;</div>
+<div class="line"><span class="lineno">   80</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\tenv [%s]\n&quot;</span>, command-&gt;<a class="code hl_variable" href="structs__command.html#ac8d958e08ec476fb34a9518ad05852e5">env</a>[i]);</div>
+<div class="line"><span class="lineno">   81</span>    <span class="keywordflow">while</span> (command-&gt;<a class="code hl_variable" href="structs__command.html#ac8d958e08ec476fb34a9518ad05852e5">env</a>[i] != NULL)</div>
+<div class="line"><span class="lineno">   82</span>    {</div>
+<div class="line"><span class="lineno">   83</span>        <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\t    [%s]\n&quot;</span>, command-&gt;<a class="code hl_variable" href="structs__command.html#ac8d958e08ec476fb34a9518ad05852e5">env</a>[i]);</div>
+<div class="line"><span class="lineno">   84</span>        i++;</div>
+<div class="line"><span class="lineno">   85</span>    }</div>
+<div class="line"><span class="lineno">   86</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\x1B[0m\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   87</span>}</div>
+<div class="ttc" id="astructs__command_html_a4db4297862213646402ca90de9d15473"><div class="ttname"><a href="structs__command.html#a4db4297862213646402ca90de9d15473">s_command::cmd_name</a></div><div class="ttdeci">char * cmd_name</div><div class="ttdef"><b>Definition</b> execute.h:33</div></div>
+<div class="ttc" id="astructs__command_html_a6acbf35efc8e953c74b0d48750325aa4"><div class="ttname"><a href="structs__command.html#a6acbf35efc8e953c74b0d48750325aa4">s_command::num_args</a></div><div class="ttdeci">int num_args</div><div class="ttdef"><b>Definition</b> execute.h:35</div></div>
+<div class="ttc" id="astructs__command_html_ab71d3325f497817c691ace8e476427cc"><div class="ttname"><a href="structs__command.html#ab71d3325f497817c691ace8e476427cc">s_command::args</a></div><div class="ttdeci">char ** args</div><div class="ttdef"><b>Definition</b> execute.h:34</div></div>
+<div class="ttc" id="astructs__command_html_ac8d958e08ec476fb34a9518ad05852e5"><div class="ttname"><a href="structs__command.html#ac8d958e08ec476fb34a9518ad05852e5">s_command::env</a></div><div class="ttdeci">char ** env</div><div class="ttdef"><b>Definition</b> execute.h:36</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac9758278a1d7db6a16e3550e23220c59" name="ac9758278a1d7db6a16e3550e23220c59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9758278a1d7db6a16e3550e23220c59">&#9670;&#160;</a></span>debug_input()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void debug_input </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>line</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>文字列をデバッグ出力 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line</td><td>readline関数で読み込まれた文字列 </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="lineno">   29</span>{</div>
+<div class="line"><span class="lineno">   30</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\n\x1B[100m\x1B[37m&quot;</span>);</div>
+<div class="line"><span class="lineno">   31</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;---- input debug ----\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   32</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;line %p [%s]\n&quot;</span>, line, line);</div>
+<div class="line"><span class="lineno">   33</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\x1B[0m\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   34</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7b56f59248dd0daebf5b3254ad913fbe" name="a7b56f59248dd0daebf5b3254ad913fbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b56f59248dd0daebf5b3254ad913fbe">&#9670;&#160;</a></span>debug_token()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void debug_token </td>
+          <td>(</td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>tokens</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>tokenize関数で生成されたトークンをデバッグ出力 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tokens</td><td>複数の文字列要素もつ二次元配列（最後の要素はNULL） </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="lineno">   42</span>{</div>
+<div class="line"><span class="lineno">   43</span>    <span class="keywordtype">int</span>     i;</div>
+<div class="line"><span class="lineno">   44</span> </div>
+<div class="line"><span class="lineno">   45</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\n\x1B[100m\x1B[37m&quot;</span>);</div>
+<div class="line"><span class="lineno">   46</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;---- char *tokens[] ----\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   47</span>    i = 0;</div>
+<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">while</span> (tokens[i] != NULL)</div>
+<div class="line"><span class="lineno">   49</span>    {</div>
+<div class="line"><span class="lineno">   50</span>        <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;tokens[%d] %p [%s]\n&quot;</span>, i, tokens[i], tokens[i]);</div>
+<div class="line"><span class="lineno">   51</span>        i++;</div>
+<div class="line"><span class="lineno">   52</span>    }</div>
+<div class="line"><span class="lineno">   53</span>    <a class="code hl_function" href="ft__printf_8h.html#a3f28c451c2d97475afa585712287a400">ft_printf</a>(<span class="stringliteral">&quot;\x1B[0m\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   54</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+構築:&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>minishell: srcs/error.c ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">minishell
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b73b02d482d1c4a3db20c3d9ad52d395.html">srcs</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">関数</a>  </div>
+  <div class="headertitle"><div class="title">error.c ファイル</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="error__minishell_8h_source.html">error_minishell.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ft__printf_8h_source.html">ft_printf.h</a>&quot;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:a43d8b6f1e159993bf73b0666565fbd1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="error_8c.html#a43d8b6f1e159993bf73b0666565fbd1f">error_code</a> (int error_code)</td></tr>
+<tr class="memdesc:a43d8b6f1e159993bf73b0666565fbd1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">システムコール以外のエラー処理。標準エラー出力へのメッセージ出力と、 エラーコードを終了ステータスとして返す関数。  <br /></td></tr>
+<tr class="separator:a43d8b6f1e159993bf73b0666565fbd1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eb1fe86f4dd8f3ec8fcf0eff2a62b22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="error_8c.html#a6eb1fe86f4dd8f3ec8fcf0eff2a62b22">ft_errno_exit</a> (char *cause)</td></tr>
+<tr class="memdesc:a6eb1fe86f4dd8f3ec8fcf0eff2a62b22"><td class="mdescLeft">&#160;</td><td class="mdescRight">システムコール失敗時のエラーメッセージ出力とexitを行う関数。  <br /></td></tr>
+<tr class="separator:a6eb1fe86f4dd8f3ec8fcf0eff2a62b22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1c71dc5b3d7c0d6f60c66fb67fe1d1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="error_8c.html#aa1c71dc5b3d7c0d6f60c66fb67fe1d1f">ft_perror_exit</a> (char *message)</td></tr>
+<tr class="memdesc:aa1c71dc5b3d7c0d6f60c66fb67fe1d1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">エラーメッセージ出力とexit(1)を行う関数  <br /></td></tr>
+<tr class="separator:aa1c71dc5b3d7c0d6f60c66fb67fe1d1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">関数詳解</h2>
+<a id="a43d8b6f1e159993bf73b0666565fbd1f" name="a43d8b6f1e159993bf73b0666565fbd1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43d8b6f1e159993bf73b0666565fbd1f">&#9670;&#160;</a></span>error_code()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void error_code </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>error_code</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>システムコール以外のエラー処理。標準エラー出力へのメッセージ出力と、 エラーコードを終了ステータスとして返す関数。 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">error_code</td><td>エラー判定の内容 </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="lineno">   39</span>{</div>
+<div class="line"><span class="lineno">   40</span>    error_message(<a class="code hl_function" href="error_8c.html#a43d8b6f1e159993bf73b0666565fbd1f">error_code</a>);</div>
+<div class="line"><span class="lineno">   41</span>    exit(<a class="code hl_function" href="error_8c.html#a43d8b6f1e159993bf73b0666565fbd1f">error_code</a>);</div>
+<div class="line"><span class="lineno">   42</span>}</div>
+<div class="ttc" id="aerror_8c_html_a43d8b6f1e159993bf73b0666565fbd1f"><div class="ttname"><a href="error_8c.html#a43d8b6f1e159993bf73b0666565fbd1f">error_code</a></div><div class="ttdeci">void error_code(int error_code)</div><div class="ttdoc">システムコール以外のエラー処理。標準エラー出力へのメッセージ出力と、 エラーコードを終了ステータスとして返す関数。</div><div class="ttdef"><b>Definition</b> error.c:38</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6eb1fe86f4dd8f3ec8fcf0eff2a62b22" name="a6eb1fe86f4dd8f3ec8fcf0eff2a62b22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eb1fe86f4dd8f3ec8fcf0eff2a62b22">&#9670;&#160;</a></span>ft_errno_exit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ft_errno_exit </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>cause</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>システムコール失敗時のエラーメッセージ出力とexitを行う関数。 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cause</td><td>失敗したシステムコールの名前 </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="lineno">   50</span>{</div>
+<div class="line"><span class="lineno">   51</span>    <span class="keywordtype">int</span>     error_number;</div>
+<div class="line"><span class="lineno">   52</span>    <span class="keywordtype">char</span>    *error_message;</div>
+<div class="line"><span class="lineno">   53</span> </div>
+<div class="line"><span class="lineno">   54</span>    error_number = errno;</div>
+<div class="line"><span class="lineno">   55</span>    error_message = strerror(error_number);</div>
+<div class="line"><span class="lineno">   56</span>    <a class="code hl_function" href="ft__printf_8h.html#a5862602919a8234471221e53e31de993">ft_fprintf</a>(STDERR_FILENO, <span class="stringliteral">&quot;%s: %s: %s\n&quot;</span>, <a class="code hl_define" href="error__minishell_8h.html#a47f2e62c0dbebc787052c165afcada0e">NAME</a>, cause, error_message);</div>
+<div class="line"><span class="lineno">   57</span>    exit (1);</div>
+<div class="line"><span class="lineno">   58</span>}</div>
+<div class="ttc" id="aerror__minishell_8h_html_a47f2e62c0dbebc787052c165afcada0e"><div class="ttname"><a href="error__minishell_8h.html#a47f2e62c0dbebc787052c165afcada0e">NAME</a></div><div class="ttdeci">#define NAME</div><div class="ttdef"><b>Definition</b> error_minishell.h:22</div></div>
+<div class="ttc" id="aft__printf_8h_html_a5862602919a8234471221e53e31de993"><div class="ttname"><a href="ft__printf_8h.html#a5862602919a8234471221e53e31de993">ft_fprintf</a></div><div class="ttdeci">int ft_fprintf(int fd, const char *input,...)</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa1c71dc5b3d7c0d6f60c66fb67fe1d1f" name="aa1c71dc5b3d7c0d6f60c66fb67fe1d1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1c71dc5b3d7c0d6f60c66fb67fe1d1f">&#9670;&#160;</a></span>ft_perror_exit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ft_perror_exit </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>エラーメッセージ出力とexit(1)を行う関数 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>エラー出力に書かせるメッセージ </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="lineno">   66</span>{</div>
+<div class="line"><span class="lineno">   67</span>    perror(message);</div>
+<div class="line"><span class="lineno">   68</span>    exit (1);</div>
+<div class="line"><span class="lineno">   69</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+構築:&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

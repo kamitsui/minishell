@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>minishell: includes/minishell.h ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">minishell
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_09e761304027c904456130627fd4dcf5.html">includes</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">マクロ定義</a> &#124;
+<a href="#func-members">関数</a>  </div>
+  <div class="headertitle"><div class="title">minishell.h ファイル</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="tokenize_8h_source.html">tokenize.h</a>&quot;</code><br />
+</div>
+<p><a href="minishell_8h_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+マクロ定義</h2></td></tr>
+<tr class="memitem:a6b20d41d6252e9871430c242cb1a56e7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minishell_8h.html#a6b20d41d6252e9871430c242cb1a56e7">BUFFER_SIZE</a>&#160;&#160;&#160;100</td></tr>
+<tr class="separator:a6b20d41d6252e9871430c242cb1a56e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accdbea14ea06c15e271784368bd993e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minishell_8h.html#accdbea14ea06c15e271784368bd993e8">PROMPT</a>&#160;&#160;&#160;&quot;minishell&gt; &quot;</td></tr>
+<tr class="separator:accdbea14ea06c15e271784368bd993e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b6a35b8be8405a9db72cc5dea97954b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minishell_8h.html#a3b6a35b8be8405a9db72cc5dea97954b">PROGRAM_NAME</a>&#160;&#160;&#160;&quot;minishell&quot;</td></tr>
+<tr class="separator:a3b6a35b8be8405a9db72cc5dea97954b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:a3fe676936a4bef32ef824c6b38a46b1e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minishell_8h.html#a3fe676936a4bef32ef824c6b38a46b1e">input</a> (char **line, char **env)</td></tr>
+<tr class="memdesc:a3fe676936a4bef32ef824c6b38a46b1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">環境変数のハッシュテーブル（未実装）  <br /></td></tr>
+<tr class="separator:a3fe676936a4bef32ef824c6b38a46b1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03e8346228c259f1671990049ff8a6aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minishell_8h.html#a03e8346228c259f1671990049ff8a6aa">free_line</a> (char **line)</td></tr>
+<tr class="memdesc:a03e8346228c259f1671990049ff8a6aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">readlineで読み取った関数をフリーする  <br /></td></tr>
+<tr class="separator:a03e8346228c259f1671990049ff8a6aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">マクロ定義詳解</h2>
+<a id="a6b20d41d6252e9871430c242cb1a56e7" name="a6b20d41d6252e9871430c242cb1a56e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b20d41d6252e9871430c242cb1a56e7">&#9670;&#160;</a></span>BUFFER_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BUFFER_SIZE&#160;&#160;&#160;100</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3b6a35b8be8405a9db72cc5dea97954b" name="a3b6a35b8be8405a9db72cc5dea97954b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b6a35b8be8405a9db72cc5dea97954b">&#9670;&#160;</a></span>PROGRAM_NAME</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROGRAM_NAME&#160;&#160;&#160;&quot;minishell&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="accdbea14ea06c15e271784368bd993e8" name="accdbea14ea06c15e271784368bd993e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accdbea14ea06c15e271784368bd993e8">&#9670;&#160;</a></span>PROMPT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROMPT&#160;&#160;&#160;&quot;minishell&gt; &quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a id="a03e8346228c259f1671990049ff8a6aa" name="a03e8346228c259f1671990049ff8a6aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03e8346228c259f1671990049ff8a6aa">&#9670;&#160;</a></span>free_line()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_line </td>
+          <td>(</td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>line</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>readlineで読み取った関数をフリーする </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line</td><td>複数の文字列要素もつ二次元配列（最後の要素はNULL） </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>{</div>
+<div class="line"><span class="lineno">   24</span>    <span class="keywordtype">int</span> i;</div>
+<div class="line"><span class="lineno">   25</span> </div>
+<div class="line"><span class="lineno">   26</span>    i = 0;</div>
+<div class="line"><span class="lineno">   27</span>    <span class="keywordflow">while</span> (line[i] != NULL)</div>
+<div class="line"><span class="lineno">   28</span>    {</div>
+<div class="line"><span class="lineno">   29</span>        free(line[i]);</div>
+<div class="line"><span class="lineno">   30</span>        i++;</div>
+<div class="line"><span class="lineno">   31</span>    }</div>
+<div class="line"><span class="lineno">   32</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3fe676936a4bef32ef824c6b38a46b1e" name="a3fe676936a4bef32ef824c6b38a46b1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fe676936a4bef32ef824c6b38a46b1e">&#9670;&#160;</a></span>input()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int input </td>
+          <td>(</td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>env</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>環境変数のハッシュテーブル（未実装） </p>
+<p>実行や展開の時に必要なデータ構造 (未実装)</p>
+<p>mainからで使う関数</p>
+<p>環境変数のハッシュテーブル（未実装）</p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line</td><td>readline関数によって読み取った文字列。 </td></tr>
+    <tr><td class="paramname">env</td><td>環境変数。</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>status 終了ステータスを返す。 </dd></dl>
+<div class="fragment"><div class="line"><span class="lineno">   58</span>{</div>
+<div class="line"><span class="lineno">   59</span>    <span class="keywordtype">int</span> i;</div>
+<div class="line"><span class="lineno">   60</span>    <span class="keywordtype">int</span> status;</div>
+<div class="line"><span class="lineno">   61</span> </div>
+<div class="line"><span class="lineno">   62</span>    i = 0;</div>
+<div class="line"><span class="lineno">   63</span>    <span class="keywordflow">while</span> (1)</div>
+<div class="line"><span class="lineno">   64</span>    {</div>
+<div class="line"><span class="lineno">   65</span>        line[i] = readline(<a class="code hl_define" href="minishell_8h.html#accdbea14ea06c15e271784368bd993e8">PROMPT</a>);</div>
+<div class="line"><span class="lineno">   66</span>        <span class="keywordflow">if</span> (line[i] == NULL)</div>
+<div class="line"><span class="lineno">   67</span>        {</div>
+<div class="line"><span class="lineno">   68</span>            <a class="code hl_function" href="free__utils_8c.html#a03e8346228c259f1671990049ff8a6aa">free_line</a>(line);</div>
+<div class="line"><span class="lineno">   69</span>            <a class="code hl_function" href="error_8c.html#a43d8b6f1e159993bf73b0666565fbd1f">error_code</a>(<a class="code hl_define" href="error__minishell_8h.html#a950a5e179029e703c0df035b319dee83">ERR_READLINE</a>);</div>
+<div class="line"><span class="lineno">   70</span>        }</div>
+<div class="line"><span class="lineno">   71</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="libft_8h.html#abd118f33a5a0fe00b6cbbfb0eeae25a5">ft_strcmp</a>(line[i], <span class="stringliteral">&quot;exit&quot;</span>) == 0)</div>
+<div class="line"><span class="lineno">   72</span>        {</div>
+<div class="line"><span class="lineno">   73</span>            free(line[i]);</div>
+<div class="line"><span class="lineno">   74</span>            break ;</div>
+<div class="line"><span class="lineno">   75</span>        }</div>
+<div class="line"><span class="lineno">   76</span>        <span class="comment">// if (^Dがきたら)  .....</span></div>
+<div class="line"><span class="lineno">   77</span>        <span class="comment">// if (lineの最後の文字がエスケープ文字&#39;\&#39;だったら）.....</span></div>
+<div class="line"><span class="lineno">   78</span>        status = <a class="code hl_function" href="input_8c.html#a73bfe212e7ee14521da57afcbc8bdae5">lets_go_shell</a>(line[i], env);</div>
+<div class="line"><span class="lineno">   79</span>        i++;</div>
+<div class="line"><span class="lineno">   80</span>    }</div>
+<div class="line"><span class="lineno">   81</span>    line[i] = NULL;</div>
+<div class="line"><span class="lineno">   82</span>    <span class="comment">//  erro handle (^D が２回続いて入力された場合)</span></div>
+<div class="line"><span class="lineno">   83</span>    <span class="keywordflow">return</span> (status);</div>
+<div class="line"><span class="lineno">   84</span>}</div>
+<div class="ttc" id="aerror_8c_html_a43d8b6f1e159993bf73b0666565fbd1f"><div class="ttname"><a href="error_8c.html#a43d8b6f1e159993bf73b0666565fbd1f">error_code</a></div><div class="ttdeci">void error_code(int error_code)</div><div class="ttdoc">システムコール以外のエラー処理。標準エラー出力へのメッセージ出力と、 エラーコードを終了ステータスとして返す関数。</div><div class="ttdef"><b>Definition</b> error.c:38</div></div>
+<div class="ttc" id="aerror__minishell_8h_html_a950a5e179029e703c0df035b319dee83"><div class="ttname"><a href="error__minishell_8h.html#a950a5e179029e703c0df035b319dee83">ERR_READLINE</a></div><div class="ttdeci">#define ERR_READLINE</div><div class="ttdef"><b>Definition</b> error_minishell.h:19</div></div>
+<div class="ttc" id="afree__utils_8c_html_a03e8346228c259f1671990049ff8a6aa"><div class="ttname"><a href="free__utils_8c.html#a03e8346228c259f1671990049ff8a6aa">free_line</a></div><div class="ttdeci">void free_line(char **line)</div><div class="ttdoc">readlineで読み取った関数をフリーする</div><div class="ttdef"><b>Definition</b> free_utils.c:22</div></div>
+<div class="ttc" id="ainput_8c_html_a73bfe212e7ee14521da57afcbc8bdae5"><div class="ttname"><a href="input_8c.html#a73bfe212e7ee14521da57afcbc8bdae5">lets_go_shell</a></div><div class="ttdeci">int lets_go_shell(char *line, char **env)</div><div class="ttdoc">lets_go_shell関数では、引数のline文字列に対して、 tokenize関数ー＞parse関数ー＞traverse_ast関数の順番で処理する。</div><div class="ttdef"><b>Definition</b> input.c:30</div></div>
+<div class="ttc" id="alibft_8h_html_abd118f33a5a0fe00b6cbbfb0eeae25a5"><div class="ttname"><a href="libft_8h.html#abd118f33a5a0fe00b6cbbfb0eeae25a5">ft_strcmp</a></div><div class="ttdeci">int ft_strcmp(char *s1, char *s2)</div></div>
+<div class="ttc" id="aminishell_8h_html_accdbea14ea06c15e271784368bd993e8"><div class="ttname"><a href="minishell_8h.html#accdbea14ea06c15e271784368bd993e8">PROMPT</a></div><div class="ttdeci">#define PROMPT</div><div class="ttdef"><b>Definition</b> minishell.h:20</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+構築:&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

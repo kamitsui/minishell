@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:29:22 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 15:29:50 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/20 18:31:28 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "parse.h"
 #include <stdlib.h>
 
+/**
+ * @brief readlineで読み取った関数をフリーする
+ *
+ * @param line 複数の文字列要素もつ二次元配列（最後の要素はNULL）
+ */
 void	free_line(char **line)
 {
 	int	i;
@@ -26,6 +31,11 @@ void	free_line(char **line)
 	}
 }
 
+/**
+ * @brief char**型の二次元配列をフリーする関数
+ *
+ * @param tokens 複数の文字列要素もつ二次元配列（最後の要素はNULL）
+ */
 void	free_tokens(char **tokens)
 {
 	size_t	i;
@@ -39,19 +49,11 @@ void	free_tokens(char **tokens)
 	free(tokens);
 }
 
-//void	free_tokens(t_token *tokens)
-//{
-//	int	i;
-//
-//	i = 0;
-//	while (tokens[i].var != NULL)
-//	{
-//		free(tokens[i].var);
-//		i++;
-//	}
-//	free(tokens);
-//}
-
+/**
+ * @brief 抽象構文木のノードとその子ノードを全てフリーする関数
+ *
+ * @param node フリーさせたい抽象構文木のノード
+ */
 void	free_ast(t_ast *node)
 {
 	size_t	i;

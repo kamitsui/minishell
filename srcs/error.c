@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:05:41 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/12 14:32:17 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/20 18:17:17 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 #include <string.h>
 #include <unistd.h>
 
+/**
+ * @brief エラーメッセージを標準エラー出力する関数。(ヘルパー関数）
+ *
+ * @param error_code 出力させたいエラーメッセージに対するエラーコード
+ */
 static void	error_message(int error_code)
 {
 	static char	*msg[ERR_NUM] = {NULL, MSG_READLINE};
@@ -24,12 +29,23 @@ static void	error_message(int error_code)
 	ft_fprintf(STDERR_FILENO, msg[error_code]);
 }
 
+/**
+ * @brief システムコール以外のエラー処理。標準エラー出力へのメッセージ出力と、
+ * エラーコードを終了ステータスとして返す関数。
+ *
+ * @param error_code エラー判定の内容
+ */
 void	error_code(int error_code)
 {
 	error_message(error_code);
 	exit(error_code);
 }
 
+/**
+ * @brief システムコール失敗時のエラーメッセージ出力とexitを行う関数。
+ *
+ * @param cause 失敗したシステムコールの名前
+ */
 void	ft_errno_exit(char *cause)
 {
 	int		error_number;
@@ -41,6 +57,11 @@ void	ft_errno_exit(char *cause)
 	exit (1);
 }
 
+/**
+ * @brief エラーメッセージ出力とexit(1)を行う関数
+ *
+ * @param message エラー出力に書かせるメッセージ
+ */
 void	ft_perror_exit(char *message)
 {
 	perror(message);

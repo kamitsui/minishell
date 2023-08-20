@@ -6,10 +6,14 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 15:21:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/20 23:06:43 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file execute_command.c
+ * @brief <simple-command>のノードを実行する関数
+ */
 #include "error_minishell.h"
 #include "parse.h"
 #include "execute.h"
@@ -17,9 +21,12 @@
 #include <unistd.h>
 
 // debug code
-//#include "debug.h"
-//	debug_command(&command);
 
+/**
+ * @brief ヘルパー関数：ファイルの実行　存在しなければエラー出力とexit(127)
+ *
+ * @param command 実行ファイルの構造体
+ */
 static void	child_process(t_command command)
 {
 	char	*file;
@@ -30,6 +37,22 @@ static void	child_process(t_command command)
 	exit (127);
 }
 
+/**
+ * @brief <simple-command>のノードを実行する関数
+ *
+ * @param command_node 実行させるノード
+ * @param env 環境変数
+ * @param status １つ前のノードの終了ステータス
+ *
+ * @return 自身のノードで実行したコマンドの終了ステータスを返す
+ * @note 関数単体のテストあり\n
+ * cd minishell/test/unit_function\n
+ * make 4\n
+ * make run4\n\n
+ * デバッグコードあり\n
+ * \#include "debug.h"
+ * 	debug_command(&command);
+ */
 int	execute_command(t_ast *command_node, char **env, int status)
 {
 	t_command	command;
@@ -54,8 +77,3 @@ int	execute_command(t_ast *command_node, char **env, int status)
 		child_process(command);
 	return (wait_process(pid, 1));
 }
-// how to test this function
-// |
-// cd minishell/test/unit_function
-// make 4
-// make run4

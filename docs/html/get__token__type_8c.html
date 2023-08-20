@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>minishell: srcs/tokenize_utils/get_token_type.c ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">minishell
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b73b02d482d1c4a3db20c3d9ad52d395.html">srcs</a></li><li class="navelem"><a class="el" href="dir_7a3cfed40bafefd30070a11d833433ab.html">tokenize_utils</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">関数</a>  </div>
+  <div class="headertitle"><div class="title">get_token_type.c ファイル</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="tokenize_8h_source.html">tokenize.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="libft_8h_source.html">libft.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ft__printf_8h_source.html">ft_printf.h</a>&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:a5dabf4112bcd91e1f65a69037ef962e7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="get__token__type_8c.html#a5dabf4112bcd91e1f65a69037ef962e7">get_token_type</a> (char *var)</td></tr>
+<tr class="memdesc:a5dabf4112bcd91e1f65a69037ef962e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">文字列のタイプを調べて分類分けする。  <br /></td></tr>
+<tr class="separator:a5dabf4112bcd91e1f65a69037ef962e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">関数詳解</h2>
+<a id="a5dabf4112bcd91e1f65a69037ef962e7" name="a5dabf4112bcd91e1f65a69037ef962e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dabf4112bcd91e1f65a69037ef962e7">&#9670;&#160;</a></span>get_token_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_token_type </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>var</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>文字列のタイプを調べて分類分けする。 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">var</td><td>文字列&lt;connecotor&gt;か&lt;command&gt; のいずれか。</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>type 該当するタイプのbitを立てる。 </dd></dl>
+<div class="fragment"><div class="line"><span class="lineno">   25</span>{</div>
+<div class="line"><span class="lineno">   26</span>    <span class="keywordtype">int</span> type;</div>
+<div class="line"><span class="lineno">   27</span> </div>
+<div class="line"><span class="lineno">   28</span>    type = 0;</div>
+<div class="line"><span class="lineno">   29</span>    <span class="keywordflow">if</span> (var == NULL)</div>
+<div class="line"><span class="lineno">   30</span>        <span class="keywordflow">return</span> (TOK_END);</div>
+<div class="line"><span class="lineno">   31</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="libft_8h.html#af534ebeb0fdcc11b99cec6ac4d929c8f">ft_substr_exist</a>(var, <a class="code hl_define" href="tokenize_8h.html#ab523885c38e6faa2da58ebd27e74cc7f">CONNECT_AND</a>) || <a class="code hl_function" href="libft_8h.html#af534ebeb0fdcc11b99cec6ac4d929c8f">ft_substr_exist</a>(var, <a class="code hl_define" href="tokenize_8h.html#aceb6548831a2172e19706ae2534aa93b">CONNECT_OR</a>))</div>
+<div class="line"><span class="lineno">   32</span>    {</div>
+<div class="line"><span class="lineno">   33</span>        type |= TOK_CONNECT;</div>
+<div class="line"><span class="lineno">   34</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="libft_8h.html#af534ebeb0fdcc11b99cec6ac4d929c8f">ft_substr_exist</a>(var, <a class="code hl_define" href="tokenize_8h.html#ab523885c38e6faa2da58ebd27e74cc7f">CONNECT_AND</a>))</div>
+<div class="line"><span class="lineno">   35</span>            type |= TOK_CON_AND;</div>
+<div class="line"><span class="lineno">   36</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">   37</span>            type |= TOK_CON_OR;</div>
+<div class="line"><span class="lineno">   38</span>    }</div>
+<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">   40</span>        type |= TOK_COMMAND;</div>
+<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">return</span> (type);</div>
+<div class="line"><span class="lineno">   42</span>}</div>
+<div class="ttc" id="alibft_8h_html_af534ebeb0fdcc11b99cec6ac4d929c8f"><div class="ttname"><a href="libft_8h.html#af534ebeb0fdcc11b99cec6ac4d929c8f">ft_substr_exist</a></div><div class="ttdeci">bool ft_substr_exist(char *haystack, char *needle)</div></div>
+<div class="ttc" id="atokenize_8h_html_ab523885c38e6faa2da58ebd27e74cc7f"><div class="ttname"><a href="tokenize_8h.html#ab523885c38e6faa2da58ebd27e74cc7f">CONNECT_AND</a></div><div class="ttdeci">#define CONNECT_AND</div><div class="ttdef"><b>Definition</b> tokenize.h:20</div></div>
+<div class="ttc" id="atokenize_8h_html_aceb6548831a2172e19706ae2534aa93b"><div class="ttname"><a href="tokenize_8h.html#aceb6548831a2172e19706ae2534aa93b">CONNECT_OR</a></div><div class="ttdeci">#define CONNECT_OR</div><div class="ttdef"><b>Definition</b> tokenize.h:21</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+構築:&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

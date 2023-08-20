@@ -6,18 +6,22 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:22:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 15:27:14 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/20 18:23:11 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
- * @brief Expansion 展開
+ * @brief 各トークンを展開する関数
  *
- * @param head
- * @param Unknown
+ * @param ast トークナイズで生成された抽象構文木のデータ構造の先頭ノード
+ * @param env 環境変数
  *
- * @return 
+ * @return 展開後の抽象構文木データ構造の先頭ノード
  */
+t_ast	*expansion(t_ast *ast, char **env)
+{
+	//　未実装
+}
 //t_list	*expansion(t_ast *head, char **env)
 //{
 //	return(ast);

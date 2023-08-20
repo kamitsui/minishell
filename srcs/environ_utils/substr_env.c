@@ -6,13 +6,25 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 10:37:40 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/06/20 21:56:26 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/20 22:45:47 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file substr_env.c
+ * @brief 環境変数から値を取り出す関数
+ */
 #include "libft.h"
 #include <stdbool.h>
 
+/**
+ * @brief 環境変数からPATHを取り出す時に使う関数(free必要)
+ *
+ * @param name 取り出したい変数名を指定
+ * @param env[] 環境変数
+ *
+ * @return dir 環境変数のから取り出した値（文字列）
+ */
 char	*substr_env(char *name, char *env[])
 {
 	char	*dir;

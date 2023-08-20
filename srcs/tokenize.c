@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:26:16 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 14:11:45 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/20 17:57:15 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 #include "libft.h"
 #include <stdlib.h>
 
+/**
+ * @brief 入力文字列を条件に応じてトークン分けする。
+ *
+ * @param line プロンプトに入力された文字列（readlineで読み取った文字列）
+ *
+ * @return tokens 複数の文字列要素もつ二次元配列（最後の要素はNULL）
+ */
 char	**tokenize(char *line)
 {
 	char	**tokens;
