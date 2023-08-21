@@ -61,6 +61,6 @@ connected to the input of the next command via a pipe.
 The readline() function can cause memory leaks. You don’t have to fix them. But that doesn’t mean your own code, yes the code you wrote, can have memory leaks.
 
 #### docs
-> ソースコードのメタ情報を抽出してhtml形式のドキュメントに出力しています。[→ index.html]()
+> ソースコードのメタ情報を抽出してhtml形式のドキュメントに出力しています。[→ index.html](https://kamitsui.github.io/minishell/projects/minishell/docs/html/files.html)
 >
-> ドキュメント作成ツールは`doxygen`([→ 使い方]())を使用しました。
+> ドキュメント作成ツールは`doxygen`([→ 使い方](https://github.com/kamitsui/doxygen))を使用しました。
