@@ -6,10 +6,14 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:39:39 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 19:10:13 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:03:17 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file execute_pipeline.c
+ * @brief <pipe-command>のノードを実行する関数
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -20,6 +24,14 @@
 #include "execute.h"
 #include "parse.h"
 
+/**
+ * @brief コマンドを実行する関数
+ *
+ * @param command 実行させるコマンドの構造体
+ * @param pipefd[2] プロセス間通信用のパイプfd
+ * @param i 現在のコマンドの位置
+ * @param num_commands <pipe-command>のコマンド数
+ */
 static void	child_process(t_command command, int pipefd[2], int i,
 		int num_commands)
 {
@@ -41,6 +53,11 @@ static void	child_process(t_command command, int pipefd[2], int i,
 	exit (127);
 }
 
+/**
+ * @brief ヘルパー関数：次のコマンド用プロセスのために、パイプ入力を標準入力に複製する。
+ *
+ * @param pipefd[2] プロセス通信用のパイプfd
+ */
 static void	parent_process(int pipefd[2])
 {
 	close(pipefd[WRITE_END]);
@@ -66,6 +83,16 @@ static void	parent_process(int pipefd[2])
 //	free(cmd_args);
 //}
 
+/**
+ * @brief コマンド実行用のプロセスを作る関数
+ *
+ * @param cmdstack コマンド実行プロセスに渡す構造体
+ * @param pipefd プロセス間通信用のパイプfd
+ * @param i 現在のコマンドの位置
+ * @param num_commands <pipe-command>のコマンド数
+ *
+ * @return pid コマンド実行用のプロセスID
+ */
 pid_t	create_process(t_cmdstack *cmdstack, int *pipefd,
 		int i, int num_commands)
 {
@@ -81,9 +108,19 @@ pid_t	create_process(t_cmdstack *cmdstack, int *pipefd,
 	return (pid);
 }
 
-// debug code
-//#include "debug.h"//for debug
-//		debug_token(cmd_args);// for debug (insert after cmd_args line)
+/**
+ * @brief <pipe-command>を実行する関数
+ *
+ * @param commands <pipe-command>のノード
+ * @param num_commands パイプでつなげるコマンドの数
+ * @param env 環境変数
+ * @note デバッグコードあり\n
+ * \#include "debug.h"//for debug\n
+ * debug_token(cmd_args);\n
+ * @bug コマンドライン引数をfreeさせるとBUSエラーが起きる。
+ *
+ * @return 最後のコマンドの終了ステータス
+ */
 int	execute_pipeline(t_ast **commands, size_t num_commands, char **env)
 {
 	int			pipefd[2];

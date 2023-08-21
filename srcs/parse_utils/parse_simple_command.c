@@ -6,15 +6,26 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 19:29:24 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:32:24 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file parse_simple_command.c
+ * @brief <simple-command>のノードを作る関数
+ */
 #include "libft.h"
 #include "parse.h"
 #include <stdlib.h>
 #include <string.h>
 
+/**
+ * @brief <simple-command>のノードを作る関数
+ *
+ * @param tokens トークンのアドレス
+ *
+ * @return 生成されたコマンドのノードを返す
+ */
 t_ast	*parse_simple_command(char ***tokens)
 {
 	t_ast	*node;

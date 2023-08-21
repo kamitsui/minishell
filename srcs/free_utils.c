@@ -6,16 +6,21 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:29:22 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/20 18:31:28 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:07:37 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file free_utils.c
+ * @brief minishellで確保したヒープ領域のメモリを開放する関数群
+ */
 #include "minishell.h"
 #include "parse.h"
 #include <stdlib.h>
 
 /**
- * @brief readlineで読み取った関数をフリーする
+ * @brief readlineで読み取った関数をフリーする\n
+ * lineのfreeは不要（スタック領域を使っているため）
  *
  * @param line 複数の文字列要素もつ二次元配列（最後の要素はNULL）
  */
@@ -32,7 +37,8 @@ void	free_line(char **line)
 }
 
 /**
- * @brief char**型の二次元配列をフリーする関数
+ * @brief char**型の二次元配列をフリーする関数\n
+ * tokensのfreeは必要（ヒープ領域にメモリ確保しているため）
  *
  * @param tokens 複数の文字列要素もつ二次元配列（最後の要素はNULL）
  */

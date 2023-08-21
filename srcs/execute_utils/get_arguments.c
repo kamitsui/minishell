@@ -6,13 +6,23 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 20:13:59 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 15:21:27 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:27:51 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file get_arguments.c
+ * @brief <simple-command>のノードからコマンド引数を取り出す関数
+ */
 #include "parse.h"
 #include "execute.h"
 
+/**
+ * @brief <simple-command>のノードからコマンド引数を取り出す関数
+ *
+ * @param commands コマンド引数の格納先（コマンドの構造体）
+ * @param node <simple-command>のノード
+ */
 void	get_arguments(t_command *commands, t_ast *node)
 {
 	size_t	i;

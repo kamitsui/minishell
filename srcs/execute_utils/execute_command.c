@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/20 23:06:43 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:41:04 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 #include "execute.h"
 #include "ft_printf.h"
 #include <unistd.h>
-
-// debug code
 
 /**
  * @brief ヘルパー関数：ファイルの実行　存在しなければエラー出力とexit(127)
@@ -50,8 +48,8 @@ static void	child_process(t_command command)
  * make 4\n
  * make run4\n\n
  * デバッグコードあり\n
- * \#include "debug.h"
- * 	debug_command(&command);
+ * \#include "debug.h"\n
+ * debug_command(&command);
  */
 int	execute_command(t_ast *command_node, char **env, int status)
 {

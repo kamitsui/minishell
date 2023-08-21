@@ -6,10 +6,14 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/20 17:04:34 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:34:58 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file input.c
+ * @brief プロンプト表示、<command-line>入力、<command-line>処理を行う関数\n
+ */
 #include "minishell.h"
 #include "parse.h"
 #include "traverse.h"
@@ -19,7 +23,7 @@
 #include <readline/readline.h>
 
 /**
- * @brief lets_go_shell関数では、引数のline文字列に対して、
+ * @brief lets_go_shell関数では、<command-line>の文字列に対して、
  * tokenize関数ー＞parse関数ー＞traverse_ast関数の順番で処理する。
  *
  * @param line readline関数から読みとった文字列。
@@ -47,12 +51,14 @@ int	lets_go_shell(char *line, char **env)
 }
 
 /**
- * @brief input関数は入力文字列lineの取り出しと、次の処理へ渡す。
+ * @brief プロンプト表示、<command-line>入力、<command-line>処理を行う関数\n
+ * "exit"が入力されるまで上記処理を繰り返します\n
  *
  * @param line readline関数によって読み取った文字列。
  * @param env 環境変数。
  *
  * @return status 終了ステータスを返す。
+ * @note シグナルハンドル未実装
  */
 int	input(char **line, char **env)
 {

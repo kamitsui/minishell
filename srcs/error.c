@@ -6,10 +6,15 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:05:41 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/20 18:17:17 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:14:10 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file error.c
+ * @brief エラー検出時のエラー処理する関数
+ * @note 注意ft_fprintf -> ft_dprintf リネームする（未完）
+ */
 #include "error_minishell.h"
 #include "ft_printf.h"
 #include <stdio.h>
@@ -21,6 +26,7 @@
  * @brief エラーメッセージを標準エラー出力する関数。(ヘルパー関数）
  *
  * @param error_code 出力させたいエラーメッセージに対するエラーコード
+ * @note 文字列要素の順番や組み合わせを修正した方がいいかも。。。
  */
 static void	error_message(int error_code)
 {
@@ -61,6 +67,7 @@ void	ft_errno_exit(char *cause)
  * @brief エラーメッセージ出力とexit(1)を行う関数
  *
  * @param message エラー出力に書かせるメッセージ
+ * @note 不要かも。。。
  */
 void	ft_perror_exit(char *message)
 {

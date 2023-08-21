@@ -6,14 +6,27 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:23:52 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 19:25:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:36:37 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file parse_argument.c
+ * @brief \<argument>のノードを作ってトークンを一つ進める関数。
+ * （tokensのアドレスを引数で持たせているため、ポインタの移動が可能）
+ */
 #include "parse.h"
 #include "libft.h"
 #include <string.h>// for strcmp()
 
+/**
+ * @brief \<argument>のノードを作ってトークンを一つ進める関数。
+ * （tokensのアドレスを引数で持たせているため、ポインタの移動が可能）
+ *
+ * @param tokens トークンのアドレス
+ *
+ * @return 生成されたコマンド引数のノードを返す。
+ */
 t_ast	*parse_argument(char ***tokens)
 {
 	// 要改良！ is_argument

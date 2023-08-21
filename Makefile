@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/08/19 19:33:59 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/21 19:03:39 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS = main.c \
 	   parse_argument.c \
 	   parse_command.c \
 	   parse_simple_command.c \
+	   parse_pipe_command.c \
 	   create_node.c \
 	   is_pipe_command.c \
 	   \

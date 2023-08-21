@@ -6,12 +6,26 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 20:07:43 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 15:22:35 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:53:00 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file wait_process.c
+ * @brief コマンドの数分だけコマンド実行プロセスの終了を待ち、
+ * 最後の終了ステータスを返す関数
+ */
 #include <sys/wait.h>
 
+/**
+ * @brief コマンドの数分だけコマンド実行プロセスの終了を待ち、
+ * 最後の終了ステータスを返す関数
+ *
+ * @param pid 最後のコマンド実行プロセスID
+ * @param num_commands <pipe-command>でつなげるコマンドの数
+ *
+ * @return 
+ */
 int	wait_process(pid_t pid, int num_commands)
 {
 	int	i;

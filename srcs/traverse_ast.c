@@ -6,10 +6,14 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/20 18:50:22 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:39:28 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file traverse_ast.c
+ * @brief 抽象構文木のノード全てを走査して、順番に実行していく再帰関数
+ */
 #include "parse.h"
 #include "traverse.h"
 #include "execute.h"

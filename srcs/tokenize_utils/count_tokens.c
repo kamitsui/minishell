@@ -6,10 +6,14 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:22:39 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/14 15:13:45 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:49:47 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file count_tokens.c
+ * @brief line１行あたりのトークン数（<connector> "&&" も含めてカウントする）
+ */
 #include "libft.h"
 #include "tokenize.h"
 #include <stdlib.h>
@@ -18,11 +22,12 @@
 
 /**
  * @brief line１行あたりのトークン数（<connector> "&&" も含めてカウントする）
- *        "||"の対応は未実装
  *
  * @param line readlineで読み込んだ <command-line> １行分
  *
- * @return 
+ * @return トークンの数
+ * @note 8/21時点はこの関数を未使用（最終的に削除か。。。？）
+ * 別の方法で再実装を検討中(kamitsui)
  */
 size_t	count_tokens(char *line)
 {

@@ -6,9 +6,15 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/20 17:41:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:53:59 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/**
+ * @file parse.c
+ * @brief \<command-line>から各トークンを抽出して、
+ * 抽象構文木ASTのデータ構造に置き換える関数
+ */
 
 #include "libft.h"
 #include "minishell.h"
@@ -35,8 +41,8 @@ t_ast	*parse_operator(char ***tokens)
 }
 
 /**
- * @brief parse関数はトークンの情報を解析し、
- * 抽象構文木のデータ構造に置き換えます。
+ * @brief \<command-line>から各トークンを抽出して、
+ * 抽象構文木ASTのデータ構造に置き換える関数
  *
  * @param tokens 複数の文字列要素もつ二次元配列（最後の要素はNULL）
  *
