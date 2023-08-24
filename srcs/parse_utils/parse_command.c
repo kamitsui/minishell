@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:29:42 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/24 10:03:55 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/08/24 17:00:44 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,20 @@
  */
 t_ast	*parse_command(t_ast *ast, char ***tokens)
 {
-	t_ast	*command_node;
+	t_ast	*node;
 	size_t	num_pipe;
 
 	num_pipe = is_pipe_command(*tokens);//! count_pipes?
 	if (num_pipe > 0)
-	{
-		// 未実装
-		//t_ast	*pipe_node = parse_pipe_command(tokens);
-		return (ast);
-	}
-	command_node = parse_simple_command(tokens);
-	if (command_node)
+		node = parse_pipe_command(tokens, num_pipe);
+	else
+		node = parse_simple_command(tokens);
+	if (node)
 	{
 		ast->num_children++;
 		ast->children = (t_ast **)realloc(ast->children,
 				ast->num_children * sizeof(t_ast *));
-		ast->children[ast->num_children - 1] = command_node;
+		ast->children[ast->num_children - 1] = node;
 	}
 	return (ast);
 }

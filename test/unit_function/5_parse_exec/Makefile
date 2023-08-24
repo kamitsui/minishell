@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/19 19:38:38 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/24 15:16:06 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ NAME = a.out
 SRCS = parse.c \
 	   parse_command.c \
 	   parse_simple_command.c \
+	   parse_pipe_command.c \
 	   parse_argument.c \
 	   create_node.c \
 	   is_pipe_command.c \
@@ -26,26 +27,20 @@ SRCS = parse.c \
 	   wait_process.c \
 	   exec_file.c \
 	   \
-	   execute_pipeline.c \
-	   set_cmd_stack.c \
-	   \
-	   traverse_ast.c \
-	   handle_operator.c \
-	   \
 	   free_utils.c \
+	   \
 	   error.c \
 	   substr_env.c \
 	   \
 	   debug.c \
 	   debug_ast.c \
 	   \
-	   test_parse_traverse_exec.c
+	   test_parse_exec.c
 
 # Directories
 PROJ_DIR = ../../..
 SRCS_DIR = $(PROJ_DIR)/srcs \
 		   $(PROJ_DIR)/srcs/parse_utils \
-		   $(PROJ_DIR)/srcs/traverse_utils \
 		   $(PROJ_DIR)/srcs/execute_utils \
 		   $(PROJ_DIR)/srcs/environ_utils \
 		   $(PROJ_DIR)/srcs/debug \

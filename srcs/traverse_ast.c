@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 17:39:28 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:58:32 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
  */
 int	process_command(t_ast *node, char **env, int status)
 {
+	if (node->flag & BIT_OPERATOR)
+		return (status);
 	status = execute_command(node, env, status);
 	return (status);
 }
@@ -44,8 +46,8 @@ int	process_command(t_ast *node, char **env, int status)
  */
 int	process_argument(t_ast *node, char **env, int status)
 {
-	(void)env;
 	(void)node;
+	(void)env;
 	return (status);
 }
 
@@ -66,6 +68,7 @@ int	traverse_ast(t_ast *node, char **env, int status)
 		process_command, process_argument, handle_operator};
 	size_t					j;
 
+//	debug_ast(node);
 	if (node == NULL)
 		return (1);
 	// Depth-First search (DFS) approach
@@ -74,7 +77,7 @@ int	traverse_ast(t_ast *node, char **env, int status)
 	while (state != NODE_END)
 	{
 		if (node->type == state)
-			status = handle_node[i](node, env, status);
+			status = handle_node[state](node, env, status);
 		state++;
 	}
 	// Traverse the children of the current node

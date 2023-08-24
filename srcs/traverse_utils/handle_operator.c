@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:39:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 18:44:10 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:57:44 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
  * @brief ノードのタイプがオペレーターノードの時に呼び出す関数をを割り振る
  */
 #include "parse.h"
+#include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -43,13 +44,13 @@ int	handle_operator(t_ast *operator_node, char **env, int status)
 		return (status);
 	}
 //	status = 0;
-	if (strcmp(operator_node->value, "|") == 0)
+	if (ft_strcmp(operator_node->value, "|") == 0)
 	{
 		commands = operator_node->children;
 		// Execute the pipeline
 		status = execute_pipeline(commands, operator_node->num_children, env);
 	}
-	else if (strcmp(operator_node->value, "&") == 0)
+	else if (ft_strcmp(operator_node->value, "&") == 0)
 	{
 		// Implement background execution logic
 		// ...
@@ -61,3 +62,34 @@ int	handle_operator(t_ast *operator_node, char **env, int status)
 	}
 	return (status);
 }
+//int	handle_operator(t_ast *operator_node, char **env, int status)
+//{
+//	t_ast	**commands;
+//
+////	debug_ast(operator_node);
+//		ft_printf("handle_operator\n");
+//	if (operator_node->type != NODE_OPERATOR)
+//	{
+////		status = -1;
+//		return (status);
+//	}
+////	status = 0;
+//	if (strcmp(operator_node->value, "|") == 0)
+//	{
+//		ft_printf("pipe\n");
+//		commands = operator_node->children;
+//		// Execute the pipeline
+//		status = execute_pipeline(commands, operator_node->num_children, env);
+//	}
+//	else if (strcmp(operator_node->value, "&") == 0)
+//	{
+//		// Implement background execution logic
+//		// ...
+//	}
+//	else
+//	{
+//		// Handle other operators if needed
+//		// ...
+//	}
+//	return (status);
+//}
