@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 14:53:59 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/24 09:59:38 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_ast	*parse(char **tokens)
 	ast = create_node(NODE_OPERATOR, PROGRAM_NAME);
 	while (*tokens)
 	{
-		if (strcmp(*tokens, "&&") == 0)
+		if (ft_strcmp(*tokens, "&&") == 0)
 		{
 			operator_node = parse_operator(&tokens);
 			if (operator_node)

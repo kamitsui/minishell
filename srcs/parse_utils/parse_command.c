@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_command.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:29:42 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 15:41:37 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/24 10:03:55 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_ast	*parse_command(t_ast *ast, char ***tokens)
 	t_ast	*command_node;
 	size_t	num_pipe;
 
-	num_pipe = is_pipe_command(*tokens);
+	num_pipe = is_pipe_command(*tokens);//! count_pipes?
 	if (num_pipe > 0)
 	{
 		// 未実装
