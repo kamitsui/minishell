@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/08/21 19:03:39 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/24 21:47:47 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,10 @@ SRCS = main.c \
 	   is_pipe_command.c \
 	   \
 	   traverse_ast.c \
+	   handle_command.c \
+	   handle_argument.c \
 	   handle_operator.c \
+	   handle_pipe_command.c \
 	   \
 	   exec_file.c \
 	   execute_command.c \

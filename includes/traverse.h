@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 10:08:45 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 18:50:42 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:48:12 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,25 @@
 int		traverse_ast(t_ast *node, char **env, int status);
 
 /**
+ * @brief \<simple-command>のノードに対しての処理
+ */
+int	handle_command(t_ast *node, char **env, int status);
+
+/**
+ * @brief \<argument>のノードに対しての処理
+ */
+int	handle_argument(t_ast *node, char **env, int status);
+
+/**
  * @brief ノードのタイプがオペレーターノードの時に呼び出す関数をを割り振る
+ * "|" / "&&" / "||"
  */
 int		handle_operator(t_ast *operator_node, char **env, int status);
+
+/**
+ * @brief ノードタイプが　”｜”　パイプに対しての処理
+ */
+int	handle_pipe_command(t_ast *pipe_node, char **env, int status);
 
 /**
  * @brief traverse_ast関数内で行う各ノードタイプ毎の関数を関数ポインタとして使う

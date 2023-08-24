@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/24 17:03:28 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/24 21:57:58 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,9 @@ SRCS = parse.c \
 	   set_cmd_stack.c \
 	   \
 	   traverse_ast.c \
+	   handle_command.c \
+	   handle_argument.c \
+	   handle_pipe_command.c \
 	   handle_operator.c \
 	   \
 	   free_utils.c \

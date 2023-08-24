@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:44:56 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/24 16:15:09 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:40:01 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ t_ast	*parse_pipe_command(char ***tokens, size_t num_pipe)
 			pipe_node->children = (t_ast **)realloc(pipe_node->children,
 					pipe_node->num_children * sizeof(t_ast *));
 			pipe_node->children[pipe_node->num_children - 1] = command_node;
-			pipe_node->children[pipe_node->num_children - 1]->flag = BIT_COMMAND | BIT_OPERATOR;
+			pipe_node->children[pipe_node->num_children - 1]->flag
+				= BIT_COMMAND | BIT_OPERATOR;
 		}
 	}
 	return (pipe_node);

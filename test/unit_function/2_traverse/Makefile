@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/19 16:27:02 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/24 21:53:49 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,9 @@ NAME = a.out
 SRCS = traverse_ast.c \
 	   create_node.c \
 	   handle_operator.c \
+	   handle_command.c \
+	   handle_argument.c \
+	   handle_pipe_command.c \
 	   \
 	   execute_command.c \
 	   exec_file.c \

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 17:34:58 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:04:30 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
  *
  * @return status 終了ステータス
  */
-int	lets_go_shell(char *line, char **env)
+static int	lets_go_shell(char *line, char **env)
 {
 	int		status;
 	char	**tokens;
@@ -70,10 +70,7 @@ int	input(char **line, char **env)
 	{
 		line[i] = readline(PROMPT);
 		if (line[i] == NULL)
-		{
-			free_line(line);
 			error_code(ERR_READLINE);
-		}
 		if (ft_strcmp(line[i], "exit") == 0)
 		{
 			free(line[i]);
@@ -84,7 +81,6 @@ int	input(char **line, char **env)
 		status = lets_go_shell(line[i], env);
 		i++;
 	}
-	line[i] = NULL;
 	//	erro handle (^D が２回続いて入力された場合)
 	return (status);
 }
