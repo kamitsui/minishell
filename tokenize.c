@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/02 14:35:45 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/02 17:13:53 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	_print_list(void *content)
 	t_token	*token;
 
 	token = content;
-	printf("list: word:%s & flag:%d\n", token->word, token->flag);
+	printf("list:[%s]\n", token->word);
 }
 
 void	_delete_list_elem(void *content)
@@ -48,7 +48,7 @@ static t_list	*tkn_initialize(char const *cmdline)
 	t_list	*elem;
 	t_token	*token;
 
-	head = ft_lstnew(NULL);
+	head = NULL;
 	token = ft_calloc(1, sizeof(t_token));
 	token->word = ft_strdup(cmdline);
 	token->flag = 0;
@@ -56,66 +56,35 @@ static t_list	*tkn_initialize(char const *cmdline)
 	return (head);
 }
 
-static t_list	*tkn_list_concater(t_list const *cmdlist, char const joiner)
+static t_list	*tkn_list_splitter(t_list const *cmdlist, char const delim)
 {
 	t_list	*new_list;
 	t_token	*new_token;
-	t_token *tmp_token;
-	char	*tmp_word;
-	size_t	search_idx;
-	size_t	follow_idx;
-	bool	has_joiner;
-
-	new_list = NULL;
-	has_joiner = false;
-	while (cmdlist != NULL)
-	{
-		tmp_token = cmdlist->content;
-		tmp_word = tmp_token->word;
-		search_idx = 0;
-		follow_idx = 0;
-		while (tmp_word[search_idx])
-		{
-			if (tmp_word[search_idx] == joiner)
-			{
-				has_joiner = true;
-			}
-		}
-		cmdlist = cmdlist->next;
-	}
-}
-
-static t_list	*tkn_list_spliter(t_list const *cmdlist, char const delim)
-{
-	t_list	*new_list;
-	t_token	*new_token;
-	t_token	*tmp_token;
-	char	*tmp_word;
+	char	*raw_word;
 	size_t	search_idx;
 	size_t	follow_idx;
 	bool	had_delim;
 
-	// new_list = ft_lstnew(NULL);
 	new_list = NULL;
 	while (cmdlist != NULL)
 	{
-		tmp_token = cmdlist->content;
-		tmp_word = tmp_token->word;
-		// tmp_word = ((t_token *)cmdlist->content)->word;
+		had_delim = false;
 		search_idx = 0;
 		follow_idx = 0;
-		had_delim = false;
-		while (tmp_word[search_idx])
+		raw_word = ((t_token *)cmdlist->content)->word;
+		while (raw_word[search_idx])
 		{
-			if (tmp_word[search_idx] == delim)
+			if (raw_word[search_idx] == delim)
 			{
-				new_token = ft_calloc(1, sizeof(t_token));
 				//todo error
-				if (had_delim == true)
-					new_token->flag = 1;
-				else
-					new_token->flag = 0;
-				new_token->word = ft_strndup(&tmp_word[follow_idx], search_idx - follow_idx);
+				if (search_idx - follow_idx != 0)
+				{
+					new_token = ft_calloc(1, sizeof(t_token));
+					new_token->word = ft_strndup(&raw_word[follow_idx], search_idx - follow_idx);
+					ft_lstadd_back(&new_list, ft_lstnew(new_token));
+				}
+				new_token = ft_calloc(1, sizeof(t_token));
+				new_token->word = ft_strndup(&raw_word[search_idx], 1);
 				ft_lstadd_back(&new_list, ft_lstnew(new_token));
 				search_idx++;
 				follow_idx = search_idx;
@@ -126,17 +95,20 @@ static t_list	*tkn_list_spliter(t_list const *cmdlist, char const delim)
 				search_idx++;
 			}
 		}
-		if (search_idx != follow_idx)
+		if (had_delim && search_idx != follow_idx)
 		{
 				new_token = ft_calloc(1, sizeof(t_token));
-				new_token->word = ft_strndup(&tmp_word[follow_idx], search_idx - follow_idx);
+				new_token->word = ft_strndup(&raw_word[follow_idx], search_idx - follow_idx);
 				ft_lstadd_back(&new_list, ft_lstnew(new_token));
-				search_idx++;
-				follow_idx = search_idx;
+		}
+		else if (!had_delim)
+		{
+			new_token = ft_calloc(1, sizeof(t_token));
+			new_token->word = ft_strdup(raw_word);
+			ft_lstadd_back(&new_list, ft_lstnew(new_token));
 		}
 		cmdlist = cmdlist->next;
 	}
-		printf("%d\n", ft_lstsize(new_list));
 	return (new_list);
 }
 
@@ -144,10 +116,16 @@ static int	tkn_controller(char const *cmdline)
 {
 	t_list const	*head;
 	t_list			*tmp;
+	t_list			*newtmp;
 	t_list			*new_list;
 
 	head = tkn_initialize(cmdline);
-	tmp = tkn_list_spliter(head->next, ' ');
+	tmp = tkn_list_splitter(head, ' ');
+	//todo free head
+	ft_lstiter(tmp, _print_list);
+	printf("new list\n");
+	//todo free tmp
+	tmp = tkn_list_splitter(tmp, '"');
 	ft_lstiter(tmp, _print_list);
 
 	return (0);
