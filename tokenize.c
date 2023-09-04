@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/04 11:12:55 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/04 17:42:42 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct s_token
 {
 	char	*word;
 	int		flag;
+	bool	is_quoted;
+	bool	is_splittable;
+	char	target_char;
 }	t_token;
 
 void	_print_list(void *content)
@@ -42,6 +46,57 @@ void	_delete_list(void *content)
 	token = NULL;
 }
 
+void	_mark_isquoted(void *content)
+{
+	t_token	*token;
+	char	*word;
+
+	token= content;
+	word = token->word;
+	if (word[0] == '"' || word[0] == '\'')
+	{
+		token->is_quoted = true;
+	}
+	else
+		token->is_quoted = false;
+}
+
+void	tkn_list_check_isquoted(t_list *cmdlist)
+{
+	ft_lstiter(cmdlist, _mark_isquoted);
+}
+
+void	tkn_flag_no_split(t_list *cmdlist, const char target)
+{
+	t_token	*token;
+	char	*word;
+
+	while (cmdlist != NULL)
+	{
+		token = cmdlist->content;
+		word = token->word;
+		if (word[0] == target)
+			token->is_splittable = false;
+		else
+			token->is_splittable = true;
+		cmdlist = cmdlist->next;
+	}
+}
+
+void	tkn_list_add_target_char(t_list *cmdlist, char const target)
+{
+	t_list	*crnt;
+	t_token	*token;
+
+	crnt = cmdlist;
+	while (crnt != NULL)
+	{
+		token = crnt->content;
+		token->target_char = target;
+		crnt = crnt->next;
+	}
+}
+
 static t_list	*tkn_initialize(char const *cmdline)
 {
 	t_list	*head;
@@ -52,8 +107,38 @@ static t_list	*tkn_initialize(char const *cmdline)
 	token = ft_calloc(1, sizeof(t_token));
 	token->word = ft_strdup(cmdline);
 	token->flag = 0;
+	token->is_quoted = false;
+	token->is_splittable = true;
 	ft_lstadd_back(&head, ft_lstnew(token));
 	return (head);
+}
+
+void	tkn_list_del_target_char(t_list **cmdlist, char const target)
+{
+	t_list	*crnt;
+	t_list	*prev;
+	t_list	*tmp_next;
+	t_token	*token;
+	char	*word;
+
+	prev = NULL;
+	crnt = *cmdlist;
+	while (crnt != NULL)
+	{
+		tmp_next = crnt->next;
+		token = crnt->content;
+		word = token->word;
+		if (word[0] == target && word[1] == '\0')
+		{
+			prev->next = tmp_next;
+			ft_lstdelone(crnt, _delete_list);
+		}
+		else
+		{
+			prev = crnt;
+		}
+		crnt = tmp_next;
+	}
 }
 
 static t_list	*tkn_list_concat(t_list const *cmdlist, char const joint)
@@ -115,6 +200,8 @@ static t_list	*tkn_list_split(t_list const *cmdlist, char const delim)
 	char	*raw_word;
 	size_t	search_idx;
 	size_t	follow_idx;
+	bool	is_splittable;
+	bool	is_quote;
 	bool	had_delim;
 
 	new_list = NULL;
@@ -124,6 +211,17 @@ static t_list	*tkn_list_split(t_list const *cmdlist, char const delim)
 		search_idx = 0;
 		follow_idx = 0;
 		raw_word = ((t_token *)cmdlist->content)->word;
+		is_splittable = ((t_token *)cmdlist->content)->is_splittable;
+		is_quote = ((t_token *)cmdlist->content)->is_quoted;
+		if (is_splittable == false || is_quote == true)
+		{
+			new_token = ft_calloc(1, sizeof(t_token));
+			new_token->word = ft_strdup(raw_word);
+			new_token->is_splittable = false;
+			ft_lstadd_back(&new_list, ft_lstnew(new_token));
+			cmdlist = cmdlist->next;
+			continue ;
+		}
 		while (raw_word[search_idx])
 		{
 			if (raw_word[search_idx] == delim)
@@ -133,10 +231,12 @@ static t_list	*tkn_list_split(t_list const *cmdlist, char const delim)
 				{
 					new_token = ft_calloc(1, sizeof(t_token));
 					new_token->word = ft_strndup(&raw_word[follow_idx], search_idx - follow_idx);
+					new_token->is_splittable = true;
 					ft_lstadd_back(&new_list, ft_lstnew(new_token));
 				}
 				new_token = ft_calloc(1, sizeof(t_token));
 				new_token->word = ft_strndup(&raw_word[search_idx], 1);
+				new_token->is_splittable = true;
 				ft_lstadd_back(&new_list, ft_lstnew(new_token));
 				search_idx++;
 				follow_idx = search_idx;
@@ -151,16 +251,19 @@ static t_list	*tkn_list_split(t_list const *cmdlist, char const delim)
 		{
 				new_token = ft_calloc(1, sizeof(t_token));
 				new_token->word = ft_strndup(&raw_word[follow_idx], search_idx - follow_idx);
+				new_token->is_splittable = true;
 				ft_lstadd_back(&new_list, ft_lstnew(new_token));
 		}
 		else if (!had_delim)
 		{
 			new_token = ft_calloc(1, sizeof(t_token));
 			new_token->word = ft_strdup(raw_word);
+			new_token->is_splittable = true;
 			ft_lstadd_back(&new_list, ft_lstnew(new_token));
 		}
 		cmdlist = cmdlist->next;
 	}
+	// tkn_list_delete(cmdlist);
 	return (new_list);
 }
 
@@ -172,16 +275,23 @@ static int	tkn_controller(char const *cmdline)
 	t_list			*new_list;
 
 	head = tkn_initialize(cmdline);
-	// tmp = tkn_list_split(head, ' ');
 	//todo free head
-	// ft_lstiter(tmp, _print_list);
-	// printf("new list\n");
 	//todo free tmp
 	tmp = tkn_list_split(head, '"');
-	ft_lstiter(tmp, _print_list);
-	printf("new list\n");
 	tmp = tkn_list_concat(tmp, '"');
+	tkn_list_check_isquoted(tmp);
+	// tkn_flag_no_split(tmp, '"');
 	ft_lstiter(tmp, _print_list);
+	tmp = tkn_list_split(head, '>');
+	tkn_flag_no_split(tmp, '>');
+	// tkn_flag_no_split(tmp, '>');
+	printf("new list\n");
+	ft_lstiter(tmp, _print_list);
+	// tmp = tkn_list_concat(tmp, '"');
+	// tmp = tkn_list_split(tmp, ' ');
+	// tkn_list_del_target_char(&tmp, ' ');
+	// printf("new list\n");
+	// ft_lstiter(tmp, _print_list);
 	return (0);
 }
 
