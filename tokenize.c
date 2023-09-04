@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/02 17:13:53 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/04 11:12:55 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	_print_list(void *content)
 	printf("list:[%s]\n", token->word);
 }
 
-void	_delete_list_elem(void *content)
+void	_delete_list(void *content)
 {
 	t_token	*token;
 
@@ -56,7 +56,59 @@ static t_list	*tkn_initialize(char const *cmdline)
 	return (head);
 }
 
-static t_list	*tkn_list_splitter(t_list const *cmdlist, char const delim)
+static t_list	*tkn_list_concat(t_list const *cmdlist, char const joint)
+{
+	t_list	*new_list;
+	t_token	*old_token;
+	t_token	*new_token;
+	char	*old_word;
+	char 	*new_word;
+	char	*tmp_word;
+	bool	to_join;
+
+	new_list = NULL;
+	new_word = NULL;
+	to_join = false;
+	while (cmdlist != NULL)
+	{
+		old_token = cmdlist->content;
+		old_word = old_token->word;
+		if (to_join == false)
+		{
+			new_word = ft_strdup(old_word);
+		}
+		else if (to_join == true)
+		{
+			tmp_word = new_word;
+			new_word = ft_strjoin(new_word, old_word);
+			free(tmp_word);
+		}
+		if (old_word[0] == joint)
+		{
+			if (to_join == true)
+			{
+				to_join = false;
+				new_token = ft_calloc(1, sizeof(t_token));
+				new_token->word = new_word;
+				ft_lstadd_back(&new_list, ft_lstnew(new_token));
+			}
+			else if (to_join == false)
+			{
+				to_join = true;
+			}
+		}
+		else if (old_word[0] != joint && to_join == false)
+		{
+			new_token = ft_calloc(1, sizeof(t_token));
+			new_token->word = new_word;
+			ft_lstadd_back(&new_list, ft_lstnew(new_token));
+		}
+		cmdlist = cmdlist->next;
+	}
+	return (new_list);
+}
+
+static t_list	*tkn_list_split(t_list const *cmdlist, char const delim)
 {
 	t_list	*new_list;
 	t_token	*new_token;
@@ -120,14 +172,16 @@ static int	tkn_controller(char const *cmdline)
 	t_list			*new_list;
 
 	head = tkn_initialize(cmdline);
-	tmp = tkn_list_splitter(head, ' ');
+	// tmp = tkn_list_split(head, ' ');
 	//todo free head
+	// ft_lstiter(tmp, _print_list);
+	// printf("new list\n");
+	//todo free tmp
+	tmp = tkn_list_split(head, '"');
 	ft_lstiter(tmp, _print_list);
 	printf("new list\n");
-	//todo free tmp
-	tmp = tkn_list_splitter(tmp, '"');
+	tmp = tkn_list_concat(tmp, '"');
 	ft_lstiter(tmp, _print_list);
-
 	return (0);
 }
 
