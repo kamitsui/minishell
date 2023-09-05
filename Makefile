@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/08/24 21:47:47 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/09/05 14:13:45 by mogawa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,7 @@ CFLAGS		=	-Wall -Wextra -Werror
 LFLAGS		=	-lreadline
 DEP_CF		=	-MMD -MP -MF $(@:$(OBJS_DIR)/%.o=$(DEPS_DIR)/%.d)
 LD_CF = -g -fsanitize=address
-INC = -Iincludes
+INC = -Iincludes -I./libft -I./ft_printf/include -I.get_next_token
 
 # Command
 RM			=	rm -f
