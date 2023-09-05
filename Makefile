@@ -6,9 +6,10 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/09/05 14:40:19 by mogawa           ###   ########.fr        #
+#    Updated: 2023/09/05 14:43:20 by mogawa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 # Target name
 NAME		=	minishell
