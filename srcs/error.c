@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:05:41 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 17:14:10 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/24 17:39:16 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
  */
 static void	error_message(int error_code)
 {
-	static char	*msg[ERR_NUM] = {NULL, MSG_READLINE};
+	static char	*msg[ERR_NUM] = {NULL, MSG_ARG, MSG_READLINE};
 
 	ft_fprintf(STDERR_FILENO, msg[error_code]);
 }

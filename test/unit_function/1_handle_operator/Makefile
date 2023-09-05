@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/19 16:01:19 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/24 21:52:32 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ NAME = a.out
 
 # Sources files
 SRCS = handle_operator.c \
+	   handle_pipe_command.c \
+	   \
 	   execute_pipeline.c \
 	   exec_file.c \
 	   set_cmd_stack.c \

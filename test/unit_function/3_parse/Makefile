@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/19 19:36:26 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/24 15:16:36 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ NAME = a.out
 SRCS = parse.c \
 	   parse_command.c \
 	   parse_simple_command.c \
+	   parse_pipe_command.c \
 	   parse_argument.c \
 	   create_node.c \
 	   is_pipe_command.c \

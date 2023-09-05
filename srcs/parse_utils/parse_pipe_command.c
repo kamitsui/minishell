@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:44:56 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 19:10:15 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:40:01 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ t_ast	*parse_pipe_command(char ***tokens, size_t num_pipe)
 	// ループの終了は要改良　is_connector()みたいな関数を実装か。。。
 	while (**tokens && strcmp(**tokens, "&&") != 0)
 	{
+		if (strcmp(**tokens, "|") == 0)
+		{
+			(*tokens)++;
+			continue ;
+		}
 		command_node = parse_simple_command(tokens);
 		if (command_node)
 		{
@@ -46,6 +51,8 @@ t_ast	*parse_pipe_command(char ***tokens, size_t num_pipe)
 			pipe_node->children = (t_ast **)realloc(pipe_node->children,
 					pipe_node->num_children * sizeof(t_ast *));
 			pipe_node->children[pipe_node->num_children - 1] = command_node;
+			pipe_node->children[pipe_node->num_children - 1]->flag
+				= BIT_COMMAND | BIT_OPERATOR;
 		}
 	}
 	return (pipe_node);

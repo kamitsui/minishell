@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:39:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 18:44:10 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:49:54 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,12 @@
  * @brief ノードのタイプがオペレーターノードの時に呼び出す関数をを割り振る
  */
 #include "parse.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <string.h>
-#include "execute.h"
-#include "debug.h"
+#include "traverse.h"
+#include "libft.h"
 
 /**
  * @brief ノードのタイプがオペレーターノードの時に呼び出す関数をを割り振る
+ * "|" / "&&" / "||"
  *
  * @param operator_node 走査対象のノード
  * @param env 環境変数
@@ -35,21 +30,11 @@
  */
 int	handle_operator(t_ast *operator_node, char **env, int status)
 {
-	t_ast	**commands;
-
 	if (operator_node->type != NODE_OPERATOR)
-	{
-//		status = -1;
 		return (status);
-	}
-//	status = 0;
-	if (strcmp(operator_node->value, "|") == 0)
-	{
-		commands = operator_node->children;
-		// Execute the pipeline
-		status = execute_pipeline(commands, operator_node->num_children, env);
-	}
-	else if (strcmp(operator_node->value, "&") == 0)
+	if (ft_strcmp(operator_node->value, "|") == 0)
+		status = handle_pipe_command(operator_node, env, status);
+	else if (ft_strcmp(operator_node->value, "&") == 0)
 	{
 		// Implement background execution logic
 		// ...

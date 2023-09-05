@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 20:07:43 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 13:53:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:57:06 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
  * @param pid 最後のコマンド実行プロセスID
  * @param num_commands <pipe-command>でつなげるコマンドの数
  *
- * @return 
+ * @return 最後のコマンドの終了ステータス
  */
 int	wait_process(pid_t pid, int num_commands)
 {

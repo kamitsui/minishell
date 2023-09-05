@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:39:39 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 12:03:17 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:56:31 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,6 @@ static void	parent_process(int pipefd[2])
 	return ;
 }
 
-//// BUS ERROR
-//static void	free_args(char **cmd_args)
-//{
-//	int		j;
-//
-//	j = 0;
-//	while (cmd_args[j] != NULL)
-//	{
-//		free(cmd_args[j]);
-//		j++;
-//	}
-//	free(cmd_args);
-//}
-
 /**
  * @brief コマンド実行用のプロセスを作る関数
  *
@@ -117,7 +103,6 @@ pid_t	create_process(t_cmdstack *cmdstack, int *pipefd,
  * @note デバッグコードあり\n
  * \#include "debug.h"//for debug\n
  * debug_token(cmd_args);\n
- * @bug コマンドライン引数をfreeさせるとBUSエラーが起きる。
  *
  * @return 最後のコマンドの終了ステータス
  */
@@ -138,10 +123,10 @@ int	execute_pipeline(t_ast **commands, size_t num_commands, char **env)
 		if (pipe(pipefd) == -1)
 			ft_perror_exit("pipe");
 		pid = create_process(&cmdstack, pipefd, i, cmdstack.num_commands);
-//		free_args(cmdstack.commands[i].args);//BUS ERROR
+		free(cmdstack.commands[i].args);
 		i++;
 	}
-	return (wait_process(pid, cmdstack.num_commands));
+	exit (wait_process(pid, cmdstack.num_commands));
 }
 // how to test this function
 // |

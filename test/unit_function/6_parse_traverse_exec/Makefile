@@ -6,38 +6,45 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/24 21:53:49 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/24 21:57:58 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Target name
-NAME = a.out
+NAME1 = simple_command
+NAME2 = pipe_command
 
 # Sources files
-SRCS = traverse_ast.c \
+SRCS = parse.c \
+	   parse_command.c \
+	   parse_simple_command.c \
+	   parse_pipe_command.c \
+	   parse_argument.c \
 	   create_node.c \
-	   handle_operator.c \
-	   handle_command.c \
-	   handle_argument.c \
-	   handle_pipe_command.c \
+	   is_pipe_command.c \
 	   \
 	   execute_command.c \
-	   exec_file.c \
 	   get_arguments.c \
 	   wait_process.c \
+	   exec_file.c \
+	   \
 	   execute_pipeline.c \
 	   set_cmd_stack.c \
 	   \
-	   substr_env.c \
+	   traverse_ast.c \
+	   handle_command.c \
+	   handle_argument.c \
+	   handle_pipe_command.c \
+	   handle_operator.c \
 	   \
 	   free_utils.c \
-	   \
 	   error.c \
+	   substr_env.c \
 	   \
 	   debug.c \
-	   debug_ast.c \
-	   \
-	   test_traverse_ast.c
+	   debug_ast.c
+SRCS_TEST1 = test_simple_command.c
+SRCS_TEST2 = test_pipe_command.c
 
 # Directories
 PROJ_DIR = ../../..
@@ -70,8 +77,10 @@ LD_CF = -g -fsanitize=address
 INC = -I$(PROJ_DIR)/includes
 
 # Object files and dependency files
-OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
-DEPS = $(addprefix $(DEPS_DIR)/, $(SRCS:.c=.d))
+OBJS1 = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o)) $(addprefix $(OBJS_DIR)/, $(SRCS_TEST1:.c=.o))
+DEPS1 = $(addprefix $(DEPS_DIR)/, $(SRCS:.c=.d)) $(addprefix $(OBJS_DIR)/, $(SRCS_TEST1:.c=.d))
+OBJS2 = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o)) $(addprefix $(OBJS_DIR)/, $(SRCS_TEST2:.c=.o))
+DEPS2 = $(addprefix $(DEPS_DIR)/, $(SRCS:.c=.d)) $(addprefix $(OBJS_DIR)/, $(SRCS_TEST2:.c=.d))
 
 # Rules for building object files
 $(OBJS_DIR)/%.o: %.c
@@ -84,13 +93,18 @@ $(DEPS_DIR)/%.d: %.c
 	@mkdir -p $(DEPS_DIR)
 
 # Default target
-all: $(NAME)
+all: $(NAME1) $(NAME2)
 
-# Mandatory Target
-$(NAME): $(LIBFT) $(LIB_PRINTF) $(OBJS)
-	$(CC) $(CFLAGS) $(LFLAGS) $(LD_CF) $(OBJS) $(LIB_PRINTF) -o $(NAME)
-#	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(LIB_PRINTF) -o $(NAME)
+# <simple-command> Target
+$(NAME1): $(LIBFT) $(LIB_PRINTF) $(OBJS1)
+	$(CC) $(CFLAGS) $(LFLAGS) $(LD_CF) $(OBJS1) $(LIB_PRINTF) -o $(NAME1)
+#	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS1) $(LIB_PRINTF) -o $(NAME1)
 
+# <pipe-command> Target
+$(NAME2): $(LIBFT) $(LIB_PRINTF) $(OBJS2)
+	$(CC) $(CFLAGS) $(LFLAGS) $(LD_CF) $(OBJS2) $(LIB_PRINTF) -o $(NAME2)
+#	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS2) $(LIB_PRINTF) -o $(NAME2)
+#
 # Library target
 $(LIB_PRINTF): $(LIBFT)
 	make -C $(LIB_PRINTF_DIR)
@@ -103,7 +117,7 @@ clean:
 
 # Clean and remove target
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME1) $(NAME2)
 
 # Rebuild target
 re: fclean all

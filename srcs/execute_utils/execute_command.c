@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 11:41:04 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:26:16 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ int	execute_command(t_ast *command_node, char **env, int status)
 		ft_perror_exit("fork");
 	if (pid == 0)
 		child_process(command);
+	free(command.args);
 	return (wait_process(pid, 1));
 }
