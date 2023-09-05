@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 18:55:26 by mogawa            #+#    #+#             */
-/*   Updated: 2023/07/24 10:59:46 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/05 18:19:19 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ t_list	*ft_lstnew(void *content)
 		return (NULL);
 	lst->content = content;
 	lst->next = NULL;
+	lst->prev = NULL;
 	return (lst);
 }

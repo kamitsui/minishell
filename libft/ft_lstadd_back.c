@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:46:30 by mogawa            #+#    #+#             */
-/*   Updated: 2023/01/20 17:23:53 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/05 18:11:16 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	{
 		last = ft_lstlast(*lst);
 		last->next = new;
+		new->prev = last;
 	}
 }
