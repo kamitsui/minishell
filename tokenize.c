@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/04 17:42:42 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/05 09:47:21 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,18 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+typedef enum e_flag
+{
+	word,
+	operand,
+	redirect,
+}	t_flag;
+
 typedef struct s_token
 {
 	char	*word;
-	int		flag;
+	t_flag	flag;
+	// int		flag;
 	bool	is_quoted;
 	bool	is_splittable;
 	char	target_char;
@@ -32,7 +40,7 @@ void	_print_list(void *content)
 	t_token	*token;
 
 	token = content;
-	printf("list:[%s]\n", token->word);
+	printf("list:[%s]|splitable?:[%d]\n", token->word, token->is_splittable);
 }
 
 void	_delete_list(void *content)
@@ -77,8 +85,6 @@ void	tkn_flag_no_split(t_list *cmdlist, const char target)
 		word = token->word;
 		if (word[0] == target)
 			token->is_splittable = false;
-		else
-			token->is_splittable = true;
 		cmdlist = cmdlist->next;
 	}
 }
@@ -175,6 +181,7 @@ static t_list	*tkn_list_concat(t_list const *cmdlist, char const joint)
 				to_join = false;
 				new_token = ft_calloc(1, sizeof(t_token));
 				new_token->word = new_word;
+				new_token->is_splittable = false;
 				ft_lstadd_back(&new_list, ft_lstnew(new_token));
 			}
 			else if (to_join == false)
@@ -186,6 +193,7 @@ static t_list	*tkn_list_concat(t_list const *cmdlist, char const joint)
 		{
 			new_token = ft_calloc(1, sizeof(t_token));
 			new_token->word = new_word;
+			new_token->is_splittable = true;
 			ft_lstadd_back(&new_list, ft_lstnew(new_token));
 		}
 		cmdlist = cmdlist->next;
@@ -279,12 +287,19 @@ static int	tkn_controller(char const *cmdline)
 	//todo free tmp
 	tmp = tkn_list_split(head, '"');
 	tmp = tkn_list_concat(tmp, '"');
-	tkn_list_check_isquoted(tmp);
-	// tkn_flag_no_split(tmp, '"');
+	tkn_flag_no_split(tmp, '"');
+	// tkn_list_check_isquoted(tmp);
 	ft_lstiter(tmp, _print_list);
-	tmp = tkn_list_split(head, '>');
+	tmp = tkn_list_split(tmp, ' ');
+	tkn_flag_no_split(tmp, ' ');
+	tmp = tkn_list_split(tmp, '>');
 	tkn_flag_no_split(tmp, '>');
-	// tkn_flag_no_split(tmp, '>');
+	tmp = tkn_list_split(tmp, '<');
+	tkn_flag_no_split(tmp, '<');
+	tmp = tkn_list_split(tmp, '|');
+	tkn_flag_no_split(tmp, '|');
+	tmp = tkn_list_split(tmp, '&');
+	tkn_flag_no_split(tmp, '&');
 	printf("new list\n");
 	ft_lstiter(tmp, _print_list);
 	// tmp = tkn_list_concat(tmp, '"');
