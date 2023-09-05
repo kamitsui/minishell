@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/09/05 14:28:31 by mogawa           ###   ########.fr        #
+#    Updated: 2023/09/05 14:40:19 by mogawa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,7 @@ CFLAGS		=	-Wall -Wextra -Werror
 LFLAGS		=	-lreadline
 DEP_CF		=	-MMD -MP -MF $(@:$(OBJS_DIR)/%.o=$(DEPS_DIR)/%.d)
 LD_CF = -g -fsanitize=address
-INC = -Iincludes
+INC = -Iincludes -I./libft -I./ft_printf/include
 
 # Command
 RM			=	rm -f
@@ -158,3 +158,6 @@ CFLAGS = -Wall -g3 -O0 -fno-omit-frame-pointer
 endif
 
 .PHONY: debug asan all clean fclean re bonus
+
+token:
+	cc -Wall -Wextra -g -fsanitize=address ./srcs/tokenize.c -I./libft ./libft/libft.a -lreadline -o token
