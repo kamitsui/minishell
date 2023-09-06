@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/05 14:37:47 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/06 15:27:33 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,24 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+static bool tkn_is_quote(char const c);
+
 typedef enum e_flag
 {
-	word,
-	operand,
+	unclassified,
+	quote,
 	redirect,
+	control,
 }	t_flag;
 
 typedef struct s_token
 {
 	char	*word;
 	t_flag	flag;
-	// int		flag;
-	bool	is_quoted;
+	bool	is_metachar;
+	bool	is_ctrl_char;
+	bool	is_redirect_char;
+	bool	is_quote;
 	bool	is_splittable;
 	char	target_char;
 }	t_token;
@@ -40,7 +45,7 @@ void	_print_list(void *content)
 	t_token	*token;
 
 	token = content;
-	printf("list:[%s]|splitable?:[%d]\n", token->word, token->is_splittable);
+	printf("list:[%s]|quote?:[%d]\n", token->word, token->is_quote);
 }
 
 void	_delete_list(void *content)
@@ -54,24 +59,56 @@ void	_delete_list(void *content)
 	token = NULL;
 }
 
-void	_mark_isquoted(void *content)
+void	_mark_isquote(void *content)
 {
 	t_token	*token;
 	char	*word;
 
 	token= content;
 	word = token->word;
-	if (word[0] == '"' || word[0] == '\'')
+	if (tkn_is_quote(word[0]))
 	{
-		token->is_quoted = true;
+		token->is_quote = true;
 	}
 	else
-		token->is_quoted = false;
+		token->is_quote = false;
+}
+
+static bool tkn_is_quote(char const c)
+{
+	if (c == '"' || c == '\'' || c == '(' || c == ')')
+		return (true);
+	else
+		return (false);
+}
+
+static bool	tkn_is_metachar(char const c)
+{
+	if (c == ' ' || c == '\t' || c == '|' || c == '&' || c == '<' || c == '>')//todo add newline
+		return (true);
+	else
+		return (false);
+}
+
+static bool	tkn_is_ctrl_operator(char const c)
+{
+	if (c == '|' || c == '&')//todo add newline
+		return (true);
+	else
+		return (false);
+}
+
+static bool	tkn_is_redirect_operator(char const c)
+{
+	if (c == '<' || c == '>')
+		return (true);
+	else
+		return (false);
 }
 
 void	tkn_list_check_isquoted(t_list *cmdlist)
 {
-	ft_lstiter(cmdlist, _mark_isquoted);
+	ft_lstiter(cmdlist, _mark_isquote);
 }
 
 void	tkn_flag_no_split(t_list *cmdlist, const char target)
@@ -111,9 +148,11 @@ static t_list	*tkn_initialize(char const *cmdline)
 	head = NULL;
 	token = ft_calloc(1, sizeof(t_token));
 	token->word = ft_strdup(cmdline);
-	token->flag = 0;
-	token->is_quoted = false;
+	token->is_quote = false;
 	token->is_splittable = true;
+	token->is_ctrl_char = false;
+	token->is_metachar = false;
+	token->is_redirect_char = false;
 	ft_lstadd_back(&head, ft_lstnew(token));
 	return (head);
 }
@@ -146,6 +185,52 @@ void	tkn_list_del_target_char(t_list **cmdlist, char const target)
 	}
 }
 
+void	_mark_metachar(void *content)
+{
+	t_token	*token;
+	char	*word;
+
+	token = content;
+	word = token->word;
+	if (tkn_is_metachar(word[0]))
+	{
+		token->is_metachar = true;
+	}
+}
+
+void	_mark_control_char(void *content)
+{
+	t_token	*token;
+	char	*word;
+
+	token = content;
+	word = token->word;
+	if (tkn_is_ctrl_operator(word[0]))
+	{
+		token->is_ctrl_char = true;
+	}
+}
+
+void	_mark_redirect_char(void *content)
+{
+	t_token	*token;
+	char	*word;
+
+	token = content;
+	word = token->word;
+	if (tkn_is_redirect_operator(word[0]))
+	{
+		token->is_redirect_char = true;
+	}
+}
+
+static void	tkn_mark_char_type(t_list *cmdlist)
+{
+	ft_lstiter(cmdlist, _mark_metachar);
+	ft_lstiter(cmdlist, _mark_control_char);
+	ft_lstiter(cmdlist, _mark_redirect_char);
+}
+
 static t_list	*tkn_list_concat(t_list const *cmdlist, char const joint)
 {
 	t_list	*new_list;
@@ -173,7 +258,7 @@ static t_list	*tkn_list_concat(t_list const *cmdlist, char const joint)
 			new_word = ft_strjoin(new_word, old_word);
 			free(tmp_word);
 		}
-		if (old_word[0] == joint)
+		if (old_word[0] == joint || (joint == '(' && old_word[0] == ')'))
 		{
 			if (to_join == true)
 			{
@@ -181,6 +266,7 @@ static t_list	*tkn_list_concat(t_list const *cmdlist, char const joint)
 				new_token = ft_calloc(1, sizeof(t_token));
 				new_token->word = new_word;
 				new_token->is_splittable = false;
+				new_token->is_quote = true;
 				ft_lstadd_back(&new_list, ft_lstnew(new_token));
 			}
 			else if (to_join == false)
@@ -193,6 +279,7 @@ static t_list	*tkn_list_concat(t_list const *cmdlist, char const joint)
 			new_token = ft_calloc(1, sizeof(t_token));
 			new_token->word = new_word;
 			new_token->is_splittable = true;
+			new_token->is_splittable = false;
 			ft_lstadd_back(&new_list, ft_lstnew(new_token));
 		}
 		cmdlist = cmdlist->next;
@@ -219,12 +306,13 @@ static t_list	*tkn_list_split(t_list const *cmdlist, char const delim)
 		follow_idx = 0;
 		raw_word = ((t_token *)cmdlist->content)->word;
 		is_splittable = ((t_token *)cmdlist->content)->is_splittable;
-		is_quote = ((t_token *)cmdlist->content)->is_quoted;
+		is_quote = ((t_token *)cmdlist->content)->is_quote;
 		if (is_splittable == false || is_quote == true)
 		{
 			new_token = ft_calloc(1, sizeof(t_token));
 			new_token->word = ft_strdup(raw_word);
 			new_token->is_splittable = false;
+			new_token->is_quote = true;
 			ft_lstadd_back(&new_list, ft_lstnew(new_token));
 			cmdlist = cmdlist->next;
 			continue ;
@@ -279,26 +367,42 @@ static int	tkn_controller(char const *cmdline)
 	t_list const	*head;
 	t_list			*tmp;
 
+	
 	head = tkn_initialize(cmdline);
 	//todo free head
 	//todo free tmp
+	printf("--start--\n");
+	printf("*test case*\n");
+	ft_lstiter((t_list *)head, _print_list);
 	tmp = tkn_list_split(head, '"');
-	tmp = tkn_list_concat(tmp, '"');
-	tkn_flag_no_split(tmp, '"');
-	// tkn_list_check_isquoted(tmp);
+	tmp = tkn_list_split(tmp, '\'');
+	tmp = tkn_list_split(tmp, '(');
+	tmp = tkn_list_split(tmp, ')');
+	tkn_list_check_isquoted(tmp);
+	printf("*quote split*\n");
 	ft_lstiter(tmp, _print_list);
-	tmp = tkn_list_split(tmp, ' ');
-	tkn_flag_no_split(tmp, ' ');
-	tmp = tkn_list_split(tmp, '>');
-	tkn_flag_no_split(tmp, '>');
-	tmp = tkn_list_split(tmp, '<');
-	tkn_flag_no_split(tmp, '<');
-	tmp = tkn_list_split(tmp, '|');
-	tkn_flag_no_split(tmp, '|');
-	tmp = tkn_list_split(tmp, '&');
-	tkn_flag_no_split(tmp, '&');
-	printf("new list\n");
+	// tmp = tkn_list_concat(tmp, '"');
+	// tmp = tkn_list_concat(tmp, '\'');
+	// printf("*after''*\n");
+	// ft_lstiter(tmp, _print_list);
+	// tmp = tkn_list_concat(tmp, '(');
+	// tkn_flag_no_split(tmp, '\'');
+	// tkn_flag_no_split(tmp, '"');
+	// printf("*after quote isolated*\n");
+	// ft_lstiter(tmp, _print_list);
+	// tmp = tkn_list_split(tmp, ' ');
+	// tkn_flag_no_split(tmp, ' ');
+	// tmp = tkn_list_split(tmp, '>');
+	// tkn_flag_no_split(tmp, '>');
+	// tmp = tkn_list_split(tmp, '<');
+	// tkn_flag_no_split(tmp, '<');
+	// tmp = tkn_list_split(tmp, '|');
+	// tkn_flag_no_split(tmp, '|');
+	// tmp = tkn_list_split(tmp, '&');
+	// tkn_flag_no_split(tmp, '&');
+	printf("*final result*\n");
 	ft_lstiter(tmp, _print_list);
+	printf("--end--\n");
 	// tmp = tkn_list_concat(tmp, '"');
 	// tmp = tkn_list_split(tmp, ' ');
 	// tkn_list_del_target_char(&tmp, ' ');

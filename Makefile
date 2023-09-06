@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/09/05 14:43:20 by mogawa           ###   ########.fr        #
+#    Updated: 2023/09/05 21:09:38 by mogawa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -162,3 +162,4 @@ endif
 
 token:
 	cc -Wall -Wextra -g -fsanitize=address ./srcs/tokenize.c -I./libft ./libft/libft.a -lreadline -o token
+.PHONY: token
