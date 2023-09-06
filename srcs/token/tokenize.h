@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/06 18:02:19 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/06 20:50:22 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_token
 //* lstiter関数の関数ポインタ引数として渡される関数類
 void	_print_list(void *content);
 void	_delete_list(void *content);
-void	_assign_divs_list(void *content);
+void	_assign_div_and_subdiv(void *content);
 
 //* tokenizeユーティリティ関数類
 static bool tkn_is_quote(char const c);

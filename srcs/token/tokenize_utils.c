@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:27:47 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/06 18:42:55 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/06 20:49:43 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	_delete_list(void *content)
 	token = NULL;
 }
 
-void	_assign_divs_list(void *content)
+void	_assign_div_and_subdiv(void *content)
 {
 	t_token	*token;
 	char	c;

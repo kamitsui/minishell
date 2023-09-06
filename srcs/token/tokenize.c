@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/06 18:41:33 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/06 22:09:40 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,34 +33,73 @@ t_list	*tkn_split_and_assign_flag(const char *cmdline)
 		ft_lstadd_back(&head, ft_lstnew(token));
 		i++;
 	}
-	ft_lstiter(head, _assign_divs_list);
+	ft_lstiter(head, _assign_div_and_subdiv);
 	return (head);
 }
 
-//todo tkn_concater(t_list const *cmdlst)
+t_list	*tkn_concater(t_list *oldlst)
+{
+	t_list	*head;
+	t_token	*old_token;
+	t_token	*new_token;
+	char	*new_word;
+	char	*tmp;
 
-void	tkn_mark_quote_concat(t_list *cmdlst)
+	head = NULL;
+	while (true)
+	{
+		old_token = oldlst->content;
+		new_token = ft_calloc(1, sizeof(t_token));
+		new_token->div = old_token->div;
+		new_token->subdiv = old_token->subdiv;
+		new_token->to_concat = false;
+		//todo malloc error
+		new_word = ft_strdup(old_token->word);
+		while (oldlst->next != NULL && ((t_token *)oldlst->content)->to_concat == true && ((t_token *)oldlst->next->content)->to_concat == true)
+		{
+			oldlst = oldlst->next;
+			old_token = oldlst->content;
+			tmp = new_word;
+			new_word = ft_strjoin(new_word, old_token->word);
+			free(tmp);
+		}
+		new_token->word = new_word;
+		ft_lstadd_back(&head, ft_lstnew(new_token));
+		if (oldlst->next == NULL)
+			break ;
+		else
+			oldlst = oldlst->next;
+	}
+	return (head);
+}
+
+void	tkn_mark_to_concatinate(t_list *cmdlst, t_div division)
 {
 	t_token		*token;
-	bool		in_quote;
+	bool		to_join;
 	t_subdiv	closing_subdiv;
 
-	in_quote = false;
+	to_join = false;
 	while (cmdlst)
 	{
 		token = cmdlst->content;
-		if (in_quote == false)
-			closing_subdiv = token->subdiv;
-		if (token->div == quote || in_quote == true)
+		if (to_join == false)
+		{
+			if (token->subdiv == parenthesis_open)
+				closing_subdiv = parenthesis_close;
+			else
+				closing_subdiv = token->subdiv;
+		}
+		if (token->div == division || to_join == true)
 		{
 			token->to_concat = true;
-			if (in_quote == false)
+			if (to_join == false)
 			{
-				in_quote = true;
+				to_join = true;
 			}
-			else if (in_quote == true && token->subdiv == closing_subdiv)
+			else if (to_join == true && token->subdiv == closing_subdiv)
 			{
-				in_quote = false;
+				to_join = false;
 			}
 		}
 		cmdlst = cmdlst->next;
@@ -73,7 +112,15 @@ int	tkn_controller(char const *cmdline)
 	t_list	*temp;
 
 	head = tkn_split_and_assign_flag(cmdline);
-	tkn_mark_quote_concat(head);
+	tkn_mark_to_concatinate(head, quote);
+	tkn_mark_to_concatinate(head, redirect);
+	tkn_mark_to_concatinate(head, control);
+	ft_lstiter(head, _print_list);
+	printf("---\n");
+	temp = head;
+	head = tkn_concater(head);
+	ft_lstclear(&temp, _delete_list);
+	printf("---\n");
 	ft_lstiter(head, _print_list);
 	ft_lstclear(&head, _delete_list);
 	return (EXIT_SUCCESS);
