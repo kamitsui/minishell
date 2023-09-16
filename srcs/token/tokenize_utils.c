@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:27:47 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/16 12:40:08 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/16 20:24:12 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_subdiv	tkn_return_subdiv(char const c)
 		return (parenthesis_open);
 	else if (c == ')')
 		return (parenthesis_close);
-	else if (c == ' ')
+	else if (c == ' ' || c == '\t')
 		return (space);
 	else if (c == '\n')
 		return (newline);
@@ -40,41 +40,40 @@ static t_subdiv	tkn_return_subdiv(char const c)
 		return (nonclassified);
 }
 
-static bool tkn_is_quote(char const c)
-{
-	if (c == '"' || c == '\'' || c == '(' || c == ')')
-		return (true);
-	else
-		return (false);
-}
+// static bool tkn_is_quote(char const c)
+// {
+// 	if (c == '"' || c == '\'' || c == '(' || c == ')')
+// 		return (true);
+// 	else
+// 		return (false);
+// }
 
-static bool	tkn_is_metachar(char const c)
-{
-	if (c == ' ' || c == '\t' || c == '|' || c == '&' || c == '<' || c == '>' || c == '\n' || c == '*')
-		return (true);
-	else
-		return (false);
-}
+// static bool	tkn_is_metachar(char const c)
+// {
+// 	if (c == ' ' || c == '\t' || c == '|' || c == '&' || c == '<' || c == '>' || c == '\n' || c == '*')
+// 		return (true);
+// 	else
+// 		return (false);
+// }
 
-static bool	tkn_is_ctrl_operator(char const c)
-{
-	if (c == '|' || c == '&' || c == '\n')
-		return (true);
-	else
-		return (false);
-}
+// static bool	tkn_is_ctrl_operator(char const c)
+// {
+// 	if (c == '|' || c == '&' || c == '\n')
+// 		return (true);
+// 	else
+// 		return (false);
+// }
 
-static bool	tkn_is_redirect_operator(char const c)
-{
-	if (c == '<' || c == '>')
-		return (true);
-	else
-		return (false);
-}
+// static bool	tkn_is_redirect_operator(char const c)
+// {
+// 	if (c == '<' || c == '>')
+// 		return (true);
+// 	else
+// 		return (false);
+// }
 
 bool	tkn_subdiv_is_metachar(t_subdiv subdiv)
 {
-	// if (c == ' ' || c == '\t' || c == '|' || c == '&' || c == '<' || c == '>' || c == '\n' || c == '*')
 	if (subdiv == space || subdiv == newline || subdiv == ampersand || subdiv == pipe_sign || subdiv == allow_open || subdiv == allow_close || subdiv == astarisk)
 		return (true);
 	else
@@ -83,7 +82,6 @@ bool	tkn_subdiv_is_metachar(t_subdiv subdiv)
 
 bool	tkn_subdiv_is_control_operator(t_subdiv subdiv)
 {
-	// if (c == ' ' || c == '\t' || c == '|' || c == '&' || c == '<' || c == '>' || c == '\n' || c == '*')
 	if (subdiv == ampersand || subdiv == pipe_sign)
 		return (true);
 	else
@@ -92,14 +90,19 @@ bool	tkn_subdiv_is_control_operator(t_subdiv subdiv)
 
 bool	tkn_subdiv_is_redirect_operator(t_subdiv subdiv)
 {
-	// if (c == ' ' || c == '\t' || c == '|' || c == '&' || c == '<' || c == '>' || c == '\n' || c == '*')
 	if (subdiv == allow_open || subdiv == allow_close)
 		return (true);
 	else
 		return (false);
 }
 
-//todo void	_undo_to_concat(void *content)
+bool	tkn_subdiv_is_quote(t_subdiv subdiv)
+{
+	if (subdiv == doube_quote || subdiv == singl_equote || subdiv == parenthesis_open || subdiv == parenthesis_close)
+		return (true);
+	else
+		return (false);
+}
 
 void	_print_list(void *content)
 {

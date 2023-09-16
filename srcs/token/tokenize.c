@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/16 14:12:30 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/16 20:23:11 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ size_t	tkn_mark_normal_words_to_concatinate(t_list *cmdlist, size_t concat_id)
 	while (cmdlist)
 	{
 		token = cmdlist->content;
-		if (token->subdiv == nonclassified)
+		if (token->subdiv == nonclassified || tkn_subdiv_is_quote(token->subdiv))
 			token->concat_idx = concat_id;
 		else
 			concat_id++;
@@ -161,8 +161,6 @@ size_t	tkn_mark_operators_to_concatinate(t_list *cmdlist, size_t concat_id)
 	}
 	return (concat_id);
 }
-
-// size_t	tkn_mark_
 
 int	tkn_controller(char const *cmdline)
 {

@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/16 12:38:40 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/16 20:25:13 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
 // #define QUOTE 1
 // #define START_OF_IDX 2
 
-typedef enum e_div
-{
-	unclassified,
-	quote,
-	metachar,
-	redirect,
-	control,
-}	t_div;
+// typedef enum e_div
+// {
+// 	unclassified,
+// 	quote,
+// 	metachar,
+// 	redirect,
+// 	control,
+// }	t_div;
 
 typedef enum e_subdiv
 {
@@ -52,7 +52,6 @@ typedef struct s_token
 	char		*word;
 	t_div		div;
 	t_subdiv	subdiv;
-	// bool		to_concat;
 	size_t		concat_idx;
 }	t_token;
 
@@ -70,4 +69,6 @@ static bool	tkn_is_redirect_operator(char const c);
 bool	tkn_subdiv_is_metachar(t_subdiv subdiv);
 bool	tkn_subdiv_is_control_operator(t_subdiv subdiv);
 bool	tkn_subdiv_is_redirect_operator(t_subdiv subdiv);
+bool	tkn_subdiv_is_quote(t_subdiv subdiv);
+
 #endif
