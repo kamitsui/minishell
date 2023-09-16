@@ -6,12 +6,11 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:27:47 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/06 20:49:43 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/16 12:40:08 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
-#include "libft.h"
 
 static t_subdiv	tkn_return_subdiv(char const c)
 {
@@ -35,6 +34,8 @@ static t_subdiv	tkn_return_subdiv(char const c)
 		return (allow_open);
 	else if (c == '>')
 		return (allow_close);
+	else if (c == '*')
+		return (astarisk);
 	else
 		return (nonclassified);
 }
@@ -49,7 +50,7 @@ static bool tkn_is_quote(char const c)
 
 static bool	tkn_is_metachar(char const c)
 {
-	if (c == ' ' || c == '\t' || c == '|' || c == '&' || c == '<' || c == '>' || c == '\n')
+	if (c == ' ' || c == '\t' || c == '|' || c == '&' || c == '<' || c == '>' || c == '\n' || c == '*')
 		return (true);
 	else
 		return (false);
@@ -71,6 +72,33 @@ static bool	tkn_is_redirect_operator(char const c)
 		return (false);
 }
 
+bool	tkn_subdiv_is_metachar(t_subdiv subdiv)
+{
+	// if (c == ' ' || c == '\t' || c == '|' || c == '&' || c == '<' || c == '>' || c == '\n' || c == '*')
+	if (subdiv == space || subdiv == newline || subdiv == ampersand || subdiv == pipe_sign || subdiv == allow_open || subdiv == allow_close || subdiv == astarisk)
+		return (true);
+	else
+		return (false);
+}
+
+bool	tkn_subdiv_is_control_operator(t_subdiv subdiv)
+{
+	// if (c == ' ' || c == '\t' || c == '|' || c == '&' || c == '<' || c == '>' || c == '\n' || c == '*')
+	if (subdiv == ampersand || subdiv == pipe_sign)
+		return (true);
+	else
+		return (false);
+}
+
+bool	tkn_subdiv_is_redirect_operator(t_subdiv subdiv)
+{
+	// if (c == ' ' || c == '\t' || c == '|' || c == '&' || c == '<' || c == '>' || c == '\n' || c == '*')
+	if (subdiv == allow_open || subdiv == allow_close)
+		return (true);
+	else
+		return (false);
+}
+
 //todo void	_undo_to_concat(void *content)
 
 void	_print_list(void *content)
@@ -78,7 +106,7 @@ void	_print_list(void *content)
 	t_token	*token;
 
 	token = content;
-	printf("list:[%s](div:%d/sdiv:%d/cat:%d)\n", token->word, token->div, token->subdiv, token->to_concat);
+	printf("list:[%s](div:%d/sdiv:%d/catidx:%zu)\n", token->word, token->div, token->subdiv, token->concat_idx);
 }
 
 void	_delete_list(void *content)

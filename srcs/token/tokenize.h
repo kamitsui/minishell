@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/06 20:50:22 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/16 12:38:40 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,12 @@
 
 #include <readline/history.h>
 #include <readline/readline.h>
-#include "libft.h"
+#include <stdbool.h>
+#include <stdlib.h>
+
+// #define UNCLASSIFIED 0
+// #define QUOTE 1
+// #define START_OF_IDX 2
 
 typedef enum e_div
 {
@@ -39,6 +44,7 @@ typedef enum e_subdiv
 	pipe_sign,
 	allow_open,
 	allow_close,
+	astarisk,
 }	t_subdiv;
 
 typedef struct s_token
@@ -46,7 +52,8 @@ typedef struct s_token
 	char		*word;
 	t_div		div;
 	t_subdiv	subdiv;
-	bool		to_concat;
+	// bool		to_concat;
+	size_t		concat_idx;
 }	t_token;
 
 
@@ -60,5 +67,7 @@ static bool tkn_is_quote(char const c);
 static bool	tkn_is_metachar(char const c);
 static bool	tkn_is_ctrl_operator(char const c);
 static bool	tkn_is_redirect_operator(char const c);
-
+bool	tkn_subdiv_is_metachar(t_subdiv subdiv);
+bool	tkn_subdiv_is_control_operator(t_subdiv subdiv);
+bool	tkn_subdiv_is_redirect_operator(t_subdiv subdiv);
 #endif
