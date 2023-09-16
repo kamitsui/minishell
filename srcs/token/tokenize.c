@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/16 13:30:55 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/16 14:12:30 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,18 +145,24 @@ size_t	tkn_mark_operators_to_concatinate(t_list *cmdlist, size_t concat_id)
 		crnt_token = crnt->content;
 		if (tkn_subdiv_is_control_operator(crnt_token->subdiv) || tkn_subdiv_is_redirect_operator(crnt_token->subdiv))
 		{
-			if (prev_token != NULL && crnt_token->subdiv == prev_token->subdiv)
-			crnt_token->concat_idx = concat_id;
-			prev_token->concat_idx = concat_id;
-			concat_id++;
-			if (crnt->next == NULL || crnt->next->next == NULL)
-				break ;
-			crnt = crnt->next->next;
+			// if (prev_token != NULL && crnt_token->subdiv == prev_token->subdiv)
+			if (crnt_token->subdiv == prev_token->subdiv)
+			{
+				crnt_token->concat_idx = concat_id;
+				prev_token->concat_idx = concat_id;
+				concat_id++;
+				if (crnt->next == NULL || crnt->next->next == NULL)
+					break ;
+				crnt = crnt->next->next;
+				continue ;
+			}
 		}
 		crnt = crnt->next;
 	}
 	return (concat_id);
 }
+
+// size_t	tkn_mark_
 
 int	tkn_controller(char const *cmdline)
 {
