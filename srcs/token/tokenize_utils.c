@@ -6,13 +6,13 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:27:47 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/16 20:24:12 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/16 20:39:58 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 
-static t_subdiv	tkn_return_subdiv(char const c)
+static t_division tkn_return_subdiv(char const c)
 {
 	if (c == '"')
 		return (doube_quote);
@@ -37,7 +37,7 @@ static t_subdiv	tkn_return_subdiv(char const c)
 	else if (c == '*')
 		return (astarisk);
 	else
-		return (nonclassified);
+		return (unclassified);
 }
 
 // static bool tkn_is_quote(char const c)
@@ -72,33 +72,33 @@ static t_subdiv	tkn_return_subdiv(char const c)
 // 		return (false);
 // }
 
-bool	tkn_subdiv_is_metachar(t_subdiv subdiv)
+bool	tkn_div_is_metachar(t_division div)
 {
-	if (subdiv == space || subdiv == newline || subdiv == ampersand || subdiv == pipe_sign || subdiv == allow_open || subdiv == allow_close || subdiv == astarisk)
+	if (div == space || div == newline || div == ampersand || div == pipe_sign || div == allow_open || div == allow_close || div == astarisk)
 		return (true);
 	else
 		return (false);
 }
 
-bool	tkn_subdiv_is_control_operator(t_subdiv subdiv)
+bool	tkn_div_is_control_operator(t_division div)
 {
-	if (subdiv == ampersand || subdiv == pipe_sign)
+	if (div == ampersand || div == pipe_sign)
 		return (true);
 	else
 		return (false);
 }
 
-bool	tkn_subdiv_is_redirect_operator(t_subdiv subdiv)
+bool	tkn_div_is_redirect_operator(t_division div)
 {
-	if (subdiv == allow_open || subdiv == allow_close)
+	if (div == allow_open || div == allow_close)
 		return (true);
 	else
 		return (false);
 }
 
-bool	tkn_subdiv_is_quote(t_subdiv subdiv)
+bool	tkn_div_is_quote(t_division div)
 {
-	if (subdiv == doube_quote || subdiv == singl_equote || subdiv == parenthesis_open || subdiv == parenthesis_close)
+	if (div == doube_quote || div == singl_equote || div == parenthesis_open || div == parenthesis_close)
 		return (true);
 	else
 		return (false);
@@ -109,7 +109,7 @@ void	_print_list(void *content)
 	t_token	*token;
 
 	token = content;
-	printf("list:[%s](div:%d/sdiv:%d/catidx:%zu)\n", token->word, token->div, token->subdiv, token->concat_idx);
+	printf("list:[%s](div:%d/catidx:%zu)\n", token->word, token->division, token->concat_idx);
 }
 
 void	_delete_list(void *content)
@@ -130,15 +130,5 @@ void	_assign_div_and_subdiv(void *content)
 
 	token = content;
 	c = token->word[0];
-	if (tkn_is_quote(c))
-		token->div = quote;
-	else if (tkn_is_redirect_operator(c))
-		token->div = redirect;
-	else if (tkn_is_ctrl_operator(c))
-		token->div = control;
-	else if (tkn_is_metachar(c))
-		token->div = metachar;
-	else
-		token->div = unclassified;
-	token->subdiv = tkn_return_subdiv(c);
+	token->division = tkn_return_subdiv(c);
 }

@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/16 20:23:11 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/16 21:36:27 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ t_list	*tkn_split_and_assign_flag(const char *cmdline, size_t *concat_id)
 		//todo malloc error
 		token->word = ft_strndup(&cmdline[i], 1);
 		//todo malloc error
-		token->subdiv = nonclassified;
-		// token->to_concat = false;
+		token->division = unclassified;
 		token->concat_idx = *concat_id;
 		ft_lstadd_back(&head, ft_lstnew(token));
 		i++;
@@ -51,10 +50,8 @@ t_list	*tkn_concater(t_list *oldlst)
 	{
 		old_token = oldlst->content;
 		new_token = ft_calloc(1, sizeof(t_token));
-		new_token->div = old_token->div;
-		new_token->subdiv = old_token->subdiv;
+		new_token->division = old_token->division;
 		new_token->concat_idx = old_token->concat_idx;
-		// new_token->to_concat = false;
 		//todo malloc error
 		new_word = ft_strdup(old_token->word);
 		while (oldlst->next != NULL && ((t_token *)oldlst->content)->concat_idx == ((t_token *)oldlst->next->content)->concat_idx)
@@ -79,7 +76,7 @@ void	tkn_mark_quote_to_concatinate(t_list *cmdlst, size_t *concat_id)
 {
 	t_token		*token;
 	bool		to_join;
-	t_subdiv	closing_subdiv;
+	t_division	closing_div;
 
 	to_join = false;
 	while (cmdlst)
@@ -87,20 +84,19 @@ void	tkn_mark_quote_to_concatinate(t_list *cmdlst, size_t *concat_id)
 		token = cmdlst->content;
 		if (to_join == false)
 		{
-			if (token->subdiv == parenthesis_open)
-				closing_subdiv = parenthesis_close;
+			if (token->division == parenthesis_open)
+				closing_div = parenthesis_close;
 			else
-				closing_subdiv = token->subdiv;
+				closing_div = token->division;
 		}
-		if (token->div == quote || to_join == true)//! only place using t_div?
+		if (tkn_div_is_quote(token->division) || to_join == true)
 		{
-			// token->to_concat = true;
 			token->concat_idx = *concat_id;
 			if (to_join == false)
 			{
 				to_join = true;
 			}
-			else if (to_join == true && token->subdiv == closing_subdiv)
+			else if (to_join == true && token->division == closing_div)
 			{
 				to_join = false;
 			}
@@ -117,7 +113,7 @@ size_t	tkn_mark_normal_words_to_concatinate(t_list *cmdlist, size_t concat_id)
 	while (cmdlist)
 	{
 		token = cmdlist->content;
-		if (token->subdiv == nonclassified || tkn_subdiv_is_quote(token->subdiv))
+		if (token->division == unclassified || tkn_div_is_quote(token->division))
 			token->concat_idx = concat_id;
 		else
 			concat_id++;
@@ -143,10 +139,9 @@ size_t	tkn_mark_operators_to_concatinate(t_list *cmdlist, size_t concat_id)
 		}
 		prev_token = crnt->prev->content;
 		crnt_token = crnt->content;
-		if (tkn_subdiv_is_control_operator(crnt_token->subdiv) || tkn_subdiv_is_redirect_operator(crnt_token->subdiv))
+		if (tkn_div_is_control_operator(crnt_token->division) || tkn_div_is_redirect_operator(crnt_token->division))
 		{
-			// if (prev_token != NULL && crnt_token->subdiv == prev_token->subdiv)
-			if (crnt_token->subdiv == prev_token->subdiv)
+			if (crnt_token->division == prev_token->division)
 			{
 				crnt_token->concat_idx = concat_id;
 				prev_token->concat_idx = concat_id;

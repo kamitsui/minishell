@@ -3,76 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 12:14:02 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 16:28:15 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
+/*   Updated: 2023/09/16 21:00:28 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * @file tokenize.h
- * @brief <command-line>の文字列をトークン分けするための関数、マクロを定義
- */
 #ifndef TOKENIZE_H
-# define TOKENIZE_H
+#define TOKENIZE_H
 
-# include <stdlib.h>
-# include <stdbool.h>
+#include <readline/history.h>
+#include <readline/readline.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
-/**
- * @brief \<connector\> "&&"
- */
-# define CONNECT_AND	"&&"
+typedef enum e_division
+{
+	unclassified,
+	doube_quote,
+	singl_equote,
+	parenthesis_open,
+	parenthesis_close,
+	space,
+	newline,
+	ampersand,
+	pipe_sign,
+	allow_open,
+	allow_close,
+	astarisk,
+}	t_division;
 
-/**
- * @brief \<connector\> "||"
- */
-# define CONNECT_OR		"||"
+typedef struct s_token
+{
+	char		*word;
+	// t_div		div;
+	t_division	division;
+	size_t		concat_idx;
+}	t_token;
 
-/**
- * @brief \<pipe-operator\> "|"
- */
-# define PIPE			"|"
 
-/**
- * @brief \<in-operator\> "<"
- */
-# define IN_RED			"<"
+//* lstiter関数の関数ポインタ引数として渡される関数類
+void	_print_list(void *content);
+void	_delete_list(void *content);
+void	_assign_div_and_subdiv(void *content);
 
-/**
- * @brief \<out-operator\> ">"
- */
-# define OUT_RED		">"
-
-/**
- * @brief \<here_doc-operator\> "<<"
- */
-# define HERE_DOC		"<<"
-
-/**
- * @brief \<append-operator\> ">>"
- */
-# define APPEND			">>"
-
-/**
- * @brief \<double-quote-operator\> """"
- */
-# define DQUOT			"\""
-
-/**
- * @brief \<single-quote-operator\> "''"
- */
-# define SQUOT			"\'"
-
-/**
- * @brief \<double-quote-operator\> "$"
- */
-# define VAR			"$"
-
-/**
- * @brief 入力文字列を条件に応じてトークン分けする。
- */
-char	**tokenize(char *line);
+//* tokenizeユーティリティ関数類
+// static bool tkn_is_quote(char const c);
+// static bool	tkn_is_metachar(char const c);
+// static bool	tkn_is_ctrl_operator(char const c);
+// static bool	tkn_is_redirect_operator(char const c);
+bool	tkn_div_is_metachar(t_division div);
+bool	tkn_div_is_control_operator(t_division div);
+bool	tkn_div_is_redirect_operator(t_division div);
+bool	tkn_div_is_quote(t_division div);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/09/06 16:30:39 by mogawa           ###   ########.fr        #
+#    Updated: 2023/09/16 20:58:14 by mogawa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -161,5 +161,5 @@ endif
 .PHONY: debug asan all clean fclean re bonus
 
 token:
-	cc -Wall -Wextra -g -fsanitize=address ./srcs/token/tokenize.c ./srcs/token/tokenize_utils.c -I./libft ./libft/libft.a -lreadline -o token
+	cc -Wall -Wextra -g -fsanitize=address ./srcs/token/tokenize.c ./srcs/token/tokenize_utils.c -I./includes -I./libft ./libft/libft.a -lreadline -o token
 .PHONY: token
