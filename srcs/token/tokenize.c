@@ -6,14 +6,14 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/16 21:36:27 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/19 15:50:37 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 #include "libft.h"
 
-t_list	*tkn_split_and_assign_flag(const char *cmdline, size_t *concat_id)
+t_list	*tkn_create_list_with_flags(const char *cmdline, size_t *concat_id)
 {
 	t_list	*head;
 	t_token	*token;
@@ -24,162 +24,95 @@ t_list	*tkn_split_and_assign_flag(const char *cmdline, size_t *concat_id)
 	while (cmdline[i])
 	{
 		token = ft_calloc(1, sizeof(t_token));
-		//todo malloc error
+		if (!token)
+			return (NULL);
 		token->word = ft_strndup(&cmdline[i], 1);
-		//todo malloc error
-		token->division = unclassified;
+		if (!token->word)
+			return (NULL);
 		token->concat_idx = *concat_id;
 		ft_lstadd_back(&head, ft_lstnew(token));
 		i++;
 		*concat_id = *concat_id + 1;
 	}
-	ft_lstiter(head, _assign_div_and_subdiv);
+	ft_lstiter(head, _tkn_assign_division_to_list);
 	return (head);
 }
 
-t_list	*tkn_concater(t_list *oldlst)
+static t_list	**tkn_concat_same_concat_idx(t_list *oldlst, t_list **newlst)
 {
-	t_list	*head;
-	t_token	*old_token;
-	t_token	*new_token;
-	char	*new_word;
+	t_token	*new_tkn;
 	char	*tmp;
 
-	head = NULL;
-	while (true)
+	while (oldlst != NULL)
 	{
-		old_token = oldlst->content;
-		new_token = ft_calloc(1, sizeof(t_token));
-		new_token->division = old_token->division;
-		new_token->concat_idx = old_token->concat_idx;
-		//todo malloc error
-		new_word = ft_strdup(old_token->word);
-		while (oldlst->next != NULL && ((t_token *)oldlst->content)->concat_idx == ((t_token *)oldlst->next->content)->concat_idx)
+		new_tkn = ft_calloc(1, sizeof(t_token));
+		if (new_tkn == NULL)
+			return (NULL);
+		new_tkn = (t_token *)oldlst->content;
+		while (oldlst->next != NULL && ((t_token *)oldlst->content)->concat_idx \
+							== ((t_token *)oldlst->next->content)->concat_idx)
 		{
 			oldlst = oldlst->next;
-			old_token = oldlst->content;
-			tmp = new_word;
-			new_word = ft_strjoin(tmp, old_token->word);//! old token list will be freed by lstiter
+			tmp = new_tkn->word;
+			new_tkn->word = ft_strjoin(tmp, ((t_token *)oldlst->content)->word);//!leaks???
 			free(tmp);
+			if (new_tkn->word == NULL)
+				return (NULL);
 		}
-		new_token->word = new_word;
-		ft_lstadd_back(&head, ft_lstnew(new_token));
-		if (oldlst->next == NULL)
-			break ;
-		else
+		ft_lstadd_back(newlst, ft_lstnew(new_tkn));
+		if (oldlst != NULL)
 			oldlst = oldlst->next;
 	}
-	return (head);
+	// system("leaks -q token");//!
+	return (newlst);
 }
 
-void	tkn_mark_quote_to_concatinate(t_list *cmdlst, size_t *concat_id)
+static t_list	*tkn_concater(t_list *oldlst)
 {
-	t_token		*token;
-	bool		to_join;
-	t_division	closing_div;
+	t_list	*newlst;
+	t_list	**error_check;
 
-	to_join = false;
-	while (cmdlst)
+	newlst = NULL;
+	error_check = tkn_concat_same_concat_idx(oldlst, &newlst);
+	if (error_check == NULL)
 	{
-		token = cmdlst->content;
-		if (to_join == false)
-		{
-			if (token->division == parenthesis_open)
-				closing_div = parenthesis_close;
-			else
-				closing_div = token->division;
-		}
-		if (tkn_div_is_quote(token->division) || to_join == true)
-		{
-			token->concat_idx = *concat_id;
-			if (to_join == false)
-			{
-				to_join = true;
-			}
-			else if (to_join == true && token->division == closing_div)
-			{
-				to_join = false;
-			}
-		}
-		cmdlst = cmdlst->next;
+		return (NULL);
 	}
-	*concat_id = *concat_id + 1;
-}
-
-size_t	tkn_mark_normal_words_to_concatinate(t_list *cmdlist, size_t concat_id)
-{
-	t_token	*token;
-	
-	while (cmdlist)
-	{
-		token = cmdlist->content;
-		if (token->division == unclassified || tkn_div_is_quote(token->division))
-			token->concat_idx = concat_id;
-		else
-			concat_id++;
-		cmdlist = cmdlist->next;
-	}
-	return (concat_id);
-}
-
-size_t	tkn_mark_operators_to_concatinate(t_list *cmdlist, size_t concat_id)
-{
-	t_token	*crnt_token;
-	t_token	*prev_token;
-	t_list	*crnt;
-
-	prev_token = NULL;
-	crnt = cmdlist;
-	while (crnt)
-	{
-		if (crnt->prev == NULL)
-		{
-			crnt = crnt->next;
-			continue ;
-		}
-		prev_token = crnt->prev->content;
-		crnt_token = crnt->content;
-		if (tkn_div_is_control_operator(crnt_token->division) || tkn_div_is_redirect_operator(crnt_token->division))
-		{
-			if (crnt_token->division == prev_token->division)
-			{
-				crnt_token->concat_idx = concat_id;
-				prev_token->concat_idx = concat_id;
-				concat_id++;
-				if (crnt->next == NULL || crnt->next->next == NULL)
-					break ;
-				crnt = crnt->next->next;
-				continue ;
-			}
-		}
-		crnt = crnt->next;
-	}
-	return (concat_id);
+	// printf("newlst\n");
+	// ft_lstiter(newlst, _tkn_print_list);
+	// ft_lstiter(oldlst, _tkn_delete_list);
+	// free(oldlst);
+	// oldlst = NULL;
+	return (newlst);
 }
 
 int	tkn_controller(char const *cmdline)
 {
 	t_list	*head;
-	t_list	*temp;
-	size_t	concat_group_id;
+	size_t	idx;
 
-	concat_group_id = 0;
-	head = tkn_split_and_assign_flag(cmdline, &concat_group_id);
-	printf("splited into a char\n");
-	ft_lstiter(head, _print_list);
-	tkn_mark_quote_to_concatinate(head, &concat_group_id);
+	idx = 0;
+	head = tkn_create_list_with_flags(cmdline, &idx);
+	if (!head)
+	{
+		//todo error
+	}
+	tkn_mark_quote_to_concatinate(head, &idx);
 	head = tkn_concater(head);
-	printf("after quote concat\n");
-	concat_group_id = tkn_mark_normal_words_to_concatinate(head, concat_group_id);
-	printf("---\n");
-	concat_group_id = tkn_mark_operators_to_concatinate(head, concat_group_id);
-	ft_lstiter(head, _print_list);
-	temp = head;
+	if (!head)
+	{
+		//todo error
+	}
+	idx = tkn_mark_operators_to_concatinate(head, idx);
+	idx = tkn_mark_normal_words_to_concatinate(head, idx);
 	head = tkn_concater(head);
-	ft_lstclear(&temp, _delete_list);
-	printf("---\n");
-	ft_lstiter(head, _print_list);
-	ft_lstclear(&head, _delete_list);
+	if (!head)
+	{
+		//todo error
+	}
+	ft_lstiter(head, _tkn_print_list);//todo delete
+	ft_lstclear(&head, _tkn_delete_list);//todo delete
+	// system("leaks -q token");
 	return (EXIT_SUCCESS);
 }
 
