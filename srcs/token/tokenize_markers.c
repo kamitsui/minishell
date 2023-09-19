@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenize_concat_marker.c                           :+:      :+:    :+:   */
+/*   tokenize_markers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 13:13:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/19 14:21:41 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/19 17:35:07 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ size_t	tkn_mark_operators_to_concatinate(t_list *crnt, size_t concat_id)
 	while (crnt)
 	{
 		if (crnt->prev == NULL)
+		{
 			crnt = crnt->next;
+			continue ;
+		}
 		prev_tkn = crnt->prev->content;
 		crnt_tkn = crnt->content;
 		if (flg_is_operator(crnt_tkn->flg) && crnt_tkn->flg == prev_tkn->flg)
