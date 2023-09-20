@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 09:47:36 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/20 10:26:18 by mogawa           ###   ########.fr       */
+/*   Created: 2023/09/20 13:14:10 by mogawa            #+#    #+#             */
+/*   Updated: 2023/09/20 17:00:28 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_pwd.h"
-#include "libft.h"
+#include "environ.h"
+#include "ft_printf.h"
 
-void	ft_cwd(void)
+static void	_print_env_lst(void *content)
 {
-	char	*abs_path;
-	char	*buf;
+	t_env	*node;
 
-	buf = NULL;
-	abs_path = getcwd(buf, UNDEFINED);
-	if (abs_path == NULL)
-	{
-		perror("pwd:");
-	}
-	ft_putendl_fd(abs_path, STDOUT_FILENO);
-	free(abs_path);
+	node = content;
+	ft_printf("%s=%s\n", node->key, node->val);
+}
+
+//todo no error handling only exit_success
+void	ft_env(t_list *lst_head)
+{
+	ft_lstiter(lst_head, _print_env_lst);
 	exit (EXIT_SUCCESS);
 }
 
-int	main(void)
-{
-	ft_cwd();
-	system("leaks -q pwd");
-}
+// int	main(void)
+// {
+// 	ft_env();
+// }

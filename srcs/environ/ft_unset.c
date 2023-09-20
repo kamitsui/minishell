@@ -1,23 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.h                                           :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 09:48:41 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/20 16:39:48 by mogawa           ###   ########.fr       */
+/*   Created: 2023/09/20 16:49:33 by mogawa            #+#    #+#             */
+/*   Updated: 2023/09/20 16:49:34 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PWD_H
-# define FT_PWD_H
-
-# include <unistd.h>
-# include <stdio.h>
-
-# define UNDEFINED 1
-
-void	ft_pwd(void);
-
-#endif

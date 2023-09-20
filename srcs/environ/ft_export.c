@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.h                                           :+:      :+:    :+:   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 13:14:09 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/20 13:53:15 by mogawa           ###   ########.fr       */
+/*   Created: 2023/09/20 16:49:27 by mogawa            #+#    #+#             */
+/*   Updated: 2023/09/20 18:18:08 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ENV_H
-# define FT_ENV_H
+#include "environ.h"
 
-void	ft_env(void);
+void	_is_key_in_env_list(void *content)
+{
+	t_env	*node;
 
-#endif
+	node = content;
+	if (node->key == )
+}
+
+//! no validation check included
+void	ft_export(t_list *head, char *new_env)
+{
+	char	*key;
+	char	*value;
+	char	**splited;
+
+	splited = ft_split(new_env, '=');
+	key = splited[KEY];
+	value = splited[VALUE];
+	
+}

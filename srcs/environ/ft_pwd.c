@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.h                                           :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 09:48:41 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/20 16:39:48 by mogawa           ###   ########.fr       */
+/*   Created: 2023/09/20 09:47:36 by mogawa            #+#    #+#             */
+/*   Updated: 2023/09/20 16:41:02 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PWD_H
-# define FT_PWD_H
+#include "ft_pwd.h"
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdio.h>
+void	ft_pwd(void)
+{
+	char	*abs_path;
+	char	*buf;
 
-# define UNDEFINED 1
+	buf = NULL;
+	abs_path = getcwd(buf, UNDEFINED);
+	if (abs_path == NULL)
+	{
+		perror("pwd:");
+	}
+	ft_putendl_fd(abs_path, STDOUT_FILENO);
+	free(abs_path);
+	exit (EXIT_SUCCESS);
+}
 
-void	ft_pwd(void);
-
-#endif
+int	main(void)
+{
+	ft_pwd();
+	system("leaks -q pwd");
+}
