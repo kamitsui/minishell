@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 09:48:41 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/20 10:04:18 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/20 10:25:32 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FT_PWD_H
 
 # include <unistd.h>
+# include <stdio.h>
+
 # define UNDEFINED 1
 
 void	ft_cwd(void);
