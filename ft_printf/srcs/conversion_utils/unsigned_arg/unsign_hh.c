@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_ll.c                                             :+:      :+:    :+:   */
+/*   unsign_hh.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 17:28:41 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/03/20 17:29:14 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/03/09 17:59:28 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/06/21 15:30:00 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
 
-long long	s_ll(t_sm *machine)
+unsigned long long	unsign_hh(t_sm *machine)
 {
-	long long	num;
+	unsigned char	num;
 
-	num = va_arg(*(machine->ap), long long);
-	return (num);
+	num = (unsigned char)va_arg(*(machine->ap), int);
+	return ((unsigned long long)num);
 }

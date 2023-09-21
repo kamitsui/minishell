@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 21:27:32 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/03/22 12:06:59 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:26:42 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 typedef void				(*t_f_conversion)(t_sm *);
 void	conversion(t_sm *machine);
 void	decimal(t_sm *machine);
-void	u_decimal(t_sm *machine);
+void	unsign_decimal(t_sm *machine);
 void	octal(t_sm *machine);
 void	hexadecimal(t_sm *machine);
 void	pointer(t_sm *machine);

@@ -6,25 +6,27 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 14:39:52 by kamitsui          #+#    #+#              #
-#    Updated: 2023/06/20 21:27:56 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/09/21 13:10:40 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Directories
-SRC_DIR = src \
-		  src/process_utils \
-		  src/conversion_utils \
-		  src/conversion_utils/unsigned_arg \
-		  src/conversion_utils/signed_arg \
-		  src/formalize_utils
-OBJ_DIR = obj
-INC_DIR = include
-DEP_DIR = .dep
+SRC_DIR = srcs \
+		  srcs/process_utils \
+		  srcs/conversion_utils \
+		  srcs/conversion_utils/unsigned_arg \
+		  srcs/conversion_utils/signed_arg \
+		  srcs/formalize_utils
+OBJ_DIR = objs
+INC_DIR = includes
+DEP_DIR = .deps
 LIBFT_DIR = ../libft
 
 # Source files
 SRCS = \
 	   ft_printf.c \
+	   ft_dprintf.c \
+	   initialize.c \
 	   process.c \
 	   conversion.c \
 	   join_to_out.c \
@@ -41,7 +43,7 @@ SRCS = \
 	   add_to_buff.c \
 	   \
 	   decimal.c \
-	   u_decimal.c \
+	   unsign_decimal.c \
 	   octal.c \
 	   hexadecimal.c \
 	   pointer.c \
@@ -50,19 +52,19 @@ SRCS = \
 	   percent.c \
 	   itoa_buff.c \
 	   \
-	   u_va_arg.c \
-	   u_hh.c \
-	   u_ll.c \
-	   u_h.c \
-	   u_l.c \
-	   u_int.c \
+	   unsign_va_arg.c \
+	   unsign_hh.c \
+	   unsign_ll.c \
+	   unsign_h.c \
+	   unsign_l.c \
+	   unsign_int.c \
 	   \
-	   s_va_arg.c \
-	   s_hh.c \
-	   s_ll.c \
-	   s_h.c \
-	   s_l.c \
-	   s_int.c \
+	   sign_va_arg.c \
+	   sign_hh.c \
+	   sign_ll.c \
+	   sign_h.c \
+	   sign_l.c \
+	   sign_int.c \
 	   \
 	   formalize.c \
 	   adjust.c \
@@ -92,14 +94,16 @@ vpath %.c $(SRC_DIR)
 
 # Compiler
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -MMD -MP -MF $(@:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
-INC = -I$(INC_DIR)
+CF = -Wall -Wextra -Werror
+LDF = -g -fsanitize=address
+INC_CF = -I$(INC_DIR) -I$(LIBFT_DIR)
+DEP_CF = -MMD -MP -MF $(@:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
 
 # Rules for building object files
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(DEP_DIR)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	$(CC) $(CF) $(INC_CF) $(DEP_CF) -c $< -o $@
 
 $(DEP_DIR)/%.d: %.c
 	@mkdir -p $(DEP_DIR)
@@ -113,7 +117,7 @@ $(NAME): $(LIBFT) $(DEPS) $(OBJS)
 	ar rcs $@ $(OBJS)
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+	make -C $(LIBFT_DIR)
 
 bonus: $(NAME)
 

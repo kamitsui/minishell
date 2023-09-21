@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_decimal.c                                        :+:      :+:    :+:   */
+/*   sign_hh.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 14:44:02 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/03/29 18:13:25 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/03/20 17:23:17 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/06/21 14:35:58 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <stdarg.h>
 #include "ft_printf.h"
-#include "process.h"
-#include "conversion.h"
-#include "va_arg.h"
-#include "formalize.h"
-#include "libft.h"
 
-void	u_decimal(t_sm *machine)
+long long	sign_hh(t_sm *machine)
 {
-	char				str[42];
-	unsigned long long	num;
-	int					base;
+	signed char	num;
 
-	ft_bzero(str, 42);
-	base = 10;
-	num = u_va_arg(machine);
-	if (!((machine->flag & BIT_PREC) && (machine->prec == 0) && (num == 0)))
-		itoa_buff(num, str, base, machine);
-	formalize(str, machine);
+	num = (signed char)va_arg(*(machine->ap), int);
+	return ((long long)num);
 }
+//note
+//num = (short char)va_arg(*(machine->ap), short char);
+//complie error:	this va_arg has undefined behavior
+//					because type short will be promoted to int.
