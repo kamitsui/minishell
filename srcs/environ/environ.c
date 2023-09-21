@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/21 15:16:55 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/21 15:51:41 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,12 @@ void	env_controller(void)
 	ft_env(env_head);
 	printf("****\n");
 	ft_unset(env_head, "LANG");
-	ft_unset(env_head, "TAKOHACHI");
+	ft_export(env_head, "SHELL=TAKOHACHIRO");
+	ft_export(env_head, "PWD=42tokyo");
+	ft_export(env_head, "NOTHING=hogehoge");
+	ft_env(env_head);
+	printf("****\n");
+	ft_export(env_head, NULL);
 	ft_env(env_head);
 	ft_lstclear(&env_head, _env_del_content);
 }

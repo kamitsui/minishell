@@ -4,6 +4,8 @@ env:
 	env_lstiter_funcs.c \
 	ft_unset.c \
 	ft_env.c \
+	ft_export.c \
+	env_utils.c \
 	-I../../libft ../../libft/libft.a \
 	-I../../includes \
 	-I../../ft_printf/include \
