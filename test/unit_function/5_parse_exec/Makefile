@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/08/24 15:16:06 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/09/21 14:45:04 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,9 @@ LIBFT = $(LIBFT_DIR)/libft.a
 LIB_PRINTF_DIR = $(PROJ_DIR)/ft_printf
 LIB_PRINTF = $(LIB_PRINTF_DIR)/libftprintf.a
 
+# Includes directories
+INC_DIR = $(PROJ_DIR)/includes
+LIB_PRINTF_INC_DIR = $(LIB_PRINTF_DIR)/includes
 
 # Compile
 CC			=	cc
@@ -64,7 +67,7 @@ CFLAGS		=	-Wall -Wextra -Werror
 LFLAGS		=	-lreadline
 DEP_CF		=	-MMD -MP -MF $(@:$(OBJS_DIR)/%.o=$(DEPS_DIR)/%.d)
 LD_CF = -g -fsanitize=address
-INC = -I$(PROJ_DIR)/includes
+INC_CF = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(LIB_PRINTF_INC_DIR)
 
 # Object files and dependency files
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
@@ -74,8 +77,8 @@ DEPS = $(addprefix $(DEPS_DIR)/, $(SRCS:.c=.d))
 $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(DEPS_DIR)
-	$(CC) $(CFLAGS) $(INC) $(DEP_CF) $(LD_CF) -c $< -o $@
-#	$(CC) $(CFLAGS) $(INC) $(DEP_CF) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC_CF) $(DEP_CF) $(LD_CF) -c $< -o $@
+#	$(CC) $(CFLAGS) $(INC_CF) $(DEP_CF) -c $< -o $@
 
 $(DEPS_DIR)/%.d: %.c
 	@mkdir -p $(DEPS_DIR)
