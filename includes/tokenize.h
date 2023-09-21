@@ -3,76 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 12:14:02 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 16:28:15 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
+/*   Updated: 2023/09/19 13:32:34 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * @file tokenize.h
- * @brief <command-line>の文字列をトークン分けするための関数、マクロを定義
- */
 #ifndef TOKENIZE_H
 # define TOKENIZE_H
 
-# include <stdlib.h>
-# include <stdbool.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+// # include <stdbool.h>
+// # include <stdlib.h>
+# include "libft.h"
 
-/**
- * @brief \<connector\> "&&"
- */
-# define CONNECT_AND	"&&"
+typedef enum e_flg
+{
+	unclassified,
+	doube_quote,
+	singl_equote,
+	parenthesis_open,
+	parenthesis_close,
+	space,
+	newline,
+	ampersand,
+	pipe_sign,
+	allow_open,
+	allow_close,
+	astarisk,
+}	t_flg;
 
-/**
- * @brief \<connector\> "||"
- */
-# define CONNECT_OR		"||"
+typedef struct s_token
+{
+	char	*word;
+	t_flg	flg;
+	size_t	concat_idx;
+}	t_token;
 
-/**
- * @brief \<pipe-operator\> "|"
- */
-# define PIPE			"|"
+//* lstiter関数の関数ポインタ引数として渡される関数類
+void	_tkn_print_list(void *content);//! debug purpose so to be deleted
+void	_tkn_delete_list(void *content);
+void	_tkn_assign_division_to_list(void *content);
 
-/**
- * @brief \<in-operator\> "<"
- */
-# define IN_RED			"<"
+//* tokenizeユーティリティ関数類
+bool	flg_is_metachar(t_flg div);
+bool	flg_is_control(t_flg div);
+bool	flg_is_redirect(t_flg div);
+bool	flg_is_operator(t_flg flg);
+bool	flg_is_quote(t_flg div);
+t_flg	tkn_assign_flg_to_c(char c);
+t_flg	tkn_get_closing_flg(t_flg opening_flg);
 
-/**
- * @brief \<out-operator\> ">"
- */
-# define OUT_RED		">"
-
-/**
- * @brief \<here_doc-operator\> "<<"
- */
-# define HERE_DOC		"<<"
-
-/**
- * @brief \<append-operator\> ">>"
- */
-# define APPEND			">>"
-
-/**
- * @brief \<double-quote-operator\> """"
- */
-# define DQUOT			"\""
-
-/**
- * @brief \<single-quote-operator\> "''"
- */
-# define SQUOT			"\'"
-
-/**
- * @brief \<double-quote-operator\> "$"
- */
-# define VAR			"$"
-
-/**
- * @brief 入力文字列を条件に応じてトークン分けする。
- */
-char	**tokenize(char *line);
+//* tokenizeマーカー
+void	tkn_mark_quote_to_concatinate(t_list *cmdlst, size_t *concat_id);
+size_t	tkn_mark_normal_words_to_concatinate(t_list *cmdlist, size_t concat_id);
+size_t	tkn_mark_operators_to_concatinate(t_list *crnt, size_t concat_id);
 
 #endif
