@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:21:15 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/21 16:03:07 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/21 21:44:00 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define ENVIRON_H
 
 # include <stdlib.h>
+// # include <stdbool.h>
 # include "libft.h"
 
 # define KEY (0)
@@ -46,6 +47,8 @@ char	*env_get_value(t_list *env_head, char *key);
 
 //* env ft_lstiter funcs
 void	_env_del_content(void *content);
+void	_print_env_lst(void *content);
+void	_print_env_with_export(void *content);
 
 //* export
 void	ft_export(t_list *env_head, char *new_env);
