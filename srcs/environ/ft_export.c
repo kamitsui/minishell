@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:49:27 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/21 22:12:17 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/21 22:26:54 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,16 @@ static void	env_add_new_env(t_list *env_head, char *new_key, char *new_val)
 	env_add_new_at_last(env_head, new_key, new_val);
 }
 
-static void	env_export_all_env(t_list *env_head)
+static void	env_export_without_arg(t_list *env_head)
 {
 	char	*tmp;
 	char 	*tmp2;
 
 	tmp = ft_strdup(env_get_value(env_head, "_"));
-	tmp2 = ft_strjoin("_=", tmp);
-	printf("tmp2[%s]\n", tmp2);
-	ft_unset(env_head, "_=");
+	ft_unset(env_head, "_");
 	ft_lstiter(env_head, _print_env_with_export);
-	ft_export(env_head, tmp2);
+	ft_export(env_head, ft_strjoin("_=", tmp));
+	free(tmp);
 }
 
 //! no validation check included
@@ -66,7 +65,7 @@ void	ft_export(t_list *env_head, char *new_env)
 
 	if (new_env == NULL)
 	{
-		env_export_all_env(env_head);
+		env_export_without_arg(env_head);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/21 17:41:58 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/21 22:23:52 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,29 @@ t_list	*env_make_env_list(char **environ)
 	return (env_head);
 }
 
-void	env_controller(void)
+int	env_controller(void)
 {
 	extern char	**environ;
 	t_list		*env_head;
 
 	env_head = NULL;
 	env_head = env_make_env_list(environ);
-	// if (env_head == NULL)
-	//todo error handle
-	// ft_env(env_head);
-	printf("****\n");
+	if (env_head == NULL)
+		return (EXIT_SUCCESS);
+	printf("\n***initial env lst***\n");
+	ft_env(env_head);
 	ft_unset(env_head, "LANG");
 	ft_export(env_head, "SHELL=TAKOHACHIRO");
 	ft_export(env_head, "PWD=42tokyo");
 	ft_export(env_head, "NOTHING=hogehoge");
+	printf("\n***after exports ****\n");
 	ft_env(env_head);
-	printf("expOOOOOOOORTTTTTT****\n");
+	printf("\n***export with no arg ****\n");
 	ft_export(env_head, NULL);
-	printf("after export\n");
+	printf("\n***after export with no arg ****\n");
 	ft_env(env_head);
 	ft_lstclear(&env_head, _env_del_content);
+	return (EXIT_SUCCESS);
 }
 
 int	main(void)
