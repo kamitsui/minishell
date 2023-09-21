@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:14:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/20 17:00:28 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/21 15:15:38 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static void	_print_env_lst(void *content)
 	ft_printf("%s=%s\n", node->key, node->val);
 }
 
-//todo no error handling only exit_success
+//todo no error handling and no exit (EXIT_SUCCESS)
 void	ft_env(t_list *lst_head)
 {
 	ft_lstiter(lst_head, _print_env_lst);
-	exit (EXIT_SUCCESS);
+	// exit (EXIT_SUCCESS);
 }
 
 // int	main(void)

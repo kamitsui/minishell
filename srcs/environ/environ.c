@@ -6,25 +6,11 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/20 17:04:21 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/21 15:16:55 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
-#include "ft_printf.h"
-
-void	_delete_env_list(void *content)
-{
-	t_env	*node;
-
-	node = content;
-	free(node->key);
-	free(node->val);
-	node->key = NULL;
-	node->val = NULL;
-	free(node);
-	node = NULL;
-}
 
 t_list	*env_make_env_list(char **environ)
 {
@@ -45,7 +31,6 @@ t_list	*env_make_env_list(char **environ)
 		env_node->val = one_env[VALUE];
 		free (one_env);
 		ft_lstadd_back(&env_head, ft_lstnew(env_node));
-		// printf("key:[%s]val:[%s]\n", one_env[0], one_env[1]);
 		i++;
 	}
 	return (env_head);
@@ -60,10 +45,16 @@ void	env_controller(void)
 	env_head = env_make_env_list(environ);
 	// if (env_head == NULL)
 	//todo error handle
-	ft_lstclear(env_head, _delete_env_list);
+	ft_env(env_head);
+	printf("****\n");
+	ft_unset(env_head, "LANG");
+	ft_unset(env_head, "TAKOHACHI");
+	ft_env(env_head);
+	ft_lstclear(&env_head, _env_del_content);
 }
 
 int	main(void)
 {
 	env_controller();
+	system("leaks -q env");
 }

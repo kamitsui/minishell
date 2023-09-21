@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:21:15 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/20 17:01:43 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/21 15:03:50 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,14 @@ char	*substr_env(char *name, char *env[]);
 
 //* ft_env
 void	ft_env(t_list *lst_head);
+
+//* ft_unset.c
+void	ft_unset(t_list *env_head, char *tgt_key);
+
+//* env_utils
+void	env_set_tgt_key_value(t_list *env_head, char *key, char *val);
+
+//*env ft_lstiter funcs
+void	_env_del_content(void *content);
 
 #endif
