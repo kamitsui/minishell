@@ -1,41 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_va_arg.c                                         :+:      :+:    :+:   */
+/*   conversion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 14:44:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/03/25 17:09:18 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/02/25 16:33:23 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/09/07 11:47:08 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "ft_printf.h"
 #include "process.h"
 #include "conversion.h"
-#include "va_arg.h"
 
-unsigned long long	u_va_arg(t_sm *machine)
+void	conversion(t_sm *machine)
 {
-	unsigned long long	num;
-	int					i;
-	static t_f_u_va_arg	f_u_va_arg[5] = {u_hh, u_ll, u_h, u_l, u_int};
+	static t_f_conversion	f_conversion[10] = {
+		decimal, decimal, unsign_decimal, octal, hexadecimal, hexadecimal,
+		pointer, character, string, percent};
+	int						i;
+	int						bit_offset;
 
 	i = 0;
-	while (i < NB_PREFIX)
+	bit_offset = NB_FLAG + NB_FIELD + 1 + NB_PREFIX;
+	while (i < NB_TYPE)
 	{
-		if ((machine->flag & (1 << i << 8)) != FALSE)
-		{
-			num = f_u_va_arg[i](machine);
-			return (num);
-		}
+		if ((machine->flag & (1 << i) << bit_offset))
+			f_conversion[i](machine);
 		i++;
 	}
-	num = (unsigned long long)f_u_va_arg[i](machine);
-	return (num);
 }
-//debug code
-//#include <stdio.h>//for debug
-//#include "libft.h"//for debug
-//	printf("%d:flag\n", machine->flag);
+// NULL guard is required ??
+//	if (machine == NULL)
+//	{
+//		machine->state = -1;
+//		return ;
+//	}

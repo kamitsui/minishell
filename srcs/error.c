@@ -6,14 +6,13 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:05:41 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/24 17:39:16 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/09/21 13:54:40 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
  * @file error.c
  * @brief エラー検出時のエラー処理する関数
- * @note 注意ft_fprintf -> ft_dprintf リネームする（未完）
  */
 #include "error_minishell.h"
 #include "ft_printf.h"
@@ -32,7 +31,7 @@ static void	error_message(int error_code)
 {
 	static char	*msg[ERR_NUM] = {NULL, MSG_ARG, MSG_READLINE};
 
-	ft_fprintf(STDERR_FILENO, msg[error_code]);
+	ft_dprintf(STDERR_FILENO, msg[error_code]);
 }
 
 /**
@@ -59,7 +58,7 @@ void	ft_errno_exit(char *cause)
 
 	error_number = errno;
 	error_message = strerror(error_number);
-	ft_fprintf(STDERR_FILENO, "%s: %s: %s\n", NAME, cause, error_message);
+	ft_dprintf(STDERR_FILENO, "%s: %s: %s\n", NAME, cause, error_message);
 	exit (1);
 }
 
