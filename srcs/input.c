@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/24 22:04:30 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:06:40 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static int	lets_go_shell(char *line, char **env)
 	t_ast	*ast;
 
 	debug_input(line);// debug
-	tokens = tokenize(line);
+	//tokens = tokenize(line);// 本番のトークナイズ
+	tokens = ft_split(line, ' ');// 仮のトークナイズ
 	debug_token(tokens);// debug
 	ast = parse(tokens);
 	debug_ast(ast);// debug

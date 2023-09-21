@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:20:59 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/03/25 17:11:04 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:58:42 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@
 # define BIT_C		0x080000
 # define BIT_S		0x100000
 # define BIT_PER	0x200000
+
+void	process(const char *input, t_sm *machine);
 
 typedef int		(*t_f_process)(const char *, t_sm *);
 int		letter(const char *input, t_sm *machine);

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/24 19:26:16 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	child_process(t_command command)
 
 	file = command.args[0];
 	exec_file(file, command.args, command.env);
-	ft_fprintf(STDERR_FILENO, "%s: %s: command not found\n", NAME, file);
+	ft_dprintf(STDERR_FILENO, "%s: %s: command not found\n", NAME, file);
 	exit (127);
 }
 
