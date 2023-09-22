@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/19 15:50:37 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/22 10:50:46 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,14 @@ static t_list	*tkn_concater(t_list *oldlst)
 	return (newlst);
 }
 
-int	tkn_controller(char const *cmdline)
+char	**tkn_controller(char const *raw_cmds)//! has to add to tokenize.h to use on other files.
 {
 	t_list	*head;
 	size_t	idx;
+	char	**token_cmds;
 
 	idx = 0;
-	head = tkn_create_list_with_flags(cmdline, &idx);
+	head = tkn_create_list_with_flags(raw_cmds, &idx);
 	if (!head)
 	{
 		//todo error
@@ -110,8 +111,17 @@ int	tkn_controller(char const *cmdline)
 	{
 		//todo error
 	}
-	ft_lstiter(head, _tkn_print_list);//todo delete
+	// ft_lstiter(head, _tkn_print_list);//todo delete
+	token_cmds = tkn_create_char_from_list(head);
+	//todo token_cmds == NULL error
 	ft_lstclear(&head, _tkn_delete_list);//todo delete
+	//* print char **
+	int j = 0;
+	while (token_cmds[j])
+	{
+		printf("char**[%s]\n", token_cmds[j]);
+		j++;
+	}
 	// system("leaks -q token");
 	return (EXIT_SUCCESS);
 }
