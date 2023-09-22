@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/21 22:23:52 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/22 17:22:32 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,45 +16,41 @@ t_list	*env_make_env_list(char **environ)
 {
 	t_list	*env_head;
 	t_env	*env_node;
-	char	**one_env;
+	char	**one_env_line;
 	size_t	i;
 
-	env_head = NULL;
+	env_head = ft_lstnew(NULL);
 	i = 0;
 	while (environ[i])
 	{
-		one_env = ft_split(environ[i], '=');
-		env_node = ft_calloc(1, sizeof(t_env));
-		if (one_env == NULL || env_node == NULL)
+		env_node = env_create_node_from_char(environ[i]);
+		if (env_node == NULL)
 			return (NULL);
-		env_node->key = one_env[KEY];
-		env_node->val = one_env[VALUE];
-		free (one_env);
 		ft_lstadd_back(&env_head, ft_lstnew(env_node));
 		i++;
 	}
 	return (env_head);
 }
 
+//! *env_headはdummy node
 int	env_controller(void)
 {
 	extern char	**environ;
 	t_list		*env_head;
 
-	env_head = NULL;
 	env_head = env_make_env_list(environ);
 	if (env_head == NULL)
-		return (EXIT_SUCCESS);
+		return (EXIT_FAILURE);
 	printf("\n***initial env lst***\n");
 	ft_env(env_head);
-	ft_unset(env_head, "LANG");
-	ft_export(env_head, "SHELL=TAKOHACHIRO");
-	ft_export(env_head, "PWD=42tokyo");
-	ft_export(env_head, "NOTHING=hogehoge");
+	ft_unset(&env_head, "LANG");
+	ft_export(&env_head, "SHELL=TAKOHACHIRO");
+	ft_export(&env_head, "PWD=42tokyo");
+	ft_export(&env_head, "NOTHING=hogehoge");
 	printf("\n***after exports ****\n");
 	ft_env(env_head);
 	printf("\n***export with no arg ****\n");
-	ft_export(env_head, NULL);
+	ft_export(&env_head, NULL);
 	printf("\n***after export with no arg ****\n");
 	ft_env(env_head);
 	ft_lstclear(&env_head, _env_del_content);
