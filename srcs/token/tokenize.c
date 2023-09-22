@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/22 10:50:46 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/22 14:09:26 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_list	*tkn_create_list_with_flags(const char *cmdline, size_t *concat_id)
 		token = ft_calloc(1, sizeof(t_token));
 		if (!token)
 			return (NULL);
-		token->word = ft_strndup(&cmdline[i], 1);
+		token->word = ft_strndup(&cmdline[i], 0);
 		if (!token->word)
 			return (NULL);
 		token->concat_idx = *concat_id;
@@ -112,17 +112,24 @@ char	**tkn_controller(char const *raw_cmds)//! has to add to tokenize.h to use o
 		//todo error
 	}
 	// ft_lstiter(head, _tkn_print_list);//todo delete
-	token_cmds = tkn_create_char_from_list(head);
+	tkn_del_one_on_flg(&head, space);
+	token_cmds = tkn_create_dptrchar_from_list(head);
+	if (token_cmds == NULL)
+	{
+		printf("error in token_cmds\n");
+		system("leaks -q token");
+		return (NULL);
+	}
 	//todo token_cmds == NULL error
 	ft_lstclear(&head, _tkn_delete_list);//todo delete
-	//* print char **
+	//* print char ** to be deleted
 	int j = 0;
 	while (token_cmds[j])
 	{
 		printf("char**[%s]\n", token_cmds[j]);
 		j++;
 	}
-	// system("leaks -q token");
+	system("leaks -q token");
 	return (EXIT_SUCCESS);
 }
 
