@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 20:15:55 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/03/30 12:11:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:49:27 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	decimal(t_sm *machine)
 	long long	num;
 
 	ft_bzero(str, 42);
-	num = s_va_arg(machine);
+	num = sign_va_arg(machine);
 	if (!((machine->flag & BIT_PREC) && (machine->prec == 0) && (num == 0)))
 		num_to_str(num, str, machine);
 	formalize(str, machine);

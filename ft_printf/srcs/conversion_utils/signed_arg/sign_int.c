@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_ll.c                                             :+:      :+:    :+:   */
+/*   sign_int.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 18:05:02 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/03/09 18:17:48 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/03/20 17:29:44 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/06/21 14:36:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
 
-unsigned long long	u_ll(t_sm *machine)
+long long	sign_int(t_sm *machine)
 {
-	unsigned long long	num;
+	int	num;
 
-	num = va_arg(*(machine->ap), unsigned long long);
-	return (num);
+	num = va_arg(*(machine->ap), int);
+	return ((long long)num);
 }

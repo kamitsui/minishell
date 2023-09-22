@@ -15,17 +15,16 @@
 NAME		=	minishell
 
 # Libraries
-LIBFT_DIR = libft
+LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
-LIB_PRINTF_DIR = ft_printf
+LIB_PRINTF_DIR = ./ft_printf
+LIB_PRINTF_INC_DIR = $(LIB_PRINTF_DIR)/includes
 LIB_PRINTF = $(LIB_PRINTF_DIR)/libftprintf.a
 
 # Sources files
 SRCS = main.c \
 	   \
 	   input.c \
-	   \
-	   tokenize.c \
 	   \
 	   parse.c \
 	   parse_argument.c \
@@ -56,6 +55,7 @@ SRCS = main.c \
 	   \
 	   debug.c \
 	   debug_ast.c
+#	   tokenize.c \
 #	   get_next_token.c \
 #	   get_token_type.c \
 #	   count_tokens.c \
@@ -63,18 +63,19 @@ SRCS = main.c \
 SRCS_B =
 
 # Directories
-SRCS_DIR = srcs \
-		   srcs/tokenize_utils \
-		   srcs/parse_utils \
-		   srcs/execute_utils \
-		   srcs/traverse_utils \
-		   srcs/environ_utils \
-		   srcs/debug
-SRCS_B_DIR = srcs_bonus
-OBJS_DIR = objs
-OBJS_B_DIR = objs_b
+SRCS_DIR = ./srcs \
+		   ./srcs/tokenize_utils \
+		   ./srcs/parse_utils \
+		   ./srcs/execute_utils \
+		   ./srcs/traverse_utils \
+		   ./srcs/environ_utils \
+		   ./srcs/debug
+SRCS_B_DIR = ./srcs_bonus
+OBJS_DIR = ./objs
+OBJS_B_DIR = ./objs_b
 DEPS_DIR = .deps
 DEPS_B_DIR = .deps_b
+INC_DIR = ./includes
 
 # vpath for serching source files in multiple directories
 vpath %.c $(SRCS_DIR) $(SRCS_B_DIR)
@@ -85,7 +86,7 @@ CFLAGS		=	-Wall -Wextra -Werror
 LFLAGS		=	-lreadline
 DEP_CF		=	-MMD -MP -MF $(@:$(OBJS_DIR)/%.o=$(DEPS_DIR)/%.d)
 LD_CF = -g -fsanitize=address
-INC = -Iincludes -I./libft -I./ft_printf/include
+INC_CF = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(LIB_PRINTF_INC_DIR)
 
 # Command
 RM			=	rm -f
@@ -100,8 +101,8 @@ DEPS_B = $(addprefix $(DEPS_B_DIR)/, $(SRCS_B:.c=.d))
 $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(DEPS_DIR)
-	$(CC) $(CFLAGS) $(INC) $(DEP_CF) -c $< -o $@
-#	$(CC) $(CFLAGS) $(INC) $(DEP_CF) $(LD_CF) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC_CF) $(DEP_CF) -c $< -o $@
+#	$(CC) $(CFLAGS) $(INC_CF) $(DEP_CF) $(LD_CF) -c $< -o $@
 
 $(DEPS_DIR)/%.d: %.c
 	@mkdir -p $(DEPS_DIR)
