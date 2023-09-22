@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:24:03 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/22 13:59:53 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/22 15:07:38 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,29 @@ t_flg	tkn_get_closing_flg(t_flg opening_flg)
 		return (opening_flg);
 }
 
+t_token	*tkn_create_new_token_by_copy_old(t_token *old_tkn)
+{
+	t_token	*new_tkn;
+
+	if (old_tkn == NULL)
+		return (NULL);
+	new_tkn = ft_calloc(1, sizeof(t_token));
+	if (new_tkn == NULL)
+	{
+		return (NULL);
+	}
+	new_tkn->word = ft_strdup(old_tkn->word);
+	if (new_tkn->word == NULL)
+	{
+		free (new_tkn);
+		new_tkn = NULL;
+		return (NULL);
+	}
+	new_tkn->concat_idx = old_tkn->concat_idx;
+	new_tkn->flg = old_tkn->flg;
+	return (new_tkn);
+}
+
 char	**tkn_create_dptrchar_from_list(t_list *cmdlst)
 {
 	char		**cmdlines;
@@ -71,7 +94,6 @@ char	**tkn_create_dptrchar_from_list(t_list *cmdlst)
 		i++;
 	}
 	cmdlines[i] = NULL;
-	//todo need to free cmdlst;
 	return (cmdlines);
 }
 
