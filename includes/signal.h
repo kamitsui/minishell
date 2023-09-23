@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.h                                           :+:      :+:    :+:   */
+/*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 09:48:41 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/23 14:11:39 by mogawa           ###   ########.fr       */
+/*   Created: 2023/09/22 20:37:51 by mogawa            #+#    #+#             */
+/*   Updated: 2023/09/22 20:42:23 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PWD_H
-# define FT_PWD_H
+#ifndef SIGNAL_H
+# define SIGNAL_H
 
-# include <unistd.h>
-# include <stdio.h>
-# include "environ.h"
+# include <signal.h>
 
-# define UNDEFINED (1)
-
-void	ft_pwd(t_env *env_head);
+int	g_signal_num;
 
 #endif
