@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 14:22:49 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/24 19:37:21 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/24 21:00:59 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 
 void	sig_handle_ctrl_c(void)
 {
-	// ft_putchar_fd('\n', STDERR_FILENO);
-	printf("\n");//!
-	rl_replace_line("", 0);
+	ft_putchar_fd('\n', STDERR_FILENO);
+	// rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
+	//todo kill all process and back to getline
 }
 
 void	sig_handler(int sig, siginfo_t *siginfo, void *ucontext)
@@ -33,8 +33,7 @@ void	sig_handler(int sig, siginfo_t *siginfo, void *ucontext)
 	if (siginfo->si_signo == SIGINT)
 	{
 		// write(STDOUT_FILENO, "INT\n", 5);
-		printf("here\n");//!
-		g_flag = SIGINT;
+		// g_flag = SIGINT;
 		sig_handle_ctrl_c();
 		//! kill other process and back to readline prompt
 	}
@@ -74,15 +73,15 @@ int main()
 	sig_signal_initializer(&act_sigquit, SIGQUIT);
 	sigaction(SIGINT, &act_sigint, NULL);
 	sigaction(SIGQUIT,&act_sigquit, NULL);
-	g_flag = 0;
 	while (1)
 	{
 		printf("gflg[%d]", g_flag);
-		if (g_flag == SIGINT)
-		{
-			sig_handle_ctrl_c();
-			g_flag = 0;
-		}
+		// if (g_flag == SIGINT)
+		// {
+		// 	printf("here\n");
+		// 	sig_handle_ctrl_c();
+		// 	g_flag = 0;
+		// }
 		line = readline("> ");
 		if (line == NULL || strlen(line) == 0)
 		{

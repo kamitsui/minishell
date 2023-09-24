@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 14:22:48 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/23 16:44:14 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/24 20:56:21 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@
 # include <signal.h>
 # include <stdlib.h>
 
-// # define SA_HANDLER (__sigaction_u.__sa_handler)
-// # define SA_SIGACTION (__sigaction_u.__sa_sigaction)
-
 typedef struct sigaction	t_sigaction;
-volatile sig_atomic_t		g_flag;
+volatile sig_atomic_t		g_flag = 0;
 
 #endif
