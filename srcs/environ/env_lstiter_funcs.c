@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:31:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/25 11:49:06 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 12:37:31 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	_env_print_with_export(void *content)
 	if (!content)
 		return ;
 	node = content;
-	if (ft_strcmp(node->key, "-") == 0)
+	if (ft_strcmp(node->key, "_") == 0)
 		return ;
 	ft_printf("declare -x %s=\"%s\"\n", node->key, node->val);
 }

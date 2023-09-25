@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:49:27 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/25 11:39:31 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 12:23:30 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ if param3 == NULL, use param2 as full line
 else
 use param2 as key and param3 as value
 */
-void	ft_export(t_envwrap *env_wrap, char *key_or_full, char *value)
+void	ft_export(t_envwrap *env_wrap, char *key_or_full, char *val_or_null)
 {
 	t_list	*new_list_node;
 	t_env	*env_to_add;
@@ -64,15 +64,9 @@ void	ft_export(t_envwrap *env_wrap, char *key_or_full, char *value)
 	}
 	else
 	{
-		if (value == NULL)
-			env_to_add = env_create_node_from_char(key_or_full);
+		env_to_add = env_create_node_from_char(key_or_full, val_or_null);
 		if (!env_to_add)
 			return ;
-		else
-		{
-			env_to_add->key = ft_strdup(key_or_full);
-			env_to_add->val = ft_strdup(value);
-		}
 		new_list_node = ft_lstnew(env_to_add);
 		add_new_env_node_to_list(env_wrap, new_list_node);
 	}

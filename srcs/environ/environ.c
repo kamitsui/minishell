@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/25 11:59:53 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 12:40:01 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_envwrap	*create_env_list(char **environ)
 	i = 0;
 	while (environ[i])
 	{
-		env_node = env_create_node_from_char(environ[i]);
+		env_node = env_create_node_from_char(environ[i], NULL);
 		if (env_node == NULL)
 			return (NULL);
 		ft_lstadd_back(&env_head, ft_lstnew(env_node));
@@ -54,20 +54,22 @@ int	env_controller(void)
 	ft_env(env_wrapper);
 	ft_unset(env_wrapper, "LANG");
 	ft_export(env_wrapper, "SHELL=TAKOHACHIRO", NULL);
-	// ft_export(env_wrapper, "PWD=42tokyo", NULL);
-	// ft_export(env_wrapper, "NOTHING", "hogehoge");
+	ft_export(env_wrapper, "PWD=42tokyo", NULL);
+	ft_export(env_wrapper, "NOTHING", "hogehoge");
 	printf("\n***after exports ****\n");
 	ft_env(env_wrapper);
 	printf("\n***export with no arg ****\n");
-	// ft_export(env_wrapper, NULL, NULL);
+	ft_export(env_wrapper, NULL, NULL);
 	printf("\n***after export with no arg ****\n");
 	ft_env(env_wrapper);
-	ft_lstclear(&env_head, _env_del_content);
+	ft_lstclear(&env_wrapper->env, _env_del_content);
+	free(env_wrapper->pwd);
+	free(env_wrapper);
 	return (EXIT_SUCCESS);
 }
 
 int	main(void)
 {
 	env_controller();
-	// system("leaks -q env");
+	system("leaks -q env");
 }
