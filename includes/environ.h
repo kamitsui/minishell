@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:21:15 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/25 09:30:24 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 10:30:04 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ typedef struct s_env
 	char	*val;
 }	t_env;
 
-typedef struct s_env_wrap
+typedef struct s_envwrap
 {
-	t_env	*env;
+	t_list	*env;
 	int		exit_code;
 	char	*pwd;
-}	t_env_wrap;
+}	t_envwrap;
 
 /**
  * @brief 環境変数からPATHを取り出す時に使う関数(free必要)
@@ -43,7 +43,7 @@ typedef struct s_env_wrap
 char	*substr_env(char *name, char *env[]);
 
 //* ft_env
-void	ft_env(t_list *lst_head);
+void	ft_env(t_envwrap *env_wrapper);
 
 //* ft_unset.c
 void	ft_unset(t_list **env_head, char *tgt_key);
