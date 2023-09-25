@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/19 13:32:34 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/22 15:06:54 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ bool	flg_is_operator(t_flg flg);
 bool	flg_is_quote(t_flg div);
 t_flg	tkn_assign_flg_to_c(char c);
 t_flg	tkn_get_closing_flg(t_flg opening_flg);
+char	**tkn_create_dptrchar_from_list(t_list *cmdlst);
+void	tkn_del_one_on_flg(t_list **cmdlst, t_flg del_flg);
+t_token	*tkn_create_new_token_by_copy_old(t_token *old);
 
 //* tokenizeマーカー
 void	tkn_mark_quote_to_concatinate(t_list *cmdlst, size_t *concat_id);
