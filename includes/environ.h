@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:21:15 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/25 10:30:04 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 10:46:52 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 // # include <stdbool.h>
 # include "libft.h"
 
+// for ft_pwd
+# define UNDEFINED (1)
+
+// t_env
 # define KEY (0)
 # define VALUE (1)
 
@@ -41,6 +45,10 @@ typedef struct s_envwrap
  * @brief 環境変数からPATHを取り出す時に使う関数(free必要)
  */
 char	*substr_env(char *name, char *env[]);
+
+// * ft_pwd
+void	ft_pwd(t_envwrap *env);
+char	*ft_get_char_pwd(t_envwrap *env);
 
 //* ft_env
 void	ft_env(t_envwrap *env_wrapper);
