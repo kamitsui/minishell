@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:31:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/22 16:37:10 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 09:30:25 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	_env_del_content(void *content)
 	node = NULL;
 }
 
-void	_print_env_lst(void *content)
+void	_env_print_lst(void *content)
 {
 	t_env	*node;
 
@@ -38,7 +38,7 @@ void	_print_env_lst(void *content)
 	ft_printf("%s=%s\n", node->key, node->val);
 }
 
-void	_print_env_with_export(void *content)
+void	_env_print_with_export(void *content)
 {
 	t_env	*node;
 

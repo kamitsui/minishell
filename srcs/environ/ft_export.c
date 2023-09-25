@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:49:27 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/22 16:57:16 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 09:30:24 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_export(t_list **env_head, char *new_env)
 
 	if (new_env == NULL)
 	{
-		ft_lstiter((*env_head)->next, _print_env_with_export);
+		ft_lstiter((*env_head)->next, _env_print_with_export);
 	}
 	else
 	{
