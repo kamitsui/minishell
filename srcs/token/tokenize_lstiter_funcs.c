@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 22:52:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/19 13:23:51 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/22 13:47:52 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	_tkn_delete_list(void *content)
 {
 	t_token	*token;
 
+	if (!content)
+		return ;
 	token = content;
 	free(token->word);
 	token->word = NULL;

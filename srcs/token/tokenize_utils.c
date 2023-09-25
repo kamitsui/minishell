@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:24:03 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/19 15:52:56 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/22 15:07:38 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,81 @@ t_flg	tkn_get_closing_flg(t_flg opening_flg)
 		return (parenthesis_close);
 	else
 		return (opening_flg);
+}
+
+t_token	*tkn_create_new_token_by_copy_old(t_token *old_tkn)
+{
+	t_token	*new_tkn;
+
+	if (old_tkn == NULL)
+		return (NULL);
+	new_tkn = ft_calloc(1, sizeof(t_token));
+	if (new_tkn == NULL)
+	{
+		return (NULL);
+	}
+	new_tkn->word = ft_strdup(old_tkn->word);
+	if (new_tkn->word == NULL)
+	{
+		free (new_tkn);
+		new_tkn = NULL;
+		return (NULL);
+	}
+	new_tkn->concat_idx = old_tkn->concat_idx;
+	new_tkn->flg = old_tkn->flg;
+	return (new_tkn);
+}
+
+char	**tkn_create_dptrchar_from_list(t_list *cmdlst)
+{
+	char		**cmdlines;
+	t_list		*crnt;
+	t_token		*tkn;
+	const int	lstsize = ft_lstsize(cmdlst);
+	int			i;
+
+	if (cmdlst == NULL)
+		return (NULL);
+	cmdlines = ft_calloc(lstsize + 1, sizeof(char *));
+	if (cmdlines == NULL)
+		return (NULL);//todo error handle
+	i = 0;
+	crnt = cmdlst;
+	while (i < lstsize)
+	{
+		tkn = crnt->content;
+		cmdlines[i] = ft_strdup(tkn->word);
+		crnt = crnt->next;
+		i++;
+	}
+	cmdlines[i] = NULL;
+	return (cmdlines);
+}
+
+void	tkn_del_one_on_flg(t_list **cmdlst, t_flg del_flg)
+{
+	t_list	*dummy;
+	t_list	*crnt;
+	t_list	*next;
+
+	dummy = ft_lstnew(NULL);
+	ft_lstadd_front(cmdlst, dummy);
+	crnt = dummy->next;
+	while (crnt)
+	{
+		next = crnt->next;
+		if (((t_token *)(crnt->content))->flg == del_flg)
+		{
+			crnt->prev->next = crnt->next;
+			if (crnt->next != NULL)
+				crnt->next->prev = crnt->prev;
+			ft_lstdelone(crnt, _tkn_delete_list);
+			crnt = NULL;
+		}
+		crnt = next;
+	}
+	*cmdlst = dummy->next;
+	if (dummy->next != NULL)
+		dummy->next->prev = *cmdlst;
+	ft_lstdelone(dummy, _tkn_delete_list);
 }
