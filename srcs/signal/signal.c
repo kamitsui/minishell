@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 14:22:49 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/24 21:00:59 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 13:26:47 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@
 #include "readline/history.h"
 #include <string.h>
 
+// void	sig_handle_ctrl_d
+
 void	sig_handle_ctrl_c(void)
 {
 	ft_putchar_fd('\n', STDERR_FILENO);
-	// rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 	//todo kill all process and back to getline
@@ -33,7 +35,7 @@ void	sig_handler(int sig, siginfo_t *siginfo, void *ucontext)
 	if (siginfo->si_signo == SIGINT)
 	{
 		// write(STDOUT_FILENO, "INT\n", 5);
-		// g_flag = SIGINT;
+		g_flag = SIGINT;
 		sig_handle_ctrl_c();
 		//! kill other process and back to readline prompt
 	}
@@ -75,13 +77,7 @@ int main()
 	sigaction(SIGQUIT,&act_sigquit, NULL);
 	while (1)
 	{
-		printf("gflg[%d]", g_flag);
-		// if (g_flag == SIGINT)
-		// {
-		// 	printf("here\n");
-		// 	sig_handle_ctrl_c();
-		// 	g_flag = 0;
-		// }
+		// printf("gflag=[%d]\n", g_flag);
 		line = readline("> ");
 		if (line == NULL || strlen(line) == 0)
 		{
