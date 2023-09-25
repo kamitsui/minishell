@@ -6,12 +6,11 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/25 10:33:07 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 11:08:01 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
-#include "ft_pwd.h"
 
 t_envwrap	*env_make_env_list_to_wrap(char **environ)
 {
@@ -22,8 +21,7 @@ t_envwrap	*env_make_env_list_to_wrap(char **environ)
 	size_t		i;
 
 	env_head = ft_lstnew(NULL);
-	wrap_head = ft_lstnew(NULL);
-	if (!env_head || !wrap_head)
+	if (!env_head)
 		return (NULL);
 	i = 0;
 	while (environ[i])
@@ -36,7 +34,7 @@ t_envwrap	*env_make_env_list_to_wrap(char **environ)
 	}
 	wrap_head->env = env_head;
 	wrap_head->exit_code = EXIT_SUCCESS;
-	wrap_head->pwd = ft_pwd(env_head);
+	wrap_head->pwd = env_get_char_pwd(wrap_head);
 	return (wrap_head);
 }
 
@@ -48,20 +46,20 @@ int	env_controller(void)
 	t_envwrap	*env_wrapper;
 
 	env_wrapper = env_make_env_list_to_wrap(environ);
-	if (wrap_head == NULL)
+	if (env_wrapper == NULL)
 		return (EXIT_FAILURE);
 	printf("\n***initial env lst***\n");
-	ft_env(wrap_head);
+	ft_env(env_wrapper);
 	ft_unset(&env_head, "LANG");
 	ft_export(&env_head, "SHELL=TAKOHACHIRO");
 	ft_export(&env_head, "PWD=42tokyo");
 	ft_export(&env_head, "NOTHING=hogehoge");
 	printf("\n***after exports ****\n");
-	ft_env(env_head);
+	ft_env(env_wrapper);
 	printf("\n***export with no arg ****\n");
 	ft_export(&env_head, NULL);
 	printf("\n***after export with no arg ****\n");
-	ft_env(env_head);
+	ft_env(env_wrapper);
 	ft_lstclear(&env_head, _env_del_content);
 	return (EXIT_SUCCESS);
 }

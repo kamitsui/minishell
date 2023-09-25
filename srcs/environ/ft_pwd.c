@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 09:47:36 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/25 10:53:59 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 11:09:19 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 // #include "ft_pwd.h"
 #include "libft.h"
 
-char	*ft_get_char_pwd(t_envwrap *env_wrap)
+char	*env_get_char_pwd(t_envwrap *env_wrap)
 {
 	char	*abs_path;
 	char	*buf;
@@ -42,7 +42,7 @@ void	ft_pwd(t_envwrap *env_wrap)
 {
 	char	*abs_path;
 
-	abs_path = ft_get_char_pwd(env_wrap);
+	abs_path = env_get_char_pwd(env_wrap);
 	if (!abs_path)
 	{
 		env_wrap->exit_code = EXIT_FAILURE;
@@ -50,10 +50,4 @@ void	ft_pwd(t_envwrap *env_wrap)
 	}
 	ft_putendl_fd(abs_path, STDOUT_FILENO);
 	free(abs_path);
-}
-
-int	main(void)
-{
-	ft_pwd();
-	system("leaks -q pwd");
 }

@@ -6,6 +6,7 @@ env:
 	ft_env.c \
 	ft_export.c \
 	env_utils.c \
+	ft_pwd.c \
 	-I../../libft ../../libft/libft.a \
 	-I../../includes \
 	-I../../ft_printf/includes \
@@ -20,6 +21,7 @@ leak:
 	ft_env.c \
 	ft_export.c \
 	env_utils.c \
+	ft_pwd.c \
 	-I../../libft ../../libft/libft.a \
 	-I../../includes \
 	-I../../ft_printf/includes \
