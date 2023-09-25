@@ -6,11 +6,12 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/25 12:40:01 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 14:50:57 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
+#include "ft_cd.h"
 
 static t_envwrap	*create_env_list(char **environ)
 {
@@ -50,17 +51,23 @@ int	env_controller(void)
 	env_wrapper = create_env_list(environ);
 	if (env_wrapper == NULL)
 		return (EXIT_FAILURE);
+	ft_env(env_wrapper);
 	printf("\n***initial env lst***\n");
-	ft_env(env_wrapper);
-	ft_unset(env_wrapper, "LANG");
-	ft_export(env_wrapper, "SHELL=TAKOHACHIRO", NULL);
-	ft_export(env_wrapper, "PWD=42tokyo", NULL);
-	ft_export(env_wrapper, "NOTHING", "hogehoge");
-	printf("\n***after exports ****\n");
-	ft_env(env_wrapper);
-	printf("\n***export with no arg ****\n");
-	ft_export(env_wrapper, NULL, NULL);
-	printf("\n***after export with no arg ****\n");
+	// ft_unset(env_wrapper, "LANG");
+	// ft_export(env_wrapper, "SHELL=TAKOHACHIRO", NULL);
+	// ft_export(env_wrapper, "PWD=42tokyo", NULL);
+	// ft_export(env_wrapper, "NOTHING", "hogehoge");
+	// printf("\n***after exports ****\n");
+	// ft_env(env_wrapper);
+	// printf("\n***export with no arg ****\n");
+	// ft_export(env_wrapper, NULL, NULL);
+	// printf("\n***after export with no arg ****\n");
+	// ft_env(env_wrapper);
+	printf("***pwd***\n");
+	ft_pwd(env_wrapper);
+	ft_cd("/Users/masaru/42", env_wrapper);
+	printf("***pwd***\n");
+	ft_pwd(env_wrapper);
 	ft_env(env_wrapper);
 	ft_lstclear(&env_wrapper->env, _env_del_content);
 	free(env_wrapper->pwd);
