@@ -6,20 +6,20 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:49:33 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/22 16:50:15 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 11:14:31 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
 // #include "libft.h"
 
-void	ft_unset(t_list **env_head, char *tgt_key)//todo double pointer
+void	ft_unset(t_envwrap *env_wrap, char *tgt_key)
 {
 	t_list	*crnt;
 	t_list	*next;
 	t_env	*env_node;
 
-	crnt = (*env_head)->next;
+	crnt = env_wrap->env->next;
 	while (crnt)
 	{
 		next = crnt->next;

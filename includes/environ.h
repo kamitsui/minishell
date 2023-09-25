@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:21:15 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/25 10:46:52 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 11:16:32 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ char	*substr_env(char *name, char *env[]);
 
 // * ft_pwd
 void	ft_pwd(t_envwrap *env);
-char	*ft_get_char_pwd(t_envwrap *env);
+char	*env_get_char_pwd(t_envwrap *env);
 
 //* ft_env
 void	ft_env(t_envwrap *env_wrapper);
 
 //* ft_unset.c
-void	ft_unset(t_list **env_head, char *tgt_key);
+void	ft_unset(t_envwrap *env_wrap, char *tgt_key);
 
 //* env_utils
 // void	env_set_tgt_key_value(t_list *env_head, char *key, char *val);
