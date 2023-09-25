@@ -6,22 +6,23 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/25 11:08:01 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 11:59:53 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
 
-t_envwrap	*env_make_env_list_to_wrap(char **environ)
+static t_envwrap	*create_env_list(char **environ)
 {
 	t_list		*env_head;
-	t_envwrap	*wrap_head;
+	t_envwrap	*env_wrapper;
 	t_env		*env_node;
 	char		**one_env_line;
 	size_t		i;
 
 	env_head = ft_lstnew(NULL);
-	if (!env_head)
+	env_wrapper = ft_calloc(1, sizeof(t_envwrap));//todo to be curved out
+	if (!env_head || !env_wrapper)
 		return (NULL);
 	i = 0;
 	while (environ[i])
@@ -32,10 +33,11 @@ t_envwrap	*env_make_env_list_to_wrap(char **environ)
 		ft_lstadd_back(&env_head, ft_lstnew(env_node));
 		i++;
 	}
-	wrap_head->env = env_head;
-	wrap_head->exit_code = EXIT_SUCCESS;
-	wrap_head->pwd = env_get_char_pwd(wrap_head);
-	return (wrap_head);
+	//todo below env_wrapper creat to be curved out.
+	env_wrapper->env = env_head;
+	env_wrapper->exit_code = EXIT_SUCCESS;
+	env_wrapper->pwd = env_get_char_pwd(env_wrapper);
+	return (env_wrapper);
 }
 
 //! *env_headはdummy node
@@ -45,19 +47,19 @@ int	env_controller(void)
 	t_list		*env_head;
 	t_envwrap	*env_wrapper;
 
-	env_wrapper = env_make_env_list_to_wrap(environ);
+	env_wrapper = create_env_list(environ);
 	if (env_wrapper == NULL)
 		return (EXIT_FAILURE);
 	printf("\n***initial env lst***\n");
 	ft_env(env_wrapper);
-	ft_unset(&env_head, "LANG");
-	ft_export(&env_head, "SHELL=TAKOHACHIRO");
-	ft_export(&env_head, "PWD=42tokyo");
-	ft_export(&env_head, "NOTHING=hogehoge");
+	ft_unset(env_wrapper, "LANG");
+	ft_export(env_wrapper, "SHELL=TAKOHACHIRO", NULL);
+	// ft_export(env_wrapper, "PWD=42tokyo", NULL);
+	// ft_export(env_wrapper, "NOTHING", "hogehoge");
 	printf("\n***after exports ****\n");
 	ft_env(env_wrapper);
 	printf("\n***export with no arg ****\n");
-	ft_export(&env_head, NULL);
+	// ft_export(env_wrapper, NULL, NULL);
 	printf("\n***after export with no arg ****\n");
 	ft_env(env_wrapper);
 	ft_lstclear(&env_head, _env_del_content);
@@ -67,5 +69,5 @@ int	env_controller(void)
 int	main(void)
 {
 	env_controller();
-	system("leaks -q env");
+	// system("leaks -q env");
 }

@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:33:31 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/22 17:46:30 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/25 11:44:28 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ t_env	*env_create_node_from_char(char *env_line)
 		return (NULL);
 	node->key = ft_strndup(env_line, loc_of_eq - env_line);
 	node->val = ft_strdup(loc_of_eq + 1);
-	printf("split[%s]|[%s]\n", node->key, node->val);
+	// printf("split[%s]|[%s]\n", node->key, node->val);
 	return (node);
 }
