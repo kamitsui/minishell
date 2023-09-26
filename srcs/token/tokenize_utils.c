@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:24:03 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/22 15:07:38 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/26 10:06:03 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_flg	tkn_assign_flg_to_c(char c)
 	else if (c == '&')
 		return (ampersand);
 	else if (c == '|')
-		return (pipe_sign);
+		return (single_pipe);
 	else if (c == '<')
 		return (allow_open);
 	else if (c == '>')

@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/22 15:06:54 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/26 10:48:56 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ typedef enum e_flg
 	space,
 	newline,
 	ampersand,
-	pipe_sign,
+	double_ampersand,
+	single_pipe,
+	double_pipe,
 	allow_open,
 	allow_close,
 	astarisk,
@@ -45,7 +47,8 @@ typedef struct s_token
 //* lstiter関数の関数ポインタ引数として渡される関数類
 void	_tkn_print_list(void *content);//! debug purpose so to be deleted
 void	_tkn_delete_list(void *content);
-void	_tkn_assign_division_to_list(void *content);
+void	_tkn_assign_flg_to_list(void *content);
+void	_tkn_reassign_flg_to_operator(void *content);
 
 //* tokenizeユーティリティ関数類
 bool	flg_is_metachar(t_flg div);

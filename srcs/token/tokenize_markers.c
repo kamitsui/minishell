@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 13:13:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/19 17:35:07 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/26 10:26:10 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ size_t	tkn_mark_normal_words_to_concatinate(t_list *cmdlist, size_t concat_id)
 	while (cmdlist)
 	{
 		token = cmdlist->content;
-		if (token->flg == unclassified || flg_is_quote(token->flg))
+		if (token->flg == unclassified || flg_is_quote(token->flg) \
+										|| token->flg == ampersand)
 			token->concat_idx = concat_id;
 		else
 			concat_id++;

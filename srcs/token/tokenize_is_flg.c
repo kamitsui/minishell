@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:27:47 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/19 15:53:56 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/26 10:06:03 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	flg_is_metachar(t_flg flg)
 	if (flg == space || \
 		flg == newline || \
 		flg == ampersand || \
-		flg == pipe_sign || \
+		flg == single_pipe || \
 		flg == allow_open || \
 		flg == allow_close || \
 		flg == astarisk)
@@ -30,7 +30,7 @@ bool	flg_is_metachar(t_flg flg)
 
 bool	flg_is_control(t_flg flg)
 {
-	if (flg == ampersand || flg == pipe_sign)
+	if (flg == ampersand || flg == single_pipe)
 		return (true);
 	else
 		return (false);
