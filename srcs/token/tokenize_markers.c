@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 13:13:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/26 13:26:26 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/26 22:33:21 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,28 @@ void	tkn_mark_quote_to_concatinate(t_list *cmdlst, size_t *concat_id)
 {
 	t_token	*token;
 	bool	to_join;
+	t_flg	opening_flg;
 	t_flg	closing_flg;
 
 	to_join = false;
 	while (cmdlst)
 	{
 		token = cmdlst->content;
-		if (to_join == false)
+		if (to_join == false && flg_is_quote(token->flg))
+		{
 			closing_flg = tkn_get_closing_flg(token->flg);
-		if (flg_is_quote(token->flg) || to_join == true)
+			opening_flg = token->flg;
+		}
+		if (token->flg == opening_flg || to_join == true)
 		{
 			token->concat_idx = *concat_id;
 			if (to_join == false)
 				to_join = true;
 			else if (to_join == true && token->flg == closing_flg)
+			{
 				to_join = false;
+				*concat_id = *concat_id + 1;
+			}
 		}
 		cmdlst = cmdlst->next;
 	}
