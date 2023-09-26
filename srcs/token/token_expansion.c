@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 11:06:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/26 17:32:30 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/26 22:14:13 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	tkn_expand_dollar_sign(char **cmdline, t_envwrap *env_wrap)
 				tmp = new_word;
 				new_word = ft_strjoin(new_word, res);
 				printf("substr[%s]\n", dollar_string);
-				free(res);
+				// free(res);
 				free(tmp);
 			}
 		}
