@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/26 10:54:26 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/26 14:22:05 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,15 @@ char	**tkn_controller(char const *raw_cmds)//! has to add to tokenize.h to use o
 	idx = tkn_mark_operators_to_concatinate(head, idx);
 	head = tkn_concater(head);
 	ft_lstiter(head, _tkn_reassign_flg_to_operator);
-	idx = tkn_mark_normal_words_to_concatinate(head, idx);
+	t_flg	flags[] = {unclassified, end};
+	idx = tkn_mark_to_concat_for_flg(head, idx, flags);
+	// t_flg	flags2[] = {unclassified, doube_quote, single_quote, parenthesis_open, ampersand, end};
+	// idx = tkn_mark_to_concat_for_flg(head, idx, flags2);
+	// idx = tkn_mark_normal_words_to_concatinate(head, idx);
 	head = tkn_concater(head);
+	//! expansion start here
+	tkn_expansion_handler(head, NULL);
+	//! expantion till here
 	if (!head)
 	{
 		//todo error

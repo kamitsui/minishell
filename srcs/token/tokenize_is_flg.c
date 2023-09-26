@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:27:47 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/26 10:06:03 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/26 13:23:43 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ bool	flg_is_operator(t_flg flg)
 bool	flg_is_quote(t_flg flg)
 {
 	if (flg == doube_quote || \
-		flg == singl_equote || \
+		flg == single_quote || \
 		flg == parenthesis_open || \
 		flg == parenthesis_close)
 	{

@@ -6,14 +6,14 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/25 14:50:57 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/26 14:18:37 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
 #include "ft_cd.h"
 
-static t_envwrap	*create_env_list(char **environ)
+t_envwrap	*create_env_list(char **environ)
 {
 	t_list		*env_head;
 	t_envwrap	*env_wrapper;
@@ -40,6 +40,8 @@ static t_envwrap	*create_env_list(char **environ)
 	env_wrapper->pwd = env_get_char_pwd(env_wrapper);
 	return (env_wrapper);
 }
+
+
 
 //! *env_headはdummy node
 int	env_controller(void)
@@ -75,8 +77,8 @@ int	env_controller(void)
 	return (EXIT_SUCCESS);
 }
 
-int	main(void)
-{
-	env_controller();
-	system("leaks -q env");
-}
+// int	main(void)
+// {
+// 	env_controller();
+// 	system("leaks -q env");
+// }

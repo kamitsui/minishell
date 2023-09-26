@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/26 10:48:56 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/26 14:20:45 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 // # include <stdbool.h>
 // # include <stdlib.h>
 # include "libft.h"
+# include "environ.h"
 
 typedef enum e_flg
 {
 	unclassified,
 	doube_quote,
-	singl_equote,
+	single_quote,
 	parenthesis_open,
 	parenthesis_close,
 	space,
@@ -35,6 +36,7 @@ typedef enum e_flg
 	allow_open,
 	allow_close,
 	astarisk,
+	end, 
 }	t_flg;
 
 typedef struct s_token
@@ -64,7 +66,11 @@ t_token	*tkn_create_new_token_by_copy_old(t_token *old);
 
 //* tokenizeマーカー
 void	tkn_mark_quote_to_concatinate(t_list *cmdlst, size_t *concat_id);
-size_t	tkn_mark_normal_words_to_concatinate(t_list *cmdlist, size_t concat_id);
+// size_t	tkn_mark_normal_words_to_concatinate(t_list *cmdlist, size_t concat_id);
 size_t	tkn_mark_operators_to_concatinate(t_list *crnt, size_t concat_id);
+size_t	tkn_mark_to_concat_for_flg(t_list *cmdlst, size_t idx, t_flg *to_concat);
+
+//* expansion
+int		tkn_expansion_handler(t_list *cmdlst, t_envwrap *env_wrap);
 
 #endif
