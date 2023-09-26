@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 11:06:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/26 17:02:27 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/26 17:32:30 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,13 @@ static void	tkn_expand_dollar_sign(char **cmdline, t_envwrap *env_wrap)
 	unsigned int	start;
 	unsigned int	end;
 	char			*word;
+	char			*new_word;
+	char			*tmp;
 	char			*dollar_string;
+	char			*res;
 
 	word = *cmdline;
+	new_word = ft_strdup("");
 	start = 0;
 	while (word[start])
 	{
@@ -34,8 +38,20 @@ static void	tkn_expand_dollar_sign(char **cmdline, t_envwrap *env_wrap)
 			while (word[end] && ft_isalnum(word[end]))
 				end++;
 			dollar_string = ft_substr(word, start, (size_t)end - start);
-			printf("substr[%s]\n", dollar_string);
-			free (dollar_string);
+			res = env_get_value(env_wrap->env, &dollar_string[1]);
+			printf("%s\n", res);
+			if (res == NULL)
+			{
+				free(dollar_string);
+			}
+			else
+			{
+				tmp = new_word;
+				new_word = ft_strjoin(new_word, res);
+				printf("substr[%s]\n", dollar_string);
+				free(res);
+				free(tmp);
+			}
 		}
 		else
 		{
@@ -43,11 +59,17 @@ static void	tkn_expand_dollar_sign(char **cmdline, t_envwrap *env_wrap)
 			while (word[end] && word[end] != '$')
 				end++;
 			dollar_string = ft_substr(word, start, (size_t)end - start);
+			tmp = new_word;
+			new_word = ft_strjoin(new_word, dollar_string);
 			printf("substr[%s]\n", dollar_string);
-			free (dollar_string);
+			free(dollar_string);
+			free(tmp);
 		}
 		start = end;
 	}
+	printf("final[%s]\n", new_word);
+	*cmdline = new_word;
+	free(word);
 }
 
 int	tkn_expansion_handler(t_list *cmdlst, t_envwrap *env_wrap)
