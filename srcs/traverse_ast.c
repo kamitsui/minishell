@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/24 21:15:47 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:31:25 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,14 @@
  */
 int	traverse_ast(t_ast *node, char **env, int status)
 {
-	int						i;
 	enum e_NodeType			state;
 	static t_handle_node	handle_node[3] = {
 		handle_command, handle_argument, handle_operator};
-	size_t					j;
+	size_t					i;
 
 	if (node == NULL)
 		return (1);
 	// Depth-First search (DFS) approach
-	i = 0;
 	state = NODE_COMMAND;
 	while (state != NODE_END)
 	{
@@ -46,11 +44,11 @@ int	traverse_ast(t_ast *node, char **env, int status)
 		state++;
 	}
 	// Traverse the children of the current node
-	j = 0;
-	while (j < node->num_children)
+	i = 0;
+	while (i < node->num_children)
 	{
-		status = traverse_ast(node->children[j], env, status);
-		j++;
+		status = traverse_ast(node->children[i], env, status);
+		i++;
 	}
 	return (status);
 }
