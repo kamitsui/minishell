@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/28 18:39:09 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:43:03 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_ast	*parse_simple_command(char ***tokens)
 		else
 		{
 			node->num_children++;
-			node->children = (t_ast **)realloc(node->children,
+			node->children = (t_ast **)realloc(node->children,// use ft_realloc
 					node->num_children * sizeof(t_ast *));
 			node->children[node->num_children - 1] = arg_node;
 		}
