@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:06:24 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/20 22:28:01 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/09/28 21:26:22 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@
 # include "tokenize.h"
 # include "parse.h"
 # include "execute.h"
+
+int	g_fd_log;// disable when review
+int	g_flag_debug;// disable when review
+
+enum    e_flag_debug
+{
+	DEBUG_OFF,
+	DEBUG_ON
+};
+
+#define DEBUG_COLOR "\n\x1B[100m\x1B[37m"
+
+int	open_log(const char *file_name, int oflag);
 
 /**
  * @brief 文字列をデバッグ出力

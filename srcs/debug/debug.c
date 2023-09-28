@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:04:36 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/21 21:43:12 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/28 21:41:49 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 #include "libft.h"
 #include <stdlib.h>
 
+//デバッグ用
+#include "debug.h"
+
 /**
  * @brief 文字列をデバッグ出力
  *
@@ -27,12 +30,11 @@
  */
 void	debug_input(char *line)
 {
-	ft_printf("\n\x1B[100m\x1B[37m");
-	ft_printf("---- input debug ----\n");
-	ft_printf("line %p [%s]\n", line, line);
-	ft_printf("\x1B[0m\n\n");
+	ft_dprintf(g_fd_log, "%s---- input debug ----\n", DEBUG_COLOR);
+	ft_dprintf(g_fd_log, "line %p [%s]\n", line, line);
 }
 
+#include <stdio.h>
 /**
  * @brief tokenize関数で生成されたトークンをデバッグ出力
  *
@@ -42,15 +44,23 @@ void	debug_token(char **tokens)
 {
 	int		i;
 
-	ft_printf("\n\x1B[100m\x1B[37m");
-	ft_printf("---- char *tokens[] ----\n");
+//	ft_dprintf(g_fd_log, "\n\x1B[100m\x1B[37m");
+//	ft_dprintf(g_fd_log, "---- char *tokens[] ----\n");
+//	i = 0;
+//	while (tokens[i] != NULL)
+//	{
+//		ft_dprintf(g_fd_log, "tokens[%d] %p [%s]\n", i, tokens[i], tokens[i]);
+//		i++;
+//	}
+//	ft_dprintf(g_fd_log, "\x1B[0m\n\n");
+	ft_dprintf(g_fd_log, "%s---- char *tokens[] ----\n", DEBUG_COLOR);
 	i = 0;
 	while (tokens[i] != NULL)
 	{
-		ft_printf("tokens[%d] %p [%s]\n", i, tokens[i], tokens[i]);
+		ft_dprintf(g_fd_log, "tokens[%d] %p [%s]\n", i, tokens[i], tokens[i]);
 		i++;
 	}
-	ft_printf("\x1B[0m\n\n");
+	ft_dprintf(g_fd_log, "\n\n");
 }
 
 /**
@@ -62,26 +72,25 @@ void	debug_command(t_command *command)
 {
 	int		i;
 
-	ft_printf("\n\x1B[100m\x1B[37m");
-	ft_printf("---- command ----\n");
-	ft_printf("\tcmd_name [%s]\n", command->cmd_name);
-	ft_printf("\t");
+	ft_dprintf(g_fd_log, "%s---- command ----\n", DEBUG_COLOR);
+	ft_dprintf(g_fd_log, "\tcmd_name [%s]\n", command->cmd_name);
+	ft_dprintf(g_fd_log, "\t");
 	i = 0;
-	ft_printf("args");
+	ft_dprintf(g_fd_log, "args");
 	while (command->args[i] != NULL)
 	{
-		ft_printf(" [%s]", command->args[i]);
+		ft_dprintf(g_fd_log, " [%s]", command->args[i]);
 		i++;
 	}
-	ft_printf("\n");
-	ft_printf("\tnum_args [%d]\n", command->num_args);
-	ft_printf("\n");
+	ft_dprintf(g_fd_log, "\n");
+	ft_dprintf(g_fd_log, "\tnum_args [%d]\n", command->num_args);
+	ft_dprintf(g_fd_log, "\n");
 	i = 0;
-	ft_printf("\tenv [%s]\n", command->env[i]);
+	ft_dprintf(g_fd_log, "\tenv [%s]\n", command->env[i]);
 	while (command->env[i] != NULL)
 	{
-		ft_printf("\t    [%s]\n", command->env[i]);
+		ft_dprintf(g_fd_log, "\t    [%s]\n", command->env[i]);
 		i++;
 	}
-	ft_printf("\x1B[0m\n\n");
+	ft_dprintf(g_fd_log, "\n\n");
 }
