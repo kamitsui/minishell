@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/24 09:59:38 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/28 18:34:09 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
  */
 t_ast	*parse_operator(char ***tokens)
 {
-	if (**tokens && strcmp(**tokens, "&&") == 0)
+	if (**tokens && ft_strcmp(**tokens, "&&") == 0)
 	{
 		(*tokens)++;
 		return (create_node(NODE_OPERATOR, *(*tokens - 1)));

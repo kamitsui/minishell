@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:44:56 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/24 21:40:01 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:37:27 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include "libft.h"
 #include "parse.h"
 #include <stdlib.h>
-#include <string.h>// for strcmp()
 
 /**
  * @brief \<pipe-command> のノードを作る関数
@@ -37,9 +36,9 @@ t_ast	*parse_pipe_command(char ***tokens, size_t num_pipe)
 	(void)num_pipe;
 	pipe_node = create_node(NODE_OPERATOR, "|");
 	// ループの終了は要改良　is_connector()みたいな関数を実装か。。。
-	while (**tokens && strcmp(**tokens, "&&") != 0)
+	while (**tokens && ft_strcmp(**tokens, "&&") != 0)
 	{
-		if (strcmp(**tokens, "|") == 0)
+		if (ft_strcmp(**tokens, "|") == 0)
 		{
 			(*tokens)++;
 			continue ;
