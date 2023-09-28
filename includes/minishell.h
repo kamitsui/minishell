@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 16:42:34 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:29:09 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@
  */
 int		input(char **line, char **env);
 
+/**
+ * @brief readlineで得た文字列をトークン分けする関数
+ */
+char	**tkn_controller(char const *raw_cmds);
+
 #endif
+
 //
 ///**
 // * @brief 環境変数のハッシュテーブル（未実装）

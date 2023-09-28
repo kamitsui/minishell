@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/09/26 14:18:13 by mogawa           ###   ########.fr        #
+#    Updated: 2023/09/28 22:46:07 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,13 @@ LIB_PRINTF = $(LIB_PRINTF_DIR)/libftprintf.a
 SRCS = main.c \
 	   \
 	   input.c \
+	   \
+	   tokenize.c \
+	   tokenize_is_flg.c \
+	   tokenize_lstiter_funcs.c \
+	   tokenize_markers.c \
+	   tokenize_utils.c \
+	   token_expansion.c \
 	   \
 	   parse.c \
 	   parse_argument.c \
@@ -49,26 +56,39 @@ SRCS = main.c \
 	   set_cmd_stack.c \
 	   \
 	   substr_env.c \
+	   environ.c \
+	   env_utils.c \
+	   env_lstiter_funcs.c \
+	   \
+	   ft_cd.c \
+	   ft_env.c \
+	   ft_export.c \
+	   ft_pwd.c \
+	   ft_unset.c \
+	   ft_echo.c \
+	   \
 	   \
 	   error.c \
 	   free_utils.c \
 	   \
 	   debug.c \
-	   debug_ast.c
-#	   tokenize.c \
-#	   get_next_token.c \
-#	   get_token_type.c \
-#	   count_tokens.c \
+	   debug_ast.c \
+	   open_log.c
+#	   signal.c \要確認
+#	   substr_env.c \ #いらないかも
 
 SRCS_B =
 
 # Directories
 SRCS_DIR = ./srcs \
+		   ./srcs/token \
 		   ./srcs/tokenize_utils \
 		   ./srcs/parse_utils \
 		   ./srcs/execute_utils \
 		   ./srcs/traverse_utils \
+		   ./srcs/environ \
 		   ./srcs/environ_utils \
+		   ./srcs/signal \
 		   ./srcs/debug
 SRCS_B_DIR = ./srcs_bonus
 OBJS_DIR = ./objs

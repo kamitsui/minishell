@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:33:31 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/25 12:28:59 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/28 20:34:27 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ char	*env_get_value(t_list *env_head, char *key)
 
 t_env	*env_create_node_from_char(char *key_or_full, char *val_or_null)
 {
-	char	*key;
-	char	*value;
+//	char	*key;// unused variable
+//	char	*value;// unused variable
 	char	*loc_of_eq;
 	t_env	*node;
-	size_t	i;
+//	size_t	i;// unused variable
 
 	node = ft_calloc(1, sizeof(t_env));
 	if (!node)

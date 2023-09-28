@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:31:11 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/28 08:47:43 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/28 20:34:56 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static int	ft_chdir(char *path, t_envwrap *env_wrap)
 {
 	int		sys_rtn;
-	char	*tmp;
+//	char	*tmp;// unused variable
 
 	sys_rtn = chdir(path);
 	if (sys_rtn == SYSCALL_FAILED)
