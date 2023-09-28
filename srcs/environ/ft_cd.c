@@ -6,13 +6,19 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:31:11 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/28 08:47:43 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/28 13:30:31 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cd.h"
 #include "environ.h"
 #include "libft.h"
+
+static char	*cd_get_abs_path(char *path)
+{
+	if (path[0] == '.')
+		
+}
 
 static int	ft_chdir(char *path, t_envwrap *env_wrap)
 {
@@ -33,9 +39,13 @@ static int	ft_chdir(char *path, t_envwrap *env_wrap)
 }
 
 //todo error handling not implimented
+//todo relative path . ../ ../../
 void	ft_cd(char *path, t_envwrap *env_wrap)
 {
-	int	sys_rtn;
+	int		sys_rtn;
+	char	*abs_path;
+
+	abs_path = 
 
 	sys_rtn = access(path, R_OK | W_OK | X_OK);
 	// if (res_val == ACCESS_FAILED);
