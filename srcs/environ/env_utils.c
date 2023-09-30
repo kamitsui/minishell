@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:33:31 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/30 20:26:51 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/30 21:43:25 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_env	*env_create_node_from_char(char *key_or_full, char *val_or_null)
 {
 	char	*key;
 	char	*value;
-	char	*loc_of_eq;
+	int		idx_of_equal;
 	t_env	*node;
 	size_t	i;
 
@@ -43,16 +43,16 @@ t_env	*env_create_node_from_char(char *key_or_full, char *val_or_null)
 		return (NULL);
 	if (val_or_null == NULL)
 	{
-		loc_of_eq = ft_strchr(key_or_full, '=');
-		if (!loc_of_eq)
-			return (NULL);
-		node->key = ft_strndup(key_or_full, loc_of_eq - key_or_full);
-		node->val = ft_strdup(loc_of_eq + 1);
+		idx_of_equal = ft_strchr(key_or_full, '=') - key_or_full;
+		//todo error handle
+		node->key = ft_substr(key_or_full, 0, idx_of_equal);
+		node->val = ft_strdup(&key_or_full[idx_of_equal + 1]);
 	}
 	else
 	{
 		node->key = ft_strdup(key_or_full);
 		node->val = ft_strdup(val_or_null);
+		// printf("[%s][%s]\n", node->key, node->val);
 		if (!node->key || !node->val)
 			return (NULL);
 	}

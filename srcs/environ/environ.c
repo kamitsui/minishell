@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/30 21:06:47 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/30 22:32:32 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,16 @@ int	env_cd_checker(void)
 	ft_pwd(env_wrapper);
 	// ft_cd("/Users/masaru/42", env_wrapper);
 	// ft_cd(NULL, env_wrapper);
+	// ft_cd("/", env_wrapper);
+	ft_cd("../", env_wrapper);
+	ft_pwd(env_wrapper);
+	ft_cd("../../", env_wrapper);
+	ft_pwd(env_wrapper);
 	ft_cd("/", env_wrapper);
-	// ft_cd("../../", env_wrapper);
+	ft_pwd(env_wrapper);
+	ft_cd("/xxx", env_wrapper);
 	// ft_cd(".", env_wrapper);
 	// ft_cd("..", env_wrapper);
-	// ft_cd("../", env_wrapper);
 	printf("***cwd***\n");//!
 	ft_pwd(env_wrapper);
 	ft_env(env_wrapper);
@@ -118,5 +123,5 @@ int	main(void)
 {
 	// env_controller();
 	env_cd_checker();
-	// system("leaks -q env");
+	system("leaks -q env");
 }

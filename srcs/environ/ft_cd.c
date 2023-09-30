@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:31:11 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/30 21:00:26 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/30 22:35:48 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ static int	ft_chdir(char *path, t_envwrap *env_wrap)
 	int		sys_rtn;
 	char	*tmp;
 
-	//todo access to check the dir?
 	sys_rtn = chdir(path);
 	if (sys_rtn == SYSCALL_FAILED)
 	{
+		perror("cd");
 		return (SYSCALL_FAILED);
 	}
-	system("leaks -q env");
-	ft_export(env_wrap, "OLDPWD", env_wrap->cwd);
-	ft_export(env_wrap, "PWD", ft_getcwd(env_wrap));
 	tmp = env_wrap->cwd;
 	env_wrap->cwd = ft_getcwd(env_wrap);
+	ft_export(env_wrap, "PWD", env_wrap->cwd);
+	ft_export(env_wrap, "OLDPWD", tmp);
+	// printf("PWD[%s]\nOLDPWD[%s]\n", env_get_value_by_key(env_wrap->env,"PWD"), env_get_value_by_key(env_wrap->env, "OLDPWD"));//! delete
 	free(tmp);
 	return (SYSCALL_SUCCESS);
 }
