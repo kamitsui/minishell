@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/25 14:50:57 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/30 21:06:47 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,49 @@ static t_envwrap	*create_env_list(char **environ)
 	//todo below env_wrapper creat to be curved out.
 	env_wrapper->env = env_head;
 	env_wrapper->exit_code = EXIT_SUCCESS;
-	env_wrapper->pwd = env_get_char_pwd(env_wrapper);
+	env_wrapper->cwd = ft_getcwd(env_wrapper);
 	return (env_wrapper);
 }
 
 //! *env_headはdummy node
+int	env_cd_checker(void)
+{
+	extern char	**environ;
+	t_list		*env_head;
+	t_envwrap	*env_wrapper;
+
+	env_wrapper = create_env_list(environ);
+	if (env_wrapper == NULL)
+		return (EXIT_FAILURE);
+	// ft_env(env_wrapper);
+	// ft_unset(env_wrapper, "LANG");
+	// ft_export(env_wrapper, "SHELL=TAKOHACHIRO", NULL);
+	// ft_export(env_wrapper, "PWD=42tokyo", NULL);
+	// ft_export(env_wrapper, "NOTHING", "hogehoge");
+	// printf("\n***after exports ****\n");
+	// ft_env(env_wrapper);
+	// printf("\n***export with no arg ****\n");
+	// ft_export(env_wrapper, NULL, NULL);
+	// printf("\n***after export with no arg ****\n");
+	// ft_env(env_wrapper);
+	printf("***cwd***\n");//!
+	ft_pwd(env_wrapper);
+	// ft_cd("/Users/masaru/42", env_wrapper);
+	// ft_cd(NULL, env_wrapper);
+	ft_cd("/", env_wrapper);
+	// ft_cd("../../", env_wrapper);
+	// ft_cd(".", env_wrapper);
+	// ft_cd("..", env_wrapper);
+	// ft_cd("../", env_wrapper);
+	printf("***cwd***\n");//!
+	ft_pwd(env_wrapper);
+	ft_env(env_wrapper);
+	ft_lstclear(&env_wrapper->env, _env_del_content);
+	free(env_wrapper->cwd);
+	free(env_wrapper);
+	return (EXIT_SUCCESS);
+}
+
 int	env_controller(void)
 {
 	extern char	**environ;
@@ -63,20 +101,22 @@ int	env_controller(void)
 	// ft_export(env_wrapper, NULL, NULL);
 	// printf("\n***after export with no arg ****\n");
 	// ft_env(env_wrapper);
-	printf("***pwd***\n");
+	printf("***cwd***\n");//!
 	ft_pwd(env_wrapper);
-	ft_cd("/Users/masaru/42", env_wrapper);
-	printf("***pwd***\n");
+	// ft_cd("/Users/masaru/42", env_wrapper);
+	ft_cd(NULL, env_wrapper);
+	printf("***cwd***\n");//!
 	ft_pwd(env_wrapper);
 	ft_env(env_wrapper);
 	ft_lstclear(&env_wrapper->env, _env_del_content);
-	free(env_wrapper->pwd);
+	free(env_wrapper->cwd);
 	free(env_wrapper);
 	return (EXIT_SUCCESS);
 }
 
 int	main(void)
 {
-	env_controller();
-	system("leaks -q env");
+	// env_controller();
+	env_cd_checker();
+	// system("leaks -q env");
 }

@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:49:27 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/25 12:23:30 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/30 20:42:40 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	add_new_env_node_to_list(t_envwrap *env_wrap, t_list *to_add)
 			next->prev = to_add;
 			prev->next = to_add;
 			ft_lstdelone(crnt, _env_del_content);
+			// ft_lstadd_back(&env_wrap->env, to_add);
 			return ;
 		}
 		crnt = crnt->next;

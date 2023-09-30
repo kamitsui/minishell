@@ -6,13 +6,13 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:33:31 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/25 12:28:59 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/30 20:26:51 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
 
-char	*env_get_value(t_list *env_head, char *key)
+char	*env_get_value_by_key(t_list *env_head, char *key)
 {
 	t_list	*crnt;
 	t_env	*env;

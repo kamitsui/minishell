@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:21:15 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/25 12:24:14 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/30 20:28:41 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_envwrap
 {
 	t_list	*env;
 	int		exit_code;
-	char	*pwd;
+	char	*cwd;
 }	t_envwrap;
 
 /**
@@ -48,7 +48,7 @@ char	*substr_env(char *name, char *env[]);
 
 // * ft_pwd
 void	ft_pwd(t_envwrap *env);
-char	*env_get_char_pwd(t_envwrap *env);
+char	*ft_getcwd(t_envwrap *env);
 
 //* ft_env
 void	ft_env(t_envwrap *env_wrapper);
@@ -58,7 +58,7 @@ void	ft_unset(t_envwrap *env_wrap, char *tgt_key);
 
 //* env_utils
 // void	env_set_tgt_key_value(t_list *env_head, char *key, char *val);
-char	*env_get_value(t_list *env_head, char *key);
+char	*env_get_value_by_key(t_list *env_head, char *key);
 t_env	*env_create_node_from_char(char *key_or_full, char *val_or_null);
 
 //* env ft_lstiter funcs

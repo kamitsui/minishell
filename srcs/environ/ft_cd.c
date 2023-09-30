@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:31:11 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/28 13:30:31 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/30 21:00:26 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,41 @@
 #include "environ.h"
 #include "libft.h"
 
-static char	*cd_get_abs_path(char *path)
-{
-	if (path[0] == '.')
-		
-}
-
 static int	ft_chdir(char *path, t_envwrap *env_wrap)
 {
 	int		sys_rtn;
 	char	*tmp;
 
+	//todo access to check the dir?
 	sys_rtn = chdir(path);
 	if (sys_rtn == SYSCALL_FAILED)
 	{
-		printf("syscall failed\n");//!
 		return (SYSCALL_FAILED);
 	}
-	ft_export(env_wrap, "OLDPWD", env_wrap->pwd);
-	ft_export(env_wrap, "PWD", path);
-	free(env_wrap->pwd);
-	env_wrap->pwd = ft_strdup(path);
+	system("leaks -q env");
+	ft_export(env_wrap, "OLDPWD", env_wrap->cwd);
+	ft_export(env_wrap, "PWD", ft_getcwd(env_wrap));
+	tmp = env_wrap->cwd;
+	env_wrap->cwd = ft_getcwd(env_wrap);
+	free(tmp);
 	return (SYSCALL_SUCCESS);
 }
 
 //todo error handling not implimented
-//todo relative path . ../ ../../
 void	ft_cd(char *path, t_envwrap *env_wrap)
 {
+	char	*new_path;
 	int		sys_rtn;
-	char	*abs_path;
 
-	abs_path = 
-
-	sys_rtn = access(path, R_OK | W_OK | X_OK);
-	// if (res_val == ACCESS_FAILED);
-	if (sys_rtn == SYSCALL_FAILED)
+	if (path == NULL)
 	{
-		//todo error handling
-		env_wrap->exit_code = SYSCALL_FAILED;
-		return ;
+		new_path = env_get_value_by_key(env_wrap->env, "HOME");
+		sys_rtn = ft_chdir(new_path, env_wrap);
 	}
-	sys_rtn = ft_chdir(path, env_wrap);
-	if (sys_rtn == SYSCALL_FAILED)
+	else
 	{
-		//todo error handling
-		env_wrap->exit_code = SYSCALL_FAILED;
-		return ;
+		sys_rtn = ft_chdir(path, env_wrap);
 	}
-	env_wrap->exit_code = SYSCALL_SUCCESS;
+	// if (sys_rtn	== SYSCALL_FAILED)
+		//todo error handle
 }
