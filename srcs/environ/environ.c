@@ -13,7 +13,7 @@
 #include "environ.h"
 #include "ft_cd.h"
 
-static t_envwrap	*create_env_list(char **environ)
+t_envwrap	*create_env_list(char **environ)
 {
 	t_list		*env_head;
 	t_envwrap	*env_wrapper;
@@ -40,6 +40,8 @@ static t_envwrap	*create_env_list(char **environ)
 	env_wrapper->cwd = ft_getcwd(env_wrapper);
 	return (env_wrapper);
 }
+
+
 
 //! *env_headはdummy node
 int	env_cd_checker(void)

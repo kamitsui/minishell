@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 13:13:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/19 17:35:07 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/26 22:59:38 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,50 @@ void	tkn_mark_quote_to_concatinate(t_list *cmdlst, size_t *concat_id)
 {
 	t_token	*token;
 	bool	to_join;
+	t_flg	opening_flg;
 	t_flg	closing_flg;
 
 	to_join = false;
 	while (cmdlst)
 	{
 		token = cmdlst->content;
-		if (to_join == false)
+		if (to_join == false && flg_is_quote(token->flg))
+		{
 			closing_flg = tkn_get_closing_flg(token->flg);
-		if (flg_is_quote(token->flg) || to_join == true)
+			opening_flg = token->flg;
+		}
+		if (token->flg == opening_flg || to_join == true)
 		{
 			token->concat_idx = *concat_id;
 			if (to_join == false)
 				to_join = true;
 			else if (to_join == true && token->flg == closing_flg)
+			{
 				to_join = false;
+				*concat_id = *concat_id + 1;
+			}
 		}
 		cmdlst = cmdlst->next;
 	}
 	*concat_id = *concat_id + 1;
 }
 
-size_t	tkn_mark_normal_words_to_concatinate(t_list *cmdlist, size_t concat_id)
-{
-	t_token	*token;
+// size_t	tkn_mark_normal_words_to_concatinate(t_list *cmdlist, size_t concat_id)
+// {
+// 	t_token	*token;
 
-	while (cmdlist)
-	{
-		token = cmdlist->content;
-		if (token->flg == unclassified || flg_is_quote(token->flg))
-			token->concat_idx = concat_id;
-		else
-			concat_id++;
-		cmdlist = cmdlist->next;
-	}
-	return (concat_id);
-}
+// 	while (cmdlist)
+// 	{
+// 		token = cmdlist->content;
+// 		if (token->flg == unclassified || flg_is_quote(token->flg) \
+// 										|| token->flg == ampersand)
+// 			token->concat_idx = concat_id;
+// 		else
+// 			concat_id++;
+// 		cmdlist = cmdlist->next;
+// 	}
+// 	return (concat_id);
+// }
 
 size_t	tkn_mark_operators_to_concatinate(t_list *crnt, size_t concat_id)
 {
@@ -81,4 +89,29 @@ size_t	tkn_mark_operators_to_concatinate(t_list *crnt, size_t concat_id)
 		crnt = crnt->next;
 	}
 	return (concat_id);
+}
+
+size_t	tkn_mark_to_concat_for_flg(t_list *cmdlst, size_t idx, t_flg *to_concat)
+{
+	t_token	*token;
+	t_list	*crnt;
+	size_t	i;
+
+	crnt = cmdlst;
+	while (crnt)
+	{
+		token = crnt->content;
+		i = 0;
+		while (to_concat[i] != end)
+		{
+			if (token->flg == to_concat[i])
+			{
+				token->concat_idx = idx;
+			}
+			i++;
+		}
+		crnt = crnt->next;
+	}
+	idx++;
+	return (idx);
 }

@@ -2,4 +2,3 @@
 	"C_Cpp.errorSquiggles": "enabled",
 	"C_Cpp.intelliSenseEngineFallback": "enabled",
 	"C_Cpp.default.compilerPath": "/usr/bin/cc"
-}

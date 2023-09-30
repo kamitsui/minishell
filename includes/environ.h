@@ -70,4 +70,7 @@ void	_env_print_with_export(void *content);
 // void	ft_export(t_list **env_head, char *new_env);
 void	ft_export(t_envwrap *env_wrap, char *key_or_full, char *val_or_null);
 
+//! development purpose
+t_envwrap	*create_env_list(char **environ);
+
 #endif
