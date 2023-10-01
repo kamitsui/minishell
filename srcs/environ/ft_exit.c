@@ -6,13 +6,14 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:58:19 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/22 20:01:21 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/01 14:30:58 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_exit.h"
 
-void	ft_exit(int status)
+void	ft_exit(int status, t_envwrap *env)
 {
+	env->exit_code = status;
 	exit(status);
 }
