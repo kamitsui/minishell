@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.h                                            :+:      :+:    :+:   */
+/*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 13:47:28 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/01 14:25:00 by mogawa           ###   ########.fr       */
+/*   Created: 2023/09/22 20:37:51 by mogawa            #+#    #+#             */
+/*   Updated: 2023/09/22 20:42:23 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_CD_H
-# define FT_CD_H
+#ifndef SIGNAL_H
+# define SIGNAL_H
 
-# include <unistd.h>
-# include "environ.h"
+# include <signal.h>
 
-# define SYSCALL_FAILED (-1)
-# define SYSCALL_SUCCESS (0)
-
-void	ft_cd(char *path, t_envwrap *env_wrap);
+int	g_signal_num;
 
 #endif
