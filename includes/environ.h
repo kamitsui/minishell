@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:21:15 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/01 16:21:04 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/01 16:30:35 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ void	_env_print_with_export(void *content);
 void	ft_export(t_envwrap *env_wrap, char *key_or_full, char *val_or_null);
 
 //* ft_exit
+void	ft_exit(int status, t_envwrap *env_wrap);
 
 #endif
