@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/22 15:09:14 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/09/26 22:59:08 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ t_list	*tkn_create_list_with_flags(const char *cmdline, size_t *concat_id)
 		i++;
 		*concat_id = *concat_id + 1;
 	}
-	ft_lstiter(head, _tkn_assign_division_to_list);
+	ft_lstiter(head, _tkn_assign_flg_to_list);
 	return (head);
 }
 
-static t_list	**tkn_concat_same_concat_idx(t_list *oldlst, t_list **newlst)
+static t_list	**tkn_concat_same_idx(t_list *oldlst, t_list **newlst)
 {
 	t_token	*new_tkn;
 	char	*tmp;
@@ -69,7 +69,7 @@ static t_list	*tkn_concater(t_list *oldlst)
 	t_list	**error_check;
 
 	newlst = NULL;
-	error_check = tkn_concat_same_concat_idx(oldlst, &newlst);
+	error_check = tkn_concat_same_idx(oldlst, &newlst);
 	if (error_check == NULL)
 	{
 		return (NULL);
@@ -92,37 +92,52 @@ char	**tkn_controller(char const *raw_cmds)//! has to add to tokenize.h to use o
 	}
 	tkn_mark_quote_to_concatinate(head, &idx);
 	head = tkn_concater(head);
+	ft_lstiter(head, _tkn_print_list);
 	if (!head)
 	{
 		//todo error
 	}
 	idx = tkn_mark_operators_to_concatinate(head, idx);
-	idx = tkn_mark_normal_words_to_concatinate(head, idx);
+	head = tkn_concater(head);
+	ft_lstiter(head, _tkn_reassign_flg_to_operator);
+	t_flg	flags[] = {unclassified, end};
+	idx = tkn_mark_to_concat_for_flg(head, idx, flags);
+	t_flg	flags2[] = {unclassified, single_pipe, ampersand, end};
+	idx = tkn_mark_to_concat_for_flg(head, idx, flags2);
+	head = tkn_concater(head);
+
+	//! expansion start here
+	tkn_expansion_handler(head, NULL);
+
+	//! concat normal word, double quote and single quote	
+	t_flg	flag1[] = {unclassified, doube_quote, single_quote, end};
+	idx = tkn_mark_to_concat_for_flg(head, idx, flag1);
 	head = tkn_concater(head);
 	if (!head)
 	{
 		//todo error
 	}
 	tkn_del_one_on_flg(&head, space);
-	token_cmds = tkn_create_dptrchar_from_list(head);
-	if (token_cmds == NULL)
-	{
-		printf("error in token_cmds\n");
-		ft_lstclear(&head, _tkn_delete_list);
-		system("leaks -q token");
-		return (NULL);
-	}
+	ft_lstiter(head, _tkn_print_list);
+	// token_cmds = tkn_create_dptrchar_from_list(head);
+	// if (token_cmds == NULL)
+	// {
+	// 	printf("error in token_cmds\n");
+	// 	ft_lstclear(&head, _tkn_delete_list);
+	// 	system("leaks -q token");
+	// 	return (NULL);
+	// }
 	ft_lstclear(&head, _tkn_delete_list);
-	//* print char ** to be deleted
-	int j = 0;
-	while (token_cmds[j])
-	{
-		printf("char**[%s]\n", token_cmds[j]);
-		free (token_cmds[j]);
-		j++;
-	}
-	free (token_cmds);
-	system("leaks -q token");
+	// //* print char ** to be deleted
+	// int j = 0;
+	// while (token_cmds[j])
+	// {
+	// 	printf("char**[%s]\n", token_cmds[j]);
+	// 	free (token_cmds[j]);
+	// 	j++;
+	// }
+	// free (token_cmds);
+	// system("leaks -q token");
 	return (EXIT_SUCCESS);
 }
 
