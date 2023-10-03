@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/03 21:50:50 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/03 21:52:12 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,38 +53,22 @@ int	env_cd_checker(void)
 	env_wrapper = create_env_list(environ);
 	if (env_wrapper == NULL)
 		return (EXIT_FAILURE);
-	// ft_env(env_wrapper);
-	// ft_unset(env_wrapper, "LANG");
-	// ft_export(env_wrapper, "SHELL=TAKOHACHIRO", NULL);
-	// ft_export(env_wrapper, "PWD=42tokyo", NULL);
-	// ft_export(env_wrapper, "NOTHING", "hogehoge");
-	// printf("\n***after exports ****\n");
-	// ft_env(env_wrapper);
-	// printf("\n***export with no arg ****\n");
-	// ft_export(env_wrapper, NULL, NULL);
-	// printf("\n***after export with no arg ****\n");
-	// ft_env(env_wrapper);
 	printf("***cwd***\n");//!
 	ft_pwd(env_wrapper);
-	// ft_cd("/Users/masaru/42", env_wrapper);
-	// ft_cd(NULL, env_wrapper);
-	// ft_cd("/", env_wrapper);
-	ft_cd("../", env_wrapper);
+	printf(">> mkdir sample_dir\n");
+	system("mkdir sample_dir");
+	system("ls");
+	printf(">> cd  sample_dir\n");
+	ft_cd("sample_dir", env_wrapper);
 	ft_pwd(env_wrapper);
-	ft_cd("../../", env_wrapper);
+	printf(">> rm  -rf ../sample_dir\n");
+	system("rm -rf ../sample_dir");
 	ft_pwd(env_wrapper);
-	ft_cd("/", env_wrapper);
+	ft_cd("..", env_wrapper);// abort here !!
 	ft_pwd(env_wrapper);
-	ft_cd("/xxx", env_wrapper);
-	// ft_cd(".", env_wrapper);
-	// ft_cd("..", env_wrapper);
-	printf("***cwd***\n");//!
+	ft_cd("-", env_wrapper);// ?? Not required
 	ft_pwd(env_wrapper);
-	ft_env(env_wrapper);
-	ft_lstclear(&env_wrapper->env, _env_del_content);
-	free(env_wrapper->cwd);
-	free(env_wrapper);
-	return (EXIT_SUCCESS);
+	exit(0);
 }
 
 int	env_controller(void)
