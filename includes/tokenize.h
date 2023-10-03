@@ -6,15 +6,15 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/26 14:20:45 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/03 14:58:40 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZE_H
 # define TOKENIZE_H
 
-# include <readline/history.h>
-# include <readline/readline.h>
+//# include <readline/history.h>// compile error by kamitsui
+//# include <readline/readline.h>// compile error by kamitsui
 // # include <stdbool.h>
 // # include <stdlib.h>
 # include "libft.h"

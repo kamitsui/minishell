@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/28 22:54:51 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:19:30 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@
 #include "traverse.h"
 #include "error_minishell.h"
 #include "libft.h"
-#include "debug.h"
 #include <readline/readline.h>
+#include <readline/history.h>
+
+// for debug
+#include "debug.h"
 
 /**
  * @brief lets_go_shell関数では、<command-line>の文字列に対して、
@@ -38,8 +41,7 @@ static int	lets_go_shell(char *line, char **env)
 	t_ast	*ast;
 
 	debug_input(line);// debug
-	tokens = tkn_controller(line);// 本番のトークナイズ
-//	tokens = ft_split(line, ' ');// 仮のトークナイズ
+	tokens = tkn_controller(line);
 	debug_token(tokens);// debug
 	ast = parse(tokens);
 	debug_ast(ast);// debug
@@ -78,10 +80,10 @@ int	input(char **line, char **env)
 			free(line[i]);
 			break ;
 		}
+		add_history(line[i]);
 		// if (^Dがきたら)  .....
 		// if (lineの最後の文字がエスケープ文字'\'だったら）.....
 		status = lets_go_shell(line[i], env);
-		//add_history(line[i]);//???上下キーでhistory参照できていない
 		i++;
 	}
 	//	erro handle (^D が２回続いて入力された場合)
