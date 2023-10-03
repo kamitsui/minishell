@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/03 14:48:51 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/03 16:07:48 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,6 @@ SRCS = main.c \
 	   debug_ast.c \
 	   open_log.c
 #	   signal.c \要確認 include/signal.hがあるとkamitsui環境ではコンパイルできない。
-#	   substr_env.c \ #いらないかも
 
 SRCS_B =
 
