@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:33:31 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/25 12:28:59 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/03 17:32:14 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ char	*env_get_value(t_list *env_head, char *key)
 		env = crnt->content;
 		if (ft_strcmp(env->key, key) == 0)
 		{
-			return (env->val);
+			// return (env->val);//! ft_strdupに変更
+			return (ft_strdup(env->val));
 		}
 		crnt = crnt->next;
 	}
@@ -32,8 +33,8 @@ char	*env_get_value(t_list *env_head, char *key)
 
 t_env	*env_create_node_from_char(char *key_or_full, char *val_or_null)
 {
-	char	*key;
-	char	*value;
+	// char	*key;
+	// char	*value;
 	char	*loc_of_eq;
 	t_env	*node;
 	size_t	i;
