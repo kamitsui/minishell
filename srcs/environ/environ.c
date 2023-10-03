@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/30 22:32:32 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/03 21:50:50 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_envwrap	*create_env_list(char **environ)
 	t_list		*env_head;
 	t_envwrap	*env_wrapper;
 	t_env		*env_node;
-	char		**one_env_line;
+	// char		**one_env_line;
 	size_t		i;
 
 	env_head = ft_lstnew(NULL);
@@ -90,7 +90,7 @@ int	env_cd_checker(void)
 int	env_controller(void)
 {
 	extern char	**environ;
-	t_list		*env_head;
+	// t_list		*env_head;
 	t_envwrap	*env_wrapper;
 
 	env_wrapper = create_env_list(environ);
