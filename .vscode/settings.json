@@ -1,9 +1,4 @@
 {
 	"C_Cpp.errorSquiggles": "enabled",
-	"C_Cpp.intelliSenseEngineFallback": "disabled",
-	"C_Cpp.default.compilerPath": "/usr/bin/cc",
-	"files.associations": {
-		"*.c": "c",
-		"readline.h": "c"
-	}
-}
+	"C_Cpp.intelliSenseEngineFallback": "enabled",
+	"C_Cpp.default.compilerPath": "/usr/bin/cc"
