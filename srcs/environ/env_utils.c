@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:33:31 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/01 16:21:04 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/04 14:29:06 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ char	*env_get_value_by_key(t_list *env_head, char *key)
 		env = crnt->content;
 		if (ft_strcmp(env->key, key) == 0)
 		{
-			return (env->val);
+			// return (env->val);//! ft_strdupに変更
+			return (ft_strdup(env->val));
 		}
 		crnt = crnt->next;
 	}
