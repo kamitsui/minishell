@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:06:24 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/28 21:26:22 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/04 21:51:07 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "tokenize.h"
 # include "parse.h"
 # include "execute.h"
+# include <fcntl.h>
 
 int	g_fd_log;// disable when review
 int	g_flag_debug;// disable when review
@@ -43,6 +44,8 @@ void	debug_input(char *line);
  * @brief tokenize関数で生成されたトークンをデバッグ出力
  */
 void	debug_token(char **tokens);
+
+void	debug_env_two_darray(char **tokens);
 
 /**
  * @brief parse関数で生成されたASTをデバッグ出力\n

@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:04:36 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/28 21:41:49 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/04 21:50:47 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,20 @@ void	debug_token(char **tokens)
 	while (tokens[i] != NULL)
 	{
 		ft_dprintf(g_fd_log, "tokens[%d] %p [%s]\n", i, tokens[i], tokens[i]);
+		i++;
+	}
+	ft_dprintf(g_fd_log, "\n\n");
+}
+
+void	debug_env_two_darray(char **tokens)
+{
+	int		i;
+
+	ft_dprintf(g_fd_log, "%s---- char *env[] ----\n", DEBUG_COLOR);
+	i = 0;
+	while (tokens[i] != NULL)
+	{
+		ft_dprintf(g_fd_log, "env[%d] %p [%s]\n", i, tokens[i], tokens[i]);
 		i++;
 	}
 	ft_dprintf(g_fd_log, "\n\n");

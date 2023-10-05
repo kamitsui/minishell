@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/21 13:55:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:04:47 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@
 #include "error_minishell.h"
 #include "parse.h"
 #include "execute.h"
+#include "tokenize.h"
 #include "ft_printf.h"
 #include <unistd.h>
+
+// for debug
+#include "debug.h"
 
 /**
  * @brief ヘルパー関数：ファイルの実行　存在しなければエラー出力とexit(127)
@@ -51,13 +55,12 @@ static void	child_process(t_command command)
  * \#include "debug.h"\n
  * debug_command(&command);
  */
-int	execute_command(t_ast *command_node, char **env, int status)
+int	execute_command(t_ast *command_node, t_envwrap *env_wrapper)
 {
 	t_command	command;
 	size_t		i;
 	pid_t		pid;
 
-	(void)status;
 	if (command_node->type != NODE_COMMAND)
 		return (-1);
 	command.cmd_name = command_node->value;
@@ -67,12 +70,16 @@ int	execute_command(t_ast *command_node, char **env, int status)
 		get_arguments(&command, command_node);
 		i++;
 	}
-	command.env = env;
+	command.env = convert_env_list_to_two_darray(env_wrapper->env->next);
+	debug_env_two_darray(command.env);
+	debug_command(&command);
 	pid = fork();
 	if (pid == -1)
 		ft_perror_exit("fork");
 	if (pid == 0)
 		child_process(command);
-	free(command.args);
+	free(command.args);// これだけでは不十分
+	free_two_darray(command.env);
+//	system("leaks a.out");// NG リークあり
 	return (wait_process(pid, 1));
 }

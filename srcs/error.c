@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:05:41 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/21 13:54:40 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:54:32 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
  * @param error_code 出力させたいエラーメッセージに対するエラーコード
  * @note 文字列要素の順番や組み合わせを修正した方がいいかも。。。
  */
-static void	error_message(int error_code)
+static void	put_error_message(int error_code)
 {
-	static char	*msg[ERR_NUM] = {NULL, MSG_ARG, MSG_READLINE};
+	static char	*msg[ERR_NUM] = {MSG_ARG, MSG_READLINE, MSG_CREATE_ENV};
 
 	ft_dprintf(STDERR_FILENO, msg[error_code]);
 }
@@ -40,10 +40,10 @@ static void	error_message(int error_code)
  *
  * @param error_code エラー判定の内容
  */
-void	error_code(int error_code)
+void	handle_error(int error_code)
 {
-	error_message(error_code);
-	exit(error_code);
+	put_error_message(error_code);
+	exit(error_code);// 要検討　使っていいエラーコードを調べる
 }
 
 /**

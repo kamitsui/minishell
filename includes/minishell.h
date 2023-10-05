@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/28 19:29:09 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/04 22:17:19 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@
 # define MINISHELL_H
 
 /**
- * @brief readlineで読み取った文字列の格納先のバッファサイズ
+ * @brief 文字列操作用のバッファサイズ
+ * @detail
+ * 使用関数：convert_env_wrap
  */
-# define BUFFER_SIZE	100
+# define BUFF_SIZE	1024
 
 /**
  * @brief プロンプトに出力する文字列

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:29:22 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 16:07:37 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/05 20:41:26 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,25 @@
  */
 #include "minishell.h"
 #include "parse.h"
+#include "environ.h"
 #include <stdlib.h>
 
 /**
- * @brief readlineで読み取った関数をフリーする\n
- * lineのfreeは不要（スタック領域を使っているため）
- *
- * @param line 複数の文字列要素もつ二次元配列（最後の要素はNULL）
- */
-void	free_line(char **line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] != NULL)
-	{
-		free(line[i]);
-		i++;
-	}
-}
-
-/**
  * @brief char**型の二次元配列をフリーする関数\n
- * tokensのfreeは必要（ヒープ領域にメモリ確保しているため）
  *
- * @param tokens 複数の文字列要素もつ二次元配列（最後の要素はNULL）
+ * @param *array[] 複数の文字列要素もつ二次元配列（最後の要素はNULL）
  */
-void	free_tokens(char **tokens)
+void	free_two_darray(char *array[])
 {
 	size_t	i;
 
 	i = 0;
-	while (tokens[i] != NULL)
+	while (array[i] != NULL)
 	{
-		free(tokens[i]);
+		free(array[i]);
 		i++;
 	}
-	free(tokens);
+	free(array);
 }
 
 /**
@@ -75,4 +57,11 @@ void	free_ast(t_ast *node)
 	free(node->children);
 	free(node->value);
 	free(node);
+}
+
+void	free_envwrap(t_envwrap *env_wrapper)
+{
+	ft_lstclear(&env_wrapper->env, _env_del_content);
+	free(env_wrapper->pwd);
+	free(env_wrapper);
 }
