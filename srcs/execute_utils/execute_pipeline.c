@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:39:39 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/21 13:55:21 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/05 20:27:34 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
  * @param i 現在のコマンドの位置
  * @param num_commands <pipe-command>のコマンド数
  */
-static void	child_process(t_command command, int pipefd[2], int i,
+static void	child_process_pipe_cmd(t_command command, int pipefd[2], int i,
 		int num_commands)
 {
 	char	*file;
@@ -88,7 +88,7 @@ pid_t	create_process(t_cmdstack *cmdstack, int *pipefd,
 	if (pid == -1)
 		ft_perror_exit("fork");
 	else if (pid == 0)
-		child_process(cmdstack->commands[i], pipefd, i, num_commands);
+		child_process_pipe_cmd(cmdstack->commands[i], pipefd, i, num_commands);
 	else
 		parent_process(pipefd);
 	return (pid);
@@ -106,15 +106,15 @@ pid_t	create_process(t_cmdstack *cmdstack, int *pipefd,
  *
  * @return 最後のコマンドの終了ステータス
  */
-int	execute_pipeline(t_ast **commands, size_t num_commands, char **env)
+int	execute_pipeline(t_ast **commands, size_t num_commands, t_envwrap *env_wrapper)
 {
 	int			pipefd[2];
 	int			i;
 	pid_t		pid;
 	t_cmdstack	cmdstack;
 
-	set_cmd_stack(&cmdstack, commands, num_commands);
-	set_environ(&cmdstack, env);
+	set_cmd_stack(&cmdstack, commands, num_commands, env_wrapper);
+	set_environ(&cmdstack, env_wrapper);
 	i = 0;
 	while (i < cmdstack.num_commands)
 	{

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/28 18:31:25 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:42:08 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
  *
  * @return status ノードの処理結果を終了ステータスとして返す
  */
-int	traverse_ast(t_ast *node, char **env, int status)
+int	traverse_ast(t_ast *node, t_envwrap *env_wrapper)
 {
 	enum e_NodeType			state;
 	static t_handle_node	handle_node[3] = {
@@ -40,15 +40,15 @@ int	traverse_ast(t_ast *node, char **env, int status)
 	while (state != NODE_END)
 	{
 		if (node->type == state)
-			status = handle_node[state](node, env, status);
+			env_wrapper->exit_code = handle_node[state](node, env_wrapper);
 		state++;
 	}
 	// Traverse the children of the current node
 	i = 0;
 	while (i < node->num_children)
 	{
-		status = traverse_ast(node->children[i], env, status);
+		env_wrapper->exit_code = traverse_ast(node->children[i], env_wrapper);
 		i++;
 	}
-	return (status);
+	return (env_wrapper->exit_code);
 }

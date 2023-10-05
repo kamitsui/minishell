@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:17:11 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 13:52:36 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/05 20:21:52 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
  * @param num_commands <pipe-command>でつなげるコマンドの数
  */
 void	set_cmd_stack(t_cmdstack *cmdstack, t_ast **commands,
-		size_t num_commands)
+		size_t num_commands, t_envwrap *env_wrapper)
 {
 	size_t	i;
 
@@ -35,10 +35,13 @@ void	set_cmd_stack(t_cmdstack *cmdstack, t_ast **commands,
 	i = 0;
 	while (i < num_commands)
 	{
+		//cmdstack->commands[i].cmd_name = expansion(commands[i]->value);// 仮
+		// word split のexpansionについては要検討！
 		cmdstack->commands[i].cmd_name = commands[i]->value;
 		get_arguments(&(cmdstack->commands[i]), commands[i]);
 		i++;
 	}
+	(void)env_wrapper;// expansion実装すればこの行は不要になる
 }
 
 /**
@@ -47,10 +50,12 @@ void	set_cmd_stack(t_cmdstack *cmdstack, t_ast **commands,
  * @param cmdstack スタック構造体
  * @param env 環境変数
  */
-void	set_environ(t_cmdstack *cmdstack, char **env)
+void	set_environ(t_cmdstack *cmdstack, t_envwrap *env_wrapper)
 {
-	int	i;
+	int		i;
+	char	**env;
 
+	env = convert_env_list_to_two_darray(env_wrapper->env->next);
 	i = 0;
 	while (i < cmdstack->num_commands)
 	{

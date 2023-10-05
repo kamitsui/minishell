@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/09/21 14:15:36 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/05 21:12:31 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,15 @@ SRCS = handle_operator.c \
 	   debug.c \
 	   debug_ast.c \
 	   \
+	   env_lstiter_funcs.c \
+	   convert_env_list_to_two_darray.c \
+	   environ.c \
+	   env_utils.c \
+	   ft_cd.c \
+	   ft_env.c \
+	   ft_pwd.c \
+	   ft_export.c \
+	   \
 	   test_handle_operator.c
 
 # Directories
@@ -43,6 +52,7 @@ SRCS_DIR = $(PROJ_DIR)/srcs \
 		   $(PROJ_DIR)/srcs/traverse_utils \
 		   $(PROJ_DIR)/srcs/execute_utils \
 		   $(PROJ_DIR)/srcs/environ_utils \
+		   $(PROJ_DIR)/srcs/environ \
 		   $(PROJ_DIR)/srcs/debug \
 		   srcs
 OBJS_DIR = objs

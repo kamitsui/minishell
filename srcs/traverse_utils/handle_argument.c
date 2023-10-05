@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:09:43 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/24 21:41:32 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:42:36 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@
  *
  * @return status コマンドのノードから受け取った終了ステータスをそのまま返す
  */
-int	handle_argument(t_ast *node, char **env, int status)
+int	handle_argument(t_ast *node, t_envwrap *env_wrapper)
 {
 	(void)node;
-	(void)env;
-	return (status);
+	return (env_wrapper->exit_code);
 }
