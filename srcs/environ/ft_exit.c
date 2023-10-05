@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.h                                            :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 13:47:28 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/01 14:25:00 by mogawa           ###   ########.fr       */
+/*   Created: 2023/09/22 19:58:19 by mogawa            #+#    #+#             */
+/*   Updated: 2023/10/04 14:24:22 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_CD_H
-# define FT_CD_H
+#include "ft_exit.h"
 
-# include <unistd.h>
-# include "environ.h"
-
-# define SYSCALL_FAILED (-1)
-# define SYSCALL_SUCCESS (0)
-
-void	ft_cd(char *path, t_envwrap *env_wrap);
-
-#endif
+void	ft_exit(int status, t_envwrap *env_wrap)
+{
+	env_delete_t_envwrap(env_wrap);
+	ft_putstr_fd("exit\n", STDERR_FILENO);
+	exit(status);
+}

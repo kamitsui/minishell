@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:33:31 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/03 21:50:55 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/04 14:29:06 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,13 @@ t_env	*env_create_node_from_char(char *key_or_full, char *val_or_null)
 			return (NULL);
 	}
 	return (node);
+}
+
+void	env_delete_t_envwrap(t_envwrap *env_wrap)
+{
+	ft_lstiter(env_wrap->env, _env_del_content);
+	free(env_wrap->cwd);
+	env_wrap->cwd = NULL;
+	free(env_wrap);
+	env_wrap = NULL;
 }
