@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 14:39:52 by kamitsui          #+#    #+#              #
-#    Updated: 2023/09/21 13:10:40 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/05 21:28:18 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,16 +94,17 @@ vpath %.c $(SRC_DIR)
 
 # Compiler
 CC = cc
-CF = -Wall -Wextra -Werror
-LDF = -g -fsanitize=address
-INC_CF = -I$(INC_DIR) -I$(LIBFT_DIR)
-DEP_CF = -MMD -MP -MF $(@:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
+CFLAGS = -Wall -Wextra -Werror
+CF_ASAN = -g3 -O0 -fsanitize=address -fno-omit-frame-pointer
+CF_DEBUG = -g3 -O0 -fno-omit-frame-pointer
+CF_INC = -I$(INC_DIR) -I$(LIBFT_DIR)
+CF_DEP = -MMD -MP -MF $(@:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
 
 # Rules for building object files
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(DEP_DIR)
-	$(CC) $(CF) $(INC_CF) $(DEP_CF) -c $< -o $@
+	$(CC) $(CFLAGS) $(CF_INC) $(CF_DEP) -c $< -o $@
 
 $(DEP_DIR)/%.d: %.c
 	@mkdir -p $(DEP_DIR)
@@ -121,6 +122,12 @@ $(LIBFT):
 
 bonus: $(NAME)
 
+debug: fclean
+	make $(NAME) WITH_DEBUG=1
+
+asan: fclean
+	make $(NAME) WITH_ASAN=1
+
 # Clean target
 clean:
 	rm -rf $(OBJ_DIR) $(DEP_DIR)
@@ -134,4 +141,12 @@ re: fclean all
 
 -include $(DEPS)
 
-.PHONY: all bonus clean fclean re
+ifdef WITH_ASAN
+CFLAGS += $(CF_ASAN)
+endif
+
+ifdef WITH_DEBUG
+CFLAGS += $(CF_DEBUG)
+endif
+
+.PHONY: all bonus clean fclean re asan debug
