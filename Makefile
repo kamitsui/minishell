@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/07 11:07:14 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/07 14:00:13 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ SRCS = main.c \
 	   tokenize_lstiter_funcs.c \
 	   tokenize_markers.c \
 	   tokenize_utils.c \
-	   token_expansion.c \
 	   \
 	   parse.c \
 	   parse_argument.c \
@@ -194,11 +193,15 @@ token:
 	-Iincludes -Ilibft -Ift_printf/includes ./libft/libft.a ./ft_printf/libftprintf.a -lreadline \
 	./srcs/token/token_expansion.c \
 	-o token
-.PHONY: token
 
-token_leak:
+leak:
 	cc -Wall -Wextra -g3 -O0 ./srcs/token/tokenize.c ./srcs/token/tokenize_utils.c \
 	./srcs/token/tokenize_lstiter_funcs.c ./srcs/token/tokenize_markers.c ./srcs/token/tokenize_is_flg.c \
-	-Iincludes -Ilibft ./libft/libft.a -lreadline \
+	./srcs/environ/env_lstiter_funcs.c ./srcs/environ/env_utils.c ./srcs/environ/environ.c ./srcs/environ/ft_pwd.c \
+	./srcs/environ/ft_cd.c ./srcs/environ/ft_env.c ./srcs/environ/ft_export.c ./srcs/environ/ft_unset.c \
+	-Iincludes -Ilibft -Ift_printf/includes ./libft/libft.a ./ft_printf/libftprintf.a -lreadline \
+	./srcs/token/token_expansion.c \
 	-o token
-.PHONY: token
+.PHONY: token leak
+
+expand:

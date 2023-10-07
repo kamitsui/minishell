@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:29:22 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/05 20:41:26 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/07 14:09:24 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ void	free_ast(t_ast *node)
 void	free_envwrap(t_envwrap *env_wrapper)
 {
 	ft_lstclear(&env_wrapper->env, _env_del_content);
-	free(env_wrapper->pwd);
+	free(env_wrapper->cwd);
 	free(env_wrapper);
 }

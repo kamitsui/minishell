@@ -6,15 +6,15 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/03 14:58:40 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/07 13:53:28 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZE_H
 # define TOKENIZE_H
 
-//# include <readline/history.h>// compile error by kamitsui
-//# include <readline/readline.h>// compile error by kamitsui
+//# include <readline/history.h>// disable by kamitsui (compile error : unknown type name 'FILE')
+//# include <readline/readline.h>// disable by kamitsui (compile error : unknown type name 'FILE')
 // # include <stdbool.h>
 // # include <stdlib.h>
 # include "libft.h"
@@ -69,8 +69,5 @@ void	tkn_mark_quote_to_concatinate(t_list *cmdlst, size_t *concat_id);
 // size_t	tkn_mark_normal_words_to_concatinate(t_list *cmdlist, size_t concat_id);
 size_t	tkn_mark_operators_to_concatinate(t_list *crnt, size_t concat_id);
 size_t	tkn_mark_to_concat_for_flg(t_list *cmdlst, size_t idx, t_flg *to_concat);
-
-//* expansion
-int		tkn_expansion_handler(t_list *cmdlst, t_envwrap *env_wrap);
 
 #endif

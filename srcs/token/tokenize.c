@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/28 22:57:20 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/07 13:42:16 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char	**tkn_controller(char const *raw_cmds)//! has to add to tokenize.h to use o
 	head = tkn_concater(head);
 
 	//! expansion start here
-//	tkn_expansion_handler(head, NULL);// リークあり　9/28 kamitsui
+	// tkn_expansion_handler(head, NULL);
 
 	//! concat normal word, double quote and single quote	
 	t_flg	flag1[] = {unclassified, doube_quote, single_quote, end};
@@ -141,6 +141,7 @@ char	**tkn_controller(char const *raw_cmds)//! has to add to tokenize.h to use o
 	return (token_cmds);
 }
 
+// disable by kamitsui ( for use srcs/main.c )
 //int main()
 //{
 //    char *line = NULL;

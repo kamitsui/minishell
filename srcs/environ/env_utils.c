@@ -6,13 +6,13 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:33:31 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/28 20:34:27 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/07 13:16:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
 
-char	*env_get_value(t_list *env_head, char *key)
+char	*env_get_value_by_key(t_list *env_head, char *key)
 {
 	t_list	*crnt;
 	t_env	*env;
@@ -23,7 +23,8 @@ char	*env_get_value(t_list *env_head, char *key)
 		env = crnt->content;
 		if (ft_strcmp(env->key, key) == 0)
 		{
-			return (env->val);
+			// return (env->val);//! ft_strdupに変更
+			return (ft_strdup(env->val));
 		}
 		crnt = crnt->next;
 	}
@@ -32,29 +33,38 @@ char	*env_get_value(t_list *env_head, char *key)
 
 t_env	*env_create_node_from_char(char *key_or_full, char *val_or_null)
 {
-//	char	*key;// unused variable
-//	char	*value;// unused variable
-	char	*loc_of_eq;
+//	char	*key;// disable by kamitsui ( compile error : unused variable )
+//	char	*value;// disable by kamitsui ( compile error : unused variable )
+	int		idx_of_equal;
 	t_env	*node;
-//	size_t	i;// unused variable
+//	size_t	i;// disable by kamitsui ( compile error : unused variable )
 
 	node = ft_calloc(1, sizeof(t_env));
 	if (!node)
 		return (NULL);
 	if (val_or_null == NULL)
 	{
-		loc_of_eq = ft_strchr(key_or_full, '=');
-		if (!loc_of_eq)
-			return (NULL);
-		node->key = ft_strndup(key_or_full, loc_of_eq - key_or_full);
-		node->val = ft_strdup(loc_of_eq + 1);
+		idx_of_equal = ft_strchr(key_or_full, '=') - key_or_full;
+		//todo error handle
+		node->key = ft_substr(key_or_full, 0, idx_of_equal);
+		node->val = ft_strdup(&key_or_full[idx_of_equal + 1]);
 	}
 	else
 	{
 		node->key = ft_strdup(key_or_full);
 		node->val = ft_strdup(val_or_null);
+		// printf("[%s][%s]\n", node->key, node->val);
 		if (!node->key || !node->val)
 			return (NULL);
 	}
 	return (node);
+}
+
+void	env_delete_t_envwrap(t_envwrap *env_wrap)
+{
+	ft_lstiter(env_wrap->env, _env_del_content);
+	free(env_wrap->cwd);
+	env_wrap->cwd = NULL;
+	free(env_wrap);
+	env_wrap = NULL;
 }

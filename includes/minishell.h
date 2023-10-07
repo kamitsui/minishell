@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/07 10:30:52 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/07 14:07:28 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	execute_script_file(char *file, char *env[]);
  * @brief readlineで得た文字列をトークン分けする関数
  */
 char	**tkn_controller(char const *raw_cmds);
+
+t_envwrap	*create_env_list(char **environ);
 
 #endif
 

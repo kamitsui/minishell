@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/28 20:33:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/07 14:01:41 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_envwrap	*create_env_list(char **environ)
 	t_list		*env_head;
 	t_envwrap	*env_wrapper;
 	t_env		*env_node;
-//	char		**one_env_line;// unused variable
+	// char		**one_env_line;
 	size_t		i;
 
 	env_head = ft_lstnew(NULL);
@@ -37,17 +37,44 @@ t_envwrap	*create_env_list(char **environ)
 	//todo below env_wrapper creat to be curved out.
 	env_wrapper->env = env_head;
 	env_wrapper->exit_code = EXIT_SUCCESS;
-	env_wrapper->pwd = env_get_char_pwd(env_wrapper);
+	env_wrapper->cwd = ft_getcwd(env_wrapper);
 	return (env_wrapper);
 }
 
 
 
 //! *env_headはdummy node
+int	env_cd_checker(void)
+{
+	extern char	**environ;
+//	t_list		*env_head;// disable by kamitsui ( compile error : unused variable )
+	t_envwrap	*env_wrapper;
+
+	env_wrapper = create_env_list(environ);
+	if (env_wrapper == NULL)
+		return (EXIT_FAILURE);
+	printf("***cwd***\n");//!
+	ft_pwd(env_wrapper);
+	printf(">> mkdir sample_dir\n");
+	system("mkdir sample_dir");
+	system("ls");
+	printf(">> cd  sample_dir\n");
+	ft_cd("sample_dir", env_wrapper);
+	ft_pwd(env_wrapper);
+	printf(">> rm  -rf ../sample_dir\n");
+	system("rm -rf ../sample_dir");
+	ft_pwd(env_wrapper);
+	ft_cd("..", env_wrapper);// abort here !!
+	ft_pwd(env_wrapper);
+	ft_cd("-", env_wrapper);// ?? Not required
+	ft_pwd(env_wrapper);
+	exit(0);
+}
+
 int	env_controller(void)
 {
 	extern char	**environ;
-//	t_list		*env_head;// unused variable
+	// t_list		*env_head;
 	t_envwrap	*env_wrapper;
 
 	env_wrapper = create_env_list(environ);
@@ -65,20 +92,23 @@ int	env_controller(void)
 	// ft_export(env_wrapper, NULL, NULL);
 	// printf("\n***after export with no arg ****\n");
 	// ft_env(env_wrapper);
-	printf("***pwd***\n");
+	printf("***cwd***\n");//!
 	ft_pwd(env_wrapper);
-	ft_cd("/Users/masaru/42", env_wrapper);
-	printf("***pwd***\n");
+	// ft_cd("/Users/masaru/42", env_wrapper);
+	ft_cd(NULL, env_wrapper);
+	printf("***cwd***\n");//!
 	ft_pwd(env_wrapper);
 	ft_env(env_wrapper);
 	ft_lstclear(&env_wrapper->env, _env_del_content);
-	free(env_wrapper->pwd);
+	free(env_wrapper->cwd);
 	free(env_wrapper);
 	return (EXIT_SUCCESS);
 }
 
-// int	main(void)
-// {
-// 	env_controller();
-// 	system("leaks -q env");
-// }
+// disable by kamitsui ( for use srcs/main.c )
+//int	main(void)
+//{
+//	// env_controller();
+//	env_cd_checker();
+//	system("leaks -q env");
+//}

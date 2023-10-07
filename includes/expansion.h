@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.h                                            :+:      :+:    :+:   */
+/*   expansion.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 13:47:28 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/01 14:25:00 by mogawa           ###   ########.fr       */
+/*   Created: 2023/10/03 13:55:42 by mogawa            #+#    #+#             */
+/*   Updated: 2023/10/03 13:56:02 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_CD_H
-# define FT_CD_H
-
-# include <unistd.h>
-# include "environ.h"
-
-# define SYSCALL_FAILED (-1)
-# define SYSCALL_SUCCESS (0)
-
-void	ft_cd(char *path, t_envwrap *env_wrap);
+#ifndef EXPANSION_H
+# define EXPANSION_H
 
 #endif
