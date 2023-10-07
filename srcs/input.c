@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/03 15:19:30 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/06 21:57:12 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
  *
  * @return status 終了ステータス
  */
-static int	lets_go_shell(char *line, char **env)
+static int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 {
 	int		status;
 	char	**tokens;
@@ -45,12 +45,10 @@ static int	lets_go_shell(char *line, char **env)
 	debug_token(tokens);// debug
 	ast = parse(tokens);
 	debug_ast(ast);// debug
-	status = -1;
-	status = traverse_ast(ast, env, status);
-	free(line);
-	free_tokens(tokens);
+	status = traverse_ast(ast, env_wrapper);
+//	free(line);// move to input func 10/6
+	free_two_darray(tokens);
 	free_ast(ast);
-	system("leaks minishell");
 	return (status);
 }
 
@@ -64,27 +62,25 @@ static int	lets_go_shell(char *line, char **env)
  * @return status 終了ステータスを返す。
  * @note シグナルハンドル未実装
  */
-int	input(char **line, char **env)
+int	input(t_envwrap *env_wrapper)
 {
-	int	i;
-	int	status;
+	int		status;
+	char	*line;
 
-	i = 0;
 	while (1)
 	{
-		line[i] = readline(PROMPT);
-		if (line[i] == NULL)
-			error_code(ERR_READLINE);
-		if (ft_strcmp(line[i], "exit") == 0)
+		line = readline(PROMPT);
+		if (line == NULL)
+			handle_error(ERR_READLINE);
+		if (ft_strcmp(line, "exit") == 0)
 		{
-			free(line[i]);
+			free(line);
 			break ;
 		}
-		add_history(line[i]);
+		add_history(line);
 		// if (^Dがきたら)  .....
 		// if (lineの最後の文字がエスケープ文字'\'だったら）.....
-		status = lets_go_shell(line[i], env);
-		i++;
+		status = lets_go_shell(line, env_wrapper);
 	}
 	//	erro handle (^D が２回続いて入力された場合)
 	return (status);

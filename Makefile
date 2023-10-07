@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/03 16:07:48 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/07 11:07:14 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ SRCS = main.c \
 	   execute_command.c \
 	   get_arguments.c \
 	   wait_process.c \
-	   \
+	   execute_script_file.c \
 	   execute_pipeline.c \
 	   set_cmd_stack.c \
 	   \
@@ -65,6 +65,7 @@ SRCS = main.c \
 	   environ.c \
 	   env_utils.c \
 	   env_lstiter_funcs.c \
+	   convert_env_list_to_two_darray.c \
 	   \
 	   ft_cd.c \
 	   ft_env.c \
@@ -79,7 +80,8 @@ SRCS = main.c \
 	   \
 	   debug.c \
 	   debug_ast.c \
-	   open_log.c
+	   open_log.c \
+	   debug_leaks.c
 #	   signal.c \要確認 include/signal.hがあるとkamitsui環境ではコンパイルできない。
 
 SRCS_B =

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/04 22:17:19 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/07 10:30:52 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
  */
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# include "environ.h"
 
 /**
  * @brief 文字列操作用のバッファサイズ
@@ -37,7 +39,10 @@
 /**
  * @brief mainからで使う関数
  */
-int		input(char **line, char **env);
+int	input(t_envwrap *env_wrapper);
+
+// 未完成
+int	execute_script_file(char *file, char *env[]);
 
 /**
  * @brief readlineで得た文字列をトークン分けする関数

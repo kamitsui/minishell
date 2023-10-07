@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:04:36 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/04 21:50:47 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:29:54 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@
 
 //デバッグ用
 #include "debug.h"
+
+void	enable_debug(int flag)
+{
+	g_flag_debug = flag;
+	if (g_flag_debug == DEBUG_ON)
+		g_fd_log = open_log("debug.log", O_TRUNC);
+}
 
 /**
  * @brief 文字列をデバッグ出力
@@ -44,15 +51,6 @@ void	debug_token(char **tokens)
 {
 	int		i;
 
-//	ft_dprintf(g_fd_log, "\n\x1B[100m\x1B[37m");
-//	ft_dprintf(g_fd_log, "---- char *tokens[] ----\n");
-//	i = 0;
-//	while (tokens[i] != NULL)
-//	{
-//		ft_dprintf(g_fd_log, "tokens[%d] %p [%s]\n", i, tokens[i], tokens[i]);
-//		i++;
-//	}
-//	ft_dprintf(g_fd_log, "\x1B[0m\n\n");
 	ft_dprintf(g_fd_log, "%s---- char *tokens[] ----\n", DEBUG_COLOR);
 	i = 0;
 	while (tokens[i] != NULL)

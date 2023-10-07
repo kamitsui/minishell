@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 10:39:39 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/05 20:27:34 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/07 10:38:04 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int	execute_pipeline(t_ast **commands, size_t num_commands, t_envwrap *env_wrapp
 		free(cmdstack.commands[i].args);
 		i++;
 	}
-	exit (wait_process(pid, cmdstack.num_commands));
+	return (wait_process(pid, cmdstack.num_commands));
 }
 // how to test this function
 // |

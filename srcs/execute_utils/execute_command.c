@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/05 17:04:47 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/06 22:16:14 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	execute_command(t_ast *command_node, t_envwrap *env_wrapper)
 		child_process(command);
 	free(command.args);// これだけでは不十分
 	free_two_darray(command.env);
+	debug_leaks("execute_command");// debug
 //	system("leaks a.out");// NG リークあり
 	return (wait_process(pid, 1));
 }

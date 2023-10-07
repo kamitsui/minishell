@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:06:24 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/04 21:51:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/06 22:14:26 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ enum    e_flag_debug
 
 #define DEBUG_COLOR "\n\x1B[100m\x1B[37m"
 
+void	enable_debug(int flag);
+
 int	open_log(const char *file_name, int oflag);
 
 /**
@@ -57,5 +59,7 @@ void	debug_ast(t_ast *ast);
  * @brief execute関数内で実行するコマンドの要素をデバッグ出力
  */
 void	debug_command(t_command *command);
+
+void	debug_leaks(char *call_by_func);
 
 #endif
