@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:39:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/24 21:49:54 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:35:43 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@
  *
  * @return 走査結果を終了ステータスとして次のノードに渡す
  */
-int	handle_operator(t_ast *operator_node, char **env, int status)
+int	handle_operator(t_ast *operator_node, t_envwrap *env_wrapper)
 {
 	if (operator_node->type != NODE_OPERATOR)
-		return (status);
+		return (env_wrapper->exit_code);
 	if (ft_strcmp(operator_node->value, "|") == 0)
-		status = handle_pipe_command(operator_node, env, status);
+		env_wrapper->exit_code = handle_pipe_command(operator_node, env_wrapper);
 	else if (ft_strcmp(operator_node->value, "&") == 0)
 	{
 		// Implement background execution logic
@@ -44,5 +44,5 @@ int	handle_operator(t_ast *operator_node, char **env, int status)
 		// Handle other operators if needed
 		// ...
 	}
-	return (status);
+	return (env_wrapper->exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 20:41:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 17:27:30 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/07 10:35:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 #include "minishell.h"
 #include "error_minishell.h"
 #include "ft_printf.h"
+
+//デバッグ用
+#include "debug.h"
+#include <fcntl.h>
+int	g_fd_log;
+int	g_flag_debug;
 
 /**
  * @brief minishellの入口　環境変数のデータをinput関数へ渡して、
@@ -32,13 +38,37 @@
  */
 int	main(int argc, char *argv[], char *env[])
 {
-	char	*line[100];
+	int			status;
+	t_envwrap	*env_wrapper;
 
-	if (argc != 1)
-		error_code(ERR_ARG);
-	input(line, env);
-	(void)argv[argc];
-	(void)env[0];
-	system("leaks minishell");
-	return (0);
+	enable_debug(DEBUG_ON);// debug on:DEBUG_ON  off:DEBUG_OFF
+	env_wrapper = create_env_list(env);
+	if (argc == 1)
+		status = input(env_wrapper);
+	else
+		status = execute_script_file(argv[1], env);// 未着手
+	(void)argc;
+	free_envwrap(env_wrapper);
+	debug_leaks("main");// debug  リークあり10/6 kamitsui
+	return (status);
 }
+// デバッグログの保存ファイルを開く & デバッグON
+//
+////----- debug code ----------
+//	g_flag_debug = DEBUG_ON;// debug
+////	g_flag_debug = DEBUG_OFF;// debug
+//	if (g_flag_debug == DEBUG_ON)// debug
+//		g_fd_log = open_log("debug.log", O_TRUNC);// debug
+////---------------------------
+
+// スタックの状態出力
+////----- debug code ----------
+//	if (g_flag_debug == DEBUG_ON)
+//		debug_data(g_fd_log, &stack_a, &stack_b);
+////---------------------------
+
+// fd_logのリソースを解放
+////----- debug code ----------
+//	if (g_flag_debug == DEBUG_ON)
+//		close (g_fd_log);
+////---------------------------

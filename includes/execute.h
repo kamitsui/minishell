@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:59:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 19:01:49 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/05 20:23:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # include "parse.h"
 # include "free_minishell.h"
+# include "environ.h"
 
 /**
  * @brief コマンドのスタック構造のバッファサイズ
@@ -76,7 +77,7 @@ void	exec_file(char *file, char *arguments[], char *env[]);
 /**
  * @brief <simple-command>のノードを実行する関数
  */
-int		execute_command(t_ast *command_node, char **env, int status);
+int		execute_command(t_ast *command_node, t_envwrap *env_wrapper);
 
 /**
  * @brief <simple-command>のノードからコマンド引数を取り出す関数
@@ -91,17 +92,17 @@ int		wait_process(pid_t pid, int num_commands);
 /**
  * @brief <pipe-command>を実行する関数
  */
-int		execute_pipeline(t_ast **commands, size_t num_commands, char **env);
+int	execute_pipeline(t_ast **commands, size_t num_commands, t_envwrap *env_wrapper);
 
 /**
  * @brief <pipe-command>の全ての子ノードからデータを取り出す関数。
  */
-void	set_cmd_stack(t_cmdstack *cmdstack,
-			t_ast **commands, size_t num_commands);
+void	set_cmd_stack(t_cmdstack *cmdstack, t_ast **commands,
+		size_t num_commands, t_envwrap *env_wrapper);
 
 /**
  * @brief <pipe-command>の全てのコマンド構造体へ環境変数をセットする関数
  */
-void	set_environ(t_cmdstack *cmdstack, char **env);
+void	set_environ(t_cmdstack *cmdstack, t_envwrap *env_wrapper);
 
 #endif

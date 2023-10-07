@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 16:42:34 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/07 14:07:28 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "environ.h"
+
 /**
- * @brief readlineで読み取った文字列の格納先のバッファサイズ
+ * @brief 文字列操作用のバッファサイズ
+ * @detail
+ * 使用関数：convert_env_wrap
  */
-# define BUFFER_SIZE	100
+# define BUFF_SIZE	1024
 
 /**
  * @brief プロンプトに出力する文字列
@@ -35,9 +39,20 @@
 /**
  * @brief mainからで使う関数
  */
-int		input(char **line, char **env);
+int	input(t_envwrap *env_wrapper);
+
+// 未完成
+int	execute_script_file(char *file, char *env[]);
+
+/**
+ * @brief readlineで得た文字列をトークン分けする関数
+ */
+char	**tkn_controller(char const *raw_cmds);
+
+t_envwrap	*create_env_list(char **environ);
 
 #endif
+
 //
 ///**
 // * @brief 環境変数のハッシュテーブル（未実装）

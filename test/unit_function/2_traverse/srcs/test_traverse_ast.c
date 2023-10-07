@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 16:22:09 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/05 20:45:43 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,20 @@ int main(int argc, char *argv[], char *env[])
 	set_test_ast(ast);
 	debug_ast(ast);
 
+	t_envwrap	*env_wrapper;
+	env_wrapper = create_env_list(env);
+	if (env_wrapper == NULL)
+		return (EXIT_FAILURE);
+
 	// Traverse the AST and execute the commands (implementation not shown here)
-	int	status;
-	status = - 1;
-	status = traverse_ast(ast, env, status);
-	ft_printf("return(%d)\n", status);
+	ft_printf("env_wrapper exit_code [%d]\n", env_wrapper->exit_code);
+	env_wrapper->exit_code = traverse_ast(ast, env_wrapper);
+	ft_printf("return(%d)\n", env_wrapper->exit_code);
 
 	// Free the allocated memory for the AST
 	//free_ast(ast);
+
+	free_envwrap(env_wrapper);
 
 	(void)argv[argc];
 	return 0;

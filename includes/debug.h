@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:06:24 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/20 22:28:01 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/06 22:14:26 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@
 # include "tokenize.h"
 # include "parse.h"
 # include "execute.h"
+# include <fcntl.h>
+
+int	g_fd_log;// disable when review
+int	g_flag_debug;// disable when review
+
+enum    e_flag_debug
+{
+	DEBUG_OFF,
+	DEBUG_ON
+};
+
+#define DEBUG_COLOR "\n\x1B[100m\x1B[37m"
+
+void	enable_debug(int flag);
+
+int	open_log(const char *file_name, int oflag);
 
 /**
  * @brief 文字列をデバッグ出力
@@ -31,6 +47,8 @@ void	debug_input(char *line);
  */
 void	debug_token(char **tokens);
 
+void	debug_env_two_darray(char **tokens);
+
 /**
  * @brief parse関数で生成されたASTをデバッグ出力\n
  * 全てのノードと子ノードをデバッグ出力する
@@ -41,5 +59,7 @@ void	debug_ast(t_ast *ast);
  * @brief execute関数内で実行するコマンドの要素をデバッグ出力
  */
 void	debug_command(t_command *command);
+
+void	debug_leaks(char *call_by_func);
 
 #endif

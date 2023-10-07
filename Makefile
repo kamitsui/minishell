@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/03 13:52:15 by mogawa           ###   ########.fr        #
+#    Updated: 2023/10/07 14:00:13 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,22 @@ LIB_PRINTF_DIR = ./ft_printf
 LIB_PRINTF_INC_DIR = $(LIB_PRINTF_DIR)/includes
 LIB_PRINTF = $(LIB_PRINTF_DIR)/libftprintf.a
 
+# Readline
+LIB_RL = libreadline.dylib
+LIB_RL_DYLIB_PATH = $(shell find /opt/homebrew -name $(LIB_RL) 2>/dev/null)
+LIB_RL_LIB_DIR = $(dir $(LIB_RL_DYLIB_PATH))
+LIB_RL_INC_DIR = $(subst /lib/,/include,$(LIB_RL_LIB_DIR))
+
 # Sources files
 SRCS = main.c \
 	   \
 	   input.c \
+	   \
+	   tokenize.c \
+	   tokenize_is_flg.c \
+	   tokenize_lstiter_funcs.c \
+	   tokenize_markers.c \
+	   tokenize_utils.c \
 	   \
 	   parse.c \
 	   parse_argument.c \
@@ -44,31 +56,45 @@ SRCS = main.c \
 	   execute_command.c \
 	   get_arguments.c \
 	   wait_process.c \
-	   \
+	   execute_script_file.c \
 	   execute_pipeline.c \
 	   set_cmd_stack.c \
 	   \
 	   substr_env.c \
+	   environ.c \
+	   env_utils.c \
+	   env_lstiter_funcs.c \
+	   convert_env_list_to_two_darray.c \
+	   \
+	   ft_cd.c \
+	   ft_env.c \
+	   ft_export.c \
+	   ft_pwd.c \
+	   ft_unset.c \
+	   ft_echo.c \
+	   \
 	   \
 	   error.c \
 	   free_utils.c \
 	   \
 	   debug.c \
-	   debug_ast.c
-#	   tokenize.c \
-#	   get_next_token.c \
-#	   get_token_type.c \
-#	   count_tokens.c \
+	   debug_ast.c \
+	   open_log.c \
+	   debug_leaks.c
+#	   signal.c \要確認 include/signal.hがあるとkamitsui環境ではコンパイルできない。
 
 SRCS_B =
 
 # Directories
 SRCS_DIR = ./srcs \
+		   ./srcs/token \
 		   ./srcs/tokenize_utils \
 		   ./srcs/parse_utils \
 		   ./srcs/execute_utils \
 		   ./srcs/traverse_utils \
+		   ./srcs/environ \
 		   ./srcs/environ_utils \
+		   ./srcs/signal \
 		   ./srcs/debug
 SRCS_B_DIR = ./srcs_bonus
 OBJS_DIR = ./objs
@@ -83,10 +109,10 @@ vpath %.c $(SRCS_DIR) $(SRCS_B_DIR)
 # Compile
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
-LFLAGS		=	-lreadline
-DEP_CF		=	-MMD -MP -MF $(@:$(OBJS_DIR)/%.o=$(DEPS_DIR)/%.d)
-LD_CF = -g -fsanitize=address
-INC_CF = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(LIB_PRINTF_INC_DIR)
+CF_LINK		=	-lreadline
+CF_DEP		=	-MMD -MP -MF $(@:$(OBJS_DIR)/%.o=$(DEPS_DIR)/%.d)
+CF_DYLIB = -L$(LIB_RL_LIB_DIR)
+CF_INC = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(LIB_PRINTF_INC_DIR) -I$(LIB_RL_INC_DIR)
 
 # Command
 RM			=	rm -f
@@ -101,8 +127,7 @@ DEPS_B = $(addprefix $(DEPS_B_DIR)/, $(SRCS_B:.c=.d))
 $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(DEPS_DIR)
-	$(CC) $(CFLAGS) $(INC_CF) $(DEP_CF) -c $< -o $@
-#	$(CC) $(CFLAGS) $(INC_CF) $(DEP_CF) $(LD_CF) -c $< -o $@
+	$(CC) $(CFLAGS) $(CF_INC) $(CF_DEP) -c $< -o $@
 
 $(DEPS_DIR)/%.d: %.c
 	@mkdir -p $(DEPS_DIR)
@@ -112,15 +137,14 @@ all: $(NAME)
 
 # Mandatory Target
 $(NAME): $(LIBFT) $(LIB_PRINTF) $(OBJS)
-	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(LIB_PRINTF) -o $(NAME)
-#	$(CC) $(CFLAGS) $(LFLAGS) $(LD_CF) $(OBJS) $(LIB_PRINTF) -o $(NAME)
+	$(CC) $(CFLAGS) $(CF_LINK) $(CF_DYLIB) $(OBJS) $(LIB_PRINTF) -o $(NAME)
 
 # Bonus Target
 bonus: $(NAME)_bonus
 
 # Bonus Target
 $(NAME)_bonus: $(LIBFT) $(LIB_PRINTF) $(OBJS_B)
-	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS_B) $(LIBFT_PRINTF) -o $(NAME)_bonus
+	$(CC) $(CFLAGS) $(CF_LINK) $(CF_DYLIB) $(OBJS_B) $(LIBFT_PRINTF) -o $(NAME)_bonus
 
 # Library target
 $(LIB_PRINTF): $(LIBFT)

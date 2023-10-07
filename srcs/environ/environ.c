@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/04 14:29:57 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/07 14:01:41 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_envwrap	*create_env_list(char **environ)
 int	env_cd_checker(void)
 {
 	extern char	**environ;
-	t_list		*env_head;
+//	t_list		*env_head;// disable by kamitsui ( compile error : unused variable )
 	t_envwrap	*env_wrapper;
 
 	env_wrapper = create_env_list(environ);
@@ -105,9 +105,10 @@ int	env_controller(void)
 	return (EXIT_SUCCESS);
 }
 
-int	main(void)
-{
-	// env_controller();
-	env_cd_checker();
-	system("leaks -q env");
-}
+// disable by kamitsui ( for use srcs/main.c )
+//int	main(void)
+//{
+//	// env_controller();
+//	env_cd_checker();
+//	system("leaks -q env");
+//}

@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/03 13:51:57 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/07 13:42:16 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,14 @@ char	**tkn_controller(char const *raw_cmds)//! has to add to tokenize.h to use o
 	}
 	tkn_del_one_on_flg(&head, space);
 	ft_lstiter(head, _tkn_print_list);
-	// token_cmds = tkn_create_dptrchar_from_list(head);
-	// if (token_cmds == NULL)
-	// {
-	// 	printf("error in token_cmds\n");
-	// 	ft_lstclear(&head, _tkn_delete_list);
-	// 	system("leaks -q token");
-	// 	return (NULL);
-	// }
+	token_cmds = tkn_create_dptrchar_from_list(head);
+	if (token_cmds == NULL)
+	{
+		printf("error in token_cmds\n");
+		ft_lstclear(&head, _tkn_delete_list);
+		system("leaks -q token");
+		return (NULL);
+	}
 	ft_lstclear(&head, _tkn_delete_list);
 	// //* print char ** to be deleted
 	// int j = 0;
@@ -138,27 +138,28 @@ char	**tkn_controller(char const *raw_cmds)//! has to add to tokenize.h to use o
 	// }
 	// free (token_cmds);
 	// system("leaks -q token");
-	return (EXIT_SUCCESS);
+	return (token_cmds);
 }
 
-int main()
-{
-    char *line = NULL;
-
-    while (1)
-    {
-        line = readline("> ");
-        if (line == NULL || ft_strlen(line) == 0)
-        {
-            free(line);
-            break;
-        }
-		// create_token_list(line);
-		tkn_controller(line);
-        // printf("line is '%s'\n", line);
-        add_history(line);
-        free(line);
-    }
-    printf("exit\n");
-    return 0;
-}
+// disable by kamitsui ( for use srcs/main.c )
+//int main()
+//{
+//    char *line = NULL;
+//
+//    while (1)
+//    {
+//        line = readline("> ");
+//        if (line == NULL || ft_strlen(line) == 0)
+//        {
+//            free(line);
+//            break;
+//        }
+//		// create_token_list(line);
+//		tkn_controller(line);
+//        // printf("line is '%s'\n", line);
+//        add_history(line);
+//        free(line);
+//    }
+//    printf("exit\n");
+//    return 0;
+//}

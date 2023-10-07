@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/21 14:06:40 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/06 21:57:12 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@
 #include "traverse.h"
 #include "error_minishell.h"
 #include "libft.h"
-#include "debug.h"
 #include <readline/readline.h>
+#include <readline/history.h>
+
+// for debug
+#include "debug.h"
 
 /**
  * @brief lets_go_shell関数では、<command-line>の文字列に対して、
@@ -31,22 +34,20 @@
  *
  * @return status 終了ステータス
  */
-static int	lets_go_shell(char *line, char **env)
+static int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 {
 	int		status;
 	char	**tokens;
 	t_ast	*ast;
 
 	debug_input(line);// debug
-	//tokens = tokenize(line);// 本番のトークナイズ
-	tokens = ft_split(line, ' ');// 仮のトークナイズ
+	tokens = tkn_controller(line);
 	debug_token(tokens);// debug
 	ast = parse(tokens);
 	debug_ast(ast);// debug
-	status = -1;
-	status = traverse_ast(ast, env, status);
-	free(line);
-	free_tokens(tokens);
+	status = traverse_ast(ast, env_wrapper);
+//	free(line);// move to input func 10/6
+	free_two_darray(tokens);
 	free_ast(ast);
 	return (status);
 }
@@ -61,26 +62,25 @@ static int	lets_go_shell(char *line, char **env)
  * @return status 終了ステータスを返す。
  * @note シグナルハンドル未実装
  */
-int	input(char **line, char **env)
+int	input(t_envwrap *env_wrapper)
 {
-	int	i;
-	int	status;
+	int		status;
+	char	*line;
 
-	i = 0;
 	while (1)
 	{
-		line[i] = readline(PROMPT);
-		if (line[i] == NULL)
-			error_code(ERR_READLINE);
-		if (ft_strcmp(line[i], "exit") == 0)
+		line = readline(PROMPT);
+		if (line == NULL)
+			handle_error(ERR_READLINE);
+		if (ft_strcmp(line, "exit") == 0)
 		{
-			free(line[i]);
+			free(line);
 			break ;
 		}
+		add_history(line);
 		// if (^Dがきたら)  .....
 		// if (lineの最後の文字がエスケープ文字'\'だったら）.....
-		status = lets_go_shell(line[i], env);
-		i++;
+		status = lets_go_shell(line, env_wrapper);
 	}
 	//	erro handle (^D が２回続いて入力された場合)
 	return (status);

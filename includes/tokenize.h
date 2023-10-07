@@ -6,15 +6,15 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/03 13:54:51 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/07 13:53:28 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZE_H
 # define TOKENIZE_H
 
-# include <readline/history.h>
-# include <readline/readline.h>
+//# include <readline/history.h>// disable by kamitsui (compile error : unknown type name 'FILE')
+//# include <readline/readline.h>// disable by kamitsui (compile error : unknown type name 'FILE')
 // # include <stdbool.h>
 // # include <stdlib.h>
 # include "libft.h"

@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:33:31 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/04 14:29:06 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/07 13:16:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ char	*env_get_value_by_key(t_list *env_head, char *key)
 
 t_env	*env_create_node_from_char(char *key_or_full, char *val_or_null)
 {
-	char	*key;
-	char	*value;
+//	char	*key;// disable by kamitsui ( compile error : unused variable )
+//	char	*value;// disable by kamitsui ( compile error : unused variable )
 	int		idx_of_equal;
 	t_env	*node;
-	size_t	i;
+//	size_t	i;// disable by kamitsui ( compile error : unused variable )
 
 	node = ft_calloc(1, sizeof(t_env));
 	if (!node)

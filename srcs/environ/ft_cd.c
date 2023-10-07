@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:31:11 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/03 21:51:52 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/07 13:59:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,6 @@ void	ft_cd(char *path, t_envwrap *env_wrap)
 	}
 	// if (sys_rtn	== SYSCALL_FAILED)
 		//todo error handle
+	(void)sys_rtn;// Add by kamitsui (compile error : use of undeclared identifier 'sys_rtn')
+//	return (sys_rtn);// 返すべき？？　未確認　by kamitsui
 }

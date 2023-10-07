@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/24 21:15:36 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:42:15 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,13 @@
  * @brief <simple-command>のノードに対しての処理
  *
  * @param node 処理対象のノード
- * @param env 環境変数
- * @param status 再帰前のノードから渡される終了ステータス
+ * @param env_wrapper構造体  (env、exit_code, pwd)
  *
- * @return status ノードの処理結果を終了ステータスとして返す
+ * @return ノードの処理結果を終了ステータスとして返す
  */
-int	handle_command(t_ast *node, char **env, int status)
+int	handle_command(t_ast *node, t_envwrap *env_wrapper)
 {
 	if (node->flag & BIT_OPERATOR)
-		return (status);
-	status = execute_command(node, env, status);
-	return (status);
+		return (env_wrapper->exit_code);
+	return (execute_command(node, env_wrapper));
 }

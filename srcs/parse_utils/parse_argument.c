@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:23:52 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 15:36:37 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:38:30 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
  */
 #include "parse.h"
 #include "libft.h"
-#include <string.h>// for strcmp()
 
 /**
  * @brief \<argument>のノードを作ってトークンを一つ進める関数。
@@ -30,7 +29,7 @@
 t_ast	*parse_argument(char ***tokens)
 {
 	// 要改良！ is_argument
-	if (**tokens && strcmp(**tokens, "&&") != 0)
+	if (**tokens && ft_strcmp(**tokens, "&&") != 0)
 	{
 		(*tokens)++;
 		return (create_node(NODE_ARGUMENT, *(*tokens - 1)));

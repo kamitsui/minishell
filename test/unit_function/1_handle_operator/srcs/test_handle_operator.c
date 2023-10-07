@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:39:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/19 19:17:35 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/05 21:10:42 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,18 @@ int	main(int argc, char *argv[], char *env[])
 		pipe_node->children[2]->children[0] = create_node(NODE_ARGUMENT, "Make");
 
 	debug_ast(pipe_node);
+
+	t_envwrap	*env_wrapper;
+	env_wrapper = create_env_list(env);
+	if (env_wrapper == NULL)
+		return (EXIT_FAILURE);
+
 	int	status;
-	status = 0;
-	status = handle_operator(pipe_node, env, status);
-	ft_printf("(%d) ... exit status from handle_operator(pipe_node, env)\n", status);
+	status = handle_operator(pipe_node, env_wrapper);
+	ft_printf("(%d) ... exit status from handle_operator(pipe_node, env)\n",
+				status);
 	free_ast(pipe_node);
+	free_envwrap(env_wrapper);
 	(void)argv[argc];
 	return (status);
 }
