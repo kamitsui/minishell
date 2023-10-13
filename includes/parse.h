@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/21 18:59:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/13 03:58:32 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define PARSE_H
 
 # include <stdlib.h>
+# include <stdbool.h>
 
 /**
  * @brief 未完
@@ -33,25 +34,41 @@
  * @brief 未完
  */
 # define BIT_OPERATOR	0x00000004
+# define BIT_IO_RED		0x00000008
+# define BIT_FILE		0x00000010
 
-//# define BIT_CONNECT	0x00000008
-//# define BIT_CON_AND	0x00000002
-//# define BIT_CON_OR		0x00000004
+# define BIT_AND_LIST	0x00000100
+# define BIT_OR_LIST	0x00000200
+# define BIT_IN_RED		0x00001000
+# define BIT_HERE_DOC	0x00002000
+# define BIT_OUT_RED	0x00004000
+# define BIT_APPEND		0x00008000
+
 //# define BIT_SIMPLE_COM	0x00000010
 //# define BIT_PIPE_COM	0x00000020
 //# define BIT_PIPE_OUT	0x00000040
 //# define BIT_PIPE_IN	0x00000080
 //# define BIT_IO_RED		0x00000100
-//# define BIT_IN_RED		0x00000200
-//# define BIT_HERE_DOC	0x00000400
-//# define BIT_OUT_RED	0x00000800
-//# define BIT_APPEND		0x00001000
-//# define BIT_FILE		0x00002000
 //# define BIT_DQUOTED	0x00010000
 //# define BIT_SQUOTED	0x00020000
 //# define BIT_VAR		0x00040000
 //# define BIT_			0x00080000
 //# define BIT_END		0x00100000
+
+/**
+ * @brief オペレータータイプの種類数
+ * @details 関数 is_operator で使用
+ */
+# define NUM_OPERATOR		2
+
+/**
+ * @brief ノードの値（文字列）に対して、種類を調べる関数の数
+ * @details get_node_flag関数 で使用 ( create_node.c 内のヘルパー関数 )
+ */
+
+# define NUM_NOT_STRING		4
+
+# define NUM_REDIRECTION	4
 
 /**
  * @brief ノードタイプを特定するための列挙型変数を定義
@@ -66,7 +83,9 @@ enum	e_NodeType
 	NODE_COMMAND = 0,
 	NODE_ARGUMENT = 1,
 	NODE_OPERATOR = 2,
-	NODE_END = 3
+	NODE_REDIRECTION = 3,
+	NODE_FILE = 4,
+	NODE_END = 5
 };
 
 /**
@@ -98,6 +117,8 @@ struct s_ast
  */
 t_ast	*parse(char **tokens);
 
+t_ast	*parse_operator(char ***tokens);
+
 /**
  * @brief \<argument>のノードを作ってトークンを一つ進める関数。
  */
@@ -118,6 +139,9 @@ t_ast	*parse_simple_command(char ***tokens);
  */
 t_ast	*parse_pipe_command(char ***tokens, size_t num_pipe);
 
+t_ast	*parse_io_redirection(char ***tokens);
+t_ast	*parse_file(char ***tokens);
+
 /**
  * @brief 新規ノードを作る関数
  * ノードのタイプと値を引数で受け取り、ノードの構造体にセットする
@@ -127,6 +151,27 @@ t_ast	*create_node(enum e_NodeType type, char *value);
 /**
  * @brief <pipe-command>のパイプの数を数える関数
  */
-size_t	is_pipe_command(char **tokens);
+size_t	count_pipe_command(char **tokens);
+
+/**
+ * @brief 現在のトークンがオペレーターかどうか調べる関数
+ */
+bool	is_operator(const char *token);
+bool	is_and_list(const char *token);
+bool	is_or_list(const char *token);
+bool	is_pipe(const char *token);
+bool	is_redirection(const char *token);
+bool	is_in_red(const char *token);
+bool	is_here_doc(const char *token);
+bool	is_out_red(const char *token);
+bool	is_out_append(const char *token);
+bool	is_string(const char *token);
+
+/**
+ * @brief ノードの値（文字列）に対して、種類を調べる関数を関数ポインタとして宣言
+ * @details 使用関数\n
+ * get_node_flag関数 で使用 ( create_node.c 内のヘルパー関数 )
+ */
+typedef bool	(*t_is_type_node)(const char *);
 
 #endif

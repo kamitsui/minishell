@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/09/21 14:43:34 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/13 14:27:17 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,27 @@ SRCS = parse.c \
 	   parse_simple_command.c \
 	   parse_argument.c \
 	   create_node.c \
-	   is_pipe_command.c \
 	   parse_pipe_command.c \
+	   count_pipe_command.c \
+	   parse_io_redirection.c \
+	   parse_file.c \
+	   parse_operator.c \
+	   is_operator.c \
+	   is_and_list.c \
+	   is_or_list.c \
+	   is_redirection.c \
+	   is_pipe.c \
+	   is_string.c \
+	   \
+	   env_lstiter_funcs.c \
 	   \
 	   free_utils.c \
 	   \
 	   debug.c \
 	   debug_ast.c \
+	   open_log.c \
+	   \
+	   error.c \
 	   \
 	   test_parse_pipe_command.c
 
@@ -33,6 +47,8 @@ SRCS = parse.c \
 PROJ_DIR = ../../..
 SRCS_DIR = $(PROJ_DIR)/srcs \
 		   $(PROJ_DIR)/srcs/parse_utils \
+		   $(PROJ_DIR)/srcs/parse_utils/is_node_type \
+		   $(PROJ_DIR)/srcs/environ \
 		   $(PROJ_DIR)/srcs/debug \
 		   srcs
 OBJS_DIR = objs

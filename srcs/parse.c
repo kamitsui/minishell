@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/28 18:44:36 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/13 04:52:02 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,14 @@
  * 抽象構文木ASTのデータ構造に置き換える関数
  */
 
-#include "libft.h"
-#include "minishell.h"
-#include "parse.h"
-#include <stdlib.h>
-#include <string.h>
+#include	"libft.h"
+#include	"minishell.h"
+#include	"parse.h"
+#include	<stdlib.h>
+#include	<string.h>
 
-/**
- * @brief オペレーターのノードを作ってトークンを一つ進める関数。
- * （tokensのアドレスを引数で持たせているため、ポインタの移動が可能）
- *
- * @param tokens トークンのアドレス
- *
- * @return 生成されたオペレーターのノードを返す。
- */
-t_ast	*parse_operator(char ***tokens)
-{
-	if (**tokens && ft_strcmp(**tokens, "&&") == 0)
-	{
-		(*tokens)++;
-		return (create_node(NODE_OPERATOR, *(*tokens - 1)));
-	}
-	return (NULL);
-}
+#include	"ft_printf.h"// debug
+#include	"debug.h"// debug
 
 /**
  * @brief \<command-line>から各トークンを抽出して、
@@ -56,9 +41,10 @@ t_ast	*parse(char **tokens)
 	ast = create_node(NODE_OPERATOR, PROGRAM_NAME);
 	while (*tokens)
 	{
-		if (ft_strcmp(*tokens, "&&") == 0)
+		if (is_operator(*tokens) == true)
 		{
 			operator_node = parse_operator(&tokens);
+//			debug_parse("parse", operator_node);// debug
 			if (operator_node)
 			{
 				ast->num_children++;

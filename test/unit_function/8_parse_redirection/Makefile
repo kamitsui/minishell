@@ -6,13 +6,12 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/10/13 14:53:20 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/13 04:36:06 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Target name
-NAME1 = simple_command
-NAME2 = pipe_command
+NAME = a.out
 
 # Sources files
 SRCS = parse.c \
@@ -22,61 +21,49 @@ SRCS = parse.c \
 	   parse_argument.c \
 	   create_node.c \
 	   count_pipe_command.c \
+	   \
 	   parse_operator.c \
 	   parse_io_redirection.c \
 	   parse_file.c \
-	   \
 	   is_operator.c \
 	   is_and_list.c \
 	   is_or_list.c \
-	   is_pipe.c \
-	   is_redirection.c \
 	   is_string.c \
+	   is_redirection.c \
+	   is_pipe.c \
 	   \
-	   execute_command.c \
-	   get_arguments.c \
-	   wait_process.c \
-	   exec_file.c \
-	   \
-	   execute_pipeline.c \
-	   set_cmd_stack.c \
-	   \
-	   traverse_ast.c \
-	   handle_command.c \
-	   handle_argument.c \
-	   handle_pipe_command.c \
-	   handle_operator.c \
-	   \
+	   env_lstiter_funcs.c \
 	   environ.c \
 	   env_utils.c \
-	   env_lstiter_funcs.c \
-	   convert_env_list_to_two_darray.c \
-	   \
 	   ft_cd.c \
 	   ft_env.c \
-	   ft_pwd.c \
 	   ft_export.c \
+	   ft_pwd.c \
+	   \
+	   tokenize.c \
+	   tokenize_lstiter_funcs.c \
+	   tokenize_utils.c \
+	   tokenize_markers.c \
+	   tokenize_is_flg.c \
 	   \
 	   free_utils.c \
-	   error.c \
-	   substr_env.c \
 	   \
 	   debug.c \
 	   debug_ast.c \
-	   debug_leaks.c \
-	   open_log.c
-SRCS_TEST1 = test_simple_command.c
-SRCS_TEST2 = test_pipe_command.c
+	   open_log.c \
+	   debug_parse.c \
+	   \
+	   error.c \
+	   \
+	   test_parse_redirection.c
 
 # Directories
 PROJ_DIR = ../../..
 SRCS_DIR = $(PROJ_DIR)/srcs \
+SRCS_DIR = $(PROJ_DIR)/srcs/token \
 		   $(PROJ_DIR)/srcs/parse_utils \
 		   $(PROJ_DIR)/srcs/parse_utils/is_node_type \
-		   $(PROJ_DIR)/srcs/traverse_utils \
-		   $(PROJ_DIR)/srcs/execute_utils \
 		   $(PROJ_DIR)/srcs/environ \
-		   $(PROJ_DIR)/srcs/environ_utils \
 		   $(PROJ_DIR)/srcs/debug \
 		   srcs
 OBJS_DIR = objs
@@ -104,10 +91,8 @@ LD_CF = -g -fsanitize=address
 INC_CF = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(LIB_PRINTF_INC_DIR)
 
 # Object files and dependency files
-OBJS1 = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o)) $(addprefix $(OBJS_DIR)/, $(SRCS_TEST1:.c=.o))
-DEPS1 = $(addprefix $(DEPS_DIR)/, $(SRCS:.c=.d)) $(addprefix $(OBJS_DIR)/, $(SRCS_TEST1:.c=.d))
-OBJS2 = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o)) $(addprefix $(OBJS_DIR)/, $(SRCS_TEST2:.c=.o))
-DEPS2 = $(addprefix $(DEPS_DIR)/, $(SRCS:.c=.d)) $(addprefix $(OBJS_DIR)/, $(SRCS_TEST2:.c=.d))
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
+DEPS = $(addprefix $(DEPS_DIR)/, $(SRCS:.c=.d))
 
 # Rules for building object files
 $(OBJS_DIR)/%.o: %.c
@@ -120,18 +105,13 @@ $(DEPS_DIR)/%.d: %.c
 	@mkdir -p $(DEPS_DIR)
 
 # Default target
-all: $(NAME1) $(NAME2)
+all: $(NAME)
 
-# <simple-command> Target
-$(NAME1): $(LIBFT) $(LIB_PRINTF) $(OBJS1)
-	$(CC) $(CFLAGS) $(LFLAGS) $(LD_CF) $(OBJS1) $(LIB_PRINTF) -o $(NAME1)
-#	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS1) $(LIB_PRINTF) -o $(NAME1)
+# Mandatory Target
+$(NAME): $(LIBFT) $(LIB_PRINTF) $(OBJS)
+	$(CC) $(CFLAGS) $(LFLAGS) $(LD_CF) $(OBJS) $(LIB_PRINTF) -o $(NAME)
+#	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(LIB_PRINTF) -o $(NAME)
 
-# <pipe-command> Target
-$(NAME2): $(LIBFT) $(LIB_PRINTF) $(OBJS2)
-	$(CC) $(CFLAGS) $(LFLAGS) $(LD_CF) $(OBJS2) $(LIB_PRINTF) -o $(NAME2)
-#	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS2) $(LIB_PRINTF) -o $(NAME2)
-#
 # Library target
 $(LIB_PRINTF): $(LIBFT)
 	make -C $(LIB_PRINTF_DIR)
@@ -144,7 +124,7 @@ clean:
 
 # Clean and remove target
 fclean: clean
-	rm -f $(NAME1) $(NAME2)
+	rm -f $(NAME)
 
 # Rebuild target
 re: fclean all

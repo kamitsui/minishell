@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_parse.c                                       :+:      :+:    :+:   */
+/*   is_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 06:28:10 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/10 23:20:25 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/13 06:33:47 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "debug.h"
-#include "parse.h"
+#include "meta_char.h"
+#include "libft.h"
+#include <stdbool.h>
 
-int main() {
-	static char *tokens[7] = {
-			"ls", "-l", "file.txt", "&&", "cat", "file.txt", NULL};
-
-	debug_token(tokens);
-	t_ast* ast = parse(tokens);
-	debug_ast(ast);
-
-    // Traverse the AST and execute the commands (implementation not shown here)
-
-    // Free the allocated memory for the AST
-    free_ast(ast);
-
-    return 0;
+bool	is_pipe(const char *token)
+{
+	if (token == NULL)
+		return (false);
+	return (ft_strcmp(token, META_PIPE) == 0);
 }

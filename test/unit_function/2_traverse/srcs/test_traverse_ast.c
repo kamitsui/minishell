@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/05 20:45:43 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/13 06:15:56 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "parse.h"
 #include "traverse.h"
 #include "ft_printf.h"
+#include "minishell.h"
 #include <stdlib.h>
 
 void	set_test_ast(t_ast *ast)

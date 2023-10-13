@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:39:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/05 21:10:42 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/13 06:07:25 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "traverse.h"
 #include "debug.h"
 #include "ft_printf.h"
+#include "minishell.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>

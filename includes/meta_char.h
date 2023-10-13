@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_parse.c                                       :+:      :+:    :+:   */
+/*   meta_char.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 06:28:10 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/10 20:31:32 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/12 23:06:23 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "debug.h"
-#include "parse.h"
+#ifndef META_CHAR_H
+# define META_CHAR_H
 
-int main() {
-	static char *tokens[7] = {
-			"ls", "-l", "file.txt", "&&", "cat", "file.txt", NULL};
+# define META_AND_LIST	"&&"
+# define META_OR_LIST	"||"
+# define META_IN		">"
+# define META_HERE		">>"
+# define META_OUT		"<"
+# define META_APPEND	"<<"
+# define META_PIPE		"|"
 
-	debug_token(tokens);
-	t_ast* ast = parse(tokens);
-	debug_ast(ast);
-
-    // Traverse the AST and execute the commands (implementation not shown here)
-
-    // Free the allocated memory for the AST
-    free_ast(ast);
-
-    return 0;
-}
+#endif

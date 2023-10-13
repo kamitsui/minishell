@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/07 14:00:13 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/13 04:02:15 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,12 +39,22 @@ SRCS = main.c \
 	   tokenize_utils.c \
 	   \
 	   parse.c \
+	   parse_operator.c \
 	   parse_argument.c \
 	   parse_command.c \
 	   parse_simple_command.c \
 	   parse_pipe_command.c \
 	   create_node.c \
-	   is_pipe_command.c \
+	   count_pipe_command.c \
+	   parse_io_redirection.c \
+	   parse_file.c \
+	   \
+	   is_operator.c \
+	   is_and_list.c \
+	   is_or_list.c \
+	   is_pipe.c \
+	   is_redirection.c \
+	   is_string.c \
 	   \
 	   traverse_ast.c \
 	   handle_command.c \
@@ -79,7 +89,9 @@ SRCS = main.c \
 	   \
 	   debug.c \
 	   debug_ast.c \
+	   debug_parse.c \
 	   open_log.c \
+	   debug_status.c \
 	   debug_leaks.c
 #	   signal.c \要確認 include/signal.hがあるとkamitsui環境ではコンパイルできない。
 
@@ -90,6 +102,7 @@ SRCS_DIR = ./srcs \
 		   ./srcs/token \
 		   ./srcs/tokenize_utils \
 		   ./srcs/parse_utils \
+		   ./srcs/parse_utils/is_node_type \
 		   ./srcs/execute_utils \
 		   ./srcs/traverse_utils \
 		   ./srcs/environ \

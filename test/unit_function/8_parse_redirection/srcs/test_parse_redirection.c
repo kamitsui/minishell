@@ -1,57 +1,63 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_pipe_command.c                                :+:      :+:    :+:   */
+/*   test_parse_redirection.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 12:10:07 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 14:54:11 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/13 15:06:01 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "debug.h"
-#include "parse.h"
-#include "traverse.h"
-#include "execute.h"
-#include "minishell.h"
 #include "environ.h"
 #include "error_minishell.h"
+#include "parse.h"
+#include "traverse.h"
+#include "minishell.h"
 #include "ft_printf.h"
-#include "libft.h"
 
 #include "debug.h"
 int	g_flag_debug;
 int	g_fd_log;
 
 // test 2 patern
-#define LINE1 "ls -l -a | cat -e | grep Make"
-#define LINE2 "hoge1 hoge2 hoge3"
+#define LINE1 ">in"
+#define LINE2 ">>here_doc"
+#define LINE3 "<out"
+#define LINE4 "<<append"
+#define LINE5 "ls -l && non_exist || echo 42"
+#define NUM		5
 
 int main(int argc, char *argv[], char *env[])
 {
 	t_envwrap	*env_wrapper;
-	int		status;
-	char	*line1 = LINE1;// exit status 0
-	char	**tokens1 = ft_split(line1, ' ');
+	t_ast	*ast;
+	char	**tokens;
+	static char	*lines[NUM] = {LINE1, LINE2, LINE3, LINE4, LINE5};
+	int	i;
 
+	g_flag_debug = DEBUG_ON;
+	g_fd_log = open_log("debug.log", O_TRUNC);
 	env_wrapper = create_env_list(env);
 	if (env_wrapper == NULL)
 		handle_error(ERR_CREATE_ENV);
-	t_ast* ast1 = parse(tokens1);
 
-	// Traverse the AST and execute the commands (implementation not shown here)
-	ft_printf("> minishell %s\n", LINE1);
-	debug_token(tokens1);
-	debug_ast(ast1);
-	status = traverse_ast(ast1, env_wrapper);
-	ft_printf("return(%d) ... from traverse(ast, env_wrapper)\n\n", status);
+	i = 0;
+	while (i < NUM)
+	{
+		tokens = tkn_controller(lines[i]);
+		debug_token(tokens);
+		ast = parse(tokens);
+		debug_ast(ast);
+		free_two_darray(tokens);
+		i++;
+	}
+//	env_wrapper->exit_code = execute_command(ast->children[0], env_wrapper);
 
-	// Free the allocated memory for the AST
-	free_ast(ast1);
-
-	free_two_darray(tokens1);
 	free_envwrap(env_wrapper);
+
+	system("leaks a.out");
 	(void)argv[argc];
-	return (status);
+	return (0);
 }

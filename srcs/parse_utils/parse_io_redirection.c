@@ -1,47 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_simple_command.c                             :+:      :+:    :+:   */
+/*   parse_io_redirection.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 04:59:00 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/12 23:59:01 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/13 06:00:36 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * @file parse_simple_command.c
- * @brief <simple-command>のノードを作る関数
- */
 #include "libft.h"
 #include "parse.h"
 #include <stdlib.h>
 
-/**
- * @brief <simple-command>のノードを作る関数
- *
- * @param tokens トークンのアドレス
- *
- * @return 生成されたコマンドのノードを返す
- */
-t_ast	*parse_simple_command(char ***tokens)
+#include "debug.h"// debug
+
+t_ast	*parse_io_redirection(char ***tokens)
 {
 	t_ast	*node;
-	t_ast	*arg_node;
-	bool	is_argument;
+	t_ast	*file_node;
+	bool	is_file_token;
 
-	node = create_node(NODE_COMMAND, **tokens);
+	node = create_node(NODE_REDIRECTION, **tokens);
 	(*tokens)++;
-	is_argument = is_string(**tokens);
-	while (is_argument == true)
+	is_file_token = is_string(**tokens);
+	if (is_file_token == true)
 	{
-		arg_node = parse_argument(tokens);
+		file_node = parse_file(tokens);
 		node->num_children++;
 		node->children = (t_ast **)realloc(node->children,// use ft_realloc
 				node->num_children * sizeof(t_ast *));
-		node->children[node->num_children - 1] = arg_node;
-		is_argument = is_string(**tokens);
+		node->children[node->num_children - 1] = file_node;
+		is_file_token = is_string(**tokens);
 	}
 	return (node);
 }
+// debug code
+//	debug_parse("parse_io_redirection", node);// debug
+//		debug_parse("parse_file after", file_node);// debug
