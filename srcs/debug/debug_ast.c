@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:41:58 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/10 21:17:26 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/13 17:50:30 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@
 static void	display_head(t_ast *node)
 {
 	ft_dprintf(g_fd_log, "\tTop Node [%s]\t", node->value);
-	ft_dprintf(g_fd_log, "Type COMMAND[%d] ARGUMENT[%d] OPERATOR[%d]\n",
+	ft_dprintf(g_fd_log, "Type COMMAND[%d] ARGUMENT[%d] OPERATOR[%d] ",
 		NODE_COMMAND, NODE_ARGUMENT, NODE_OPERATOR);
+	ft_dprintf(g_fd_log, "REDIRECTION[%d] FILE[%d]",
+		NODE_REDIRECTION, NODE_FILE);
 }
 
 /**
