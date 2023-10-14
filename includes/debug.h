@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:06:24 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 04:48:01 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/13 22:24:25 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	debug_env_two_darray(char **tokens);
 void	debug_ast(t_ast *ast);
 
 void	debug_parse(const char *call_by, t_ast *node);
+void	debug_flag(t_ast *node);
 
 /**
  * @brief execute関数内で実行するコマンドの要素をデバッグ出力
@@ -63,6 +64,6 @@ void	debug_parse(const char *call_by, t_ast *node);
 void	debug_command(t_command *command);
 
 void	debug_status(const char *call_by, int status);
-void	debug_leaks(char *call_by_func);
+void	debug_leaks(char *call_by_func, char *target);
 
 #endif

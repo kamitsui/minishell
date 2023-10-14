@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_or_list.c                                       :+:      :+:    :+:   */
+/*   is_variable.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 22:30:23 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/14 01:50:39 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/14 02:53:02 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/14 15:53:21 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta_minishell.h"
 #include "libft.h"
-#include <stdbool.h>
+#include <stdlib.h>
 
-bool	is_or_list(const char *token)
+bool	is_variable(const char *token)
 {
-	if (token == NULL)
-		return (false);
-	return (ft_strcmp(token, META_OR_LIST) == 0);
+	return (ft_strchr(token, META_VAR_CHR) != NULL);
 }

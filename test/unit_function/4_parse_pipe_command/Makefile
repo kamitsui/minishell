@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/10/13 14:27:17 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/14 00:36:41 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS = parse.c \
 	   \
 	   debug.c \
 	   debug_ast.c \
+	   debug_flag.c \
 	   open_log.c \
 	   \
 	   error.c \

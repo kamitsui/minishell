@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:54:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 01:48:59 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/14 17:46:35 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,18 @@ static int	get_node_flag(enum e_NodeType type, char *value)
 {
 	int	flag;
 	int	i;
-	static t_is_type_node	f_is_type_node[NUM_OPERATOR + NUM_REDIRECTION] = {
-			is_and_list, is_or_list,
-			is_in_red, is_here_doc, is_out_red, is_out_append};
-	static int		match_flag[NUM_OPERATOR + NUM_REDIRECTION] = {
-			BIT_AND_LIST, BIT_OR_LIST,
-			BIT_IN_RED, BIT_HERE_DOC, BIT_OUT_RED, BIT_APPEND};
+	static t_is_type_node	f_is_type_node[NUM_GET_FLAG] = {
+			is_and_list, is_or_list, is_pipe,
+			is_in_red, is_here_doc, is_out_red, is_out_append,
+			is_expansion, is_squote, is_dquote, is_variable};
+	static int		match_flag[NUM_GET_FLAG] = {
+			BIT_AND_LIST, BIT_OR_LIST, BIT_PIPE,
+			BIT_IN_RED, BIT_HERE_DOC, BIT_OUT_RED, BIT_APPEND,
+			BIT_EXPANSION, BIT_SQUOTE, BIT_DQUOTE, BIT_VAR};
 
 	flag = 0x1 << type;
 	i = 0;
-	while (i < NUM_OPERATOR + NUM_REDIRECTION)
+	while (i < NUM_GET_FLAG)
 	{
 		if (f_is_type_node[i](value) == true)
 			flag |= match_flag[i];
@@ -66,3 +68,8 @@ t_ast	*create_node(enum e_NodeType type, char *value)
 	node->num_children = 0;
 	return (node);
 }
+// debug code
+//
+//#include "debug.h"// debug
+//#include "ft_printf.h"// debug
+//	debug_parse("create_node", node);// debug

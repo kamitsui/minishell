@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   meta_char.h                                        :+:      :+:    :+:   */
+/*   is_squote.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 20:31:32 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/12 23:06:23 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/14 01:29:16 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/14 02:35:01 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef META_CHAR_H
-# define META_CHAR_H
+#include "meta_minishell.h"
+#include "parse.h"
+#include <stdlib.h>
 
-# define META_AND_LIST	"&&"
-# define META_OR_LIST	"||"
-# define META_IN		">"
-# define META_HERE		">>"
-# define META_OUT		"<"
-# define META_APPEND	"<<"
-# define META_PIPE		"|"
+bool	is_squote(const char *token)
+{
+	size_t	count;
+	size_t	i;
 
-#endif
+	count = 0;
+	i = 0;
+	while (token[i] != '\0')
+	{
+		if (token[i] == META_SQUOT_CHR)
+			count++;
+		i++;
+	}
+	if (count == 0)
+		return (false);
+	return (count % 2 == 0);
+}

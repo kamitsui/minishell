@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 17:57:41 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/14 16:00:20 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,43 +22,46 @@ int	g_flag_debug;
 int	g_fd_log;
 
 // test 2 patern
-#define LINE1 ">in"
-#define LINE2 ">>here_doc"
-#define LINE3 "<out"
-#define LINE4 "<<append"
+#define LINE1 "> in"
+#define LINE2 ">> here_doc"
+#define LINE3 "< out"
+#define LINE4 "<< append"
 #define LINE5 "ls -l && < non_exist ls_zzz || ls -l | cat -e | grep Make"
-#define NUM		5
+#define LINE6 "$(VAR) \"42tokyo\" && \"ec\"\"ho\" \'hello_world\'"
+#define NUM		6
 
-int main(int argc, char *argv[], char *env[])
+//int main(int argc, char *argv[], char *env[])
+int main(int argc, char *argv[])
 {
-	t_envwrap	*env_wrapper;
 	t_ast	*ast;
 	char	**tokens;
-	static char	*lines[NUM] = {LINE1, LINE2, LINE3, LINE4, LINE5};
+//	static char	*lines[NUM] = {LINE1, LINE2, LINE3, LINE4, LINE5, LINE6};
+	char	*line;
 	int	i;
+	char	*file_log;
 
+	if (argc == 1)
+		ft_perror_exit("error of num argment\n");
+	file_log = argv[1];
 	g_flag_debug = DEBUG_ON;
-	g_fd_log = open_log("debug.log", O_TRUNC);
-	env_wrapper = create_env_list(env);
-	if (env_wrapper == NULL)
-		handle_error(ERR_CREATE_ENV);
+	g_fd_log = open_log(file_log, O_TRUNC);
 
-	i = 0;
-	while (i < NUM)
+	i = 2;
+	line = ft_strdup(argv[i]);
+	i++;
+	while (argv[i] != NULL)
 	{
-		//tokens = tkn_controller(ft_strdup(lines[i]));// why does not derimiter?
-		tokens = ft_split(lines[i], ' ');
-		debug_token(tokens);
-		ast = parse(tokens);
-		debug_ast(ast);
-		free_two_darray(tokens);
+		line = ft_strjoin_free(line, " ");
+		line = ft_strjoin_free(line, argv[i]);
 		i++;
 	}
-//	env_wrapper->exit_code = execute_command(ast->children[0], env_wrapper);
+	//tokens = tkn_controller(line);// why does not derimiter? in test5,6
+	tokens = ft_split(line, ' ');
+	debug_token(tokens);
+	ast = parse(tokens);
+	debug_ast(ast);
+	free_two_darray(tokens);
 
-	free_envwrap(env_wrapper);
-
-	system("leaks a.out");
-	(void)argv[argc];
+	debug_leaks("main", "a.out");
 	return (0);
 }

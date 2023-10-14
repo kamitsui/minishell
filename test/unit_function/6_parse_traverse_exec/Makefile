@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/10/13 14:53:20 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/14 01:14:59 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ SRCS = parse.c \
 	   debug.c \
 	   debug_ast.c \
 	   debug_leaks.c \
+	   debug_flag.c \
 	   open_log.c
 SRCS_TEST1 = test_simple_command.c
 SRCS_TEST2 = test_pipe_command.c

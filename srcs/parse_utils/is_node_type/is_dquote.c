@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_or_list.c                                       :+:      :+:    :+:   */
+/*   is_dquote.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 22:30:23 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/14 01:50:39 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/14 01:51:32 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/14 02:42:50 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta_minishell.h"
-#include "libft.h"
-#include <stdbool.h>
+#include "parse.h"
+#include <stdlib.h>
 
-bool	is_or_list(const char *token)
+bool	is_dquote(const char *token)
 {
-	if (token == NULL)
+	size_t	count;
+	size_t	i;
+
+	count = 0;
+	i = 0;
+	while (token[i] != '\0')
+	{
+		if (token[i] == META_DQUOT_CHR)
+			count++;
+		i++;
+	}
+	if (count == 0)
 		return (false);
-	return (ft_strcmp(token, META_OR_LIST) == 0);
+	return (count % 2 == 0);
 }

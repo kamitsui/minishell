@@ -6,11 +6,11 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 22:29:30 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 06:35:04 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/14 01:50:23 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "meta_char.h"
+#include "meta_minishell.h"
 #include "libft.h"
 #include <stdbool.h>
 

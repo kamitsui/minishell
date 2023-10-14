@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 17:48:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/14 15:56:41 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,27 @@ int	g_flag_debug;
 int	g_fd_log;
 
 // test 2 patern
-#define LINE1 ">in"
-#define LINE2 ">>here_doc"
-#define LINE3 "<out"
-#define LINE4 "<<append"
+#define LINE1 "> in"
+#define LINE2 ">> here_doc"
+#define LINE3 "< out"
+#define LINE4 "<< append"
 #define LINE5 "ls -l && < non_exist || echo 42"
-#define NUM				1
-#define NUM_IS_UTILS	6
+#define LINE6 "\"42tokyo\""
+#define LINE7 "'single_quote'"
+#define LINE8 "$VAR"
+#define NUM				8
+#define NUM_IS_UTILS	10
 
 void	test_is_node_type(char **token)
 {
 	int	i;
 	static t_is_type_node	f_is_utils[NUM_IS_UTILS] = {
 			is_string, is_operator, is_and_list, is_or_list, is_pipe,
-			is_redirection};
+			is_redirection, is_expansion, is_squote, is_dquote, is_variable};
 	static char *str_type[NUM_IS_UTILS] = {
 			"is_string", "is_operator", "is_and_list", "is_or_list", "is_pipe",
-			"is_redirection"};
+			"is_redirection", "is_expansion",
+			"is_squote", "is_dquote", "is_variable"};
 
 	ft_dprintf(g_fd_log, ">> test_is_node_type\n");
 	while (*token != NULL)
@@ -58,8 +62,7 @@ int main(void)
 {
 	t_ast	*ast;
 	char	**tokens;
-	static char	*lines[NUM] = {LINE5};
-//	static char	*lines[NUM] = {LINE1, LINE2, LINE3, LINE4, LINE5};
+	static char	*lines[NUM] = {LINE1, LINE2, LINE3, LINE4, LINE5, LINE6, LINE7, LINE8};
 	int	i;
 
 	g_flag_debug = DEBUG_ON;

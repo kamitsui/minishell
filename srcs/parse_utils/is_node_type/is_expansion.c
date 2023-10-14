@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_or_list.c                                       :+:      :+:    :+:   */
+/*   is_expansion.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 22:30:23 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/14 01:50:39 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/14 02:41:31 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/14 15:53:00 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "meta_minishell.h"
+#include "parse.h"
 #include "libft.h"
-#include <stdbool.h>
+#include <stdlib.h>
 
-bool	is_or_list(const char *token)
+bool	is_expansion(const char *token)
 {
+	t_is_type_node	f_type_expansion[NUM_EXPANSION] = {
+						is_squote, is_dquote, is_variable};
+	bool			result;
+	size_t			i;
+
 	if (token == NULL)
 		return (false);
-	return (ft_strcmp(token, META_OR_LIST) == 0);
+	result = false;
+	i = 0;
+	while (i < NUM_EXPANSION && result == false)
+	{
+		result = f_type_expansion[i](token);
+		i++;
+	}
+	return (result);
 }

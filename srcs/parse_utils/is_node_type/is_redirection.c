@@ -6,12 +6,12 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 23:22:26 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 06:36:01 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/14 01:51:01 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "meta_char.h"
+#include "meta_minishell.h"
 #include "libft.h"
 #include <stdbool.h>
 

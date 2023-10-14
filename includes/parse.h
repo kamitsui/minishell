@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 03:58:32 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/14 16:49:57 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,21 @@
 
 # define BIT_AND_LIST	0x00000100
 # define BIT_OR_LIST	0x00000200
+# define BIT_PIPE		0x00000400
 # define BIT_IN_RED		0x00001000
 # define BIT_HERE_DOC	0x00002000
 # define BIT_OUT_RED	0x00004000
 # define BIT_APPEND		0x00008000
+# define BIT_EXPANSION	0x00010000
+# define BIT_DQUOTE		0x00020000
+# define BIT_SQUOTE		0x00040000
+# define BIT_VAR		0x00080000
 
 //# define BIT_SIMPLE_COM	0x00000010
 //# define BIT_PIPE_COM	0x00000020
 //# define BIT_PIPE_OUT	0x00000040
 //# define BIT_PIPE_IN	0x00000080
 //# define BIT_IO_RED		0x00000100
-//# define BIT_DQUOTED	0x00010000
-//# define BIT_SQUOTED	0x00020000
-//# define BIT_VAR		0x00040000
 //# define BIT_			0x00080000
 //# define BIT_END		0x00100000
 
@@ -67,8 +69,9 @@
  */
 
 # define NUM_NOT_STRING		4
-
 # define NUM_REDIRECTION	4
+# define NUM_EXPANSION		3
+# define NUM_GET_FLAG		11
 
 /**
  * @brief ノードタイプを特定するための列挙型変数を定義
@@ -166,6 +169,10 @@ bool	is_here_doc(const char *token);
 bool	is_out_red(const char *token);
 bool	is_out_append(const char *token);
 bool	is_string(const char *token);
+bool	is_expansion(const char *token);
+bool	is_dquote(const char *token);
+bool	is_squote(const char *token);
+bool	is_variable(const char *token);
 
 /**
  * @brief ノードの値（文字列）に対して、種類を調べる関数を関数ポインタとして宣言

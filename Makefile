@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/13 04:02:15 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/14 02:01:55 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,8 @@ SRCS = main.c \
 	   is_pipe.c \
 	   is_redirection.c \
 	   is_string.c \
+	   is_squote.c \
+	   is_dquote.c \
 	   \
 	   traverse_ast.c \
 	   handle_command.c \
@@ -90,6 +92,7 @@ SRCS = main.c \
 	   debug.c \
 	   debug_ast.c \
 	   debug_parse.c \
+	   debug_flag.c \
 	   open_log.c \
 	   debug_status.c \
 	   debug_leaks.c
@@ -204,8 +207,8 @@ token:
 	./srcs/environ/env_lstiter_funcs.c ./srcs/environ/env_utils.c ./srcs/environ/environ.c ./srcs/environ/ft_pwd.c \
 	./srcs/environ/ft_cd.c ./srcs/environ/ft_env.c ./srcs/environ/ft_export.c ./srcs/environ/ft_unset.c \
 	-Iincludes -Ilibft -Ift_printf/includes ./libft/libft.a ./ft_printf/libftprintf.a -lreadline \
-	./srcs/token/token_expansion.c \
 	-o token
+#	./srcs/token/token_expansion.c \
 
 leak:
 	cc -Wall -Wextra -g3 -O0 ./srcs/token/tokenize.c ./srcs/token/tokenize_utils.c \

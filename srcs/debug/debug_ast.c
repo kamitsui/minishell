@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:41:58 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 17:50:30 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:31:20 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,35 @@ static void	display_head(t_ast *node)
 static void	display_children(t_ast *node)
 {
 	size_t	i;
+	char	*bit_str;
+	t_ast	*children;
 
 	if (node->type == NODE_ARGUMENT)
 		return ;
 	ft_dprintf(g_fd_log, "\n\n");
 	ft_dprintf(g_fd_log, "\tparent[%s]\ttype[%d]\n",
 		node->value, (int)node->type);
+	bit_str = ft_itoa_binary(node->flag);// handle_error
+	ft_dprintf(g_fd_log, "\tflag[%s]\n", bit_str);
+	free(bit_str);
+	debug_flag(node);
 	i = 0;
 	while (i < node->num_children)
 	{
+		children = node->children[i];
 		ft_dprintf(g_fd_log, "\t\tchildren[%d]\t[%s]",
-			i, node->children[i]->value);
-		ft_dprintf(g_fd_log, "\ttype\t[%d]\n", (int)node->children[i]->type);
+					i, children->value);
+		ft_dprintf(g_fd_log, "\ttype\t[%d]\n", (int)children->type);
+		if (children->flag & BIT_ARGUMENT
+			|| children->flag & BIT_FILE)
+		{
+			ft_dprintf(g_fd_log, "\n\tchildren[%d]\t[%s]",
+						i, children->value);
+			bit_str = ft_itoa_binary(children->flag);// handle_error
+			ft_dprintf(g_fd_log, "\n\tflag[%s]\n", bit_str);
+			free(bit_str);
+			debug_flag(children);
+		}
 		i++;
 	}
 	i = 0;
