@@ -27,16 +27,24 @@ chose N from the below
 * ```5``` : make the tester to link the below functions
 > `parse` / `execute_command`
 >
-> test case : \<simple-command>
-> > "ls -a -l"
+> test case1 : \<simple-command>
+> > `ls -a -l` ... return(0)
+>
+> test case2 : \<simple-command> ... command not found
+> > `hoge1 hoge2 hoge3` ... return (127)
 * ```6``` : make the tester to link the below functions
 > `parse` / `traverse_ast` / `execute_command` / `execute_pipeline`
 >
 > test case1 : \<simple-command>
-> > "ls -l -a"
+> > `ls -l -a` ... (0)
+> >
+> > `hoge1 hoge2 hoge3` ... return (127)
 >
 > test case2 : \<pipe-command>
-> > "ls -l -a | grep Make"
+> > `ls -l -a | grep Make` ... return(0)
+> >
+> > `hoge1 -a | hoge2 -b | hoge3` ... return(???)
+
 
 #### Run check
 ```make run``` : Run all test
