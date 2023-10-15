@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:45:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/07 11:03:14 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/15 13:56:26 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,17 @@ int	handle_pipe_command(t_ast *pipe_node, t_envwrap *env_wrapper)
 {
 	int	original_stdout_fd;
 	int	original_stdin_fd;
+	int	status;
 
 	original_stdin_fd = buck_up_fd(STDIN_FILENO);
 	original_stdout_fd = buck_up_fd(STDOUT_FILENO);
 	if (original_stdout_fd == -1)
 		ft_errno_exit("dup");
-	execute_pipeline(
+	status = execute_pipeline(
 			pipe_node->children, pipe_node->num_children, env_wrapper);
 	recover_fd(original_stdin_fd, STDIN_FILENO);
 	recover_fd(original_stdout_fd, STDOUT_FILENO);
-	return (env_wrapper->exit_code);
+	return (status);
 }
 //{
 //	pid_t	pid;
