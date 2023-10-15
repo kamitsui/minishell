@@ -43,7 +43,9 @@ chose N from the below
 > test case2 : \<pipe-command>
 > > `ls -l -a | grep Make` ... return(0)
 > >
-> > `hoge1 -a | hoge2 -b | hoge3` ... return(???)
+> > `hoge1 -a | hoge2 -b | hoge3` ... return(127)
+> >
+> > `hoge1 | ls -l | echo 42` ... return(0)
 
 
 #### Run check
