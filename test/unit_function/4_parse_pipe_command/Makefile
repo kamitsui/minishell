@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/10/14 00:36:41 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/14 20:55:47 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,10 @@ SRCS = parse.c \
 	   is_redirection.c \
 	   is_pipe.c \
 	   is_string.c \
+	   is_expansion.c \
+	   is_squote.c \
+	   is_dquote.c \
+	   is_variable.c \
 	   \
 	   env_lstiter_funcs.c \
 	   \

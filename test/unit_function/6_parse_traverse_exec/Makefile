@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/10/14 01:14:59 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/14 21:08:17 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,10 @@ SRCS = parse.c \
 	   is_pipe.c \
 	   is_redirection.c \
 	   is_string.c \
+	   is_expansion.c \
+	   is_squote.c \
+	   is_dquote.c \
+	   is_variable.c \
 	   \
 	   execute_command.c \
 	   get_arguments.c \
@@ -150,9 +154,17 @@ fclean: clean
 # Rebuild target
 re: fclean all
 
+run: $(NAME1) $(NAME2)
+	make run1
+	make run2
+
+run1: $(NAME1)
+	./$(NAME1)
+
+run2: $(NAME2)
+	./$(NAME2)
+
 # Enable dependency file
 -include $(DEPS)
 
-.PHONY: debug all clean fclean re
-
-#cw -Iincludes srcs/execute_utils/exec_pipe_cmd.c srcs/execute_utils/exec_file.c srcs/error.c srcs/environ_utils/substr_env.c ft_printf/libftprintf.a -g -fsanitize=address
+.PHONY: debug all clean fclean re run1 run2 run
