@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:39:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 06:07:25 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 04:08:13 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,23 @@
 #include <sys/wait.h>
 #include <string.h>
 
+#define LINE	"ls -a -l | cat -e | grep Make"
+
 int	main(int argc, char *argv[], char *env[])
 {
-	t_ast* pipe_node = create_node(NODE_OPERATOR, "|");
+	t_ast* pipe_node = create_node(NODE_PIPE_COM, LINE);
 	pipe_node->num_children = 3;
 	pipe_node->children = (t_ast**)malloc(3 * sizeof(t_ast*));
-	pipe_node->children[0] = create_node(NODE_COMMAND, "ls");
+	pipe_node->children[0] = create_node(NODE_EXECUTABLE, "ls");
 		pipe_node->children[0]->num_children = 2;
 		pipe_node->children[0]->children = (t_ast**)malloc(2 * sizeof(t_ast*));
 		pipe_node->children[0]->children[0] = create_node(NODE_ARGUMENT, "-a");
 		pipe_node->children[0]->children[1] = create_node(NODE_ARGUMENT, "-l");
-	pipe_node->children[1] = create_node(NODE_COMMAND, "cat");
+	pipe_node->children[1] = create_node(NODE_EXECUTABLE, "cat");
 		pipe_node->children[1]->num_children = 1;
 		pipe_node->children[1]->children = (t_ast**)malloc(1 * sizeof(t_ast*));
 		pipe_node->children[1]->children[0] = create_node(NODE_ARGUMENT, "-e");
-	pipe_node->children[2] = create_node(NODE_COMMAND, "grep");
+	pipe_node->children[2] = create_node(NODE_EXECUTABLE, "grep");
 		pipe_node->children[2]->num_children = 1;
 		pipe_node->children[2]->children = (t_ast**)malloc(1 * sizeof(t_ast*));
 		pipe_node->children[2]->children[0] = create_node(NODE_ARGUMENT, "Make");
@@ -57,4 +59,4 @@ int	main(int argc, char *argv[], char *env[])
 	return (status);
 }
 // tokens = { "ls", "-a", "-l", "|", "cat", "-e", "|", "grep", "Make", NULL }
-	//pipe_node->children[2] = create_node(NODE_COMMAND, "grepee");// exit status 127 (command not found)
+	//pipe_node->children[2] = create_node(NODE_EXECUTABLE, "grepee");// exit status 127 (command not found)

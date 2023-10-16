@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/10/13 06:11:01 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/17 03:45:55 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,20 @@ NAME = a.out
 SRCS = handle_operator.c \
 	   handle_pipe_command.c \
 	   \
-	   is_operator.c \
+	   buck_up_fd.c \
+	   recover_fd.c \
+	   \
+	   is_connector.c \
 	   is_and_list.c \
 	   is_or_list.c \
 	   is_pipe.c \
 	   is_redirection.c \
 	   is_string.c \
+	   is_expansion.c \
+	   is_squote.c \
+	   is_dquote.c \
+	   is_variable.c \
+	   is_end.c \
 	   \
 	   execute_pipeline.c \
 	   exec_file.c \
@@ -40,6 +48,7 @@ SRCS = handle_operator.c \
 	   \
 	   debug.c \
 	   debug_ast.c \
+	   debug_flag.c \
 	   open_log.c \
 	   \
 	   env_lstiter_funcs.c \
@@ -59,6 +68,7 @@ SRCS_DIR = $(PROJ_DIR)/srcs \
 		   $(PROJ_DIR)/srcs/parse_utils \
 		   $(PROJ_DIR)/srcs/parse_utils/is_node_type \
 		   $(PROJ_DIR)/srcs/traverse_utils \
+		   $(PROJ_DIR)/srcs/traverse_utils/fd_utils \
 		   $(PROJ_DIR)/srcs/execute_utils \
 		   $(PROJ_DIR)/srcs/environ_utils \
 		   $(PROJ_DIR)/srcs/environ \
