@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_operator.c                                  :+:      :+:    :+:   */
+/*   handle_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 03:01:02 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 03:13:13 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/15 15:03:50 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/17 04:10:28 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "traverse.h"
+#include "execute.h"
 
-int	handle_operator(t_ast *node, t_envwrap *env_wrapper)
+/**
+ * @brief <io-redirection>のノードに対しての処理
+ *
+ * @param node 処理対象のノード
+ * @param env_wrapper構造体  (env、exit_code, pwd)
+ *
+ * @return ノードの処理結果を終了ステータスとして返す
+ */
+int	handle_redirection(t_ast *node, t_envwrap *env_wrapper)
 {
-	if (node->flag & BIT_PARENTHESIS)
-	{
-		// fork して、lets_go_minishell をよぶ
+	if (node->flag & BIT_IO_REDIRECTIONS)
 		return (env_wrapper->exit_code);
-	}
-	else
-		return (env_wrapper->exit_code);
+	return (execute_command(node, env_wrapper));
 }

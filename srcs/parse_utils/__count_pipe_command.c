@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:37:54 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 15:09:03 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/16 09:31:10 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ size_t	count_pipe_command(char **tokens)
 	size_t	num_pipe;
 
 	num_pipe = 0;
-	while (is_operator(*tokens) == false && is_redirection(*tokens) == false
+	while (is_connector(*tokens) == false && is_redirection(*tokens) == false
 			&& *tokens != NULL)
 	{
 		if (is_pipe(*tokens) == true)

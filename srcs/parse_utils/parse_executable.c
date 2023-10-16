@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_io_redirection.c                             :+:      :+:    :+:   */
+/*   parse_executable.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 23:59:01 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 06:00:36 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/16 18:39:58 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/17 01:38:41 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,36 @@
 #include "parse.h"
 #include <stdlib.h>
 
-#include "debug.h"// debug
+static t_ast	*parse_argument(char ***tokens)
+{
+	if (is_string(**tokens) == true)
+	{
+		(*tokens)++;
+		return (create_node(BIT_ARGUMENT, *(*tokens - 1)));
+	}
+	return (NULL);
+}
 
-t_ast	*parse_io_redirection(char ***tokens)
+t_ast	*parse_executable(char ***tokens)
 {
 	t_ast	*node;
-	t_ast	*file_node;
-	bool	is_file_token;
+	t_ast	*arg_node;
 
-	node = create_node(NODE_REDIRECTION, **tokens);
+	node = create_node(BIT_EXECUTABLE, **tokens);
 	(*tokens)++;
-	is_file_token = is_string(**tokens);
-	if (is_file_token == true)
+	while (is_connector(**tokens) == false && is_end(**tokens) == false
+			&& is_pipe(**tokens) == false)
 	{
-		file_node = parse_file(tokens);
+		if (is_redirection(**tokens) == true)
+		{
+			(*tokens) += 2;//　エラーケースは未想定　例えば”>>"のみ
+			continue ;
+		}
+		arg_node = parse_argument(tokens);
 		node->num_children++;
 		node->children = (t_ast **)realloc(node->children,// use ft_realloc
 				node->num_children * sizeof(t_ast *));
-		node->children[node->num_children - 1] = file_node;
-		is_file_token = is_string(**tokens);
+		node->children[node->num_children - 1] = arg_node;
 	}
 	return (node);
 }
-// debug code
-//	debug_parse("parse_io_redirection", node);// debug
-//		debug_parse("parse_file after", file_node);// debug

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:45:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/15 13:56:26 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:14:09 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,8 @@
 #include "libft.h"
 #include "execute.h"
 #include "error_minishell.h"
+#include "traverse.h"
 #include <sys/wait.h>
-
-static int	buck_up_fd(int fd)
-{
-	int	prev_fd;
-
-	prev_fd = dup(fd);
-	if (prev_fd == -1)
-		ft_errno_exit("dup");
-	return (prev_fd);
-}
-
-static void	recover_fd(int prev_fd, int recover_fd)
-{
-	dup2(prev_fd, recover_fd);
-	if (dup2(prev_fd, recover_fd) == -1)
-		ft_errno_exit("dup2");
-	close(prev_fd);
-}
 
 /**
  *

@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_operator.c                                  :+:      :+:    :+:   */
+/*   is_end.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 03:01:02 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 03:13:13 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/16 17:12:44 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/17 01:40:20 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
-#include "traverse.h"
+#include <stdbool.h>
+#include <stdlib.h>
 
-int	handle_operator(t_ast *node, t_envwrap *env_wrapper)
+bool	is_end(const char *token)
 {
-	if (node->flag & BIT_PARENTHESIS)
-	{
-		// fork して、lets_go_minishell をよぶ
-		return (env_wrapper->exit_code);
-	}
-	else
-		return (env_wrapper->exit_code);
+	return (token == NULL);
 }

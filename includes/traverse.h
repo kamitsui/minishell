@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 10:08:45 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/05 18:39:39 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 02:58:28 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@
 
 # include "environ.h"
 
+# define NUM_HANDLE	2
+
 /**
  * @brief 抽象構文木のノード全てを走査して、順番に実行していく再帰関数
  */
 int	traverse_ast(t_ast *node, t_envwrap *env_wrapper);
 
+int	handle_connector(t_ast *node, t_envwrap *env_wrapper);
 /**
  * @brief \<simple-command>のノードに対しての処理
  */
@@ -40,6 +43,9 @@ int	handle_argument(t_ast *node, t_envwrap *env_wrapper);
  */
 int	handle_operator(t_ast *operator_node, t_envwrap *env_wrapper);
 
+int	handle_redirection(t_ast *node, t_envwrap *env_wrapper);
+int	handle_file(t_ast *node, t_envwrap *env_wrapper);
+
 /**
  * @brief ノードタイプが　”｜”　パイプに対しての処理
  */
@@ -50,5 +56,8 @@ int	handle_pipe_command(t_ast *pipe_node, t_envwrap *env_wrapper);
  * （ステートマシンの制御手法）
  */
 typedef int	(*t_handle_node)(t_ast *node, t_envwrap *env_wrapper);
+
+int		buck_up_fd(int fd);
+void	recover_fd(int prev_fd, int recover_fd);
 
 #endif

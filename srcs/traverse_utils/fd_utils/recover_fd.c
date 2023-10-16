@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_operator.c                                  :+:      :+:    :+:   */
+/*   recover_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 03:01:02 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 03:13:13 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/15 16:12:38 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/15 16:12:47 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
-#include "traverse.h"
+#include "error_minishell.h"
+#include <unistd.h>
 
-int	handle_operator(t_ast *node, t_envwrap *env_wrapper)
+void	recover_fd(int prev_fd, int recover_fd)
 {
-	if (node->flag & BIT_PARENTHESIS)
-	{
-		// fork して、lets_go_minishell をよぶ
-		return (env_wrapper->exit_code);
-	}
-	else
-		return (env_wrapper->exit_code);
+	dup2(prev_fd, recover_fd);
+	if (dup2(prev_fd, recover_fd) == -1)
+		ft_errno_exit("dup2");
+	close(prev_fd);
 }

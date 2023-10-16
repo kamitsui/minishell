@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:41:58 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/14 19:31:20 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 03:59:50 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@
  */
 static void	display_head(t_ast *node)
 {
-	ft_dprintf(g_fd_log, "\tTop Node [%s]\t", node->value);
-	ft_dprintf(g_fd_log, "Type COMMAND[%d] ARGUMENT[%d] OPERATOR[%d] ",
-		NODE_COMMAND, NODE_ARGUMENT, NODE_OPERATOR);
-	ft_dprintf(g_fd_log, "REDIRECTION[%d] FILE[%d]",
-		NODE_REDIRECTION, NODE_FILE);
+	ft_dprintf(g_fd_log, "\tTop Node [%s]\n", node->value);
+	ft_dprintf(g_fd_log, "\t\ttype\tOPERATOR[%d]\tCOMMAND[%d]\tCONNECTOR[%d]\t\t",
+		NODE_OPERATOR, NODE_COMMAND, NODE_CONNECTOR);
+	ft_dprintf(g_fd_log,
+				"PIPE_COM[%d]\tSIMPLE_COM[%d]\n\t\t\tEXECUTABLE[%d]\tARGUMENT[%d]\t",
+				NODE_PIPE_COM, NODE_SIMPLE_COM, NODE_EXECUTABLE, NODE_ARGUMENT);
+	ft_dprintf(g_fd_log, "IO_REDIRECTIONS[%d]\tREDIRECTION[%d]\tFILE[%d]\n",
+		NODE_IO_REDIRECTIONS, NODE_REDIRECTION, NODE_FILE);
 }
 
 /**
@@ -44,7 +47,7 @@ static void	display_children(t_ast *node)
 	char	*bit_str;
 	t_ast	*children;
 
-	if (node->type == NODE_ARGUMENT)
+	if (node->flag & (BIT_ARGUMENT | BIT_FILE))
 		return ;
 	ft_dprintf(g_fd_log, "\n\n");
 	ft_dprintf(g_fd_log, "\tparent[%s]\ttype[%d]\n",

@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:29:42 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 04:57:22 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/16 21:48:02 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@
 #include "ft_printf.h"// debug
 #include "debug.h"// debug
 
+
 /**
  * @brief \<command>のノードを作る関数
- * ::= <simple-command> or <pipe-command> or <io-redirection>
+ * ::= <simple-command> or <pipe-command>
  *
  * @param ast 親のノード
  * @param tokens トークンのアドレス
@@ -33,23 +34,22 @@
  */
 t_ast	*parse_command(t_ast *ast, char ***tokens)
 {
-	t_ast	*node;
-	size_t	num_pipe;
+	t_ast	*command_node;
+	char	*value;
 
-	num_pipe = count_pipe_command(*tokens);
-	if (num_pipe > 0)
-		node = parse_pipe_command(tokens, num_pipe);
-	else if (is_redirection(**tokens) == true)
-		node = parse_io_redirection(tokens);
+	value = get_command_value(*tokens);
+	if (ft_strchr(value, '|') != NULL)// 要改良　'abc|efg' がNG
+		command_node = parse_pipe_command(tokens, value);
 	else
-		node = parse_simple_command(tokens);
-	if (node)
+		command_node = parse_simple_command(tokens, value);
+	if (command_node)
 	{
 		ast->num_children++;
 		ast->children = (t_ast **)realloc(ast->children,// use ft_realloc
 				ast->num_children * sizeof(t_ast *));
-		ast->children[ast->num_children - 1] = node;
+		ast->children[ast->num_children - 1] = command_node;
 	}
+	free(value);
 	return (ast);
 }
 // debug code

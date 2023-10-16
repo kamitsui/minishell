@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/05 17:42:15 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 02:24:40 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 #include "traverse.h"
 #include "execute.h"
 
+//int	hanlde_simple_command(t_ast *node, t_envwrap *env_wrapper)
+//{
+//}
+
 /**
  * @brief <simple-command>のノードに対しての処理
  *
@@ -28,7 +32,11 @@
  */
 int	handle_command(t_ast *node, t_envwrap *env_wrapper)
 {
-	if (node->flag & BIT_OPERATOR)
-		return (env_wrapper->exit_code);
-	return (execute_command(node, env_wrapper));
+	if (node->flag & BIT_PIPE_COM)
+	{
+		//expansion(...);
+		return (handle_pipe_command(node, env_wrapper));
+	}
+	else
+		return (execute_command(node, env_wrapper));
 }

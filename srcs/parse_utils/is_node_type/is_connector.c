@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_operator.c                                      :+:      :+:    :+:   */
+/*   is_connector.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:04:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 03:51:13 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 01:39:33 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #include "debug.h"// debug
 #include "ft_printf.h"// debug
 
-bool	is_operator(const char *token)
+bool	is_connector(const char *token)
 {
-	t_is_type_node	f_type_operator[NUM_OPERATOR] = {is_and_list, is_or_list};
+	t_is_type_node	f_is_connector[NUM_CONNECTOR] = {is_and_list, is_or_list};
 	bool			result;
 	size_t			i;
 
@@ -27,9 +27,9 @@ bool	is_operator(const char *token)
 		return (false);
 	result = false;
 	i = 0;
-	while (i < NUM_OPERATOR && result == false)
+	while (i < NUM_CONNECTOR && result == false)
 	{
-		result = f_type_operator[i](token);
+		result = f_is_connector[i](token);
 		i++;
 	}
 	return (result);

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/07 14:07:28 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/16 21:39:44 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,18 @@
 /**
  * @brief 文字列操作用のバッファサイズ
  * @detail
- * 使用関数：convert_env_wrap
+ * 使用関数：convert_env_wrap, get_value.c
  */
 # define BUFF_SIZE	1024
+
+typedef struct s_string
+{
+	char			buffer[BUFF_SIZE];
+	size_t			len;
+	char			*out;
+	size_t			out_len;
+}	t_string;
+
 
 /**
  * @brief プロンプトに出力する文字列

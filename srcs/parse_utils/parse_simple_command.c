@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 04:59:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 03:41:35 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@
 #include "parse.h"
 #include <stdlib.h>
 
+static bool	is_include_redirection(char **tokens)
+{
+	while (is_end(*tokens) == false && is_connector(*tokens) == false)
+	{
+		if (is_redirection(*tokens) == true)
+			return (true);
+		tokens++;
+	}
+	return (false);
+}
+
 /**
  * @brief <simple-command>のノードを作る関数
  *
@@ -25,23 +36,38 @@
  *
  * @return 生成されたコマンドのノードを返す
  */
-t_ast	*parse_simple_command(char ***tokens)
+t_ast	*parse_simple_command(char ***tokens, char *head_value)
 {
 	t_ast	*node;
-	t_ast	*arg_node;
-	bool	is_argument;
+	t_ast	*redirection_node;
+	t_ast	*executable_node;
+	char	*value;
 
-	node = create_node(NODE_COMMAND, **tokens);
-	(*tokens)++;
-	is_argument = is_string(**tokens);
-	while (is_argument == true)
+	node = create_node(NODE_SIMPLE_COM, head_value);
+	if (is_include_redirection(*tokens) == true)
 	{
-		arg_node = parse_argument(tokens);
+		value = get_redirection_value(*tokens);
+		redirection_node = parse_io_redirections(*tokens, value);
 		node->num_children++;
 		node->children = (t_ast **)realloc(node->children,// use ft_realloc
 				node->num_children * sizeof(t_ast *));
-		node->children[node->num_children - 1] = arg_node;
-		is_argument = is_string(**tokens);
+		node->children[node->num_children - 1] = redirection_node;
+		free(value);
+	}
+	while (is_end(**tokens) == false && is_connector(**tokens) == false)
+	{
+		if (is_redirection(**tokens) == true)
+		{
+			(*tokens) += 2;// エラーケースは未想定　例えば">>"のみ
+			continue ;
+		}
+		value = get_executable_value(*tokens);
+		executable_node = parse_executable(tokens);
+		node->num_children++;
+		node->children = (t_ast **)realloc(node->children,// use ft_realloc
+				node->num_children * sizeof(t_ast *));
+		node->children[node->num_children - 1] = executable_node;
+		free(value);
 	}
 	return (node);
 }

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:44:56 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/28 18:44:06 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 03:41:04 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,31 @@
  * @note 未完成
  * あと一部未実装。is_connector()関数　引数num_pipeは不要か。。。
  */
-t_ast	*parse_pipe_command(char ***tokens, size_t num_pipe)
+t_ast	*parse_pipe_command(char ***tokens, char *head_value)
 {
 	t_ast	*pipe_node;
-	t_ast	*command_node;
+	t_ast	*node;
+	char	*value;
 
-	(void)num_pipe;
-	pipe_node = create_node(NODE_OPERATOR, "|");
+	pipe_node = create_node(NODE_PIPE_COM, head_value);
 	// ループの終了は要改良　is_connector()みたいな関数を実装か。。。
-	while (**tokens && ft_strcmp(**tokens, "&&") != 0)
+	while (is_end(**tokens) == false && is_connector(**tokens) == false)
 	{
 		if (ft_strcmp(**tokens, "|") == 0)
 		{
 			(*tokens)++;
 			continue ;
 		}
-		command_node = parse_simple_command(tokens);
-		if (command_node)
+		value = get_simple_command_value(*tokens);
+		node = parse_simple_command(tokens, value);
+		if (node)
 		{
 			pipe_node->num_children++;
 			pipe_node->children = (t_ast **)realloc(pipe_node->children,// use ft_realloc
 					pipe_node->num_children * sizeof(t_ast *));
-			pipe_node->children[pipe_node->num_children - 1] = command_node;
-			pipe_node->children[pipe_node->num_children - 1]->flag
-				= BIT_COMMAND | BIT_OPERATOR;
+			pipe_node->children[pipe_node->num_children - 1] = node;
+			//pipe_node->children[pipe_node->num_children - 1]->flag
+			//	= BIT_COMMAND | BIT_SIMPLE_COM;
 		}
 	}
 	return (pipe_node);

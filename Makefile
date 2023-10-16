@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/14 02:01:55 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/17 03:12:12 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,30 +39,38 @@ SRCS = main.c \
 	   tokenize_utils.c \
 	   \
 	   parse.c \
-	   parse_operator.c \
-	   parse_argument.c \
-	   parse_command.c \
-	   parse_simple_command.c \
-	   parse_pipe_command.c \
 	   create_node.c \
-	   count_pipe_command.c \
-	   parse_io_redirection.c \
-	   parse_file.c \
+	   get_value.c \
+	   parse_connector.c \
+	   parse_command.c \
+	   parse_pipe_command.c \
+	   parse_simple_command.c \
+	   parse_io_redirections.c \
+	   parse_executable.c \
 	   \
-	   is_operator.c \
+	   is_connector.c \
 	   is_and_list.c \
 	   is_or_list.c \
 	   is_pipe.c \
 	   is_redirection.c \
 	   is_string.c \
+	   is_expansion.c \
 	   is_squote.c \
 	   is_dquote.c \
+	   is_variable.c \
+	   is_end.c \
 	   \
 	   traverse_ast.c \
+	   handle_operator.c \
+	   handle_connector.c \
 	   handle_command.c \
 	   handle_argument.c \
-	   handle_operator.c \
 	   handle_pipe_command.c \
+	   handle_redirection.c \
+	   handle_file.c \
+	   \
+	   buck_up_fd.c \
+	   recover_fd.c \
 	   \
 	   exec_file.c \
 	   execute_command.c \
@@ -108,6 +116,7 @@ SRCS_DIR = ./srcs \
 		   ./srcs/parse_utils/is_node_type \
 		   ./srcs/execute_utils \
 		   ./srcs/traverse_utils \
+		   ./srcs/traverse_utils/fd_utils \
 		   ./srcs/environ \
 		   ./srcs/environ_utils \
 		   ./srcs/signal \

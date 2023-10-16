@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:54:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/14 17:46:35 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 03:39:09 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	get_node_flag(enum e_NodeType type, char *value)
 			is_in_red, is_here_doc, is_out_red, is_out_append,
 			is_expansion, is_squote, is_dquote, is_variable};
 	static int		match_flag[NUM_GET_FLAG] = {
-			BIT_AND_LIST, BIT_OR_LIST, BIT_PIPE,
+			BIT_AND_LIST, BIT_OR_LIST, BIT_PIPE_COM,
 			BIT_IN_RED, BIT_HERE_DOC, BIT_OUT_RED, BIT_APPEND,
 			BIT_EXPANSION, BIT_SQUOTE, BIT_DQUOTE, BIT_VAR};
 

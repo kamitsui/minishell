@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/05 18:42:08 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 02:55:26 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,21 @@
  */
 int	traverse_ast(t_ast *node, t_envwrap *env_wrapper)
 {
-	enum e_NodeType			state;
-	static t_handle_node	handle_node[3] = {
-		handle_command, handle_argument, handle_operator};
+	enum e_NodeType			current_type;
+	static t_handle_node	handle_node[NUM_HANDLE] = {
+		handle_operator, handle_command};
 	size_t					i;
 
-	if (node == NULL)
-		return (1);
+	if (node->type == NODE_CONNECTOR
+		&& handle_connector(node, env_wrapper) == EXIT_FAILURE)
+		return (env_wrapper->exit_code);
 	// Depth-First search (DFS) approach
-	state = NODE_COMMAND;
-	while (state != NODE_END)
+	current_type = NODE_OPERATOR;
+	while (current_type < NUM_HANDLE)
 	{
-		if (node->type == state)
-			env_wrapper->exit_code = handle_node[state](node, env_wrapper);
-		state++;
+		if (node->type == current_type)
+			env_wrapper->exit_code = handle_node[current_type](node, env_wrapper);
+		current_type++;
 	}
 	// Traverse the children of the current node
 	i = 0;
@@ -52,3 +53,13 @@ int	traverse_ast(t_ast *node, t_envwrap *env_wrapper)
 	}
 	return (env_wrapper->exit_code);
 }
+// reference ... enum e_NodeType
+//enum	e_NodeType
+//{
+//	NODE_COMMAND = 0,
+//	NODE_ARGUMENT = 1,
+//	NODE_OPERATOR = 2,
+//	NODE_REDIRECTION = 3,
+//	NODE_FILE = 4,
+//	NODE_END = 5
+//};

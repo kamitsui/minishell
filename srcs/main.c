@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 20:41:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/07 10:35:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 01:48:56 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char *argv[], char *env[])
 		status = execute_script_file(argv[1], env);// 未着手
 	(void)argc;
 	free_envwrap(env_wrapper);
-	debug_leaks("main");// debug  リークあり10/6 kamitsui
+	debug_leaks("main", NULL);// debug  リークあり10/6 kamitsui
 	return (status);
 }
 // デバッグログの保存ファイルを開く & デバッグON
