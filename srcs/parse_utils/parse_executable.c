@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 18:39:58 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 01:38:41 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:23:30 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 static t_ast	*parse_argument(char ***tokens)
 {
-	if (is_string(**tokens) == true)
+	if (is_end(**tokens) == false)
 	{
 		(*tokens)++;
-		return (create_node(BIT_ARGUMENT, *(*tokens - 1)));
+		return (create_node(NODE_ARGUMENT, *(*tokens - 1)));
 	}
 	return (NULL);
 }
@@ -29,7 +29,7 @@ t_ast	*parse_executable(char ***tokens)
 	t_ast	*node;
 	t_ast	*arg_node;
 
-	node = create_node(BIT_EXECUTABLE, **tokens);
+	node = create_node(NODE_EXECUTABLE, **tokens);
 	(*tokens)++;
 	while (is_connector(**tokens) == false && is_end(**tokens) == false
 			&& is_pipe(**tokens) == false)

@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   meta_minishell.h                                   :+:      :+:    :+:   */
+/*   is_include_pipe_command.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 20:31:32 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 15:05:07 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/17 08:11:31 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/17 08:12:38 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef META_MINISHELL_H
-# define META_MINISHELL_H
+#include "libft.h"
+#include "parse.h"
+#include <stdlib.h>
 
-# define META_AND_LIST	"&&"
-# define META_OR_LIST	"||"
-# define META_IN		"<"
-# define META_HERE		"<<"
-# define META_OUT		">"
-# define META_APPEND	">>"
-# define META_PIPE		"|"
-
-# define META_SQUOT_CHR	'\''
-# define META_DQUOT_CHR	'\"'
-# define META_VAR_CHR	'$'
-
-#endif
+bool	is_include_pipe_command(char **tokens)
+{
+	while (is_end(*tokens) == false && is_connector(*tokens) == false)
+	{
+		if (is_pipe(*tokens) == true)
+			return (true);
+		tokens++;
+	}
+	return (false);
+}

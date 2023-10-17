@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/16 21:36:44 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 08:59:27 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,29 @@
 t_ast	*parse(char **tokens)
 {
 	t_ast	*ast;
-	t_ast	*connector_node;
+	t_ast	*node;
+	char	*value;
 
 	ast = create_node(NODE_OPERATOR, PROGRAM_NAME);
 	while (*tokens)
 	{
 		if (is_connector(*tokens) == true)
 		{
-			connector_node = parse_connector(&tokens);
-//			debug_parse("parse", connector_node);// debug
-			if (connector_node != NULL)
-			{
-				ast->num_children++;
-				ast->children = (t_ast **)realloc(ast->children,// use ft_realloc
-						ast->num_children * sizeof(t_ast *));
-				ast->children[ast->num_children - 1] = connector_node;
-			}
+			ft_dprintf(g_fd_log, "before call parse_connector()\n");// debug
+			node = parse_connector(&tokens);
 		}
 		else
-			ast = parse_command(ast, &tokens);
+		{
+			value = get_command_value(tokens);
+			ft_dprintf(g_fd_log, "before call parse_command()\n");// debug
+			node = parse_command(&tokens, value);
+			free(value);
+		}
+//		debug_parse("parse", node);// debug
+		ast->num_children++;
+		ast->children = (t_ast **)realloc(ast->children,// use ft_realloc
+				ast->num_children * sizeof(t_ast *));
+		ast->children[ast->num_children - 1] = node;
 	}
 	return (ast);
 }

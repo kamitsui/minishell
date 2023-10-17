@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 03:41:35 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:30:13 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,8 @@
 #include "parse.h"
 #include <stdlib.h>
 
-static bool	is_include_redirection(char **tokens)
-{
-	while (is_end(*tokens) == false && is_connector(*tokens) == false)
-	{
-		if (is_redirection(*tokens) == true)
-			return (true);
-		tokens++;
-	}
-	return (false);
-}
+#include "ft_printf.h"
+#include "debug.h"
 
 /**
  * @brief <simple-command>のノードを作る関数
@@ -44,9 +36,11 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 	char	*value;
 
 	node = create_node(NODE_SIMPLE_COM, head_value);
-	if (is_include_redirection(*tokens) == true)
+	if (is_include_redirection_in_simple_com(*tokens) == true)
 	{
-		value = get_redirection_value(*tokens);
+		value = get_redirection_value_in_simple_command(*tokens);
+		ft_dprintf(g_fd_log, ">> in parse_simple_command ... redirection_value[%s]\n", value);
+		//redirection_node = parse_io_redirections_in_simple_command(*tokens, value);
 		redirection_node = parse_io_redirections(*tokens, value);
 		node->num_children++;
 		node->children = (t_ast **)realloc(node->children,// use ft_realloc
@@ -54,7 +48,8 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 		node->children[node->num_children - 1] = redirection_node;
 		free(value);
 	}
-	while (is_end(**tokens) == false && is_connector(**tokens) == false)
+	while (is_end(**tokens) == false && is_connector(**tokens) == false
+			&& is_pipe(**tokens) == false)
 	{
 		if (is_redirection(**tokens) == true)
 		{
@@ -62,6 +57,7 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 			continue ;
 		}
 		value = get_executable_value(*tokens);
+		ft_dprintf(g_fd_log, ">> in parse_simple_command ... executable_value[%s]\n", value);
 		executable_node = parse_executable(tokens);
 		node->num_children++;
 		node->children = (t_ast **)realloc(node->children,// use ft_realloc

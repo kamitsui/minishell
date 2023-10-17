@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 03:38:41 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:27:57 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ t_ast	*parse_connector(char ***tokens);
 /**
  * @brief \<simple-command> or <pipe-command> のノードを作る関数
  */
-t_ast	*parse_command(t_ast *ast, char ***tokens);
+t_ast	*parse_command(char ***tokens, char *head_value);
 
 /**
  * @brief \<pipe-command> のノードを作る関数
@@ -139,6 +139,7 @@ t_ast	*parse_pipe_command(char ***tokens, char *head_value);
 t_ast	*parse_simple_command(char ***tokens, char *head_value);
 
 t_ast	*parse_io_redirections(char **tokens, char *head_value);
+//t_ast	*parse_io_redirections_in_simple_command(char **tokens, char *head_value);
 t_ast	*parse_file(char **tokens);
 t_ast	*parse_executable(char ***tokens);
 
@@ -149,8 +150,12 @@ t_ast	*parse_executable(char ***tokens);
 t_ast	*create_node(enum e_NodeType type, char *value);
 
 char	*get_command_value(char **tokens);
+char	*get_pipe_command_value(char **tokens);
+char	*get_one_pipe_command_value(char **tokens);
 char	*get_simple_command_value(char **tokens);
 char	*get_redirection_value(char **tokens);
+char	*get_redirection_value_in_simple_command(char **tokens);
+char	*get_one_redirection_value(char **tokens);
 char	*get_executable_value(char **tokens);
 
 /**
@@ -171,6 +176,10 @@ bool	is_dquote(const char *token);
 bool	is_squote(const char *token);
 bool	is_variable(const char *token);
 bool	is_end(const char *token);
+
+bool	is_include_redirection(char **tokens);
+bool	is_include_redirection_in_simple_com(char **tokens);
+bool	is_include_pipe_command(char **tokens);
 
 /**
  * @brief ノードの値（文字列）に対して、種類を調べる関数を関数ポインタとして宣言

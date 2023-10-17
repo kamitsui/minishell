@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:54:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 03:39:09 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 05:18:45 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_ast	*create_node(enum e_NodeType type, char *value)
 	node->type = type;
 	node->flag = get_node_flag(type, value);
 	node->value = ft_strdup(value);
-	if (node == NULL)
+	if (node->value == NULL)
 		ft_errno_exit("ft_strdup");
 	node->children = NULL;
 	node->num_children = 0;

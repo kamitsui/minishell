@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/17 03:12:12 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/17 08:16:34 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,8 @@ SRCS = main.c \
 	   is_dquote.c \
 	   is_variable.c \
 	   is_end.c \
+	   is_include_redirection.c \
+	   is_include_pipe_command.c \
 	   \
 	   traverse_ast.c \
 	   handle_operator.c \
@@ -114,6 +116,7 @@ SRCS_DIR = ./srcs \
 		   ./srcs/tokenize_utils \
 		   ./srcs/parse_utils \
 		   ./srcs/parse_utils/is_node_type \
+		   ./srcs/parse_utils/get_value_utils \
 		   ./srcs/execute_utils \
 		   ./srcs/traverse_utils \
 		   ./srcs/traverse_utils/fd_utils \

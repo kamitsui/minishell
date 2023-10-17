@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:41:58 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 03:59:50 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:56:54 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static void	display_children(t_ast *node)
 	char	*bit_str;
 	t_ast	*children;
 
-	if (node->flag & (BIT_ARGUMENT | BIT_FILE))
-		return ;
+//	if (node->flag & (BIT_ARGUMENT | BIT_REDIRECTION | BIT_FILE))
+//		return ;
 	ft_dprintf(g_fd_log, "\n\n");
 	ft_dprintf(g_fd_log, "\tparent[%s]\ttype[%d]\n",
 		node->value, (int)node->type);
@@ -56,6 +56,8 @@ static void	display_children(t_ast *node)
 	ft_dprintf(g_fd_log, "\tflag[%s]\n", bit_str);
 	free(bit_str);
 	debug_flag(node);
+	if (node->flag & (BIT_ARGUMENT | BIT_REDIRECTION | BIT_FILE))
+		return ;
 	i = 0;
 	while (i < node->num_children)
 	{
@@ -63,16 +65,16 @@ static void	display_children(t_ast *node)
 		ft_dprintf(g_fd_log, "\t\tchildren[%d]\t[%s]",
 					i, children->value);
 		ft_dprintf(g_fd_log, "\ttype\t[%d]\n", (int)children->type);
-		if (children->flag & BIT_ARGUMENT
-			|| children->flag & BIT_FILE)
-		{
-			ft_dprintf(g_fd_log, "\n\tchildren[%d]\t[%s]",
-						i, children->value);
-			bit_str = ft_itoa_binary(children->flag);// handle_error
-			ft_dprintf(g_fd_log, "\n\tflag[%s]\n", bit_str);
-			free(bit_str);
-			debug_flag(children);
-		}
+//		if (children->flag & BIT_ARGUMENT
+//			|| children->flag & BIT_REDIRECTION || children->flag & BIT_FILE)
+//		{
+//			ft_dprintf(g_fd_log, "\n\tchildren[%d]\t[%s]",
+//						i, children->value);
+//			bit_str = ft_itoa_binary(children->flag);// handle_error
+//			ft_dprintf(g_fd_log, "\n\tflag[%s]\n", bit_str);
+//			free(bit_str);
+//			debug_flag(children);
+//		}
 		i++;
 	}
 	i = 0;
