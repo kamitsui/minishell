@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/14 16:00:20 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 07:05:37 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int	g_fd_log;
 #define LINE4 "<< append"
 #define LINE5 "ls -l && < non_exist ls_zzz || ls -l | cat -e | grep Make"
 #define LINE6 "$(VAR) \"42tokyo\" && \"ec\"\"ho\" \'hello_world\'"
-#define NUM		6
+#define LINE7 "ls | < file_in cat > file_out << eof1 << eof2 | cat"
+#define LINE8 "< file_in ls | < file_in cat > file_out << eof1 << eof2 | cat > file_out"
+#define NUM		7
 
 //int main(int argc, char *argv[], char *env[])
 int main(int argc, char *argv[])

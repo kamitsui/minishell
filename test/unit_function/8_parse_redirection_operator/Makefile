@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/10/14 16:48:44 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/17 09:32:37 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,14 +18,13 @@ SRCS = parse.c \
 	   parse_command.c \
 	   parse_simple_command.c \
 	   parse_pipe_command.c \
-	   parse_argument.c \
 	   create_node.c \
-	   count_pipe_command.c \
+	   get_value.c \
 	   \
-	   parse_operator.c \
-	   parse_io_redirection.c \
-	   parse_file.c \
-	   is_operator.c \
+	   parse_connector.c \
+	   parse_io_redirections.c \
+	   parse_executable.c \
+	   is_connector.c \
 	   is_and_list.c \
 	   is_or_list.c \
 	   is_string.c \
@@ -35,6 +34,9 @@ SRCS = parse.c \
 	   is_squote.c \
 	   is_dquote.c \
 	   is_variable.c \
+	   is_end.c \
+	   is_include_pipe_command.c \
+	   is_include_redirection.c \
 	   \
 	   env_lstiter_funcs.c \
 	   environ.c \
@@ -69,6 +71,7 @@ SRCS_DIR = $(PROJ_DIR)/srcs \
 SRCS_DIR = $(PROJ_DIR)/srcs/token \
 		   $(PROJ_DIR)/srcs/parse_utils \
 		   $(PROJ_DIR)/srcs/parse_utils/is_node_type \
+		   $(PROJ_DIR)/srcs/parse_utils/get_value_utils \
 		   $(PROJ_DIR)/srcs/environ \
 		   $(PROJ_DIR)/srcs/debug \
 		   srcs
@@ -124,6 +127,12 @@ $(LIB_PRINTF): $(LIBFT)
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
+debug: fclean
+	make $(NAME) WITH_DEBUG=1
+
+asan: fclean
+	make $(NAME) WITH_ASAN=1
+
 # Clean target
 clean:
 	rm -rf $(OBJS_DIR) $(DEPS_DIR)
@@ -138,6 +147,12 @@ re: fclean all
 # Enable dependency file
 -include $(DEPS)
 
-.PHONY: debug all clean fclean re
+ifdef WITH_ASAN
+CFLAGS = -Wall -g3 -O0 -fsanitize=address -fno-omit-frame-pointer
+endif
 
-#cw -Iincludes srcs/execute_utils/exec_pipe_cmd.c srcs/execute_utils/exec_file.c srcs/error.c srcs/environ_utils/substr_env.c ft_printf/libftprintf.a -g -fsanitize=address
+ifdef WITH_DEBUG
+CFLAGS = -Wall -g3 -O0 -fno-omit-frame-pointer
+endif
+
+.PHONY: debug all clean fclean re asan debug
