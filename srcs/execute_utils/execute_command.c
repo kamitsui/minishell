@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/14 00:38:43 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:11:45 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,12 @@ static void	child_process(t_command command)
 int	execute_command(t_ast *command_node, t_envwrap *env_wrapper)
 {
 	t_command	command;
-	size_t		i;
 	pid_t		pid;
 
-	if (command_node->type != NODE_COMMAND)
+	if (command_node->type != NODE_EXECUTABLE)
 		return (-1);
 	command.cmd_name = command_node->value;
-	i = 0;
-	while (i < command_node->num_children)
-	{
-		get_arguments(&command, command_node);
-		i++;
-	}
+	get_arguments(&command, command_node);
 	command.env = convert_env_list_to_two_darray(env_wrapper->env->next);
 	debug_env_two_darray(command.env);
 	debug_command(&command);
