@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 08:59:27 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:54:34 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,10 @@ t_ast	*parse(char **tokens)
 	while (*tokens)
 	{
 		if (is_connector(*tokens) == true)
-		{
-			ft_dprintf(g_fd_log, "before call parse_connector()\n");// debug
 			node = parse_connector(&tokens);
-		}
 		else
 		{
 			value = get_command_value(tokens);
-			ft_dprintf(g_fd_log, "before call parse_command()\n");// debug
 			node = parse_command(&tokens, value);
 			free(value);
 		}

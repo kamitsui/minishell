@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:44:56 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 14:21:01 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:58:47 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,6 @@
 #include "debug.h"
 #include "ft_printf.h"
 
-//t_ast	*parse_one_pipe_command(char ***tokens, char *head_value)
-//{
-//	t_ast	*node;
-//	t_ast	*redirection_node;
-//	t_ast	*command_node;
-//	char	*value;
-//
-//	node = create_node(NODE_COMMAND, head_value);
-//	while (is_end(**tokens) == false && is_connector(**tokens) == false
-//			&& is_pipe(**tokens) == false)
-//	{
-//		if (is_include_redirection(*tokens) == true)
-//		{
-//			value = get_redirection_value(*tokens);
-//			redirection_node = parse_io_redirections(*tokens, value);
-//			node->num_children++;
-//			node->children = (t_ast **)realloc(node->children,// use ft_realloc
-//					node->num_children * sizeof(t_ast *));
-//			node->children[node->num_children - 1] = redirection_node;
-//			free(value);
-//		}
-//		value = get_one_pipe_command_value(*tokens);
-//		ft_dprintf(g_fd_log, ">> in parse_pipe_command ... one_pipe_com_value[%s]\n", value);
-//		command_node = parse_one_pipe_command(tokens, value);
-//		node->num_children++;
-//		node->children = (t_ast **)realloc(node->children,// use ft_realloc
-//				node->num_children * sizeof(t_ast *));
-//		node->children[node->num_children - 1] = command_node;
-//	}
-//	return (node);
-//}
 /**
  * @brief \<pipe-command> のノードを作る関数
  *
@@ -66,12 +35,10 @@
 t_ast	*parse_pipe_command(char ***tokens, char *head_value)
 {
 	t_ast	*node;
-//	t_ast	*redirection_node;
 	t_ast	*command_node;
 	char	*value;
 
 	node = create_node(NODE_PIPE_COM, head_value);
-		ft_dprintf(g_fd_log, ">> in parse_pipe_command ... head_value[%s]\n", head_value);
 	while (is_end(**tokens) == false && is_connector(**tokens) == false)
 	{
 		if (is_pipe(**tokens) == true)
@@ -79,19 +46,7 @@ t_ast	*parse_pipe_command(char ***tokens, char *head_value)
 			(*tokens)++;
 			continue ;
 		}
-//		if (is_include_redirection(*tokens) == true)
-//		{
-//			value = get_redirection_value(*tokens);
-//			redirection_node = parse_io_redirections(*tokens, value);
-//			node->num_children++;
-//			node->children = (t_ast **)realloc(node->children,// use ft_realloc
-//					node->num_children * sizeof(t_ast *));
-//			node->children[node->num_children - 1] = redirection_node;
-//			free(value);
-//		}
-		//value = get_one_pipe_command_value(*tokens);
 		value = get_simple_command_value(*tokens);
-		ft_dprintf(g_fd_log, ">> in parse_pipe_command ... one_pipe_com_value[%s]\n", value);
 		command_node = parse_simple_command(tokens, value);
 		node->num_children++;
 		node->children = (t_ast **)realloc(node->children,// use ft_realloc
@@ -100,3 +55,6 @@ t_ast	*parse_pipe_command(char ***tokens, char *head_value)
 	}
 	return (node);
 }
+//debug code
+//		ft_dprintf(g_fd_log, ">> in parse_pipe_command ... head_value[%s]\n", head_value);
+//		ft_dprintf(g_fd_log, ">> in parse_pipe_command ... one_pipe_com_value[%s]\n", value);

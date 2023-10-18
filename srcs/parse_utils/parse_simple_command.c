@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 16:30:13 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/17 18:00:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 	if (is_include_redirection_in_simple_com(*tokens) == true)
 	{
 		value = get_redirection_value_in_simple_command(*tokens);
-		ft_dprintf(g_fd_log, ">> in parse_simple_command ... redirection_value[%s]\n", value);
-		//redirection_node = parse_io_redirections_in_simple_command(*tokens, value);
 		redirection_node = parse_io_redirections(*tokens, value);
 		node->num_children++;
 		node->children = (t_ast **)realloc(node->children,// use ft_realloc
@@ -57,7 +55,6 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 			continue ;
 		}
 		value = get_executable_value(*tokens);
-		ft_dprintf(g_fd_log, ">> in parse_simple_command ... executable_value[%s]\n", value);
 		executable_node = parse_executable(tokens);
 		node->num_children++;
 		node->children = (t_ast **)realloc(node->children,// use ft_realloc
@@ -67,3 +64,10 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 	}
 	return (node);
 }
+// debug code
+//		ft_dprintf(g_fd_log,
+//					">> in parse_simple_command ... redirection_value[%s]\n",
+//					value);// debug
+//		ft_dprintf(g_fd_log,
+//					">> in parse_simple_command ... executable_value[%s]\n",
+//					value);// debug

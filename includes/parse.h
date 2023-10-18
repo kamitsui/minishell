@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 16:27:57 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:31:09 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #ifndef PARSE_H
 # define PARSE_H
 
+# include "minishell.h"
 # include <stdlib.h>
 # include <stdbool.h>
 
@@ -157,6 +158,8 @@ char	*get_redirection_value(char **tokens);
 char	*get_redirection_value_in_simple_command(char **tokens);
 char	*get_one_redirection_value(char **tokens);
 char	*get_executable_value(char **tokens);
+void	str_add_to_buff(t_string *str, char c);
+char	*str_join_to_out(const char *s1, const char *s2, size_t len2);
 
 /**
  * @brief 現在のトークンがオペレーターかどうか調べる関数

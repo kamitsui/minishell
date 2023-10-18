@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/17 08:16:34 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/18 13:22:02 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,13 +40,21 @@ SRCS = main.c \
 	   \
 	   parse.c \
 	   create_node.c \
-	   get_value.c \
 	   parse_connector.c \
 	   parse_command.c \
 	   parse_pipe_command.c \
 	   parse_simple_command.c \
 	   parse_io_redirections.c \
 	   parse_executable.c \
+	   \
+	   get_command_value.c \
+	   get_executable_value.c \
+	   get_one_pipe_command.c \
+	   get_pipe_command_value.c \
+	   get_redirection_value.c \
+	   get_simple_command_value.c \
+	   str_add_to_buff.c \
+	   str_join_to_out.c \
 	   \
 	   is_connector.c \
 	   is_and_list.c \
