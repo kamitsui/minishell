@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:05:41 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/12 23:12:16 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:12:27 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,16 @@ void	handle_error(int error_code)
 	exit(error_code);// 要検討　使っていいエラーコードを調べる
 }
 
+void	put_error_message_from_errno(char *cause)
+{
+	int		error_number;
+	char	*error_message;
+
+	error_number = errno;
+	error_message = strerror(error_number);
+	ft_dprintf(STDERR_FILENO, "%s: %s: %s\n", NAME, cause, error_message);
+}
+
 /**
  * @brief システムコールや関数の失敗時のエラーハンドル
  * （errnoからエラーメッセージ出力とexitを行う関数）
@@ -54,12 +64,7 @@ void	handle_error(int error_code)
  */
 void	ft_errno_exit(char *cause)
 {
-	int		error_number;
-	char	*error_message;
-
-	error_number = errno;
-	error_message = strerror(error_number);
-	ft_dprintf(STDERR_FILENO, "%s: %s: %s\n", NAME, cause, error_message);
+	put_error_message_from_errno(cause);
 	exit (1);
 }
 

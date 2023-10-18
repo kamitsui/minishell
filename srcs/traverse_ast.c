@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/18 13:49:59 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:35:47 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
  */
 #include "parse.h"
 #include "traverse.h"
+
+#include "debug.h"
+#include "ft_printf.h"
 
 /**
  * @brief 抽象構文木のノード全てを走査して、順番に実行していく再帰関数
@@ -33,15 +36,21 @@ int	traverse_ast(t_ast *node, t_envwrap *env_wrapper)
 		handle_operator, handle_command};
 	size_t					i;
 
-	if (node->type == NODE_CONNECTOR
-		&& handle_connector(node, env_wrapper) == EXIT_FAILURE)
+	if (node->type > NODE_COMMAND)
 		return (env_wrapper->exit_code);
+	ft_dprintf(g_fd_log, "current node->value [%s]\n", node->value);
+//	if (node->type == NODE_CONNECTOR
+//		&& handle_connector(node, env_wrapper) == EXIT_FAILURE)
+//		return (env_wrapper->exit_code);
 	// Depth-First search (DFS) approach
 	current_type = NODE_OPERATOR;
-	while (current_type <= NODE_CONNECTOR)
+	while (current_type <= NODE_COMMAND)
 	{
 		if (node->type == current_type)
+		{
 			env_wrapper->exit_code = handle_node[current_type](node, env_wrapper);
+			debug_status("traverse_ast", env_wrapper->exit_code);
+		}
 		current_type++;
 	}
 	// Traverse the children of the current node

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 23:04:36 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/04 14:49:26 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:12:55 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	handle_error(int error_code);
  * @brief システムコール失敗時のエラーメッセージ出力とexitを行う関数。
  */
 void	ft_errno_exit(char *cause);
+void	put_error_message_from_errno(char *cause);
 
 /**
  * @brief エラーメッセージ出力とexit(1)を行う関数

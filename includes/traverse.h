@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 10:08:45 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/18 13:46:33 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/18 19:19:28 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define TRAVERSE_H
 
 # include "environ.h"
+# include "parse.h"
 
 # define NUM_HANDLE	3
 
@@ -26,25 +27,24 @@
  */
 int	traverse_ast(t_ast *node, t_envwrap *env_wrapper);
 
-int	handle_connector(t_ast *node, t_envwrap *env_wrapper);
-/**
- * @brief \<simple-command>のノードに対しての処理
- */
-int	handle_command(t_ast *node, t_envwrap *env_wrapper);
-
-/**
- * @brief \<argument>のノードに対しての処理
- */
-int	handle_argument(t_ast *node, t_envwrap *env_wrapper);
+int	handle_operator(t_ast *operator_node, t_envwrap *env_wrapper);
 
 /**
  * @brief ノードのタイプがオペレーターノードの時に呼び出す関数をを割り振る
  * "|" / "&&" / "||"
  */
-int	handle_operator(t_ast *operator_node, t_envwrap *env_wrapper);
+int	handle_connector(t_ast *node, t_envwrap *env_wrapper);
 
-int	handle_redirection(t_ast *node, t_envwrap *env_wrapper);
-int	handle_file(t_ast *node, t_envwrap *env_wrapper);
+/**
+ * @brief \<simple-command> <pipe-command>のノードに対しての処理
+ */
+int	handle_command(t_ast *node, t_envwrap *env_wrapper);
+
+int	handle_io_redirections(t_ast *node, t_envwrap *env_wrapper);
+
+# define PROMPT_HERE_DOC	"> "
+# define READ_END	0
+# define WRITE_END	1
 
 /**
  * @brief ノードタイプが　”｜”　パイプに対しての処理
@@ -59,5 +59,11 @@ typedef int	(*t_handle_node)(t_ast *node, t_envwrap *env_wrapper);
 
 int		buck_up_fd(int fd);
 void	recover_fd(int prev_fd, int recover_fd);
+
+typedef int	(*t_select_redirection)(char *, t_envwrap *);
+int	input_redirection(char *file_name, t_envwrap *env_wrapper);
+int	here_doc(char *end_of_block, t_envwrap *env_wrapper);
+int	out_redirection_trunc(char *file_name, t_envwrap *env_wrapper);
+int	out_redirection_append(char *file_name, t_envwrap *env_wrapper);
 
 #endif

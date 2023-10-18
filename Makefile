@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/18 13:22:02 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/18 19:29:18 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,9 @@ LIB_RL = libreadline.dylib
 LIB_RL_DYLIB_PATH = $(shell find /opt/homebrew -name $(LIB_RL) 2>/dev/null)
 LIB_RL_LIB_DIR = $(dir $(LIB_RL_DYLIB_PATH))
 LIB_RL_INC_DIR = $(subst /lib/,/include,$(LIB_RL_LIB_DIR))
+
+# get_next_line directory
+GNL_DIR = ./get_next_line
 
 # Sources files
 SRCS = main.c \
@@ -74,13 +77,14 @@ SRCS = main.c \
 	   handle_operator.c \
 	   handle_connector.c \
 	   handle_command.c \
-	   handle_argument.c \
 	   handle_pipe_command.c \
-	   handle_redirection.c \
-	   handle_file.c \
+	   handle_io_redirections.c \
 	   \
 	   buck_up_fd.c \
 	   recover_fd.c \
+	   input_redirection.c \
+	   here_doc.c \
+	   out_redirection.c \
 	   \
 	   exec_file.c \
 	   execute_command.c \
@@ -116,6 +120,10 @@ SRCS = main.c \
 	   debug_leaks.c
 #	   signal.c \要確認 include/signal.hがあるとkamitsui環境ではコンパイルできない。
 
+SRCS_GNL = \
+		   get_next_line_utils.c \
+		   get_next_line.c
+
 SRCS_B =
 
 # Directories
@@ -131,12 +139,15 @@ SRCS_DIR = ./srcs \
 		   ./srcs/environ \
 		   ./srcs/environ_utils \
 		   ./srcs/signal \
-		   ./srcs/debug
+		   ./srcs/debug \
+		   ./$(GNL_DIR)
 SRCS_B_DIR = ./srcs_bonus
 OBJS_DIR = ./objs
-OBJS_B_DIR = ./objs_b
 DEPS_DIR = .deps
+OBJS_B_DIR = ./objs_b
 DEPS_B_DIR = .deps_b
+OBJS_GNL_DIR = $(GNL_DIR)/objs
+DEPS_GNL_DIR = $(GNL_DIR)/.deps
 INC_DIR = ./includes
 
 # vpath for serching source files in multiple directories
@@ -148,7 +159,8 @@ CFLAGS		=	-Wall -Wextra -Werror
 CF_LINK		=	-lreadline
 CF_DEP		=	-MMD -MP -MF $(@:$(OBJS_DIR)/%.o=$(DEPS_DIR)/%.d)
 CF_DYLIB = -L$(LIB_RL_LIB_DIR)
-CF_INC = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(LIB_PRINTF_INC_DIR) -I$(LIB_RL_INC_DIR)
+CF_INC = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(LIB_PRINTF_INC_DIR) \
+		 -I$(LIB_RL_INC_DIR) -I$(GNL_DIR)
 
 # Command
 RM			=	rm -f
@@ -158,6 +170,8 @@ OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 OBJS_B = $(addprefix $(OBJS_B_DIR)/, $(SRCS_B:.c=.o))
 DEPS = $(addprefix $(DEPS_DIR)/, $(SRCS:.c=.d))
 DEPS_B = $(addprefix $(DEPS_B_DIR)/, $(SRCS_B:.c=.d))
+OBJS_GNL = $(addprefix $(OBJS_GNL_DIR)/, $(SRCS_GNL:.c=.o))
+DEPS_GNL = $(addprefix $(DEPS_GNL_DIR)/, $(SRCS_GNL:.c=.d))
 
 # Rules for building object files
 $(OBJS_DIR)/%.o: %.c
@@ -168,12 +182,18 @@ $(OBJS_DIR)/%.o: %.c
 $(DEPS_DIR)/%.d: %.c
 	@mkdir -p $(DEPS_DIR)
 
+$(OBJS_GNL_DIR)/%.o: %.c
+	@mkdir -p $(OBJS_GNL_DIR)
+	@mkdir -p $(DEPS_GNL_DIR)
+	$(CC) $(CFLAGS) $(CF_INC) $(CF_DEP) -c $< -o $@
+
 # Default target
 all: $(NAME)
 
 # Mandatory Target
-$(NAME): $(LIBFT) $(LIB_PRINTF) $(OBJS)
-	$(CC) $(CFLAGS) $(CF_LINK) $(CF_DYLIB) $(OBJS) $(LIB_PRINTF) -o $(NAME)
+$(NAME): $(LIBFT) $(LIB_PRINTF) $(OBJS_GNL) $(OBJS)
+	$(CC) $(CFLAGS) $(CF_LINK) $(CF_DYLIB) \
+		$(OBJS) $(OBJS_GNL) $(LIB_PRINTF) -o $(NAME)
 
 # Bonus Target
 bonus: $(NAME)_bonus

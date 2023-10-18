@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/18 14:52:19 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/18 22:27:37 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@
 #include "execute.h"
 
 #include "debug.h"
+#include "ft_printf.h"
 
 int	handle_executable(t_ast *node, t_envwrap *env_wrapper)
 {
 //	if (node->flag & BIT_EXPANSION)
 //		node = handle_expansion(node);
+	ft_dprintf(g_fd_log, ">> call handle_executable ... node value [%s]\n", node->value);
 	return (execute_command(node, env_wrapper));
 }
 // debug code
@@ -31,31 +33,38 @@ int	handle_executable(t_ast *node, t_envwrap *env_wrapper)
 //	debug_status("handle_executable", status);// debug
 //	return (status);// debug
 
-int	handle_io_redirections(t_ast *node, t_envwrap *env_wrapper)
-{
-//	if (node->flag & BIT_EXPANSION)
-//		node = handle_expansion(node);
-	// 未実装
-	(void)node;// remove
-	(void)env_wrapper;// remove
-	return (EXIT_SUCCESS);
-}
-
 int	handle_simple_command(t_ast *node, t_envwrap *env_wrapper)
 {
 	size_t	i;
+	int		status;// for debug
+	int	original_stdout_fd;
+	int	original_stdin_fd;
 
+	ft_dprintf(g_fd_log, ">> call handle_simple_command ... node value [%s]\n", node->value);
 	i = 0;
-	if (node->children[i]->type == NODE_IO_REDIRECTIONS)
-		if (handle_io_redirections(node->children[i], env_wrapper) == EXIT_SUCCESS)
+	//else// debug code
+	if (node->children[i]->type == NODE_EXECUTABLE)
+	{
+		status = handle_executable(node->children[i], env_wrapper);
+		debug_status("handle_simple_command ... only executable", status);// debug
+		return (status);
+	}
+	//if (node->children[i]->type == NODE_IO_REDIRECTIONS)
+	else
+	{
+		original_stdin_fd = buck_up_fd(STDIN_FILENO);
+		original_stdout_fd = buck_up_fd(STDOUT_FILENO);
+		status = handle_io_redirections(node->children[i], env_wrapper);
+		if (status == EXIT_SUCCESS)
 		{
 			i++;
-			return (handle_executable(node->children[i], env_wrapper));
+			status = handle_executable(node->children[i], env_wrapper);
+			recover_fd(original_stdin_fd, STDIN_FILENO);
+			recover_fd(original_stdout_fd, STDOUT_FILENO);
 		}
-		else
-			return (EXIT_FAILURE);
-	else
-		return (handle_executable(node->children[i], env_wrapper));
+		debug_status("handle_simple_command ... exist redirection", status);
+		return (status);
+	}
 }
 
 /**
