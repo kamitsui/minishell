@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 10:08:45 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/18 19:19:28 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/18 23:40:18 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@ int	handle_operator(t_ast *operator_node, t_envwrap *env_wrapper);
  */
 int	handle_connector(t_ast *node, t_envwrap *env_wrapper);
 
+
 /**
  * @brief \<simple-command> <pipe-command>のノードに対しての処理
  */
 int	handle_command(t_ast *node, t_envwrap *env_wrapper);
+
+int	handle_simple_command(t_ast *node, t_envwrap *env_wrapper);
 
 int	handle_io_redirections(t_ast *node, t_envwrap *env_wrapper);
 
