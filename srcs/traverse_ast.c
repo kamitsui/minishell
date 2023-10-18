@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 02:55:26 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:49:59 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 int	traverse_ast(t_ast *node, t_envwrap *env_wrapper)
 {
 	enum e_NodeType			current_type;
-	static t_handle_node	handle_node[NUM_HANDLE] = {
+	static t_handle_node	handle_node[NODE_COMMAND + 1] = {
 		handle_operator, handle_command};
 	size_t					i;
 
@@ -38,7 +38,7 @@ int	traverse_ast(t_ast *node, t_envwrap *env_wrapper)
 		return (env_wrapper->exit_code);
 	// Depth-First search (DFS) approach
 	current_type = NODE_OPERATOR;
-	while (current_type < NUM_HANDLE)
+	while (current_type <= NODE_CONNECTOR)
 	{
 		if (node->type == current_type)
 			env_wrapper->exit_code = handle_node[current_type](node, env_wrapper);
@@ -56,10 +56,15 @@ int	traverse_ast(t_ast *node, t_envwrap *env_wrapper)
 // reference ... enum e_NodeType
 //enum	e_NodeType
 //{
-//	NODE_COMMAND = 0,
-//	NODE_ARGUMENT = 1,
-//	NODE_OPERATOR = 2,
-//	NODE_REDIRECTION = 3,
-//	NODE_FILE = 4,
-//	NODE_END = 5
+//	NODE_OPERATOR,
+//	NODE_COMMAND,
+//	NODE_CONNECTOR,
+//	NODE_PIPE_COM,
+//	NODE_SIMPLE_COM,
+//	NODE_EXECUTABLE,
+//	NODE_ARGUMENT,
+//	NODE_IO_REDIRECTIONS,
+//	NODE_REDIRECTION,
+//	NODE_FILE,
+//	NODE_END
 //};

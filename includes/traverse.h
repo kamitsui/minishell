@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 10:08:45 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 02:58:28 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:46:33 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # include "environ.h"
 
-# define NUM_HANDLE	2
+# define NUM_HANDLE	3
 
 /**
  * @brief 抽象構文木のノード全てを走査して、順番に実行していく再帰関数
