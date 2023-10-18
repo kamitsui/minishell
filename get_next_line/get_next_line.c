@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 21:50:28 by mogawa            #+#    #+#             */
-/*   Updated: 2023/06/21 13:15:15 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/18 19:15:37 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen_gnl(char const *s)
 	return (n);
 }
 
-void	ft_free_null(char *s)
+void	ft_free_null_gnl(char *s)
 {
 	free(s);
 	s = NULL;
