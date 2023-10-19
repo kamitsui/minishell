@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/18 22:27:37 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:08:00 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	handle_simple_command(t_ast *node, t_envwrap *env_wrapper)
 	int	original_stdout_fd;
 	int	original_stdin_fd;
 
+	handle_expansion(node, env_wrapper);
 	ft_dprintf(g_fd_log, ">> call handle_simple_command ... node value [%s]\n", node->value);
 	i = 0;
 	//else// debug code

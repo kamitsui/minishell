@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 11:06:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/03 17:40:42 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/19 16:27:23 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static char	*exp_strjoin(char *new_word, char *to_add, t_list *env, char sign)
 	if (sign == '$')
 	{
 		tmp = to_add;
-		to_add = env_get_value(env, &to_add[1]);
+		to_add = env_get_value_by_key(env, &to_add[1]);// fix by kamitsui
+													   // (compile error)
 		if (!to_add)
 			to_add = ft_strdup("");
 		free(tmp);
@@ -83,42 +84,42 @@ int	expand_dollar_sign_on_char(char **cmdline, t_envwrap *env_wrap)
 	free(old_cmd);
 	return (EXIT_SUCCESS);
 }
-
-void	tkn_expansion_tester(void)
-{
-	extern char	**environ;
-	t_envwrap	*env_wrap;
-	char		*test_word;
-	char		*tmp;
-
-	env_wrap = create_env_list(environ);
-	test_word = ft_strdup("\"$PWD@$HOME$H@ME\"");
-	// while (cmdlst)
-	// {
-	// 	token = cmdlst->content;
-	// 	if (token->flg == unclassified || token->flg == doube_quote)
-	// 	{
-	// 		if (ft_strchr(token->word, '$') != NULL)
-	// tmp = test_word;
-	printf("before:[%s]\n", test_word);//!
-	expand_dollar_sign_on_char(&test_word, env_wrap);//!＄展開関数
-	tmp = test_word;
-	test_word = ft_strtrim(test_word, "\"\'");//!クオートを削除
-	free(tmp);
-	// 	}
-	// 	cmdlst = cmdlst->next;
-	// }
-	// free(tmp);
-	printf("after:[%s]\n", test_word);//!
-	ft_lstclear(&env_wrap->env, _env_del_content);
-	free(env_wrap->pwd);
-	free(env_wrap);
-	free(test_word);
-	system("leaks -q expansion");
-}
-
-int main(void)
-{
-	tkn_expansion_tester();
-	return (0);
-}
+//
+//void	tkn_expansion_tester(void)
+//{
+//	extern char	**environ;
+//	t_envwrap	*env_wrap;
+//	char		*test_word;
+//	char		*tmp;
+//
+//	env_wrap = create_env_list(environ);
+//	test_word = ft_strdup("\"$PWD@$HOME$H@ME\"");
+//	// while (cmdlst)
+//	// {
+//	// 	token = cmdlst->content;
+//	// 	if (token->flg == unclassified || token->flg == doube_quote)
+//	// 	{
+//	// 		if (ft_strchr(token->word, '$') != NULL)
+//	// tmp = test_word;
+//	printf("before:[%s]\n", test_word);//!
+//	expand_dollar_sign_on_char(&test_word, env_wrap);//!＄展開関数
+//	tmp = test_word;
+//	test_word = ft_strtrim(test_word, "\"\'");//!クオートを削除
+//	free(tmp);
+//	// 	}
+//	// 	cmdlst = cmdlst->next;
+//	// }
+//	// free(tmp);
+//	printf("after:[%s]\n", test_word);//!
+//	ft_lstclear(&env_wrap->env, _env_del_content);
+//	free(env_wrap->pwd);
+//	free(env_wrap);
+//	free(test_word);
+//	system("leaks -q expansion");
+//}
+//
+//int main(void)
+//{
+//	tkn_expansion_tester();
+//	return (0);
+//}

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:45:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/19 00:46:53 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:08:43 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	handle_pipe_command(t_ast *node, t_envwrap *env_wrapper)
 	int	status;
 
 	ft_dprintf(g_fd_log, ">> call handle_pipe_command ... node value [%s]\n", node->value);
+	handle_expansion(node, env_wrapper);
 	original_stdin_fd = buck_up_fd(STDIN_FILENO);
 	original_stdout_fd = buck_up_fd(STDOUT_FILENO);
 	if (original_stdout_fd == -1)

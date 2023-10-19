@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/18 19:29:18 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/19 16:20:46 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ SRCS = main.c \
 	   tokenize_lstiter_funcs.c \
 	   tokenize_markers.c \
 	   tokenize_utils.c \
+	   \
+	   expansion.c \
 	   \
 	   parse.c \
 	   create_node.c \
@@ -79,6 +81,7 @@ SRCS = main.c \
 	   handle_command.c \
 	   handle_pipe_command.c \
 	   handle_io_redirections.c \
+	   handle_expansion.c \
 	   \
 	   buck_up_fd.c \
 	   recover_fd.c \
@@ -129,6 +132,7 @@ SRCS_B =
 # Directories
 SRCS_DIR = ./srcs \
 		   ./srcs/token \
+		   ./srcs/expansion \
 		   ./srcs/tokenize_utils \
 		   ./srcs/parse_utils \
 		   ./srcs/parse_utils/is_node_type \
