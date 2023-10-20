@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:41:58 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 14:56:54 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/20 22:20:14 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,12 @@ void	debug_ast(t_ast *ast)
 {
 	t_ast	*node;
 
-	ft_dprintf(g_fd_log, "%s---- AST debug  ----\n", DEBUG_COLOR);
-	display_head(ast);
-	node = ast;
-	display_children(node);
-	ft_dprintf(g_fd_log, "\n\n");
+	if (g_flag_debug == DEBUG_ON)
+	{
+		ft_dprintf(g_fd_log, "%s---- AST debug  ----\n", DEBUG_COLOR);
+		display_head(ast);
+		node = ast;
+		display_children(node);
+		ft_dprintf(g_fd_log, "\n\n");
+	}
 }
