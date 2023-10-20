@@ -1,6 +1,7 @@
-RL_DIR = $(shell brew --prefix readline)
-RL_LIB_DIR = $(addprefix $(RL_DIR), /lib)
-RL_INC_DIR = $(addprefix $(RL_DIR), /include)
+LIB_RL = libreadline.dylib
+RL_DYLIB_PATH = $(shell find /opt/homebrew -name $(LIB_RL) 2>/dev/null)
+RL_LIB_DIR = $(dir $(RL_DYLIB_PATH))
+RL_INC_DIR = $(subst /lib/,/include,$(RL_LIB_DIR))
 
 signal:
 	cc -g3 -O0 -fsanitize=address \

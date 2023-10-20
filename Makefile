@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/20 14:40:20 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/20 22:26:37 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,6 @@ SRCS = main.c \
 	   is_or_list.c \
 	   is_pipe.c \
 	   is_redirection.c \
-	   is_string.c \
 	   is_expansion.c \
 	   is_squote.c \
 	   is_dquote.c \
@@ -112,6 +111,7 @@ SRCS = main.c \
 	   ft_unset.c \
 	   ft_echo.c \
 	   \
+	   signal.c \
 	   \
 	   error.c \
 	   free_utils.c \
@@ -123,7 +123,6 @@ SRCS = main.c \
 	   open_log.c \
 	   debug_status.c \
 	   debug_leaks.c
-#	   signal.c \要確認 include/signal.hがあるとkamitsui環境ではコンパイルできない。
 #	   execute_pipeline.c \
 #	   set_cmd_stack.c \
 

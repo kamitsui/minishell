@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 14:22:49 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/26 09:57:00 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/20 21:52:32 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	sig_handler(int sig, siginfo_t *siginfo, void *ucontext)
 		write(STDOUT_FILENO, "ELSE\n", 6);
 
 	}
+	(void)sig;// add by kamitsui (compile error : unused parameter)
+	(void)ucontext;// add by kamitsui (compile error : unused parameter)
 }
 
 void	sig_signal_initializer(t_sigaction *act, int sig_type)
@@ -64,30 +66,30 @@ void	sig_signal_initializer(t_sigaction *act, int sig_type)
 	else if (sig_type == SIGQUIT)
 		act->sa_handler = SIG_IGN;
 }
-
-int main()
-{
-	char *line = NULL;
-	t_sigaction	act_sigint;
-	t_sigaction	act_sigquit;
-
-	sig_signal_initializer(&act_sigint, SIGINT);
-	sig_signal_initializer(&act_sigquit, SIGQUIT);
-	sigaction(SIGINT, &act_sigint, NULL);
-	sigaction(SIGQUIT,&act_sigquit, NULL);
-	while (1)
-	{
-		// printf("gflag=[%d]\n", g_flag);
-		line = readline("> ");
-		if (line == NULL || strlen(line) == 0)
-		{
-			free(line);
-			break ;
-		}
-		printf("%s\n", line);
-		add_history(line);
-		free(line);
-	}
-	printf("exit\n");
-	return 0;
-}
+//
+//int main()
+//{
+//	char *line = NULL;
+//	t_sigaction	act_sigint;
+//	t_sigaction	act_sigquit;
+//
+//	sig_signal_initializer(&act_sigint, SIGINT);
+//	sig_signal_initializer(&act_sigquit, SIGQUIT);
+//	sigaction(SIGINT, &act_sigint, NULL);
+//	sigaction(SIGQUIT,&act_sigquit, NULL);
+//	while (1)
+//	{
+//		// printf("gflag=[%d]\n", g_flag);
+//		line = readline("> ");
+//		if (line == NULL || strlen(line) == 0)
+//		{
+//			free(line);
+//			break ;
+//		}
+//		printf("%s\n", line);
+//		add_history(line);
+//		free(line);
+//	}
+//	printf("exit\n");
+//	return 0;
+//}
