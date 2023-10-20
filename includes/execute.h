@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:59:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/05 20:23:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/19 23:14:16 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	exec_file(char *file, char *arguments[], char *env[]);
  * @brief <simple-command>のノードを実行する関数
  */
 int		execute_command(t_ast *command_node, t_envwrap *env_wrapper);
+int	execute_builtins_command(t_ast *node, t_envwrap *env_wrapper);
 
 /**
  * @brief <simple-command>のノードからコマンド引数を取り出す関数

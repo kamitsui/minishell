@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/19 16:20:46 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/20 14:40:20 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,8 +94,9 @@ SRCS = main.c \
 	   get_arguments.c \
 	   wait_process.c \
 	   execute_script_file.c \
-	   execute_pipeline.c \
-	   set_cmd_stack.c \
+	   execute_builtins_command.c \
+	   \
+	   is_builtins_command.c \
 	   \
 	   substr_env.c \
 	   environ.c \
@@ -105,6 +106,7 @@ SRCS = main.c \
 	   \
 	   ft_cd.c \
 	   ft_env.c \
+	   ft_exit.c \
 	   ft_export.c \
 	   ft_pwd.c \
 	   ft_unset.c \
@@ -122,6 +124,8 @@ SRCS = main.c \
 	   debug_status.c \
 	   debug_leaks.c
 #	   signal.c \要確認 include/signal.hがあるとkamitsui環境ではコンパイルできない。
+#	   execute_pipeline.c \
+#	   set_cmd_stack.c \
 
 SRCS_GNL = \
 		   get_next_line_utils.c \
@@ -142,6 +146,7 @@ SRCS_DIR = ./srcs \
 		   ./srcs/traverse_utils/fd_utils \
 		   ./srcs/environ \
 		   ./srcs/environ_utils \
+		   ./srcs/builtins \
 		   ./srcs/signal \
 		   ./srcs/debug \
 		   ./$(GNL_DIR)

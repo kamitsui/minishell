@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:29:42 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 17:55:27 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:44:17 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,10 @@ t_ast	*parse_command(char ***tokens, char *head_value)
 	char	*value;
 
 	node = create_node(NODE_COMMAND, head_value);
-	ft_dprintf(g_fd_log,
-				"is_include_redirection = [%d]  false[%d] true[%d]\n\n",
-				is_include_redirection(*tokens), false, true);
 	if (is_include_pipe_command(*tokens) == true)
 	{
 		value = get_pipe_command_value(*tokens);
-		ft_dprintf(g_fd_log, "value_pipe_command [%s]\n", value);
+//		ft_dprintf(g_fd_log, "value_pipe_command [%s]\n", value);// debug
 		command_node = parse_pipe_command(tokens, value);
 		free(value);
 	}

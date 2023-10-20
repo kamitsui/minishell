@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/10 21:25:51 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/20 19:20:17 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,12 @@ int	input(t_envwrap *env_wrapper)
 		line = readline(PROMPT);
 		if (line == NULL)
 			handle_error(ERR_READLINE);
-		if (ft_strcmp(line, "exit") == 0)
-		{
-			free(line);
-			break ;
-		}
 		add_history(line);
 		// if (^Dがきたら)  .....
 		// if (lineの最後の文字がエスケープ文字'\'だったら）.....
 		status = lets_go_shell(line, env_wrapper);
-		debug_status("input", status);
+		debug_status("lets_go_shell", status);// debug
+		debug_leaks("lets_go_shell", "minishell");// debug
 	}
 	//	erro handle (^D が２回続いて入力された場合)
 	return (status);

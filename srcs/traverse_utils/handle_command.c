@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/19 16:08:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:46:58 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,22 @@
 #include "parse.h"
 #include "traverse.h"
 #include "execute.h"
+#include "builtins.h"
 
 #include "debug.h"
 #include "ft_printf.h"
 
+
 int	handle_executable(t_ast *node, t_envwrap *env_wrapper)
 {
-//	if (node->flag & BIT_EXPANSION)
-//		node = handle_expansion(node);
-	ft_dprintf(g_fd_log, ">> call handle_executable ... node value [%s]\n", node->value);
-	return (execute_command(node, env_wrapper));
+	if (is_builtins_command(node->value) == true)
+		return (execute_builtins_command(node, env_wrapper));
+	else
+	{
+//		ft_dprintf(g_fd_log,
+//				">> call handle_executable ... node value [%s]\n", node->value);// debug
+		return (execute_command(node, env_wrapper));
+	}
 }
 // debug code
 //	int	status = execute_command(node, env_wrapper);// debug
@@ -41,7 +47,7 @@ int	handle_simple_command(t_ast *node, t_envwrap *env_wrapper)
 	int	original_stdin_fd;
 
 	handle_expansion(node, env_wrapper);
-	ft_dprintf(g_fd_log, ">> call handle_simple_command ... node value [%s]\n", node->value);
+//	ft_dprintf(g_fd_log, ">> call handle_simple_command ... node value [%s]\n", node->value);// debug
 	i = 0;
 	//else// debug code
 	if (node->children[i]->type == NODE_EXECUTABLE)
