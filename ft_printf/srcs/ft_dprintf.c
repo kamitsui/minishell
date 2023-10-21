@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 11:55:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/09/07 18:55:51 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 12:02:12 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "ft_printf.h"
 #include "process.h"
 
-static void	handle_error(const char *cause)
+static void	handle_error_dprintf(const char *cause)
 {
 	ft_dprintf(STDERR_FILENO, "%s\n", cause);
 	exit(1);
@@ -30,9 +30,9 @@ static int	set_stdout_fd(int fd)
 
 	original_stdout_fd = dup(STDOUT_FILENO);
 	if (original_stdout_fd == -1)
-		handle_error("dup");
+		handle_error_dprintf("dup");
 	if (dup2(fd, STDOUT_FILENO) == -1)
-		handle_error("dup2");
+		handle_error_dprintf("dup2");
 	return (original_stdout_fd);
 }
 
@@ -58,7 +58,7 @@ int	ft_dprintf(int fd, const char *input, ...)
 	if (machine.state == ERROR)
 		return (-1);
 	if (dup2(original_stdout_fd, STDOUT_FILENO) == -1)
-		handle_error("dup2");
+		handle_error_dprintf("dup2");
 	close(original_stdout_fd);
 	return (machine.out_size);
 }

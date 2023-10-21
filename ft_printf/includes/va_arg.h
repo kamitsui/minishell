@@ -6,14 +6,14 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:18:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/06/21 15:26:11 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 12:02:57 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VA_ARG_H
 # define VA_ARG_H
 
-typedef unsigned long long	(*t_f_u_va_arg)(t_sm *);
+typedef unsigned long long	(*t_f_u_va_arg)(t_sm *machine);
 unsigned long long	unsign_hh(t_sm *machine);
 unsigned long long	unsign_ll(t_sm *machine);
 unsigned long long	unsign_h(t_sm *machine);
