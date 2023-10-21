@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/18 13:31:09 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:06:21 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,12 @@ struct s_ast
 };
 
 /**
+ * @brief 新規ノードを作る関数
+ * ノードのタイプと値を引数で受け取り、ノードの構造体にセットする
+ */
+t_ast	*create_node(enum e_NodeType type, char *value);
+
+/**
  * @brief parse関数はトークンの情報を解析し、
  * 抽象構文木のデータ構造に置き換えます。
  */
@@ -140,15 +146,8 @@ t_ast	*parse_pipe_command(char ***tokens, char *head_value);
 t_ast	*parse_simple_command(char ***tokens, char *head_value);
 
 t_ast	*parse_io_redirections(char **tokens, char *head_value);
-//t_ast	*parse_io_redirections_in_simple_command(char **tokens, char *head_value);
 t_ast	*parse_file(char **tokens);
 t_ast	*parse_executable(char ***tokens);
-
-/**
- * @brief 新規ノードを作る関数
- * ノードのタイプと値を引数で受け取り、ノードの構造体にセットする
- */
-t_ast	*create_node(enum e_NodeType type, char *value);
 
 char	*get_command_value(char **tokens);
 char	*get_pipe_command_value(char **tokens);
@@ -173,7 +172,7 @@ bool	is_in_red(const char *token);
 bool	is_here_doc(const char *token);
 bool	is_out_red(const char *token);
 bool	is_out_append(const char *token);
-bool	is_string(const char *token);
+
 bool	is_expansion(const char *token);
 bool	is_dquote(const char *token);
 bool	is_squote(const char *token);
@@ -189,6 +188,6 @@ bool	is_include_pipe_command(char **tokens);
  * @details 使用関数\n
  * get_node_flag関数 で使用 ( create_node.c 内のヘルパー関数 )
  */
-typedef bool	(*t_is_type_node)(const char *);
+typedef bool			(*t_is_type_node)(const char *);
 
 #endif

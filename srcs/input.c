@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/20 19:20:17 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:11:07 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 	ast = parse(tokens);
 	debug_ast(ast);// debug
 	status = traverse_ast(ast, env_wrapper);
-//	free(line);// move to input func 10/6
 	free_two_darray(tokens);
 	free_ast(ast);
 	return (status);
@@ -82,12 +81,3 @@ int	input(t_envwrap *env_wrapper)
 	//	erro handle (^D が２回続いて入力された場合)
 	return (status);
 }
-// debug code
-// エスケープ文字'\'がきたときの挙動(将来対応)
-// 例　下記をリードラインする。　\0までの文字列を返す。
-//
-// lines[0]  "echo aaa\"
-// lines[1]  "ls -l\"
-// lines[2]  "| cat -e\"
-// lines[3]  "exit" or '\n' or ^D <-ここまで
-// lines[3]  NULL

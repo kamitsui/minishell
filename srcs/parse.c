@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 17:54:34 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:12:54 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ t_ast	*parse(char **tokens)
 			node = parse_command(&tokens, value);
 			free(value);
 		}
-//		debug_parse("parse", node);// debug
 		ast->num_children++;
 		ast->children = (t_ast **)realloc(ast->children,// use ft_realloc
 				ast->num_children * sizeof(t_ast *));
@@ -58,3 +57,5 @@ t_ast	*parse(char **tokens)
 	}
 	return (ast);
 }
+//debug code
+//		debug_parse("parse", node);// debug

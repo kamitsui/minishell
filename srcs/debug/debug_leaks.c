@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:54:20 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 22:28:13 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 16:43:42 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void	recover_filedes(int prev_fd, int recover_fd)
 
 void	debug_leaks(char *call_by_func, char *target)
 {
-	int	prev_fd;
-	int	prev_stderr_fd;
+	int		prev_fd;
+	int		prev_stderr_fd;
 	char	*str_leak;
 
 	if (g_flag_debug == DEBUG_ON)

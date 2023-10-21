@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/20 14:45:32 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:16:25 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,24 @@ int	traverse_ast(t_ast *node, t_envwrap *env_wrapper)
 
 	if (node->type > NODE_COMMAND)
 		return (env_wrapper->exit_code);
-//	if (node->type == NODE_CONNECTOR
+//	if (node->type == NODE_CONNECTOR// ボーナス
 //		&& handle_connector(node, env_wrapper) == EXIT_FAILURE)
 //		return (env_wrapper->exit_code);
-	// Depth-First search (DFS) approach
 	current_type = NODE_OPERATOR;
 	while (current_type <= NODE_COMMAND)
 	{
 		if (node->type == current_type)
-		{
-			env_wrapper->exit_code = handle_node[current_type](node, env_wrapper);
-			//debug_status("traverse_ast", env_wrapper->exit_code);// debug
-		}
+			env_wrapper->exit_code
+				= handle_node[current_type](node, env_wrapper);
 		current_type++;
 	}
-	// Traverse the children of the current node
 	i = 0;
 	while (i < node->num_children)
-	{
-		env_wrapper->exit_code = traverse_ast(node->children[i], env_wrapper);
-		i++;
-	}
+		env_wrapper->exit_code = traverse_ast(node->children[i++], env_wrapper);
 	return (env_wrapper->exit_code);
 }
+//debug code
+			//debug_status("traverse_ast", env_wrapper->exit_code);// debug
 // reference ... enum e_NodeType
 //enum	e_NodeType
 //{

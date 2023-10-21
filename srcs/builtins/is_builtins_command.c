@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:07:50 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/20 14:37:54 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:17:04 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ bool	is_builtins_command(const char *value)
 {
 	static const char				*str_builtins[NUM_BUILTINS] = {
 		STR_ECHO, STR_CD, STR_PWD, STR_ENV, STR_UNSET, STR_EXPORT, STR_EXIT};
-	bool			result;
-	size_t			i;
+	bool							result;
+	size_t							i;
 
 	if (value == NULL)
 		return (false);

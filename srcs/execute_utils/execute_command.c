@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/20 14:49:16 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:44:44 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,16 @@ int	execute_command(t_ast *command_node, t_envwrap *env_wrapper)
 	command.cmd_name = command_node->value;
 	get_arguments(&command, command_node);
 	command.env = convert_env_list_to_two_darray(env_wrapper->env->next);
-//	debug_env_two_darray(command.env);// debug
-//	debug_command(&command);// debug
 	pid = fork();
 	if (pid == -1)
 		ft_perror_exit("fork");
 	if (pid == 0)
 		child_process(command);
-	free(command.args);// これだけでは不十分
+	free(command.args);
 	free_two_darray(command.env);
-	debug_leaks("execute_command", NULL);// debug
-//	system("leaks a.out");// NG リークあり
+	debug_leaks("execute_command", "minishell");// debug
 	return (wait_process(pid, 1));
 }
+//	debug_env_two_darray(command.env);// debug
+//	debug_command(&command);// debug
+//	debug_leaks("execute_command", "minishell");// debug

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/16 21:39:44 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:32:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_string
 	size_t			out_len;
 }	t_string;
 
-
 /**
  * @brief プロンプトに出力する文字列
  */
@@ -48,37 +47,13 @@ typedef struct s_string
 /**
  * @brief mainからで使う関数
  */
-int	input(t_envwrap *env_wrapper);
-
-// 未完成
-int	execute_script_file(char *file, char *env[]);
+int			input(t_envwrap *env_wrapper);
 
 /**
  * @brief readlineで得た文字列をトークン分けする関数
  */
-char	**tkn_controller(char const *raw_cmds);
+char		**tkn_controller(char const *raw_cmds);
 
 t_envwrap	*create_env_list(char **environ);
 
 #endif
-
-//
-///**
-// * @brief 環境変数のハッシュテーブル（未実装）
-// */
-//typedef struct s_hash
-//{
-//	char			*key;
-//	char			*value;
-//	struct s_hash	*next;
-//}	t_hash;
-//
-///**
-// * @brief 実行や展開の時に必要なデータ構造 (未実装)
-// */
-//typedef struct s_data
-//{
-//	t_hash	*env;
-//	char	*current_dir;
-//// ...追加していくかも。。。
-//}	t_data;

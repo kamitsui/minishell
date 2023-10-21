@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:41:58 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/20 22:20:14 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 16:48:32 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,23 @@ static void	display_head(t_ast *node)
 	ft_dprintf(g_fd_log, "\t\ttype\tOPERATOR[%d]\tCOMMAND[%d]\tCONNECTOR[%d]\t\t",
 		NODE_OPERATOR, NODE_COMMAND, NODE_CONNECTOR);
 	ft_dprintf(g_fd_log,
-				"PIPE_COM[%d]\tSIMPLE_COM[%d]\n\t\t\tEXECUTABLE[%d]\tARGUMENT[%d]\t",
-				NODE_PIPE_COM, NODE_SIMPLE_COM, NODE_EXECUTABLE, NODE_ARGUMENT);
+		"PIPE_COM[%d]\tSIMPLE_COM[%d]\n\t\t\tEXECUTABLE[%d]\tARGUMENT[%d]\t",
+		NODE_PIPE_COM, NODE_SIMPLE_COM, NODE_EXECUTABLE, NODE_ARGUMENT);
 	ft_dprintf(g_fd_log, "IO_REDIRECTIONS[%d]\tREDIRECTION[%d]\tFILE[%d]\n",
 		NODE_IO_REDIRECTIONS, NODE_REDIRECTION, NODE_FILE);
+}
+
+static void	display_parent(t_ast *node)
+{
+	char	*bit_str;
+
+	ft_dprintf(g_fd_log, "\n\n");
+	ft_dprintf(g_fd_log, "\tparent[%s]\ttype[%d]\n",
+		node->value, (int)node->type);
+	bit_str = ft_itoa_binary(node->flag);// handle_error
+	ft_dprintf(g_fd_log, "\tflag[%s]\n", bit_str);
+	free(bit_str);
+	debug_flag(node);
 }
 
 /**
@@ -44,18 +57,9 @@ static void	display_head(t_ast *node)
 static void	display_children(t_ast *node)
 {
 	size_t	i;
-	char	*bit_str;
 	t_ast	*children;
 
-//	if (node->flag & (BIT_ARGUMENT | BIT_REDIRECTION | BIT_FILE))
-//		return ;
-	ft_dprintf(g_fd_log, "\n\n");
-	ft_dprintf(g_fd_log, "\tparent[%s]\ttype[%d]\n",
-		node->value, (int)node->type);
-	bit_str = ft_itoa_binary(node->flag);// handle_error
-	ft_dprintf(g_fd_log, "\tflag[%s]\n", bit_str);
-	free(bit_str);
-	debug_flag(node);
+	display_parent(node);
 	if (node->flag & (BIT_ARGUMENT | BIT_REDIRECTION | BIT_FILE))
 		return ;
 	i = 0;
@@ -63,18 +67,8 @@ static void	display_children(t_ast *node)
 	{
 		children = node->children[i];
 		ft_dprintf(g_fd_log, "\t\tchildren[%d]\t[%s]",
-					i, children->value);
+			i, children->value);
 		ft_dprintf(g_fd_log, "\ttype\t[%d]\n", (int)children->type);
-//		if (children->flag & BIT_ARGUMENT
-//			|| children->flag & BIT_REDIRECTION || children->flag & BIT_FILE)
-//		{
-//			ft_dprintf(g_fd_log, "\n\tchildren[%d]\t[%s]",
-//						i, children->value);
-//			bit_str = ft_itoa_binary(children->flag);// handle_error
-//			ft_dprintf(g_fd_log, "\n\tflag[%s]\n", bit_str);
-//			free(bit_str);
-//			debug_flag(children);
-//		}
 		i++;
 	}
 	i = 0;

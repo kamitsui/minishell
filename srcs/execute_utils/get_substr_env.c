@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   substr_env.c                                       :+:      :+:    :+:   */
+/*   get_substr_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 10:37:40 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/20 22:45:47 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 14:24:29 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
  *
  * @return dir 環境変数のから取り出した値（文字列）
  */
-char	*substr_env(char *name, char *env[])
+char	*get_substr_env(char *name, char *env[])
 {
 	char	*dir;
 	size_t	name_len;

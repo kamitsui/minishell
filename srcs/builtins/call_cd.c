@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_file.c                                       :+:      :+:    :+:   */
+/*   call_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 02:40:13 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 03:49:14 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/21 17:19:22 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/21 17:21:22 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_cd.h"
 #include "parse.h"
-#include "libft.h"
+#include "environ.h"
 
-t_ast	*parse_file(char ***tokens)
+int	call_cd(t_ast *node, t_envwrap *env_wrapper)
 {
-	if (is_string(**tokens) == true)
-	{
-		(*tokens)++;
-		return (create_node(NODE_FILE, *(*tokens - 1)));
-	}
-	return (NULL);
+	char	*path;
+	int		status;
+
+	path = NULL;
+	if (node->num_children > 0)
+		path = node->children[0]->value;
+	status = ft_cd(path, env_wrapper);
+	return (status);
 }

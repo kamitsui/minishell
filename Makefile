@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/21 12:49:24 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/21 18:30:57 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,13 +91,12 @@ SRCS = main.c \
 	   exec_file.c \
 	   execute_command.c \
 	   get_arguments.c \
+	   get_substr_env.c \
 	   wait_process.c \
-	   execute_script_file.c \
 	   execute_builtins_command.c \
+	   execute_script_file.c \
+	   join_path.c \
 	   \
-	   is_builtins_command.c \
-	   \
-	   substr_env.c \
 	   environ.c \
 	   env_utils.c \
 	   env_lstiter_funcs.c \
@@ -111,6 +110,15 @@ SRCS = main.c \
 	   ft_unset.c \
 	   ft_echo.c \
 	   \
+	   call_cd.c \
+	   call_echo.c \
+	   call_env.c \
+	   call_exit.c \
+	   call_export.c \
+	   call_pwd.c \
+	   call_unset.c \
+	   is_builtins_command.c \
+	   \
 	   signal.c \
 	   \
 	   error.c \
@@ -123,8 +131,6 @@ SRCS = main.c \
 	   open_log.c \
 	   debug_status.c \
 	   debug_leaks.c
-#	   execute_pipeline.c \
-#	   set_cmd_stack.c \
 
 SRCS_GNL = \
 		   get_next_line_utils.c \
