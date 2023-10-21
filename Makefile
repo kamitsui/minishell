@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/20 22:26:37 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/21 12:49:24 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -224,7 +224,7 @@ asan: fclean
 
 # Clean target
 clean:
-	rm -rf $(OBJS_DIR) $(DEPS_DIR)
+	rm -rf $(OBJS_DIR) $(DEPS_DIR) $(OBJS_GNL_DIR) $(DEPS_GNL_DIR)
 	make -C ./libft clean
 
 # Clean and remove target
