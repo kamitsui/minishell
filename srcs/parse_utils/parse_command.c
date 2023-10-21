@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:29:42 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/20 14:44:17 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:40:15 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 // for debug
 #include "ft_printf.h"// debug
 #include "debug.h"// debug
-
 
 /**
  * @brief \<command>のノードを作る関数
@@ -42,7 +41,6 @@ t_ast	*parse_command(char ***tokens, char *head_value)
 	if (is_include_pipe_command(*tokens) == true)
 	{
 		value = get_pipe_command_value(*tokens);
-//		ft_dprintf(g_fd_log, "value_pipe_command [%s]\n", value);// debug
 		command_node = parse_pipe_command(tokens, value);
 		free(value);
 	}
@@ -53,8 +51,8 @@ t_ast	*parse_command(char ***tokens, char *head_value)
 		free(value);
 	}
 	node->num_children++;
-	node->children = (t_ast **)realloc(node->children,// use ft_realloc
-			node->num_children * sizeof(t_ast *));
+	node->children = (t_ast **)realloc(node->children,
+			node->num_children * sizeof(t_ast *));// use ft_realloc
 	node->children[node->num_children - 1] = command_node;
 	return (node);
 }

@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/21 18:30:57 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/21 21:00:23 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,8 @@ SRCS = main.c \
 	   get_simple_command_value.c \
 	   str_add_to_buff.c \
 	   str_join_to_out.c \
+	   init_t_string.c \
+	   add_token.c \
 	   \
 	   is_connector.c \
 	   is_and_list.c \

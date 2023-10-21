@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:16:10 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/18 13:25:58 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 20:43:30 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,21 @@
 char	*get_pipe_command_value(char **tokens)
 {
 	t_string	str;
-	size_t		i;
 
-	ft_bzero(&str.buffer, BUFF_SIZE);
-	str.len = 0;
-	str.out = ft_strnew(1);
-	if (str.out == NULL)
-		ft_errno_exit("ft_strnew");
-	str.out_len = 0;
+	init_t_string(&str);
 	while (is_connector(*tokens) == false && is_end(*tokens) == false
-			&& is_include_pipe_command(tokens) == true)
+		&& is_include_pipe_command(tokens) == true)
 	{
 		if (str.out_len > 0)
 			str_add_to_buff(&str, ' ');
-		i = 0;
-		while ((*tokens)[i] != '\0')
-		{
-			str_add_to_buff(&str, (*tokens)[i]);
-			i++;
-		}
+		add_token(&str, tokens);
 		tokens++;
 	}
 	while (is_connector(*tokens) == false && is_end(*tokens) == false
 		&& is_redirection(*tokens) == false)
 	{
 		str_add_to_buff(&str, ' ');
-		i = 0;
-		while ((*tokens)[i] != '\0')
-		{
-			str_add_to_buff(&str, (*tokens)[i]);
-			i++;
-		}
+		add_token(&str, tokens);
 		tokens++;
 	}
 	str.out = str_join_to_out(str.out, str.buffer, str.len);

@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_expansion.c                                     :+:      :+:    :+:   */
+/*   init_t_string.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/14 02:41:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 20:02:12 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/21 20:18:46 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/21 20:59:46 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
 #include "libft.h"
-#include <stdlib.h>
+#include "minishell.h"
+#include "error_minishell.h"
 
-bool	is_expansion(const char *token)
+void	init_t_string(t_string *str)
 {
-	static t_is_type_node	f_type_expansion[NUM_EXPANSION]
-		= {is_squote, is_dquote, is_variable};
-	bool					result;
-	size_t					i;
-
-	if (token == NULL)
-		return (false);
-	result = false;
-	i = 0;
-	while (i < NUM_EXPANSION && result == false)
-	{
-		result = f_type_expansion[i](token);
-		i++;
-	}
-	return (result);
+	ft_bzero(&str->buffer, BUFF_SIZE);
+	str->len = 0;
+	str->out = ft_strnew(1);
+	if (str->out == NULL)
+		ft_errno_exit("ft_strnew");
+	str->out_len = 0;
 }

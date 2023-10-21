@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:04:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 01:39:33 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 20:05:00 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 
 bool	is_connector(const char *token)
 {
-	t_is_type_node	f_is_connector[NUM_CONNECTOR] = {is_and_list, is_or_list};
-	bool			result;
-	size_t			i;
+	static t_is_type_node	f_is_connector[NUM_CONNECTOR]
+		= {is_and_list, is_or_list};
+	bool					result;
+	size_t					i;
 
 	if (token == NULL)
 		return (false);
