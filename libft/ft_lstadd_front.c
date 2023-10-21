@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 19:59:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/05 18:09:44 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/17 15:30:01 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 	new->next = old_head;
 	if (old_head != NULL)
 		old_head->prev = new;
-	old_head = new;
+	*lst = new;
 }
