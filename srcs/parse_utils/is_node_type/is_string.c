@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_parse.c                                       :+:      :+:    :+:   */
+/*   is_string.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 06:28:10 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/13 02:50:26 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/13 04:00:16 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "debug.h"
 #include "parse.h"
+#include <stdlib.h>
 
-int main() {
-	static char *tokens[7] = {
-			"ls", "-l", "file.txt", "&&", "cat", "file.txt", NULL};
+bool	is_string(const char *token)
+{
+	t_is_type_node	f_is_not_string[NUM_NOT_STRING] = {
+						is_and_list, is_or_list, is_pipe, is_redirection};
+	size_t			i;
+	bool			is_string;
 
-	debug_token(tokens);
-	t_ast* ast = parse(tokens);
-	debug_ast(ast);
-
-    // Traverse the AST and execute the commands (implementation not shown here)
-
-    // Free the allocated memory for the AST
-    free_ast(ast);
-
-    return 0;
+	if (token == NULL)
+		return (false);
+	i = 0;
+	is_string = true;
+	while (i < NUM_NOT_STRING && is_string == true)
+	{
+		is_string = is_string && f_is_not_string[i](token) == false;
+		i++;
+	}
+	return (is_string);
 }

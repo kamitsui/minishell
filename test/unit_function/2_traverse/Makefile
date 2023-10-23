@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/10/05 21:05:42 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/13 06:18:31 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,14 @@
 NAME = a.out
 
 # Sources files
-SRCS = traverse_ast.c \
+SRCS = \
+	   is_and_list.c \
+	   is_or_list.c \
+	   is_pipe.c \
+	   is_operator.c \
+	   is_redirection.c \
+	   \
+	   traverse_ast.c \
 	   create_node.c \
 	   handle_operator.c \
 	   handle_command.c \
@@ -36,6 +43,8 @@ SRCS = traverse_ast.c \
 	   \
 	   debug.c \
 	   debug_ast.c \
+	   debug_leaks.c \
+	   open_log.c \
 	   \
 	   env_lstiter_funcs.c \
 	   convert_env_list_to_two_darray.c \
@@ -52,6 +61,7 @@ SRCS = traverse_ast.c \
 PROJ_DIR = ../../..
 SRCS_DIR = $(PROJ_DIR)/srcs \
 		   $(PROJ_DIR)/srcs/parse_utils \
+		   $(PROJ_DIR)/srcs/parse_utils/is_node_type \
 		   $(PROJ_DIR)/srcs/traverse_utils \
 		   $(PROJ_DIR)/srcs/execute_utils \
 		   $(PROJ_DIR)/srcs/environ_utils \

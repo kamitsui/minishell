@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:40:27 by kamitsui          #+#    #+#              #
-#    Updated: 2023/09/21 14:45:04 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/14 01:02:00 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,32 @@ SRCS = parse.c \
 	   parse_pipe_command.c \
 	   parse_argument.c \
 	   create_node.c \
-	   is_pipe_command.c \
+	   count_pipe_command.c \
+	   parse_io_redirection.c \
+	   parse_operator.c \
+	   parse_file.c \
+	   \
+	   is_operator.c \
+	   is_and_list.c \
+	   is_or_list.c \
+	   is_pipe.c \
+	   is_string.c \
+	   is_redirection.c \
 	   \
 	   execute_command.c \
 	   get_arguments.c \
 	   wait_process.c \
 	   exec_file.c \
+	   \
+	   environ.c \
+	   env_lstiter_funcs.c \
+	   convert_env_list_to_two_darray.c \
+	   env_utils.c \
+	   \
+	   ft_cd.c \
+	   ft_env.c \
+	   ft_export.c \
+	   ft_pwd.c \
 	   \
 	   free_utils.c \
 	   \
@@ -34,6 +54,9 @@ SRCS = parse.c \
 	   \
 	   debug.c \
 	   debug_ast.c \
+	   debug_flag.c \
+	   debug_leaks.c \
+	   open_log.c \
 	   \
 	   test_parse_exec.c
 
@@ -41,7 +64,9 @@ SRCS = parse.c \
 PROJ_DIR = ../../..
 SRCS_DIR = $(PROJ_DIR)/srcs \
 		   $(PROJ_DIR)/srcs/parse_utils \
+		   $(PROJ_DIR)/srcs/parse_utils/is_node_type \
 		   $(PROJ_DIR)/srcs/execute_utils \
+		   $(PROJ_DIR)/srcs/environ \
 		   $(PROJ_DIR)/srcs/environ_utils \
 		   $(PROJ_DIR)/srcs/debug \
 		   srcs

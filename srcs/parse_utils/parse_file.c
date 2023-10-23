@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_parse.c                                       :+:      :+:    :+:   */
+/*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 06:28:10 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/13 02:40:13 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/13 03:49:14 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "debug.h"
 #include "parse.h"
+#include "libft.h"
 
-int main() {
-	static char *tokens[7] = {
-			"ls", "-l", "file.txt", "&&", "cat", "file.txt", NULL};
-
-	debug_token(tokens);
-	t_ast* ast = parse(tokens);
-	debug_ast(ast);
-
-    // Traverse the AST and execute the commands (implementation not shown here)
-
-    // Free the allocated memory for the AST
-    free_ast(ast);
-
-    return 0;
+t_ast	*parse_file(char ***tokens)
+{
+	if (is_string(**tokens) == true)
+	{
+		(*tokens)++;
+		return (create_node(NODE_FILE, *(*tokens - 1)));
+	}
+	return (NULL);
 }

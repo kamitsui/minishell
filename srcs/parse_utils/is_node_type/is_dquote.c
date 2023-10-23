@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_parse.c                                       :+:      :+:    :+:   */
+/*   is_dquote.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 06:28:10 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/14 01:51:32 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/14 02:42:50 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "debug.h"
+#include "meta_minishell.h"
 #include "parse.h"
+#include <stdlib.h>
 
-int main() {
-	static char *tokens[7] = {
-			"ls", "-l", "file.txt", "&&", "cat", "file.txt", NULL};
+bool	is_dquote(const char *token)
+{
+	size_t	count;
+	size_t	i;
 
-	debug_token(tokens);
-	t_ast* ast = parse(tokens);
-	debug_ast(ast);
-
-    // Traverse the AST and execute the commands (implementation not shown here)
-
-    // Free the allocated memory for the AST
-    free_ast(ast);
-
-    return 0;
+	count = 0;
+	i = 0;
+	while (token[i] != '\0')
+	{
+		if (token[i] == META_DQUOT_CHR)
+			count++;
+		i++;
+	}
+	if (count == 0)
+		return (false);
+	return (count % 2 == 0);
 }

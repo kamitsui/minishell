@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_argument.c                                   :+:      :+:    :+:   */
+/*   parse_operator.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 19:23:52 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 03:49:39 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/10 21:33:23 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/13 03:50:10 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * @file parse_argument.c
- * @brief \<argument>のノードを作ってトークンを一つ進める関数。
- * （tokensのアドレスを引数で持たせているため、ポインタの移動が可能）
- */
 #include "parse.h"
-#include "libft.h"
+#include <stdlib.h>
 
 /**
- * @brief \<argument>のノードを作ってトークンを一つ進める関数。
+ * @brief オペレーターのノードを作ってトークンを一つ進める関数。
  * （tokensのアドレスを引数で持たせているため、ポインタの移動が可能）
  *
  * @param tokens トークンのアドレス
  *
- * @return 生成されたコマンド引数のノードを返す。
+ * @return 生成されたオペレーターのノードを返す。
  */
-t_ast	*parse_argument(char ***tokens)
+t_ast	*parse_operator(char ***tokens)
 {
-	if (is_string(**tokens) == true)
+	if (is_operator(**tokens) == true)
 	{
 		(*tokens)++;
-		return (create_node(NODE_ARGUMENT, *(*tokens - 1)));
+		return (create_node(NODE_OPERATOR, *(*tokens - 1)));
 	}
 	return (NULL);
 }

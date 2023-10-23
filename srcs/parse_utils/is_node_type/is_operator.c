@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_parse.c                                       :+:      :+:    :+:   */
+/*   is_operator.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 13:58:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 06:28:10 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/10 20:04:35 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/13 03:51:13 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "debug.h"
 #include "parse.h"
+#include <stdbool.h>
 
-int main() {
-	static char *tokens[7] = {
-			"ls", "-l", "file.txt", "&&", "cat", "file.txt", NULL};
+// for debug
+#include "debug.h"// debug
+#include "ft_printf.h"// debug
 
-	debug_token(tokens);
-	t_ast* ast = parse(tokens);
-	debug_ast(ast);
+bool	is_operator(const char *token)
+{
+	t_is_type_node	f_type_operator[NUM_OPERATOR] = {is_and_list, is_or_list};
+	bool			result;
+	size_t			i;
 
-    // Traverse the AST and execute the commands (implementation not shown here)
-
-    // Free the allocated memory for the AST
-    free_ast(ast);
-
-    return 0;
+	if (token == NULL)
+		return (false);
+	result = false;
+	i = 0;
+	while (i < NUM_OPERATOR && result == false)
+	{
+		result = f_type_operator[i](token);
+		i++;
+	}
+	return (result);
 }

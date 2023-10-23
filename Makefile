@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/07 14:00:13 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/14 02:01:55 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,12 +39,24 @@ SRCS = main.c \
 	   tokenize_utils.c \
 	   \
 	   parse.c \
+	   parse_operator.c \
 	   parse_argument.c \
 	   parse_command.c \
 	   parse_simple_command.c \
 	   parse_pipe_command.c \
 	   create_node.c \
-	   is_pipe_command.c \
+	   count_pipe_command.c \
+	   parse_io_redirection.c \
+	   parse_file.c \
+	   \
+	   is_operator.c \
+	   is_and_list.c \
+	   is_or_list.c \
+	   is_pipe.c \
+	   is_redirection.c \
+	   is_string.c \
+	   is_squote.c \
+	   is_dquote.c \
 	   \
 	   traverse_ast.c \
 	   handle_command.c \
@@ -79,7 +91,10 @@ SRCS = main.c \
 	   \
 	   debug.c \
 	   debug_ast.c \
+	   debug_parse.c \
+	   debug_flag.c \
 	   open_log.c \
+	   debug_status.c \
 	   debug_leaks.c
 #	   signal.c \要確認 include/signal.hがあるとkamitsui環境ではコンパイルできない。
 
@@ -90,6 +105,7 @@ SRCS_DIR = ./srcs \
 		   ./srcs/token \
 		   ./srcs/tokenize_utils \
 		   ./srcs/parse_utils \
+		   ./srcs/parse_utils/is_node_type \
 		   ./srcs/execute_utils \
 		   ./srcs/traverse_utils \
 		   ./srcs/environ \
@@ -191,8 +207,8 @@ token:
 	./srcs/environ/env_lstiter_funcs.c ./srcs/environ/env_utils.c ./srcs/environ/environ.c ./srcs/environ/ft_pwd.c \
 	./srcs/environ/ft_cd.c ./srcs/environ/ft_env.c ./srcs/environ/ft_export.c ./srcs/environ/ft_unset.c \
 	-Iincludes -Ilibft -Ift_printf/includes ./libft/libft.a ./ft_printf/libftprintf.a -lreadline \
-	./srcs/token/token_expansion.c \
 	-o token
+#	./srcs/token/token_expansion.c \
 
 leak:
 	cc -Wall -Wextra -g3 -O0 ./srcs/token/tokenize.c ./srcs/token/tokenize_utils.c \
