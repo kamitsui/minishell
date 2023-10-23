@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 12:28:13 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 14:28:21 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,8 @@ bool	is_end(const char *token);
 bool	is_include_redirection(char **tokens);
 bool	is_include_redirection_in_simple_com(char **tokens);
 bool	is_include_pipe_command(char **tokens);
+
+bool	is_parenthesis(const char *token);
 
 /**
  * @brief ノードの値（文字列）に対して、種類を調べる関数を関数ポインタとして宣言

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 18:32:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 15:21:31 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_string
  * @brief mainからで使う関数
  */
 int			input(t_envwrap *env_wrapper);
+int	lets_go_shell(char *line, t_envwrap *env_wrapper);
 
 /**
  * @brief readlineで得た文字列をトークン分けする関数

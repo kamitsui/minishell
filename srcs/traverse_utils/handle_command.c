@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 12:50:29 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:21:22 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ int	handle_executable(t_ast *node, t_envwrap *env_wrapper)
 int	handle_simple_command(t_ast *node, t_envwrap *env_wrapper)
 {
 	size_t	i;
-	int		status;// for debug
+	int		status;
 	int	original_stdout_fd;
 	int	original_stdin_fd;
 
+	if (node->flag & BIT_PARENTHESIS)
+		return (handle_parenthesis(node, env_wrapper));
 	handle_expansion(node, env_wrapper);
-//	ft_dprintf(g_fd_log, ">> call handle_simple_command ... node value [%s]\n", node->value);// debug
 	i = 0;
-	//else// debug code
 	if (node->children[i]->type == NODE_EXECUTABLE)
 	{
 		status = handle_executable(node->children[i], env_wrapper);

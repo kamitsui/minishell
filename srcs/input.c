@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 15:11:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 15:21:22 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
  *
  * @return status 終了ステータス
  */
-static int	lets_go_shell(char *line, t_envwrap *env_wrapper)
+int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 {
 	int		status;
 	char	**tokens;

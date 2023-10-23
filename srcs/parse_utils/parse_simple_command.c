@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 20:00:29 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:16:04 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 	t_ast	*node;
 
 	node = create_node(NODE_SIMPLE_COM, head_value);
+	if (is_parenthesis(**tokens) == true)
+	{
+		node->flag |= BIT_PARENTHESIS;
+		(*tokens)++;
+		return (node);
+	}
 	if (is_include_redirection_in_simple_com(*tokens) == true)
 		call_parse_io_redirections(node, tokens);
 	while (is_end(**tokens) == false && is_connector(**tokens) == false

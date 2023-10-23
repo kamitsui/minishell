@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/21 21:00:23 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/23 15:22:14 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SRCS = main.c \
 	   is_end.c \
 	   is_include_redirection.c \
 	   is_include_pipe_command.c \
+	   is_parenthesis.c \
 	   \
 	   traverse_ast.c \
 	   handle_operator.c \
@@ -83,6 +84,7 @@ SRCS = main.c \
 	   handle_pipe_command.c \
 	   handle_io_redirections.c \
 	   handle_expansion.c \
+	   handle_parenthesis.c \
 	   \
 	   buck_up_fd.c \
 	   recover_fd.c \
