@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:58:10 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 21:03:08 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 12:30:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char	*get_redirection_value(char **tokens)
 		}
 		if (is_redirection(*tokens) == true)
 		{
-			add_redirection_token(&str, tokens);
-			add_file_token(&str, tokens);
+			add_redirection_token(&str, &tokens);
+			add_file_token(&str, &tokens);
 		}
 		else
 			tokens++;
@@ -51,8 +51,8 @@ char	*get_redirection_value_in_simple_command(char **tokens)
 	{
 		if (is_redirection(*tokens) == true)
 		{
-			add_redirection_token(&str, tokens);
-			add_file_token(&str, tokens);
+			add_redirection_token(&str, &tokens);
+			add_file_token(&str, &tokens);
 		}
 		else
 			tokens++;

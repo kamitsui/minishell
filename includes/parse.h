@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 20:57:17 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 12:28:13 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,8 +162,8 @@ void	init_t_string(t_string *str);
 void	str_add_to_buff(t_string *str, char c);
 char	*str_join_to_out(const char *s1, const char *s2, size_t len2);
 void	add_token(t_string *str, char **tokens);
-void	add_redirection_token(t_string *str, char **token);
-void	add_file_token(t_string *str, char **token);
+void	add_redirection_token(t_string *str, char ***tokens);
+void	add_file_token(t_string *str, char ***tokens);
 
 
 /**

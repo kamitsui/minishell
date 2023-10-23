@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:03:50 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/18 22:20:15 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 12:42:58 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ static int	set_redirection(t_ast *node, t_envwrap *env_wrapper)
 			input_redirection, here_doc,
 			out_redirection_trunc, out_redirection_append};
 
-	ft_dprintf(g_fd_log,
-				">> call set_redirection ... node value [%s] file[%s]\n",
-				node->value, node->children[0]->value);
-	debug_ast(node);// debug
 	status = EXIT_SUCCESS;
 	current_flag = BIT_IN_RED;
 	i = 0;
@@ -63,7 +59,6 @@ int	handle_io_redirections(t_ast *node, t_envwrap *env_wrapper)
 	int		status;
 	size_t	i;
 
-	ft_dprintf(g_fd_log, ">> call handle_io_redirections ... node value [%s]\n", node->value);
 	status = EXIT_SUCCESS;
 	i = 0;
 	while (i < node->num_children && status == EXIT_SUCCESS)

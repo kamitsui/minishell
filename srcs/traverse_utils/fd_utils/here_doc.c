@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:40:52 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/18 19:17:10 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:14:07 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ static void	write_to_pipefd(int fd, char *end_of_block)
 	line = get_next_line(STDIN_FILENO);
 	while (line != NULL)
 	{
-		//if (ft_strnequ(line, end_of_block, ft_strlen(end_of_block)) == true)
-		if (ft_strcmp(line, end_of_block) == true)
+		if (ft_strncmp(line, end_of_block, ft_strlen(end_of_block)) == 0)
 			break ;
 		write(fd, line, ft_strlen(line));
 		free(line);

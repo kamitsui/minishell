@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 23:59:01 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 19:44:58 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 12:35:36 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static t_ast	*parse_one_redirection(char **tokens, char *value)
 	node->children[node->num_children - 1] = redirection_node;
 	tokens++;
 	file_node = create_node(NODE_FILE, *tokens);
-	ft_dprintf(g_fd_log, ">> in parse_one_redirection ... file[%s]\n", *tokens);
 	node->num_children++;
 	node->children = (t_ast **)realloc(node->children,
 			node->num_children * sizeof(t_ast *));// use ft_realloc
