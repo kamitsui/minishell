@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 15:16:25 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:40:54 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ int	traverse_ast(t_ast *node, t_envwrap *env_wrapper)
 
 	if (node->type > NODE_COMMAND)
 		return (env_wrapper->exit_code);
-//	if (node->type == NODE_CONNECTOR// ボーナス
-//		&& handle_connector(node, env_wrapper) == EXIT_FAILURE)
-//		return (env_wrapper->exit_code);
 	current_type = NODE_OPERATOR;
 	while (current_type <= NODE_COMMAND)
 	{
@@ -51,7 +48,12 @@ int	traverse_ast(t_ast *node, t_envwrap *env_wrapper)
 	}
 	i = 0;
 	while (i < node->num_children)
+	{
+		if (node->children[i]->type == NODE_CONNECTOR
+			&& handle_connector(node->children[i], env_wrapper) == EXIT_FAILURE)
+			return (env_wrapper->exit_code);
 		env_wrapper->exit_code = traverse_ast(node->children[i++], env_wrapper);
+	}
 	return (env_wrapper->exit_code);
 }
 //debug code
