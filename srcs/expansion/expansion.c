@@ -6,12 +6,16 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 11:06:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/19 16:27:23 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/24 01:49:10 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
 #include "environ.h"
+#include "libft.h"
+#include "error_minishell.h"
+#include "minishell.h"
+#include "parse.h"
 
 //todo astarisk expansion
 
@@ -23,8 +27,7 @@ static char	*exp_strjoin(char *new_word, char *to_add, t_list *env, char sign)
 	if (sign == '$')
 	{
 		tmp = to_add;
-		to_add = env_get_value_by_key(env, &to_add[1]);// fix by kamitsui
-													   // (compile error)
+		to_add = env_get_value_by_key(env, &to_add[1]);
 		if (!to_add)
 			to_add = ft_strdup("");
 		free(tmp);
@@ -44,7 +47,9 @@ static int	get_end(char const *str, size_t end, char sign)
 	end++;
 	if (sign == '$')
 	{
-		while (str[end] && ft_isalnum(str[end]))
+		if (str[end] == '?')
+			return (end + 1);
+		while (str[end] && (ft_isalnum(str[end])))
 			end++;
 	}
 	else
@@ -53,6 +58,21 @@ static int	get_end(char const *str, size_t end, char sign)
 			end++;
 	}
 	return (end);
+}
+
+static char	*expansion_exit_status(t_envwrap *env_wrapper)
+{
+	char	*new_value;
+	t_string	str;
+
+	init_t_string(&str);
+	new_value = ft_itoa(env_wrapper->exit_code);
+	if (new_value == NULL)
+		ft_perror_exit("ft_itoa");
+	add_token(&str, new_value);
+	free(new_value);
+	str.out = str_join_to_out(str.out, str.buffer, str.len);
+	return (str.out);
 }
 
 //! char cmdline has to be already verified only for "" or nonclasified
@@ -71,14 +91,25 @@ int	expand_dollar_sign_on_char(char **cmdline, t_envwrap *env_wrap)
 	while (old_cmd[start])
 	{
 		end = get_end(old_cmd, end, old_cmd[start]);
-		join_str = ft_substr(old_cmd, (unsigned int) start, end - start);
-		if (!join_str)
-			return (EXIT_FAILURE);
-		new_cmd = exp_strjoin(new_cmd, join_str, env_wrap->env, \
-														old_cmd[start]);
-		if (!new_cmd)
-			return (EXIT_FAILURE);
-		start = end;
+		if (ft_strcmp(old_cmd + start, "$?") == 0)
+		{
+			join_str = expansion_exit_status(env_wrap);
+			new_cmd = ft_strjoin_free(new_cmd, join_str);
+			if (!new_cmd)
+				return (EXIT_FAILURE);
+			break ;
+		}
+		else
+		{
+			join_str = ft_substr(old_cmd, (unsigned int) start, end - start);
+			if (!join_str)
+				return (EXIT_FAILURE);
+			new_cmd = exp_strjoin(new_cmd, join_str, env_wrap->env, \
+															old_cmd[start]);
+			if (!new_cmd)
+				return (EXIT_FAILURE);
+			start = end;
+		}
 	}
 	*cmdline = new_cmd;
 	free(old_cmd);
