@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:16:10 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 20:43:30 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:52:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ char	*get_pipe_command_value(char **tokens)
 	{
 		if (str.out_len > 0)
 			str_add_to_buff(&str, ' ');
-		add_token(&str, tokens);
+		add_token(&str, *tokens);
 		tokens++;
 	}
 	while (is_connector(*tokens) == false && is_end(*tokens) == false
 		&& is_redirection(*tokens) == false)
 	{
 		str_add_to_buff(&str, ' ');
-		add_token(&str, tokens);
+		add_token(&str, *tokens);
 		tokens++;
 	}
 	str.out = str_join_to_out(str.out, str.buffer, str.len);

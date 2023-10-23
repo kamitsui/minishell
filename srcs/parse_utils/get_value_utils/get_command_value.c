@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:15:19 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/18 13:28:56 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:01:10 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,7 @@ char	*get_command_value(char **tokens)
 	t_string	str;
 	size_t		i;
 
-	str.len = 0;
-	str.out = ft_strnew(1);
-	if (str.out == NULL)
-		ft_errno_exit("ft_strnew");
-	str.out_len = 0;
-	ft_bzero(&str.buffer, BUFF_SIZE);
+	init_t_string(&str);
 	while (is_connector(*tokens) == false && is_end(*tokens) == false)
 	{
 		if (str.out_len > 0)

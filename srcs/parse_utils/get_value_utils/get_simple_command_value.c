@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 13:14:15 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 20:59:26 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:52:42 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_simple_command_value(char **tokens)
 	{
 		if (str.out_len > 0)
 			str_add_to_buff(&str, ' ');
-		add_token(&str, tokens);
+		add_token(&str, *tokens);
 		tokens++;
 	}
 	str.out = str_join_to_out(str.out, str.buffer, str.len);

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 17:21:22 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 20:14:29 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,11 @@ int	handle_simple_command(t_ast *node, t_envwrap *env_wrapper)
  */
 int	handle_command(t_ast *node, t_envwrap *env_wrapper)
 {
+	int		status;
+
 	if (node->children[0]->type == NODE_PIPE_COM)
-		return (handle_pipe_command(node->children[0], env_wrapper));
-	else// NODE_SIMPLE_COM
-		return (handle_simple_command(node->children[0], env_wrapper));
+		status = handle_pipe_command(node->children[0], env_wrapper);
+	else
+		status = handle_simple_command(node->children[0], env_wrapper);
+	return (status);
 }
