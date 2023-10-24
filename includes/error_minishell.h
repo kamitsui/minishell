@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 23:04:36 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/24 18:48:03 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:47:44 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ enum	e_error_code
  * エラーコードを終了ステータスとして返す関数。
  */
 void	handle_error(int error_code);
-void	handle_syntax_error(char *unexpected_token);
+int	handle_syntax_error(char *unexpected_token);
 
 /**
  * @brief システムコール失敗時のエラーメッセージ出力とexitを行う関数。

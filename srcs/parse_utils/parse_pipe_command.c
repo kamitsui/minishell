@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:44:56 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 19:46:49 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:26:02 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_ast	*parse_pipe_command(char ***tokens, char *head_value)
 	node = create_node(NODE_PIPE_COM, head_value);
 	while (is_end(**tokens) == false && is_connector(**tokens) == false)
 	{
-		if (is_pipe(**tokens) == true)
+		if (is_pipe(**tokens) == true && node->num_children > 0)
 		{
 			(*tokens)++;
 			continue ;
