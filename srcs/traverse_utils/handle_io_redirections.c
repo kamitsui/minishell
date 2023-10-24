@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:03:50 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/24 19:58:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:04:38 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,5 @@ int	handle_io_redirections(t_ast *node, t_envwrap *env_wrapper)
 		status = set_redirection(node->children[i], env_wrapper);
 		i++;
 	}
-
 	return (status);
 }

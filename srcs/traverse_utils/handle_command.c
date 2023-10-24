@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 20:14:29 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:11:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,10 @@ int	handle_simple_command(t_ast *node, t_envwrap *env_wrapper)
 		original_stdin_fd = buck_up_fd(STDIN_FILENO);
 		original_stdout_fd = buck_up_fd(STDOUT_FILENO);
 		status = handle_io_redirections(node->children[i], env_wrapper);
-		if (status == EXIT_SUCCESS)
-		{
-			i++;
-			status = handle_executable(node->children[i], env_wrapper);
-			recover_fd(original_stdin_fd, STDIN_FILENO);
-			recover_fd(original_stdout_fd, STDOUT_FILENO);
-		}
+		if (status == EXIT_SUCCESS && node->num_children > 1)
+			status = handle_executable(node->children[++i], env_wrapper);
+		recover_fd(original_stdin_fd, STDIN_FILENO);
+		recover_fd(original_stdout_fd, STDOUT_FILENO);
 		debug_status("handle_simple_command ... exist redirection", status);// debug
 		ft_dprintf(g_fd_log, "\thead value[%s]\n", node->value);//debug
 		return (status);
