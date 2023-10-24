@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/07 14:01:41 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/24 08:44:07 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,14 @@ int	env_controller(void)
 		return (EXIT_FAILURE);
 	ft_env(env_wrapper);
 	printf("\n***initial env lst***\n");
+	ft_export(env_wrapper, "TEST", "NOTHING");
+	ft_export(env_wrapper, "LOGNAME", "takohachiro");
+	ft_env(env_wrapper);
+	ft_unset(env_wrapper, "TEST");
+	ft_unset(env_wrapper, "TEST");
+	ft_unset(env_wrapper, "LOGNAME");
+	printf("\n***ending env lst***\n");
+	ft_env(env_wrapper);
 	// ft_unset(env_wrapper, "LANG");
 	// ft_export(env_wrapper, "SHELL=TAKOHACHIRO", NULL);
 	// ft_export(env_wrapper, "PWD=42tokyo", NULL);
@@ -92,13 +100,13 @@ int	env_controller(void)
 	// ft_export(env_wrapper, NULL, NULL);
 	// printf("\n***after export with no arg ****\n");
 	// ft_env(env_wrapper);
-	printf("***cwd***\n");//!
-	ft_pwd(env_wrapper);
+	// printf("***cwd***\n");//!
+	// ft_pwd(env_wrapper);
 	// ft_cd("/Users/masaru/42", env_wrapper);
-	ft_cd(NULL, env_wrapper);
-	printf("***cwd***\n");//!
-	ft_pwd(env_wrapper);
-	ft_env(env_wrapper);
+	// ft_cd(NULL, env_wrapper);
+	// printf("***cwd***\n");//!
+	// ft_pwd(env_wrapper);
+	// ft_env(env_wrapper);
 	ft_lstclear(&env_wrapper->env, _env_del_content);
 	free(env_wrapper->cwd);
 	free(env_wrapper);
@@ -106,9 +114,9 @@ int	env_controller(void)
 }
 
 // disable by kamitsui ( for use srcs/main.c )
-//int	main(void)
-//{
-//	// env_controller();
-//	env_cd_checker();
-//	system("leaks -q env");
-//}
+// int	main(void)
+// {
+// 	env_controller();
+// 	// env_cd_checker();
+// 	// system("leaks -q env");
+// }
