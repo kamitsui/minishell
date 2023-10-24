@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:33:31 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/07 13:16:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/24 07:58:03 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*env_get_value_by_key(t_list *env_head, char *key)
 	return (NULL);
 }
 
+//todo make 2 funcs instead of below one func which accept NULL as switcher. 
 t_env	*env_create_node_from_char(char *key_or_full, char *val_or_null)
 {
 //	char	*key;// disable by kamitsui ( compile error : unused variable )
