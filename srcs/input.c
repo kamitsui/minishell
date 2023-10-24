@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 15:21:22 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:40:38 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 // for debug
 #include "debug.h"
+#include "ft_printf.h"
 
 /**
  * @brief lets_go_shell関数では、<command-line>の文字列に対して、
@@ -71,6 +72,9 @@ int	input(t_envwrap *env_wrapper)
 		line = readline(PROMPT);
 		if (line == NULL)
 			handle_error(ERR_READLINE);
+		ft_dprintf(g_fd_log, "line[%s] [%p] *line[%c]\n", line, line, *line);
+		if (*line == '\0')
+			continue ;
 		add_history(line);
 		// if (^Dがきたら)  .....
 		// if (lineの最後の文字がエスケープ文字'\'だったら）.....
