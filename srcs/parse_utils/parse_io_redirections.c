@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 23:59:01 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/24 19:08:36 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/24 21:04:06 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,28 @@
 #include "debug.h"
 #include "ft_printf.h"
 
-static t_ast	*parse_one_redirection(char **tokens, char *value)
+static t_ast	*parse_one_redirection(char ***tokens, char *value)
 {
 	t_ast	*node;
 	t_ast	*redirection_node;
 	t_ast	*file_node;
 
 	node = create_node(NODE_COMMAND, value);
-	redirection_node = create_node(NODE_REDIRECTION, *tokens);
+	redirection_node = create_node(NODE_REDIRECTION, **tokens);
 	node->num_children++;
 	node->children = (t_ast **)realloc(node->children,
 			node->num_children * sizeof(t_ast *));// use ft_realloc
 	node->children[node->num_children - 1] = redirection_node;
-	tokens++;
+	(*tokens)++;
 	//if (is_file(*tokens) == true)
-	if (*tokens != NULL)// 要改良
+	if (**tokens != NULL)// 要改良
 	{
-		file_node = create_node(NODE_FILE, *tokens);
+		file_node = create_node(NODE_FILE, **tokens);
 		node->num_children++;
 		node->children = (t_ast **)realloc(node->children,
 				node->num_children * sizeof(t_ast *));// use ft_realloc
 		node->children[node->num_children - 1] = file_node;
+		(*tokens)++;
 	}
 	return (node);
 }
@@ -62,12 +63,12 @@ t_ast	*parse_io_redirections(char **tokens, char *head_value)
 			continue ;
 		}
 		value = get_one_redirection_value(tokens);
-		redirection_node = parse_one_redirection(tokens, value);
+		redirection_node = parse_one_redirection(&tokens, value);
 		node->num_children++;
 		node->children = (t_ast **)realloc(node->children,
 				node->num_children * sizeof(t_ast *));// use ft_realloc
 		node->children[node->num_children - 1] = redirection_node;
-		tokens++;// ？ 連続してリダイレクションのトークンがきたら...
+//		tokens++;// ？ 連続してリダイレクションのトークンがきたら...
 	}
 	debug_ast(node);// dbeug
 	return (node);
