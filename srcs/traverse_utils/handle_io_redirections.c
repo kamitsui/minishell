@@ -6,13 +6,14 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:03:50 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 12:42:58 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:58:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "traverse.h"
 #include "execute.h"
+#include "error_minishell.h"
 
 #include "debug.h"
 #include "ft_printf.h"
@@ -26,6 +27,11 @@ static int	set_redirection(t_ast *node, t_envwrap *env_wrapper)
 			input_redirection, here_doc,
 			out_redirection_trunc, out_redirection_append};
 
+	if (node->num_children == 1)
+	{
+		handle_syntax_error(NULL);
+		return (258);
+	}
 	status = EXIT_SUCCESS;
 	current_flag = BIT_IN_RED;
 	i = 0;

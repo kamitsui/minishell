@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:58:10 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 19:52:20 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:02:13 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 #include "parse.h"
 #include "libft.h"
 #include <stdlib.h>
+
+// for debug
+#include "debug.h"
+#include "ft_printf.h"
 
 char	*get_redirection_value(char **tokens)
 {
@@ -67,9 +71,12 @@ char	*get_one_redirection_value(char **tokens)
 
 	init_t_string(&str);
 	add_token(&str, *tokens);
-	str_add_to_buff(&str, ' ');
 	tokens++;
-	add_token(&str, *tokens);
+	if (*tokens != NULL)
+	{
+		str_add_to_buff(&str, ' ');
+		add_token(&str, *tokens);
+	}
 	str.out = str_join_to_out(str.out, str.buffer, str.len);
 	return (str.out);
 }

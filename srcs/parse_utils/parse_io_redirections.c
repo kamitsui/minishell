@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 23:59:01 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 12:35:36 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:08:36 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,15 @@ static t_ast	*parse_one_redirection(char **tokens, char *value)
 			node->num_children * sizeof(t_ast *));// use ft_realloc
 	node->children[node->num_children - 1] = redirection_node;
 	tokens++;
-	file_node = create_node(NODE_FILE, *tokens);
-	node->num_children++;
-	node->children = (t_ast **)realloc(node->children,
-			node->num_children * sizeof(t_ast *));// use ft_realloc
-	node->children[node->num_children - 1] = file_node;
+	//if (is_file(*tokens) == true)
+	if (*tokens != NULL)// 要改良
+	{
+		file_node = create_node(NODE_FILE, *tokens);
+		node->num_children++;
+		node->children = (t_ast **)realloc(node->children,
+				node->num_children * sizeof(t_ast *));// use ft_realloc
+		node->children[node->num_children - 1] = file_node;
+	}
 	return (node);
 }
 // debug code
@@ -65,6 +69,7 @@ t_ast	*parse_io_redirections(char **tokens, char *head_value)
 		node->children[node->num_children - 1] = redirection_node;
 		tokens++;// ？ 連続してリダイレクションのトークンがきたら...
 	}
+	debug_ast(node);// dbeug
 	return (node);
 }
 // debug code

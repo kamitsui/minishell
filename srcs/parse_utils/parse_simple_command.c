@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 17:16:04 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:48:23 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 	{
 		if (is_redirection(**tokens) == true)
 		{
-			(*tokens) += 2;// エラーケースは未想定　例えば">>"のみ
+			(*tokens) ++;
+			if (is_end(**tokens) == false)
+				(*tokens) ++;
 			continue ;
 		}
 		call_parse_executable(node, tokens);
