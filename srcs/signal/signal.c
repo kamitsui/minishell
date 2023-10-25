@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 14:22:49 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/20 21:52:32 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/25 14:55:07 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 // void	sig_handle_ctrl_d
 
-void	sig_handle_ctrl_c(void)
+void	_sigint_normal(void)
 {
 	ft_putchar_fd('\n', STDERR_FILENO);
 	rl_replace_line("", 0);
@@ -30,13 +30,25 @@ void	sig_handle_ctrl_c(void)
 	//todo kill all process and back to getline
 }
 
-void	sig_handler(int sig, siginfo_t *siginfo, void *ucontext)
+//todo heredocを抜けるだけに変更必要（exitではなく）
+// todo have to set signal back to normal after heredoc
+void	_sigint_heredoc(void)
+{
+	exit(1);
+}
+
+void	sig_handler_heredoc(int sig, siginfo_t *siginfo, void *ucontext)
+{
+	// g_flag = SIGINT;
+	_sigint_heredoc();
+}
+
+void	sig_handler_normal(int sig, siginfo_t *siginfo, void *ucontext)
 {
 	if (siginfo->si_signo == SIGINT)
 	{
-		// write(STDOUT_FILENO, "INT\n", 5);
-		g_flag = SIGINT;
-		sig_handle_ctrl_c();
+		_sigint_normal();
+		
 		//! kill other process and back to readline prompt
 	}
 	else if (siginfo->si_signo == SIGQUIT)
@@ -54,13 +66,16 @@ void	sig_handler(int sig, siginfo_t *siginfo, void *ucontext)
 	(void)ucontext;// add by kamitsui (compile error : unused parameter)
 }
 
-void	sig_signal_initializer(t_sigaction *act, int sig_type)
+void	sig_signal_initializer(t_sigaction *act, int sig_type, bool in_heredoc)
 {
 	if (sig_type == SIGINT)
 	{
 		sigemptyset(&act->sa_mask);
 		sigaddset(&act->sa_mask, sig_type);
-		act->sa_sigaction = sig_handler;
+		if (in_heredoc == true)
+			act->sa_sigaction = sig_handler_heredoc;
+		else
+			act->sa_sigaction = sig_handler_normal;
 		act->sa_flags = SA_SIGINFO | SA_RESTART;
 	}
 	else if (sig_type == SIGQUIT)
