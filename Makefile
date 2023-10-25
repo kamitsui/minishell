@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/23 15:22:14 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/25 11:00:26 by mogawa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -274,7 +274,6 @@ leak:
 	./srcs/environ/env_lstiter_funcs.c ./srcs/environ/env_utils.c ./srcs/environ/environ.c ./srcs/environ/ft_pwd.c \
 	./srcs/environ/ft_cd.c ./srcs/environ/ft_env.c ./srcs/environ/ft_export.c ./srcs/environ/ft_unset.c \
 	-Iincludes -Ilibft -Ift_printf/includes ./libft/libft.a ./ft_printf/libftprintf.a -lreadline \
-	./srcs/token/token_expansion.c \
 	-o token
 .PHONY: token leak
 
