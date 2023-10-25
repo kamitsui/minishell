@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 15:21:31 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/25 14:20:22 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	lets_go_shell(char *line, t_envwrap *env_wrapper);
 /**
  * @brief readlineで得た文字列をトークン分けする関数
  */
-char		**tkn_controller(char const *raw_cmds);
+// char		**tkn_controller(char const *raw_cmds);
 
 t_envwrap	*create_env_list(char **environ);
 

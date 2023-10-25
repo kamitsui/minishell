@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/25 14:01:40 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/25 14:25:42 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ char	**token_controller(char *cmdline)
 
 	//todo cmdline validator
 	tokenized_head = make_tokenlist_from_char(cmdline);
-	dptr_cmds = tkn_create_dptrchar_from_list(tokenized_head);//for dptrline, need to free
+	dptr_cmds = tkn_create_dptrchar_from_list(tokenized_head->next);//for dptrline, need to free
 	ft_lstclear(&tokenized_head, _tkn_delete_list);
 	return (dptr_cmds);
 	// cmdslst_head = create_cmdslst_from_tknlst(tokenized_head->next);//free tokenized list
@@ -143,7 +143,7 @@ char	**token_controller(char *cmdline)
 	// int i = 0;
 	// while (dptr_cmds[i])
 	// {
-	// 	free(dptr_cmds[i]);
+	// 	free(dptr_cmds[i])
 	// 	i++;
 	// }
 	// free(dptr_cmds);

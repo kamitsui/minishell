@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/25 10:48:38 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/25 14:18:12 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	tkn_mark_to_concat_on_flg(t_list *cmdlst, t_flg const to_concat[]);
 
 //* parse.c
 // t_cmd	*create_redirect_list(t_list **crnt);
-void	parse_controller(t_list **cmdlst);// to be deleted
+char	**token_controller(char *cmdline);
 t_list	*create_cmdslst_from_tknlst(t_list *tknlst);
 
 //* execution.c

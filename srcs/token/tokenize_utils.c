@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 22:24:03 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/25 11:54:54 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/25 14:25:21 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ char	**tkn_create_dptrchar_from_list(t_list *cmdlst)
 	cmdlines = ft_calloc(lstsize + 1, sizeof(char *));
 	if (cmdlines == NULL)
 		return (NULL);//todo error handle
-	crnt = cmdlst->next;
+	crnt = cmdlst;
 	i = 0;
 	while (i < lstsize)
 	{
