@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/24 16:56:49 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/25 14:21:08 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
  * @brief プロンプト表示、<command-line>入力、<command-line>処理を行う関数\n
  */
 #include "minishell.h"
+#include "tokenize.h"
 #include "parse.h"
 #include "traverse.h"
 #include "error_minishell.h"
@@ -42,7 +43,7 @@ int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 	t_ast	*ast;
 
 	debug_input(line);// debug
-	tokens = tkn_controller(line);
+	tokens = token_controller(line);
 	debug_token(tokens);// debug
 	ast = parse(tokens);
 	debug_ast(ast);// debug

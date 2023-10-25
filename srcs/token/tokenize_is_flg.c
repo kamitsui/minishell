@@ -6,11 +6,13 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:27:47 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/26 13:23:43 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/25 14:02:42 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
+
+//todo check which flg_func is in use to remove unused.
 
 bool	flg_is_metachar(t_flg flg)
 {
@@ -18,8 +20,8 @@ bool	flg_is_metachar(t_flg flg)
 		flg == newline || \
 		flg == ampersand || \
 		flg == single_pipe || \
-		flg == allow_open || \
-		flg == allow_close || \
+		flg == allow_read || \
+		flg == allow_write || \
 		flg == astarisk)
 	{
 		return (true);
@@ -28,25 +30,47 @@ bool	flg_is_metachar(t_flg flg)
 		return (false);
 }
 
-bool	flg_is_control(t_flg flg)
-{
-	if (flg == ampersand || flg == single_pipe)
-		return (true);
-	else
-		return (false);
-}
+// bool	flg_is_control(t_flg flg)
+// {
+// 	if (flg == ampersand || flg == single_pipe)//!double ampersand?
+// 		return (true);
+// 	else
+// 		return (false);
+// }
 
 bool	flg_is_redirect(t_flg flg)
 {
-	if (flg == allow_open || flg == allow_close)
+	if (flg == allow_read || flg == allow_write)
+		return (true);
+	else if (flg == allow_append || flg == allow_heredoc)
 		return (true);
 	else
 		return (false);
 }
 
-bool	flg_is_operator(t_flg flg)
+bool	flg_is_cmd_divider(t_flg flg)
 {
-	if (flg_is_control(flg) || flg_is_redirect(flg))
+	if (flg == double_ampersand || flg == double_pipe || flg == single_pipe)
+		return (true);
+	else
+		return (false);
+}
+
+bool	flg_is_join_operator(t_flg flg)
+{
+	if (flg == ampersand || flg == single_pipe)
+		return (true);
+	else if (flg == allow_read || flg == allow_write)
+		return (true);
+	else
+		return (false);
+}
+
+bool	flg_is_operator(t_flg flg)//todo should change name to describe the func.
+{
+	if (flg == ampersand || flg == single_pipe)
+		return (true);
+	else if (flg == allow_read || flg == allow_write)
 		return (true);
 	else
 		return (false);

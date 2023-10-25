@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:40:52 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 13:14:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/25 14:37:22 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "environ.h"
 #include "error_minishell.h"
 #include "get_next_line.h"
+#include "ft_signal.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -40,10 +41,13 @@ static void	write_to_pipefd(int fd, char *end_of_block)
 
 int	here_doc(char *end_of_block, t_envwrap *env_wrapper)
 {
-	int		pipefd[2];
-	pid_t	pid;
-	int		status;
+	int			pipefd[2];
+	pid_t		pid;
+	int			status;
+	t_sigaction	act_sigint;
 
+	sig_signal_initializer(&act_sigint, SIGINT, true);
+	sigaction(SIGINT, &act_sigint, NULL);
 	//file_name = handle_expansion(file_name, env_wrapper);
 	(void)env_wrapper;// case of no expansion
 	status = EXIT_SUCCESS;
