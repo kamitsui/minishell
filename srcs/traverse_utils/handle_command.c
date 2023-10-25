@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 15:12:23 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/25 21:52:46 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	handle_executable(t_ast *node, t_envwrap *env_wrapper)
 {
 	int	status;
 
-	if (is_pipe(node->value) == true)
-		return (handle_syntax_error(node->value));
 	if (is_builtins_command(node->value) == true)
 		status = execute_builtins_command(node, env_wrapper);
 	else

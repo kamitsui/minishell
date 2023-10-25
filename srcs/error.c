@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:05:41 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 15:05:58 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/26 00:00:31 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,19 @@ void	handle_error(int error_code)
 	exit(error_code);// 要検討　使っていいエラーコードを調べる
 }
 
-//int	handle_syntax_error(char *unexpected_token, int sig)
-int	handle_syntax_error(char *unexpected_token)
+int	handle_syntax_error(char *unexpected_token, int sig)
 {
-	char	*message;
+	static char	*message = MSG_SYNTAX_ERR;
 
-	message = "syntax error near unexpected token";
 	if (unexpected_token == NULL)
-		unexpected_token = "newline";
+		unexpected_token = MSG_NEW_LINE;
 	ft_dprintf(STDERR_FILENO, "%s: %s `%s'\n", NAME, message, unexpected_token);
-//	if (sig == SIGTERM)
-//		exit(SIGTERM);
-	return (258);// SIGTERM??
+	if (sig == SIGINT)
+	{
+		if (kill(getpid(), sig) == -1)
+			perror("kill");
+	}
+	return (SIGINT);
 }
 
 void	put_error_message_from_errno(char *cause)

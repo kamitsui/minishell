@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:45:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 15:23:27 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/25 23:47:28 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,6 @@ int	handle_one_pipe_command(t_ast *node, t_envwrap *env_wrapper)
 	size_t	i;
 	pid_t	pid;
 
-	if (is_pipe(node->children[0]->value) == true)
-		//return (handle_syntax_error(node->children[0]->value, 0));
-		return (handle_syntax_error(node->children[0]->value));
 	i = 0;
 	while (i < node->num_children)
 	{

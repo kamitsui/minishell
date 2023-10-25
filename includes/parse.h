@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 19:49:18 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/25 23:59:42 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ enum	e_NodeType
 # define NUM_NOT_STRING		4
 # define NUM_REDIRECTION	4
 # define NUM_EXPANSION		3
-# define NUM_GET_FLAG		11
+# define NUM_GET_FLAG		10
 
 /**
  * @brief 抽象構文木の構造体名を定義
