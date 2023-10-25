@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/07 14:07:28 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 15:21:31 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,17 @@
 /**
  * @brief 文字列操作用のバッファサイズ
  * @detail
- * 使用関数：convert_env_wrap
+ * 使用関数：convert_env_wrap, get_value.c
  */
 # define BUFF_SIZE	1024
+
+typedef struct s_string
+{
+	char			buffer[BUFF_SIZE];
+	size_t			len;
+	char			*out;
+	size_t			out_len;
+}	t_string;
 
 /**
  * @brief プロンプトに出力する文字列
@@ -39,37 +47,14 @@
 /**
  * @brief mainからで使う関数
  */
-int	input(t_envwrap *env_wrapper);
-
-// 未完成
-int	execute_script_file(char *file, char *env[]);
+int			input(t_envwrap *env_wrapper);
+int	lets_go_shell(char *line, t_envwrap *env_wrapper);
 
 /**
  * @brief readlineで得た文字列をトークン分けする関数
  */
-char	**tkn_controller(char const *raw_cmds);
+char		**tkn_controller(char const *raw_cmds);
 
 t_envwrap	*create_env_list(char **environ);
 
 #endif
-
-//
-///**
-// * @brief 環境変数のハッシュテーブル（未実装）
-// */
-//typedef struct s_hash
-//{
-//	char			*key;
-//	char			*value;
-//	struct s_hash	*next;
-//}	t_hash;
-//
-///**
-// * @brief 実行や展開の時に必要なデータ構造 (未実装)
-// */
-//typedef struct s_data
-//{
-//	t_hash	*env;
-//	char	*current_dir;
-//// ...追加していくかも。。。
-//}	t_data;

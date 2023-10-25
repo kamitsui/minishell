@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:47:01 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/20 22:52:20 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:38:43 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,12 @@
  * @brief コマンドにPATHを通して実行する関数
  * @bug 要修正："./file" や "../file" などの実行ができない
  */
-#include "environ.h"
+#include "execute.h"
 #include "libft.h"
 #include "error_minishell.h"
 #include <stdlib.h>
 #include <stdbool.h>
 #include <unistd.h>
-
-/**
- * @brief PATHと実行ファイル名を繋げる関数（free必要）
- *
- * @param dir 実行ファイルが存在するディレクトリパス名
- * @param file 実行ファイル
- *
- * @return パス付き実行ファイル 例 "/bin/ls"
- */
-static char	*join_path(char const *dir, char const *file)
-{
-	size_t	len_dir;
-	size_t	len_file;
-	char	*path;
-
-	if (dir == NULL || file == NULL)
-		return (NULL);
-	len_dir = ft_strlen(dir);
-	len_file = ft_strlen(file);
-	path = malloc(sizeof(char) * (len_dir + len_file + 2));
-	if (path == NULL)
-		return (NULL);
-	ft_memcpy(path, dir, len_dir);
-	ft_memcpy(path + len_dir, "/", 1);
-	ft_memcpy(path + len_dir + 1, file, len_file + 1);
-	return (path);
-}
 
 /**
  * @brief 絶対パス、相対パスで渡された実行ファイルに対しての処理
@@ -62,7 +35,7 @@ static void	search_exec_file(char *file, char *arguments[], char *env[])
 	char	*dir;
 	char	*token;
 
-	dir = substr_env("PATH", env);
+	dir = get_substr_env("PATH", env);
 	if (dir == NULL)
 		return ;
 	token = ft_strtok(dir, ":");

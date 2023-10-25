@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/10 21:25:51 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:56:49 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 // for debug
 #include "debug.h"
+#include "ft_printf.h"
 
 /**
  * @brief lets_go_shell関数では、<command-line>の文字列に対して、
@@ -34,7 +35,7 @@
  *
  * @return status 終了ステータス
  */
-static int	lets_go_shell(char *line, t_envwrap *env_wrapper)
+int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 {
 	int		status;
 	char	**tokens;
@@ -46,7 +47,6 @@ static int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 	ast = parse(tokens);
 	debug_ast(ast);// debug
 	status = traverse_ast(ast, env_wrapper);
-//	free(line);// move to input func 10/6
 	free_two_darray(tokens);
 	free_ast(ast);
 	return (status);
@@ -72,26 +72,20 @@ int	input(t_envwrap *env_wrapper)
 		line = readline(PROMPT);
 		if (line == NULL)
 			handle_error(ERR_READLINE);
-		if (ft_strcmp(line, "exit") == 0)
+		ft_dprintf(g_fd_log, "line[%s] [%p] *line[%c]\n", line, line, *line);
+		if (*line == '\0')
 		{
-			free(line);
-			break ;
+			free (line);
+			continue ;
 		}
 		add_history(line);
 		// if (^Dがきたら)  .....
 		// if (lineの最後の文字がエスケープ文字'\'だったら）.....
 		status = lets_go_shell(line, env_wrapper);
-		debug_status("input", status);
+		debug_status("lets_go_shell", status);// debug
+		debug_leaks("lets_go_shell", "minishell");// debug
+		free (line);
 	}
 	//	erro handle (^D が２回続いて入力された場合)
 	return (status);
 }
-// debug code
-// エスケープ文字'\'がきたときの挙動(将来対応)
-// 例　下記をリードラインする。　\0までの文字列を返す。
-//
-// lines[0]  "echo aaa\"
-// lines[1]  "ls -l\"
-// lines[2]  "| cat -e\"
-// lines[3]  "exit" or '\n' or ^D <-ここまで
-// lines[3]  NULL

@@ -6,11 +6,15 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 22:52:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/26 10:49:54 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/20 23:06:04 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
+
+// for debug
+#include "ft_printf.h"
+#include "debug.h"
 
 //! for debug purpose - delete when submit
 void	_tkn_print_list(void *content)
@@ -18,8 +22,9 @@ void	_tkn_print_list(void *content)
 	t_token	*token;
 
 	token = content;
-	printf("list:[%s](flg:%d/catidx:%zu)\n", \
-			token->word, token->flg, token->concat_idx);
+//	printf("list:[%s](flg:%d/catidx:%zu)\n", \// fix out redirection by kamitsui
+	ft_dprintf(g_fd_log, "list:[%s](flg:%d/catidx:%u)\n",
+			token->word, token->flg, (unsigned int)token->concat_idx);// debug
 }
 
 void	_tkn_delete_list(void *content)

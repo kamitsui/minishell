@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 20:41:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/07 10:35:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:26:00 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "minishell.h"
 #include "error_minishell.h"
 #include "ft_printf.h"
+#include "ft_signal.h"
 
 //デバッグ用
 #include "debug.h"
@@ -40,16 +41,23 @@ int	main(int argc, char *argv[], char *env[])
 {
 	int			status;
 	t_envwrap	*env_wrapper;
+	t_sigaction	act_sigint;
+	t_sigaction	act_sigquit;
 
+	g_flag = 0;
+	sig_signal_initializer(&act_sigint, SIGINT);
+	sig_signal_initializer(&act_sigquit, SIGQUIT);
+	sigaction(SIGINT, &act_sigint, NULL);
+	sigaction(SIGQUIT, &act_sigquit, NULL);
 	enable_debug(DEBUG_ON);// debug on:DEBUG_ON  off:DEBUG_OFF
 	env_wrapper = create_env_list(env);
 	if (argc == 1)
 		status = input(env_wrapper);
 	else
-		status = execute_script_file(argv[1], env);// 未着手
+		status = execute_script_file(argv[1], env_wrapper);
 	(void)argc;
 	free_envwrap(env_wrapper);
-	debug_leaks("main");// debug  リークあり10/6 kamitsui
+	debug_leaks("main", NULL);// debug  リークあり10/6 kamitsui
 	return (status);
 }
 // デバッグログの保存ファイルを開く & デバッグON

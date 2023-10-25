@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 13:08:51 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/02/20 14:09:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:22:42 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strnew(size_t size)
 	if (str == NULL)
 		return (NULL);
 	i = 0;
-	while (i > size)
+	while (i < size)
 	{
 		str[i] = '\0';
 		i++;

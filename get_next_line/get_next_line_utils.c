@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:46:57 by mogawa            #+#    #+#             */
-/*   Updated: 2023/06/20 15:05:42 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/21 12:52:13 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*ft_output(char **saved, size_t lf_loc)
 	tmp = *saved;
 	*saved = ft_strndup_gnl((*saved) + lf_loc, \
 					ft_strlen_gnl((*saved) + lf_loc));
-	ft_free_null(tmp);
+	ft_free_null_gnl(tmp);
 	return (output);
 }
 
@@ -102,5 +102,5 @@ void	ft_read_success(char **saved, char *buf, ssize_t n_read)
 	buf[n_read] = '\0';
 	tmp = *saved;
 	*saved = ft_strjoin_gnl(*saved, buf);
-	ft_free_null(tmp);
+	ft_free_null_gnl(tmp);
 }

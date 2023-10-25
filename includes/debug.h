@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:06:24 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 22:24:25 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 14:51:30 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ enum e_flag_debug
 	DEBUG_ON
 };
 
-#define DEBUG_COLOR "\n\x1B[100m\x1B[37m"
+# define DEBUG_COLOR "\n\x1B[100m\x1B[37m"
 
 void	enable_debug(int flag);
 
-int	open_log(const char *file_name, int oflag);
+int		open_log(const char *file_name, int oflag);
 
 /**
  * @brief 文字列をデバッグ出力

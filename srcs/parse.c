@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 04:52:02 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:12:54 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,38 +36,26 @@
 t_ast	*parse(char **tokens)
 {
 	t_ast	*ast;
-	t_ast	*operator_node;
+	t_ast	*node;
+	char	*value;
 
 	ast = create_node(NODE_OPERATOR, PROGRAM_NAME);
 	while (*tokens)
 	{
-		if (is_operator(*tokens) == true)
-		{
-			operator_node = parse_operator(&tokens);
-//			debug_parse("parse", operator_node);// debug
-			if (operator_node)
-			{
-				ast->num_children++;
-				ast->children = (t_ast **)realloc(ast->children,// use ft_realloc
-						ast->num_children * sizeof(t_ast *));
-				ast->children[ast->num_children - 1] = operator_node;
-			}
-		}
+		if (is_connector(*tokens) == true)
+			node = parse_connector(&tokens);
 		else
-			ast = parse_command(ast, &tokens);
+		{
+			value = get_command_value(tokens);
+			node = parse_command(&tokens, value);
+			free(value);
+		}
+		ast->num_children++;
+		ast->children = (t_ast **)realloc(ast->children,// use ft_realloc
+				ast->num_children * sizeof(t_ast *));
+		ast->children[ast->num_children - 1] = node;
 	}
 	return (ast);
 }
-// The way of test parse function
-// |
-// cd minishell/test/unit_function
-// |
-// parse test
-//     tokens = { "ls", "-l", "file.txt", "&&", "cat", "file.txt", NULL }
-// make 3
-// make run3
-// |
-// parse & execute
-//     tokens = { "ls", "-l", "-a", "&&", "echo", "\n", "42", "tokyo", NULL }
-// make 4
-// make run4
+//debug code
+//		debug_parse("parse", node);// debug

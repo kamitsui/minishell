@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:21:15 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/07 11:40:38 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 14:26:45 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ typedef struct s_envwrap
 	int		exit_code;
 	char	*cwd;
 }	t_envwrap;
-
-/**
- * @brief 環境変数からPATHを取り出す時に使う関数(free必要)
- */
-char	*substr_env(char *name, char *env[]);
 
 // * ft_pwd
 void	ft_pwd(t_envwrap *env);

@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:04:36 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/06 17:29:54 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:36:14 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	debug_input(char *line)
 	ft_dprintf(g_fd_log, "line %p [%s]\n", line, line);
 }
 
-#include <stdio.h>
 /**
  * @brief tokenize関数で生成されたトークンをデバッグ出力
  *
@@ -49,7 +48,7 @@ void	debug_input(char *line)
  */
 void	debug_token(char **tokens)
 {
-	int		i;
+	int	i;
 
 	ft_dprintf(g_fd_log, "%s---- char *tokens[] ----\n", DEBUG_COLOR);
 	i = 0;

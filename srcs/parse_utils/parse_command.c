@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:29:42 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/13 04:57:22 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:40:15 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,33 +24,37 @@
 
 /**
  * @brief \<command>のノードを作る関数
- * ::= <simple-command> or <pipe-command> or <io-redirection>
+ * ::= <simple-command> or <pipe-command>
  *
  * @param ast 親のノード
  * @param tokens トークンのアドレス
  *
  * @return 生成された<command>のノードを返す
  */
-t_ast	*parse_command(t_ast *ast, char ***tokens)
+t_ast	*parse_command(char ***tokens, char *head_value)
 {
 	t_ast	*node;
-	size_t	num_pipe;
+	t_ast	*command_node;
+	char	*value;
 
-	num_pipe = count_pipe_command(*tokens);
-	if (num_pipe > 0)
-		node = parse_pipe_command(tokens, num_pipe);
-	else if (is_redirection(**tokens) == true)
-		node = parse_io_redirection(tokens);
-	else
-		node = parse_simple_command(tokens);
-	if (node)
+	node = create_node(NODE_COMMAND, head_value);
+	if (is_include_pipe_command(*tokens) == true)
 	{
-		ast->num_children++;
-		ast->children = (t_ast **)realloc(ast->children,// use ft_realloc
-				ast->num_children * sizeof(t_ast *));
-		ast->children[ast->num_children - 1] = node;
+		value = get_pipe_command_value(*tokens);
+		command_node = parse_pipe_command(tokens, value);
+		free(value);
 	}
-	return (ast);
+	else
+	{
+		value = get_simple_command_value(*tokens);
+		command_node = parse_simple_command(tokens, value);
+		free(value);
+	}
+	node->num_children++;
+	node->children = (t_ast **)realloc(node->children,
+			node->num_children * sizeof(t_ast *));// use ft_realloc
+	node->children[node->num_children - 1] = command_node;
+	return (node);
 }
 // debug code
 //	debug_parse("parse_command", node);// debug

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/05 18:42:08 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:40:54 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
  */
 #include "parse.h"
 #include "traverse.h"
+
+#include "debug.h"
+#include "ft_printf.h"
 
 /**
  * @brief 抽象構文木のノード全てを走査して、順番に実行していく再帰関数
@@ -28,27 +31,45 @@
  */
 int	traverse_ast(t_ast *node, t_envwrap *env_wrapper)
 {
-	enum e_NodeType			state;
-	static t_handle_node	handle_node[3] = {
-		handle_command, handle_argument, handle_operator};
+	enum e_NodeType			current_type;
+	static t_handle_node	handle_node[NODE_COMMAND + 1] = {
+		handle_operator, handle_command};
 	size_t					i;
 
-	if (node == NULL)
-		return (1);
-	// Depth-First search (DFS) approach
-	state = NODE_COMMAND;
-	while (state != NODE_END)
+	if (node->type > NODE_COMMAND)
+		return (env_wrapper->exit_code);
+	current_type = NODE_OPERATOR;
+	while (current_type <= NODE_COMMAND)
 	{
-		if (node->type == state)
-			env_wrapper->exit_code = handle_node[state](node, env_wrapper);
-		state++;
+		if (node->type == current_type)
+			env_wrapper->exit_code
+				= handle_node[current_type](node, env_wrapper);
+		current_type++;
 	}
-	// Traverse the children of the current node
 	i = 0;
 	while (i < node->num_children)
 	{
-		env_wrapper->exit_code = traverse_ast(node->children[i], env_wrapper);
-		i++;
+		if (node->children[i]->type == NODE_CONNECTOR
+			&& handle_connector(node->children[i], env_wrapper) == EXIT_FAILURE)
+			return (env_wrapper->exit_code);
+		env_wrapper->exit_code = traverse_ast(node->children[i++], env_wrapper);
 	}
 	return (env_wrapper->exit_code);
 }
+//debug code
+			//debug_status("traverse_ast", env_wrapper->exit_code);// debug
+// reference ... enum e_NodeType
+//enum	e_NodeType
+//{
+//	NODE_OPERATOR,
+//	NODE_COMMAND,
+//	NODE_CONNECTOR,
+//	NODE_PIPE_COM,
+//	NODE_SIMPLE_COM,
+//	NODE_EXECUTABLE,
+//	NODE_ARGUMENT,
+//	NODE_IO_REDIRECTIONS,
+//	NODE_REDIRECTION,
+//	NODE_FILE,
+//	NODE_END
+//};

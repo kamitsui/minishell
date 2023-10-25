@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:31:11 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/07 13:59:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:39:43 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ static int	ft_chdir(char *path, t_envwrap *env_wrap)
 }
 
 //todo error handling not implimented
-void	ft_cd(char *path, t_envwrap *env_wrap)
+//void	ft_cd(char *path, t_envwrap *env_wrap)
+int	ft_cd(char *path, t_envwrap *env_wrap)// fix return value type
 {
 	char	*new_path;
 	int		sys_rtn;
+//	static const char	*error_msg = "No such file or directory";// added kamitsui
 
 	if (path == NULL)
 	{
@@ -49,8 +51,9 @@ void	ft_cd(char *path, t_envwrap *env_wrap)
 	{
 		sys_rtn = ft_chdir(path, env_wrap);
 	}
-	// if (sys_rtn	== SYSCALL_FAILED)
-		//todo error handle
-	(void)sys_rtn;// Add by kamitsui (compile error : use of undeclared identifier 'sys_rtn')
+	if (sys_rtn == SYSCALL_FAILED)// enable kamitsui
+		return (EXIT_FAILURE);
+//	(void)sys_rtn;// Add by kamitsui (compile error : use of undeclared identifier 'sys_rtn')
 //	return (sys_rtn);// 返すべき？？　未確認　by kamitsui
+	return (EXIT_SUCCESS);// added kamitsui
 }

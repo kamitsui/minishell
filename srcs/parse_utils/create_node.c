@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:54:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/14 17:46:35 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:38:19 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@
 
 static int	get_node_flag(enum e_NodeType type, char *value)
 {
-	int	flag;
-	int	i;
+	int						flag;
+	int						i;
 	static t_is_type_node	f_is_type_node[NUM_GET_FLAG] = {
-			is_and_list, is_or_list, is_pipe,
-			is_in_red, is_here_doc, is_out_red, is_out_append,
-			is_expansion, is_squote, is_dquote, is_variable};
-	static int		match_flag[NUM_GET_FLAG] = {
-			BIT_AND_LIST, BIT_OR_LIST, BIT_PIPE,
-			BIT_IN_RED, BIT_HERE_DOC, BIT_OUT_RED, BIT_APPEND,
-			BIT_EXPANSION, BIT_SQUOTE, BIT_DQUOTE, BIT_VAR};
+		is_and_list, is_or_list, is_pipe,
+		is_in_red, is_here_doc, is_out_red, is_out_append,
+		is_expansion, is_squote, is_dquote, is_variable};
+	static int				match_flag[NUM_GET_FLAG] = {
+		BIT_AND_LIST, BIT_OR_LIST, BIT_PIPE_COM,
+		BIT_IN_RED, BIT_HERE_DOC, BIT_OUT_RED, BIT_APPEND,
+		BIT_EXPANSION, BIT_SQUOTE, BIT_DQUOTE, BIT_VAR};
 
 	flag = 0x1 << type;
 	i = 0;
@@ -62,7 +62,7 @@ t_ast	*create_node(enum e_NodeType type, char *value)
 	node->type = type;
 	node->flag = get_node_flag(type, value);
 	node->value = ft_strdup(value);
-	if (node == NULL)
+	if (node->value == NULL)
 		ft_errno_exit("ft_strdup");
 	node->children = NULL;
 	node->num_children = 0;

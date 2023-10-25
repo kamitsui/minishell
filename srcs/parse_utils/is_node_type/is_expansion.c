@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 02:41:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/14 15:53:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/21 20:02:12 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 bool	is_expansion(const char *token)
 {
-	t_is_type_node	f_type_expansion[NUM_EXPANSION] = {
-						is_squote, is_dquote, is_variable};
-	bool			result;
-	size_t			i;
+	static t_is_type_node	f_type_expansion[NUM_EXPANSION]
+		= {is_squote, is_dquote, is_variable};
+	bool					result;
+	size_t					i;
 
 	if (token == NULL)
 		return (false);
