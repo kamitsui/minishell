@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/24 19:48:23 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:35:43 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void	call_parse_executable(t_ast *node, char ***tokens)
 			node->num_children * sizeof(t_ast *));// use ft_realloc
 	node->children[node->num_children - 1] = executable_node;
 	free(value);
+//	(*tokens)++;// ??　ほんとにこれでいい？
 }
 
 /**
@@ -69,17 +70,24 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 	}
 	if (is_include_redirection_in_simple_com(*tokens) == true)
 		call_parse_io_redirections(node, tokens);
-	while (is_end(**tokens) == false && is_connector(**tokens) == false
-		&& is_pipe(**tokens) == false)
+	if (is_pipe(**tokens) == true)
 	{
-		if (is_redirection(**tokens) == true)
-		{
-			(*tokens) ++;
-			if (is_end(**tokens) == false)
-				(*tokens) ++;
-			continue ;
-		}
 		call_parse_executable(node, tokens);
+	}
+	else
+	{
+		while (is_end(**tokens) == false && is_connector(**tokens) == false
+			&& is_pipe(**tokens) == false)
+		{
+			if (is_redirection(**tokens) == true)
+			{
+				(*tokens) ++;
+				if (is_end(**tokens) == false)
+					(*tokens) ++;
+				continue ;
+			}
+			call_parse_executable(node, tokens);
+		}
 	}
 	return (node);
 }
