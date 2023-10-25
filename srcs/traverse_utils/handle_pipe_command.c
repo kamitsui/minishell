@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:45:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/24 20:45:52 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:23:27 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	handle_one_pipe_command(t_ast *node, t_envwrap *env_wrapper)
 	pid_t	pid;
 
 	if (is_pipe(node->children[0]->value) == true)
+		//return (handle_syntax_error(node->children[0]->value, 0));
 		return (handle_syntax_error(node->children[0]->value));
 	i = 0;
 	while (i < node->num_children)
@@ -111,7 +112,7 @@ int	handle_pipe_command(t_ast *node, t_envwrap *env_wrapper)
 //			node->children, node->num_children, env_wrapper);
 	recover_fd(original_stdin_fd, STDIN_FILENO);
 	recover_fd(original_stdout_fd, STDOUT_FILENO);
-	debug_status("handle_pipe_command ... exist redirection", status);
+	debug_status("handle_pipe_command ... exist redirection", status);// debug
 	return (status);
 }
 //{

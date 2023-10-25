@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 23:59:01 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/24 21:04:06 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:34:34 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ t_ast	*parse_io_redirections(char **tokens, char *head_value)
 				node->num_children * sizeof(t_ast *));// use ft_realloc
 		node->children[node->num_children - 1] = redirection_node;
 //		tokens++;// ？ 連続してリダイレクションのトークンがきたら...
+		free(value);
 	}
 	debug_ast(node);// dbeug
 	return (node);

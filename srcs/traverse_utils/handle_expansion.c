@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:09:06 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/24 02:06:11 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:18:06 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,8 +158,9 @@ void	expansion(char **value, t_envwrap *env_wrapper)
 	ft_dprintf(g_fd_log, ">> expansion buffer[");
 	write(g_fd_log, machine.str.buffer, machine.str.len);// debug
 	ft_dprintf(g_fd_log, "]\n");
+	free(*value);
 	*value = str_join_to_out(machine.str.out, machine.str.buffer, machine.str.len);
-	ft_dprintf(g_fd_log, ">> expansion [%s]\n", *value);
+	ft_dprintf(g_fd_log, ">> expansion [%s]\n", *value);// debug
 }
 
 void	handle_expansion(t_ast *node, t_envwrap *env_wrapper)
