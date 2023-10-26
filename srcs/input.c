@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 18:10:23 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:07:16 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	input(t_envwrap *env_wrapper)
 		line = readline(PROMPT);
 		sig_signal_initializer(&sa_int, SIGINT, HANDLE_IGN);
 		if (line == NULL)
-			handle_error(ERR_READLINE);
+			ft_exit(status, env_wrapper);
 		ft_dprintf(g_fd_log, "line[%s] [%p] *line[%c]\n", line, line, *line);
 		if (*line == '\0')
 		{

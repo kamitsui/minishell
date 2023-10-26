@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 23:04:36 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 17:58:53 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:03:39 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@
 # define MSG_ARG		"Error: argument out of specification\
 							-> Usage \"./minishell\"\n"
 
-/**
- * @brief readline関数が失敗した時のエラーメッセージ
- */
-# define MSG_READLINE	"Error: readline function\n"
-
 # define MSG_CREATE_ENV	"Error: create_env_list function\n"
 # define MSG_SIGQUIT	"Quit: 3\n"
 
@@ -44,7 +39,6 @@
 enum	e_error_code
 {
 	ERR_ARG,
-	ERR_READLINE,
 	ERR_CREATE_ENV,
 	ERR_NUM
 };
