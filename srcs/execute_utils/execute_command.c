@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 00:02:13 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/26 17:54:03 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "execute.h"
 #include "tokenize.h"
 #include "ft_printf.h"
+#include "ft_signal.h"
 #include <unistd.h>
 #include <signal.h>
 
@@ -33,6 +34,11 @@
 static void	child_process(t_command command)
 {
 	char	*file;
+	t_sigaction	sa_int;
+	t_sigaction	sa_quit;
+
+	sig_signal_initializer(&sa_int, SIGINT, HANDLE_EXIT_SIGNUM);
+	sig_signal_initializer(&sa_quit, SIGQUIT, HANDLE_NORMAL);
 
 	file = command.args[0];
 	if (is_pipe(file) == true)
@@ -43,12 +49,6 @@ static void	child_process(t_command command)
 		ft_dprintf(STDERR_FILENO, "%s: %s: command not found\n", NAME, file);
 		exit (127);
 	}
-}
-
-static void	sigint_handler_execute(int signum)
-{
-	(void)signum;
-	exit (SIGINT);
 }
 
 /**
@@ -71,12 +71,6 @@ int	execute_command(t_ast *command_node, t_envwrap *env_wrapper)
 {
 	t_command	command;
 	pid_t		pid;
-	struct sigaction	sa_int;
-
-	sa_int.sa_handler = sigint_handler_execute;
-	sigemptyset(&sa_int.sa_mask);
-	sa_int.sa_flags = 0;
-	sigaction(SIGINT, &sa_int, NULL);
 
 	if (command_node->type != NODE_EXECUTABLE)
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:05:41 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 00:00:31 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:52:11 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	handle_error(int error_code)
 
 int	handle_syntax_error(char *unexpected_token, int sig)
 {
-	static char	*message = MSG_SYNTAX_ERR;
+	char	*message = MSG_SYNTAX_ERR;
 
 	if (unexpected_token == NULL)
 		unexpected_token = MSG_NEW_LINE;

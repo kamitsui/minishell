@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 23:04:36 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 23:57:17 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/26 17:58:53 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define MSG_READLINE	"Error: readline function\n"
 
 # define MSG_CREATE_ENV	"Error: create_env_list function\n"
+# define MSG_SIGQUIT	"Quit: 3\n"
 
 /**
  * @brief handle_error関数に渡すエラーコード
