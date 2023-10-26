@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:09:06 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 15:18:06 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/26 00:35:38 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,9 @@ size_t	exp_var(char *value, t_exp_sm *machine, t_envwrap *env_wrapper)
 	{
 		str_var = ft_strndup(value, len);
 		ft_dprintf(g_fd_log, ">> exp_var str[%s]\n", str_var);
-		//exit(0);
+		debug_leaks("before var expansion", "minishell");// debug
 		expand_dollar_sign_on_char(&str_var, env_wrapper);
+		debug_leaks("after var expansion", "minishell");// debug
 		add_token(&machine->str, str_var);
 		free(str_var);
 		machine->state = EXP_LETTER;
