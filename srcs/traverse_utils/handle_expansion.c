@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:09:06 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 20:22:40 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/26 22:51:21 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,27 @@ void	init_exp_sm(t_exp_sm *machine)
 bool	is_allowd_variable_char(char c)
 {
 	return (ft_isalnum(c) == true || c == META_UNDER_CHR || c == META_QUESTION_CHR);
+	//return (ft_isalnum(c) == true || c == META_UNDER_CHR);
+}
+
+size_t	count_variable_char(char *value)
+{
+	size_t	len;
+
+	len = 0;
+	if (ft_strncmp(value, "$?", 2) == 0)
+		len = 2;
+	else
+	{
+		len++;
+		while (is_allowd_variable_char(value[len]) == true)
+		{
+			len++;
+			if (value[len] == META_QUESTION_CHR)
+				break ;
+		}
+	}
+	return (len);
 }
 
 size_t	exp_var(char *value, t_exp_sm *machine, t_envwrap *env_wrapper)
@@ -52,13 +73,7 @@ size_t	exp_var(char *value, t_exp_sm *machine, t_envwrap *env_wrapper)
 	size_t	len;
 
 	ft_dprintf(g_fd_log, ">> exp_var ... before value[%s]\n", value);// debug
-	len = 1;
-	while (is_allowd_variable_char(value[len]) == true && value[len] != '\0')
-	{
-		len++;
-		if (value[len] == META_QUESTION_CHR && value[len] != '\0')
-			break ;
-	}
+	len = count_variable_char(value);
 	if (len == 1)
 	{
 		str_add_to_buff(&machine->str, *value);
@@ -105,21 +120,36 @@ size_t	exp_dquote(char *value, t_exp_sm *machine, t_envwrap *env_wrapper)
 {
 	char	*str_dquote;
 	size_t	len;
+	size_t	len_var;
+	size_t	i;
 
 	ft_dprintf(g_fd_log, ">> exp_dquote ... before value[%s]\n", value);// debug
 	value++;
 	len = ft_strchr(value, META_DQUOT_CHR) - value;
 	ft_dprintf(g_fd_log, ">> exp_dquote len[%u]\n", len);// debug
 	if (len == 0)
-	{
 		machine->state = EXP_LETTER;
-		return (2);
+	i = 0;
+	while (value[i] != '"')
+	{
+		len_var = count_variable_char(value + i);
+		ft_dprintf(g_fd_log, ">> exp_dquote len_var[%u]\n", len_var);// debug
+		if (value[i] == '$' && len_var > 1)
+		{
+			str_dquote = ft_strndup(value + i, len_var);
+			ft_dprintf(g_fd_log, ">> exp_dquote str[%s]\n", str_dquote);// debug
+			expand_dollar_sign_on_char(&str_dquote, env_wrapper);
+			add_token(&machine->str, str_dquote);
+			free(str_dquote);
+			i += len_var;
+		}
+		else
+		{
+			str_add_to_buff(&machine->str, value[i]);
+			i++;
+		}
 	}
-	str_dquote = ft_strndup(value, len);
-	ft_dprintf(g_fd_log, ">> exp_dquote str[%s]\n", str_dquote);// debug
-	expand_dollar_sign_on_char(&str_dquote, env_wrapper);
-	add_token(&machine->str, str_dquote);
-	free(str_dquote);
+	len = i;
 	machine->state = EXP_LETTER;
 	return (len + 2);
 }

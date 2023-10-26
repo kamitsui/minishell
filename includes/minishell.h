@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 14:20:22 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/26 21:24:30 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,6 @@ typedef struct s_string
  */
 int			input(t_envwrap *env_wrapper);
 int	lets_go_shell(char *line, t_envwrap *env_wrapper);
-
-/**
- * @brief readlineで得た文字列をトークン分けする関数
- */
-// char		**tkn_controller(char const *raw_cmds);
 
 t_envwrap	*create_env_list(char **environ);
 
