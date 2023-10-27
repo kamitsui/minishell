@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 17:59:29 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/27 22:49:56 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	handle_simple_command(t_ast *node, t_envwrap *env_wrapper)
 
 	if (node->flag & BIT_PARENTHESIS)
 		return (handle_parenthesis(node, env_wrapper));
-	handle_expansion(node, env_wrapper);
 	i = 0;
 	if (node->children[i]->type == NODE_EXECUTABLE)
 	{
@@ -87,6 +86,7 @@ int	handle_command(t_ast *node, t_envwrap *env_wrapper)
 {
 	int		status;
 
+	handle_expansion(node, env_wrapper);
 	if (node->children[0]->type == NODE_PIPE_COM)
 		status = handle_pipe_command(node->children[0], env_wrapper);
 	else

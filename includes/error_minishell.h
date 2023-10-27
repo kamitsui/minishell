@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 23:04:36 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/27 19:15:54 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/27 20:28:32 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	handle_error(int error_code);
 void	handle_syntax_error(char *unexpected_token);
 # define MSG_SYNTAX_ERR	"syntax error near unexpected token"
 # define MSG_NEW_LINE	"newline"
+# define MSG_NOT_VALID	"not a valid identifier"
 
 /**
  * @brief システムコール失敗時のエラーメッセージ出力とexitを行う関数。

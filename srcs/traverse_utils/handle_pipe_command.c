@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:45:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 23:47:28 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/27 22:50:19 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,11 @@ int	handle_pipe_command(t_ast *node, t_envwrap *env_wrapper)
 	int	status;
 
 	ft_dprintf(g_fd_log, ">> call handle_pipe_command ... node value [%s]\n", node->value);
-	handle_expansion(node, env_wrapper);
 	original_stdin_fd = buck_up_fd(STDIN_FILENO);
 	original_stdout_fd = buck_up_fd(STDOUT_FILENO);
 	if (original_stdout_fd == -1)
 		ft_errno_exit("dup");
 	status = handle_one_pipe_command(node, env_wrapper);
-//	status = execute_pipeline(
-//			node->children, node->num_children, env_wrapper);
 	recover_fd(original_stdin_fd, STDIN_FILENO);
 	recover_fd(original_stdout_fd, STDOUT_FILENO);
 	debug_status("handle_pipe_command ... exist redirection", status);// debug
