@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 17:54:03 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:31:56 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,10 @@ static void	child_process(t_command command)
 
 	sig_signal_initializer(&sa_int, SIGINT, HANDLE_EXIT_SIGNUM);
 	sig_signal_initializer(&sa_quit, SIGQUIT, HANDLE_NORMAL);
-
 	file = command.args[0];
-	if (is_pipe(file) == true)
-		handle_syntax_error(file, SIGINT);
-	else
-	{
-		exec_file(file, command.args, command.env);
-		ft_dprintf(STDERR_FILENO, "%s: %s: command not found\n", NAME, file);
-		exit (127);
-	}
+	exec_file(file, command.args, command.env);
+	ft_dprintf(STDERR_FILENO, "%s: %s: command not found\n", NAME, file);
+	exit (127);
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:09:06 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 22:51:21 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/27 19:38:59 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ size_t	exp_var(char *value, t_exp_sm *machine, t_envwrap *env_wrapper)
 	{
 		str_add_to_buff(&machine->str, *value);
 		machine->state = EXP_LETTER;
-		return (len);
 	}
 	else
 	{
@@ -91,6 +90,7 @@ size_t	exp_var(char *value, t_exp_sm *machine, t_envwrap *env_wrapper)
 		free(str_var);
 		machine->state = EXP_LETTER;
 	}
+	ft_dprintf(g_fd_log, ">> exp_var ... end value[%s]\n", value);// debug
 	return (len);
 }
 
