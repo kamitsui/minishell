@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 20:41:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 14:48:53 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/26 16:20:06 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,7 @@ int	main(int argc, char *argv[], char *env[])
 {
 	int			status;
 	t_envwrap	*env_wrapper;
-	t_sigaction	act_sigint;
-	t_sigaction	act_sigquit;
 
-	g_flag = 0;
-	sig_signal_initializer(&act_sigint, SIGINT, NULL);
-	sig_signal_initializer(&act_sigquit, SIGQUIT, NULL);
-	sigaction(SIGINT, &act_sigint, NULL);
-	sigaction(SIGQUIT, &act_sigquit, NULL);
 	enable_debug(DEBUG_ON);// debug on:DEBUG_ON  off:DEBUG_OFF
 	env_wrapper = create_env_list(env);
 	if (argc == 1)

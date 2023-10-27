@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:05:41 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 00:00:31 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:03:25 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
  */
 static void	put_error_message(int error_code)
 {
-	static char	*msg[ERR_NUM] = {MSG_ARG, MSG_READLINE, MSG_CREATE_ENV};
+	static char	*msg[ERR_NUM] = {MSG_ARG, MSG_CREATE_ENV};
 
 	ft_dprintf(STDERR_FILENO, msg[error_code]);
 }
@@ -49,7 +49,7 @@ void	handle_error(int error_code)
 
 int	handle_syntax_error(char *unexpected_token, int sig)
 {
-	static char	*message = MSG_SYNTAX_ERR;
+	char	*message = MSG_SYNTAX_ERR;
 
 	if (unexpected_token == NULL)
 		unexpected_token = MSG_NEW_LINE;

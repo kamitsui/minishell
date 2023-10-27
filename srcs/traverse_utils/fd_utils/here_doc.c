@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:40:52 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 14:37:22 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/26 18:39:19 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "error_minishell.h"
 #include "get_next_line.h"
 #include "ft_signal.h"
+#include "execute.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -43,14 +44,9 @@ int	here_doc(char *end_of_block, t_envwrap *env_wrapper)
 {
 	int			pipefd[2];
 	pid_t		pid;
-	int			status;
 	t_sigaction	act_sigint;
 
-	sig_signal_initializer(&act_sigint, SIGINT, true);
-	sigaction(SIGINT, &act_sigint, NULL);
-	//file_name = handle_expansion(file_name, env_wrapper);
-	(void)env_wrapper;// case of no expansion
-	status = EXIT_SUCCESS;
+	(void)env_wrapper;
 	if (pipe(pipefd) == -1)
 		perror("pipe");
 	pid = fork();
@@ -58,16 +54,15 @@ int	here_doc(char *end_of_block, t_envwrap *env_wrapper)
 		perror("fork");
 	else if (pid == 0)
 	{
+		sig_signal_initializer(&act_sigint, SIGINT, HANDLE_HEREDOC);
 		close(pipefd[READ_END]);
 		write_to_pipefd(pipefd[WRITE_END], end_of_block);
 	}
 	else
 	{
-		waitpid(pid, NULL, 0);
 		close(pipefd[WRITE_END]);
 		dup2(pipefd[READ_END], STDIN_FILENO);
 		close(pipefd[READ_END]);
 	}
-	//  here_doc は常に EXIT_SUCCESS を返すのでいいのか？？？
-	return (status);
+	return (wait_process(pid, 1));
 }

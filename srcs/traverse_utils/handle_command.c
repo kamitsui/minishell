@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 21:52:46 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/26 17:59:29 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int	handle_executable(t_ast *node, t_envwrap *env_wrapper)
 		status = execute_builtins_command(node, env_wrapper);
 	else
 		status = execute_command(node, env_wrapper);
+	if (status == (0x80 | SIGINT))
+		ft_printf("\n");
+	if (status == (0x80 | SIGQUIT))
+		ft_printf(MSG_SIGQUIT);
 	return (status);
 }
 // debug code

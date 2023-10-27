@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 14:21:08 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/26 19:07:16 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@
 #include "parse.h"
 #include "traverse.h"
 #include "error_minishell.h"
+#include "ft_signal.h"
 #include "libft.h"
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <errno.h>
 
 // for debug
 #include "debug.h"
@@ -67,12 +69,17 @@ int	input(t_envwrap *env_wrapper)
 {
 	int		status;
 	char	*line;
+	t_sigaction	sa_int;
+	t_sigaction	ignore_action;
 
 	while (1)
 	{
+		sig_signal_initializer(&sa_int, SIGINT, HANDLE_NORMAL);
+		sig_signal_initializer(&ignore_action, SIGQUIT, HANDLE_IGN);
 		line = readline(PROMPT);
+		sig_signal_initializer(&sa_int, SIGINT, HANDLE_IGN);
 		if (line == NULL)
-			handle_error(ERR_READLINE);
+			ft_exit(status, env_wrapper);
 		ft_dprintf(g_fd_log, "line[%s] [%p] *line[%c]\n", line, line, *line);
 		if (*line == '\0')
 		{

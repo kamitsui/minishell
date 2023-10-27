@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 20:07:43 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/24 20:57:06 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/26 17:47:11 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ int	wait_process(pid_t pid, int num_commands)
 	if (WIFEXITED(status))
 		status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
-		status = WTERMSIG(status);
+		status = 0x80 | WTERMSIG(status);
 	return (status);
 }
