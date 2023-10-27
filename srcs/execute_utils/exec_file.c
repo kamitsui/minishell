@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:47:01 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 18:38:43 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/27 23:39:35 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "execute.h"
 #include "libft.h"
 #include "error_minishell.h"
+#include "ft_printf.h"
 #include <stdlib.h>
 #include <stdbool.h>
 #include <unistd.h>
@@ -63,10 +64,14 @@ void	exec_file(char *file, char *arguments[], char *env[])
 {
 	if (file == NULL || arguments == NULL || env == NULL)
 		return ;
-	if (ft_strnequ(file, "/", 1) == true)
+	if (ft_strchr(file, '/') != NULL)
 	{
 		if (access(file, F_OK | X_OK) == 0)
+		{
 			execve(file, arguments, env);
+			ft_dprintf(STDERR_FILENO, "%s: %s: is a directory\n", NAME, file);
+			exit (126);
+		}
 		else
 			ft_errno_exit(file);
 	}
