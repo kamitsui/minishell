@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:47:01 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/27 23:39:35 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:28:28 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <sys/errno.h>
 
 /**
  * @brief 絶対パス、相対パスで渡された実行ファイルに対しての処理
@@ -72,8 +73,11 @@ void	exec_file(char *file, char *arguments[], char *env[])
 			ft_dprintf(STDERR_FILENO, "%s: %s: is a directory\n", NAME, file);
 			exit (126);
 		}
+		put_error_message_from_errno(file);
+		if (errno == EACCES)
+			exit (126);
 		else
-			ft_errno_exit(file);
+			exit (127);
 	}
 	else
 		search_exec_file(file, arguments, env);
