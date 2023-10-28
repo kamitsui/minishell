@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:05:41 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/27 21:13:39 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:51:07 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,6 @@
 #include <unistd.h>
 
 /**
- * @brief エラーメッセージを標準エラー出力する関数。(ヘルパー関数）
- *
- * @param error_code 出力させたいエラーメッセージに対するエラーコード
- * @note 文字列要素の順番や組み合わせを修正した方がいいかも。。。
- */
-static void	put_error_message(int error_code)
-{
-	static char	*msg[ERR_NUM] = {MSG_ARG, MSG_CREATE_ENV};
-
-	ft_dprintf(STDERR_FILENO, msg[error_code]);
-}
-
-/**
  * @brief システムコール以外のエラー処理。標準エラー出力へのメッセージ出力と、
  * エラーコードを終了ステータスとして返す関数。
  *
@@ -44,8 +31,10 @@ static void	put_error_message(int error_code)
  */
 void	handle_error(int error_code)
 {
-	put_error_message(error_code);
-	exit(error_code);// 要検討　使っていいエラーコードを調べる
+	static char	*msg[ERR_NUM] = {MSG_ARG, MSG_CREATE_ENV};
+
+	ft_dprintf(STDERR_FILENO, msg[error_code]);
+	exit(error_code);
 }
 
 void	handle_syntax_error(char *unexpected_token)
@@ -84,7 +73,6 @@ void	ft_errno_exit(char *cause)
  * @brief エラーメッセージ出力とexit(1)を行う関数
  *
  * @param message エラー出力に書かせるメッセージ
- * @note 不要かも。。。
  */
 void	ft_perror_exit(char *message)
 {
