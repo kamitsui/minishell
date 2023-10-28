@@ -6,21 +6,15 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/25 14:18:12 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/28 21:24:59 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZE_H
 # define TOKENIZE_H
 
-// # include <readline/history.h>
-// # include <readline/readline.h>
-// # include <stdbool.h>
-// # include <stdlib.h>
 # include "libft.h"
 # include "environ.h"
-# include <sys/wait.h>//? in this h file?
-# include <fcntl.h>//? in this h file? for func open
 
 # define READ_END 0
 # define WRITE_END 1
@@ -43,7 +37,7 @@ typedef enum e_flg
 	allow_heredoc,//13<<
 	allow_append,//14>>
 	astarisk,//15
-	end, 
+	end,
 }	t_flg;
 
 typedef struct s_token
@@ -84,7 +78,7 @@ t_flg	tkn_assign_flg_to_c(char c);
 t_flg	tkn_assign_flg_to_word(char *s);
 t_flg	tkn_get_closing_flg(t_flg opening_flg);
 char	**tkn_create_dptrchar_from_list(t_list *cmdlst);
-void   tkn_del_one_by_flg(t_list **cmdlst, t_flg del_flg);
+void	tkn_del_one_by_flg(t_list **cmdlst, t_flg del_flg);
 t_token	*tkn_create_new_token_by_copy_old(t_token *old);
 
 //* tokenizeマーカー
@@ -101,6 +95,6 @@ t_list	*create_cmdslst_from_tknlst(t_list *tknlst);
 void	ft_exec(t_list *cmdslst, t_envwrap *env_wrapper);
 
 //* expansion.c
-int	expand_dollar_sign_on_char(char **cmdline, t_envwrap *env_wrap);
+int		expand_dollar_sign_on_char(char **cmdline, t_envwrap *env_wrap);
 
 #endif
