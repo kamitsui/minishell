@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:44:56 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 15:28:44 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:28:37 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_ast	*parse_pipe_command(char ***tokens, char *head_value)
 	node = create_node(NODE_PIPE_COM, head_value);
 	while (is_end(**tokens) == false && is_connector(**tokens) == false)
 	{
-		if (is_pipe(**tokens) == true && node->num_children > 0)
+		if (is_pipe(**tokens) == true && node->num_children > 0 && !is_end(**tokens))
 			(*tokens)++;
 		value = get_simple_command_value(*tokens);
 		command_node = parse_simple_command(tokens, value);
@@ -55,6 +55,6 @@ t_ast	*parse_pipe_command(char ***tokens, char *head_value)
 }
 //debug code
 //		ft_dprintf(g_fd_log,
-//			">> in parse_pipe_command ... head_value[%s]\n", head_value);
+//			">> in parse_pipe_command ... head_value[%s]\n", head_value);// debug
 //		ft_dprintf(g_fd_log,
-//			">> in parse_pipe_command ... one_pipe_com_value[%s]\n", value);
+//			">> in parse_pipe_command ... one_pipe_com_value[%s]\n", value);// debug

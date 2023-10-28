@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:03:50 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 00:04:37 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/27 19:34:15 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ static int	set_redirection(t_ast *node, t_envwrap *env_wrapper)
 			input_redirection, here_doc,
 			out_redirection_trunc, out_redirection_append};
 
-	if (node->num_children == 1)
-		return (handle_syntax_error(NULL, 0));
-	if (is_redirection(node->children[1]->value) == true)
-		return (handle_syntax_error(node->children[1]->value, 0));
 	status = EXIT_SUCCESS;
 	current_flag = BIT_IN_RED;
 	i = 0;

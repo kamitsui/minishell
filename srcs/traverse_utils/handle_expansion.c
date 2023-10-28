@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:09:06 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 00:35:38 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/27 19:38:59 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "error_minishell.h"
 #include "meta_minishell.h"
 
+// for debug
 #include "debug.h"
 #include "ft_printf.h"
 
@@ -43,6 +44,27 @@ void	init_exp_sm(t_exp_sm *machine)
 bool	is_allowd_variable_char(char c)
 {
 	return (ft_isalnum(c) == true || c == META_UNDER_CHR || c == META_QUESTION_CHR);
+	//return (ft_isalnum(c) == true || c == META_UNDER_CHR);
+}
+
+size_t	count_variable_char(char *value)
+{
+	size_t	len;
+
+	len = 0;
+	if (ft_strncmp(value, "$?", 2) == 0)
+		len = 2;
+	else
+	{
+		len++;
+		while (is_allowd_variable_char(value[len]) == true)
+		{
+			len++;
+			if (value[len] == META_QUESTION_CHR)
+				break ;
+		}
+	}
+	return (len);
 }
 
 size_t	exp_var(char *value, t_exp_sm *machine, t_envwrap *env_wrapper)
@@ -50,24 +72,17 @@ size_t	exp_var(char *value, t_exp_sm *machine, t_envwrap *env_wrapper)
 	char	*str_var;
 	size_t	len;
 
-	ft_dprintf(g_fd_log, ">> exp_var ... before value[%s]\n", value);
-	len = 1;
-	while (is_allowd_variable_char(value[len]) == true && value[len] != '\0')
-	{
-		len++;
-		if (value[len] == META_QUESTION_CHR && value[len] != '\0')
-			break ;
-	}
+	ft_dprintf(g_fd_log, ">> exp_var ... before value[%s]\n", value);// debug
+	len = count_variable_char(value);
 	if (len == 1)
 	{
 		str_add_to_buff(&machine->str, *value);
 		machine->state = EXP_LETTER;
-		return (len);
 	}
 	else
 	{
 		str_var = ft_strndup(value, len);
-		ft_dprintf(g_fd_log, ">> exp_var str[%s]\n", str_var);
+		ft_dprintf(g_fd_log, ">> exp_var str[%s]\n", str_var);// debug
 		debug_leaks("before var expansion", "minishell");// debug
 		expand_dollar_sign_on_char(&str_var, env_wrapper);
 		debug_leaks("after var expansion", "minishell");// debug
@@ -75,6 +90,7 @@ size_t	exp_var(char *value, t_exp_sm *machine, t_envwrap *env_wrapper)
 		free(str_var);
 		machine->state = EXP_LETTER;
 	}
+	ft_dprintf(g_fd_log, ">> exp_var ... end value[%s]\n", value);// debug
 	return (len);
 }
 
@@ -83,37 +99,59 @@ size_t	exp_squote(char *value, t_exp_sm *machine, t_envwrap *env_wrapper)
 	char	*str_squote;
 	size_t	len;
 
-	ft_dprintf(g_fd_log, ">> exp_squote ... before value[%s]\n", value);
+	ft_dprintf(g_fd_log, ">> exp_squote ... before value[%s]\n", value);// debug
+	value++;
 	len = ft_strchr(value, META_SQUOT_CHR) - value;
 	if (len == 0)
-		return (1);
+	{
+		machine->state = EXP_LETTER;
+		return (2);
+	}
 	str_squote = ft_strndup(value, len);
-	ft_dprintf(g_fd_log, ">> exp_squote str[%s]\n", str_squote);
-	//exit(0);
+	ft_dprintf(g_fd_log, ">> exp_squote str[%s]\n", str_squote);// debug
 	add_token(&machine->str, str_squote);
+	free(str_squote);
 	(void)env_wrapper;
 	machine->state = EXP_LETTER;
-	return (len + 1);
+	return (len + 2);
 }
 
 size_t	exp_dquote(char *value, t_exp_sm *machine, t_envwrap *env_wrapper)
 {
 	char	*str_dquote;
 	size_t	len;
+	size_t	len_var;
+	size_t	i;
 
-	ft_dprintf(g_fd_log, ">> exp_dquote ... before value[%s]\n", value);
+	ft_dprintf(g_fd_log, ">> exp_dquote ... before value[%s]\n", value);// debug
+	value++;
 	len = ft_strchr(value, META_DQUOT_CHR) - value;
-	ft_dprintf(g_fd_log, ">> exp_dquote len[%u]\n", len);
+	ft_dprintf(g_fd_log, ">> exp_dquote len[%u]\n", len);// debug
 	if (len == 0)
-		return (1);
-	str_dquote = ft_strndup(value, len);
-	ft_dprintf(g_fd_log, ">> exp_dquote str[%s]\n", str_dquote);
-	//exit(0);
-	expand_dollar_sign_on_char(&str_dquote, env_wrapper);
-	add_token(&machine->str, str_dquote);
-	free(str_dquote);
+		machine->state = EXP_LETTER;
+	i = 0;
+	while (value[i] != '"')
+	{
+		len_var = count_variable_char(value + i);
+		ft_dprintf(g_fd_log, ">> exp_dquote len_var[%u]\n", len_var);// debug
+		if (value[i] == '$' && len_var > 1)
+		{
+			str_dquote = ft_strndup(value + i, len_var);
+			ft_dprintf(g_fd_log, ">> exp_dquote str[%s]\n", str_dquote);// debug
+			expand_dollar_sign_on_char(&str_dquote, env_wrapper);
+			add_token(&machine->str, str_dquote);
+			free(str_dquote);
+			i += len_var;
+		}
+		else
+		{
+			str_add_to_buff(&machine->str, value[i]);
+			i++;
+		}
+	}
+	len = i;
 	machine->state = EXP_LETTER;
-	return (len + 1);
+	return (len + 2);
 }
 
 size_t	exp_letter(char *value, t_exp_sm *machine, t_envwrap *env_wrapper)
@@ -121,9 +159,15 @@ size_t	exp_letter(char *value, t_exp_sm *machine, t_envwrap *env_wrapper)
 	if (*value == META_DQUOT_CHR || *value == META_SQUOT_CHR)
 	{
 		if (*value == META_DQUOT_CHR && is_dquote(value) == true)
+		{
 			machine->state = EXP_DQUOTE;
+			return (0);
+		}
 		else if (*value == META_SQUOT_CHR && is_squote(value) == true)
+		{
 			machine->state = EXP_SQUOTE;
+			return (0);
+		}
 		else
 			str_add_to_buff(&machine->str, *value);
 	}
@@ -156,9 +200,9 @@ void	expansion(char **value, t_envwrap *env_wrapper)
 		write(g_fd_log, machine.str.buffer, machine.str.len);// debug
 		write(g_fd_log, "\n", 1);// debug
 	}
-	ft_dprintf(g_fd_log, ">> expansion buffer[");
+	ft_dprintf(g_fd_log, ">> expansion buffer[");// debug
 	write(g_fd_log, machine.str.buffer, machine.str.len);// debug
-	ft_dprintf(g_fd_log, "]\n");
+	ft_dprintf(g_fd_log, "]\n");// debug
 	free(*value);
 	*value = str_join_to_out(machine.str.out, machine.str.buffer, machine.str.len);
 	ft_dprintf(g_fd_log, ">> expansion [%s]\n", *value);// debug

@@ -6,12 +6,13 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 23:59:01 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 15:34:34 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/27 19:22:49 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parse.h"
+#include "error_minishell.h"
 #include <stdlib.h>
 
 // for debug
@@ -31,8 +32,8 @@ static t_ast	*parse_one_redirection(char ***tokens, char *value)
 			node->num_children * sizeof(t_ast *));// use ft_realloc
 	node->children[node->num_children - 1] = redirection_node;
 	(*tokens)++;
-	//if (is_file(*tokens) == true)
-	if (**tokens != NULL)// 要改良
+	if (is_redirection(**tokens) == false && is_pipe(**tokens) == false
+		&& is_end(**tokens) == false)
 	{
 		file_node = create_node(NODE_FILE, **tokens);
 		node->num_children++;
@@ -40,6 +41,12 @@ static t_ast	*parse_one_redirection(char ***tokens, char *value)
 				node->num_children * sizeof(t_ast *));// use ft_realloc
 		node->children[node->num_children - 1] = file_node;
 		(*tokens)++;
+	}
+	else
+	{
+		handle_syntax_error(**tokens);
+		while (is_end(**tokens) == false)
+			(*tokens)++;
 	}
 	return (node);
 }

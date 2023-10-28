@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 15:35:43 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/27 19:28:46 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
  */
 #include "libft.h"
 #include "parse.h"
+#include "error_minishell.h"
+#include "ft_signal.h"
 #include <stdlib.h>
 
 #include "ft_printf.h"
@@ -62,6 +64,12 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 	t_ast	*node;
 
 	node = create_node(NODE_SIMPLE_COM, head_value);
+	if (g_flag != 0)
+	{
+		while (is_end(**tokens) == false)
+			(*tokens)++;
+		return (node);
+	}
 	if (is_parenthesis(**tokens) == true)
 	{
 		node->flag |= BIT_PARENTHESIS;
@@ -71,9 +79,7 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 	if (is_include_redirection_in_simple_com(*tokens) == true)
 		call_parse_io_redirections(node, tokens);
 	if (is_pipe(**tokens) == true)
-	{
-		call_parse_executable(node, tokens);
-	}
+		handle_syntax_error(**tokens);
 	else
 	{
 		while (is_end(**tokens) == false && is_connector(**tokens) == false
