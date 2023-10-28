@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 10:08:45 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 20:02:36 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/28 19:03:25 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	handle_pipe_command(t_ast *pipe_node, t_envwrap *env_wrapper);
 int	handle_parenthesis(t_ast *node, t_envwrap *env_wrapper);
 
 void	handle_expansion(t_ast *node, t_envwrap *env_wrapper);
+void	handle_empty_node(t_ast **node, t_envwrap *env_wrapper);
 
 /**
  * @brief traverse_ast関数内で行う各ノードタイプ毎の関数を関数ポインタとして使う

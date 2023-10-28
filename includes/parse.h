@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 23:59:42 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/28 15:19:19 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ enum	e_NodeType
 # define BIT_VAR				0x00800000
 
 # define BIT_PARENTHESIS		0x01000000
+
+# define BIT_EMPTY				0x02000000
 
 /**
  * @brief コネクタータイプの種類数

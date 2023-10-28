@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:09:06 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/27 19:38:59 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/28 15:20:53 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,11 @@ void	handle_expansion(t_ast *node, t_envwrap *env_wrapper)
 		ft_dprintf(g_fd_log, "[%s] before expansion\n", node->value);//debug
 		expansion(&node->value, env_wrapper);
 		ft_dprintf(g_fd_log, "[%s] after expansion\n", node->value);//debug
+		if (*node->value == '\0')
+		{
+			node->flag |= BIT_EMPTY;
+			ft_dprintf(g_fd_log, "[%s] is EMPTY\n", node->value);//debug
+		}
 	}
 	i = 0;
 	while (i < node->num_children)
