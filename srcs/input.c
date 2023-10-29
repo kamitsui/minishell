@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/28 21:40:53 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:03:36 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@
 #include "parse.h"
 #include "traverse.h"
 #include "error_minishell.h"
+#include "free_minishell.h"
 #include "ft_signal.h"
 #include "libft.h"
+#include "ft_printf.h"
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <errno.h>
-
-// for debug
-#include "debug.h"
-#include "ft_printf.h"
 
 /**
  * @brief lets_go_shell関数では、<command-line>の文字列に対して、
@@ -55,10 +53,6 @@ int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 	free_ast(ast);
 	return (status);
 }
-// debug code
-//	debug_input(line);// debug
-//	debug_token(tokens);// debug
-//	debug_ast(ast);// debug
 
 /**
  * @brief プロンプト表示、<command-line>入力、<command-line>処理を行う関数\n
@@ -98,6 +92,3 @@ int	input(t_envwrap *env_wrapper)
 	}
 	return (env_wrapper->exit_code);
 }
-// debug code
-//		debug_status("lets_go_shell", env_wrapper->exit_code);// debug
-//		debug_leaks("lets_go_shell", "minishell");// debug

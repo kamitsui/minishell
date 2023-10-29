@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:17:23 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/27 22:48:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:04:29 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,14 @@
 #include "environ.h"
 #include "meta_minishell.h"
 #include "error_minishell.h"
-
-// for debug
 #include "ft_printf.h"
-#include "debug.h"
 
 static bool	is_valid_export_variable(char *str)
 {
 	if (*str == '=' || ft_isdigit(*str) == true)
 		return (false);
-	ft_dprintf(g_fd_log, "start\n");// debug
 	while (*str != '\0')
 	{
-		ft_dprintf(g_fd_log, "[%c] ", *str);// debug
 		if (ft_isalnum(*str) == false && *str != META_UNDER_CHR)
 		{
 			if (*str != '=')

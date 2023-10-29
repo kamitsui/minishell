@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:45:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/27 22:50:19 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:58:19 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@
 #include "error_minishell.h"
 #include "traverse.h"
 #include <sys/wait.h>
-
-#include "debug.h"
-#include "ft_printf.h"
 
 static void	child_process_in_pipe_com(
 				int pipefd[2], size_t i, t_ast *node, t_envwrap *env_wrapper)
@@ -98,7 +95,6 @@ int	handle_pipe_command(t_ast *node, t_envwrap *env_wrapper)
 	int	original_stdin_fd;
 	int	status;
 
-	ft_dprintf(g_fd_log, ">> call handle_pipe_command ... node value [%s]\n", node->value);
 	original_stdin_fd = buck_up_fd(STDIN_FILENO);
 	original_stdout_fd = buck_up_fd(STDOUT_FILENO);
 	if (original_stdout_fd == -1)
@@ -106,20 +102,5 @@ int	handle_pipe_command(t_ast *node, t_envwrap *env_wrapper)
 	status = handle_one_pipe_command(node, env_wrapper);
 	recover_fd(original_stdin_fd, STDIN_FILENO);
 	recover_fd(original_stdout_fd, STDOUT_FILENO);
-	debug_status("handle_pipe_command ... exist redirection", status);// debug
 	return (status);
 }
-//{
-//	pid_t	pid;
-//
-//	pid = fork();
-//	if (pid == 0)
-//		execute_pipeline(pipe_node->children,
-//					pipe_node->num_children, env_wrapper);
-//	waitpid(pid, &status, 0);
-//	if (WIFEXITED(status))
-//		env_wrapper->exit_code = WEXITSTATUS(status);
-//	else if (WIFSIGNALED(status))
-//		env_wrapper->exit_code = WTERMSIG(status);
-//	return (env_wrapper->exit_code);
-//}

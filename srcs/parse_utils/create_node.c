@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:54:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 00:03:04 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:46:36 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,3 @@ t_ast	*create_node(enum e_NodeType type, char *value)
 	node->num_children = 0;
 	return (node);
 }
-// debug code
-//
-//#include "debug.h"// debug
-//#include "ft_printf.h"// debug
-//	debug_parse("create_node", node);// debug

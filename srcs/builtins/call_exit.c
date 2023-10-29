@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:16:27 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 17:57:32 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:00:55 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 #include "libft.h"
 #include "error_minishell.h"
 #include "meta_minishell.h"
-
-// for debug
-#include "debug.h"
 
 static bool	is_long(const char *str)
 {
@@ -42,20 +39,14 @@ static void	handle_error_too_many_args(char *value)
 	ft_dprintf(STDERR_FILENO, "%s: %s: %s\n",
 		NAME, value, "too many arguments");
 }
-//exit
-//minishell: exit: too many arguments
-//>minishell
 
 static void	handle_error_nurmeric_args(char *value)
 {
 	ft_dprintf(STDERR_FILENO, "%s\n", STR_EXIT);
 	ft_dprintf(STDERR_FILENO, "%s: %s: %s\n",
 		NAME, value, "numeric argument required");
-	exit (255);// ??? ハードコーディングでいいのか？？
+	exit (255);
 }
-//exit
-//minishell: exit: numeric argument required
-//>
 
 int	call_exit(t_ast *node, t_envwrap *env_wrapper)
 {

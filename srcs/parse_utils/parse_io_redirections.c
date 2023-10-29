@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 23:59:01 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/27 19:22:49 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:46:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 #include "parse.h"
 #include "error_minishell.h"
 #include <stdlib.h>
-
-// for debug
-#include "debug.h"
-#include "ft_printf.h"
 
 static t_ast	*parse_one_redirection(char ***tokens, char *value)
 {
@@ -50,9 +46,6 @@ static t_ast	*parse_one_redirection(char ***tokens, char *value)
 	}
 	return (node);
 }
-// debug code
-//	ft_dprintf(g_fd_log,
-//			">> in parse_one_redirection ... redirection[%s]\n", *tokens);
 
 t_ast	*parse_io_redirections(char **tokens, char *head_value)
 {
@@ -75,11 +68,7 @@ t_ast	*parse_io_redirections(char **tokens, char *head_value)
 		node->children = (t_ast **)realloc(node->children,
 				node->num_children * sizeof(t_ast *));// use ft_realloc
 		node->children[node->num_children - 1] = redirection_node;
-//		tokens++;// ？ 連続してリダイレクションのトークンがきたら...
 		free(value);
 	}
-	debug_ast(node);// dbeug
 	return (node);
 }
-// debug code
-//	debug_parse("parse_io_redirections", node);// debug

@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 20:41:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/28 21:43:19 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:50:34 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 #include "minishell.h"
 #include "execute.h"
 #include "free_minishell.h"
-
-//デバッグ用
-//#include "debug.h"
-//#include "ft_printf.h"
-//int	g_fd_log;
-//int	g_flag_debug;
 
 /**
  * @brief minishellの入口　環境変数のデータをinput関数へ渡して、
@@ -50,5 +44,11 @@ int	main(int argc, char *argv[], char *env[])
 	return (status);
 }
 // debug code
+//
+//#include "debug.h"
+//#include "ft_printf.h"
+//int	g_fd_log;
+//int	g_flag_debug;
+//
 //	enable_debug(DEBUG_OFF);// debug on:DEBUG_ON  off:DEBUG_OFF
 //	debug_leaks("main", NULL);// debug

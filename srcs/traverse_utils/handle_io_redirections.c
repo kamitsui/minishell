@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 15:03:50 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/27 19:34:15 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:55:34 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 #include "traverse.h"
 #include "execute.h"
 #include "error_minishell.h"
-
-#include "debug.h"
-#include "ft_printf.h"
 
 static int	set_redirection(t_ast *node, t_envwrap *env_wrapper)
 {

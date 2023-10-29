@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/27 19:28:46 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:47:10 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 #include "error_minishell.h"
 #include "ft_signal.h"
 #include <stdlib.h>
-
-#include "ft_printf.h"
-#include "debug.h"
 
 static void	call_parse_io_redirections(t_ast *node, char ***tokens)
 {
@@ -49,7 +46,6 @@ static void	call_parse_executable(t_ast *node, char ***tokens)
 			node->num_children * sizeof(t_ast *));// use ft_realloc
 	node->children[node->num_children - 1] = executable_node;
 	free(value);
-//	(*tokens)++;// ??　ほんとにこれでいい？
 }
 
 /**
@@ -97,10 +93,3 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 	}
 	return (node);
 }
-// debug code
-//		ft_dprintf(g_fd_log,
-//					">> in parse_simple_command ... redirection_value[%s]\n",
-//					value);// debug
-//		ft_dprintf(g_fd_log,
-//					">> in parse_simple_command ... executable_value[%s]\n",
-//					value);// debug

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/28 19:31:24 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:56:01 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@
 #include "execute.h"
 #include "builtins.h"
 #include "error_minishell.h"
-#include <signal.h>
-
-#include "debug.h"
 #include "ft_printf.h"
-
+#include <signal.h>
 
 int	handle_executable(t_ast *node, t_envwrap *env_wrapper)
 {
@@ -41,8 +38,6 @@ int	handle_executable(t_ast *node, t_envwrap *env_wrapper)
 		ft_printf(MSG_SIGQUIT);
 	return (status);
 }
-// debug code
-//	debug_status("handle_executable", status);// debug
 
 int	handle_simple_command(t_ast *node, t_envwrap *env_wrapper)
 {
@@ -57,8 +52,6 @@ int	handle_simple_command(t_ast *node, t_envwrap *env_wrapper)
 	if (node->children[i]->type == NODE_EXECUTABLE)
 	{
 		status = handle_executable(node->children[i], env_wrapper);
-		debug_status("handle_simple_command ... only executable", status);// debug
-		ft_dprintf(g_fd_log, "\thead value[%s]\n", node->value);//debug
 		return (status);
 	}
 	else
@@ -70,8 +63,6 @@ int	handle_simple_command(t_ast *node, t_envwrap *env_wrapper)
 			status = handle_executable(node->children[++i], env_wrapper);
 		recover_fd(original_stdin_fd, STDIN_FILENO);
 		recover_fd(original_stdout_fd, STDOUT_FILENO);
-		debug_status("handle_simple_command ... exist redirection", status);// debug
-		ft_dprintf(g_fd_log, "\thead value[%s]\n", node->value);//debug
 		return (status);
 	}
 }
@@ -88,7 +79,6 @@ int	handle_command(t_ast *node, t_envwrap *env_wrapper)
 {
 	int		status;
 
-	debug_ast(node);
 	handle_expansion(node, env_wrapper);
 	handle_empty_node(&node, env_wrapper);
 	if (node->children[0]->type == NODE_PIPE_COM)

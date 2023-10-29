@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remove_empty_node.c                                :+:      :+:    :+:   */
+/*   handle_empty_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:09:06 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/28 19:31:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:57:22 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 #include "expansion.h"
 #include "error_minishell.h"
 #include "meta_minishell.h"
-
-// for debug
-#include "debug.h"
-#include "ft_printf.h"
 
 void	adjust_argument_node(t_ast **node)
 {
