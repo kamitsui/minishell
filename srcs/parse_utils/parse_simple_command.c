@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 12:47:10 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:40:29 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ static void	call_parse_io_redirections(t_ast *node, char ***tokens)
 	value = get_redirection_value_in_simple_command(*tokens);
 	redirection_node = parse_io_redirections(*tokens, value);
 	node->num_children++;
-	node->children = (t_ast **)realloc(node->children,
-			node->num_children * sizeof(t_ast *));// use ft_realloc
+	node->children = (t_ast **)ft_realloc_tentative(node->children,
+			node->num_children * sizeof(t_ast *),
+			(node->num_children - 1) * sizeof(t_ast *));
 	node->children[node->num_children - 1] = redirection_node;
 	free(value);
 }
@@ -42,8 +43,9 @@ static void	call_parse_executable(t_ast *node, char ***tokens)
 	value = get_executable_value(*tokens);
 	executable_node = parse_executable(tokens);
 	node->num_children++;
-	node->children = (t_ast **)realloc(node->children,
-			node->num_children * sizeof(t_ast *));// use ft_realloc
+	node->children = (t_ast **)ft_realloc_tentative(node->children,
+			node->num_children * sizeof(t_ast *),
+			(node->num_children - 1) * sizeof(t_ast *));
 	node->children[node->num_children - 1] = executable_node;
 	free(value);
 }

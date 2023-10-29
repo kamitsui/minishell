@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 12:52:41 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:30:16 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ t_ast	*parse(char **tokens)
 			free(value);
 		}
 		ast->num_children++;
-		ast->children = (t_ast **)realloc(ast->children,// use ft_realloc
-				ast->num_children * sizeof(t_ast *));
+		ast->children = (t_ast **)ft_realloc_tentative(ast->children,
+				ast->num_children * sizeof(t_ast *),
+				(ast->num_children - 1) * sizeof(t_ast *));
 		ast->children[ast->num_children - 1] = node;
 	}
 	return (ast);

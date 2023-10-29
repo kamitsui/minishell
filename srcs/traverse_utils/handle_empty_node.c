@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:09:06 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 12:57:22 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:40:57 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ void	adjust_argument_node(t_ast **node)
 		else
 		{
 			tmp->num_children++;
-			tmp->children = (t_ast **)realloc(tmp->children,
-				tmp->num_children * sizeof(t_ast *));// ft_realloc
+			tmp->children = (t_ast **)ft_realloc_tentative(tmp->children,
+				tmp->num_children * sizeof(t_ast *),
+				(tmp->num_children - 1) * sizeof(t_ast *));
 			tmp->children[tmp->num_children - 1] = (*node)->children[i];
 		}
 		i++;

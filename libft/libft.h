@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:40:49 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/21 22:14:12 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/29 20:04:25 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ char	*ft_strtok(char *str, char const *sep);
 long	ft_strtol(const char *str, char **endptr, int base);
 bool	ft_substr_exist(char *haystack, char *needle);
 bool	ft_isenclosed(const char *str, char start, char end);
+void	*ft_realloc_tentative(void *ptr, size_t new_size, size_t old_size);
 
 #endif
