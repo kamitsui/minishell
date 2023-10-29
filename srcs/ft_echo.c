@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:10:56 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/20 21:16:58 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 21:11:43 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	ft_echo(char **argv)
 			ft_putchar_fd(SPACE, STDOUT_FILENO);
 		i++;
 	}
-//	exit (EXIT_SUCCESS);// disable by kamitsui (compile error)
 }
 
 // int	main(void)

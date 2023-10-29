@@ -6,26 +6,44 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:17:56 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/24 14:23:38 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 22:35:07 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "environ.h"
+#include "builtins.h"
+#include "error_minishell.h"
+#include "ft_printf.h"
+
+static int	handle_error_unset(char *value)
+{
+	ft_dprintf(STDERR_FILENO, "%s: %s: `%s': %s\n",
+		NAME, STR_UNSET, value, "not a valid identifier");
+	return (EXIT_FAILURE);
+}
 
 int	call_unset(t_ast *node, t_envwrap *env_wrapper)
 {
 	char	*tgt_key;
-//	static const char	*cause = "unset";
-//	static const char	*error_msg = "not a valid identifier";
-// bash: unset: `1': not a valid identifier
+	size_t	i;
+	int		status;
 
-//	if (is_error_unset(...) == true)
-//		handl_error_not_exit(...);
-//		return (EXIT_FAILURE);
+	status = EXIT_SUCCESS;
 	if (node->num_children == 0)
 		return (EXIT_SUCCESS);
-	tgt_key = node->children[0]->value;
-	ft_unset(env_wrapper, tgt_key);
-	return (EXIT_SUCCESS);
+	else
+	{
+		i = 0;
+		while (i < node->num_children)
+		{
+			tgt_key = node->children[i]->value;
+			if (is_valid_export_variable(tgt_key) == true)
+				ft_unset(env_wrapper, tgt_key);
+			else
+				status = handle_error_unset(tgt_key);
+			i++;
+		}
+	}
+	return (status);
 }

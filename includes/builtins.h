@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:52:12 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 15:08:45 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 22:18:22 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int		call_exit(t_ast *node, t_envwrap *env_wrapper);
 typedef int		(*t_call_builtins)(t_ast *, t_envwrap *);
 
 bool	is_builtins_command(const char *value);
+bool	is_valid_export_variable(char *str);
 
 #endif
