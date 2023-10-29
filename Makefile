@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/25 14:16:19 by mogawa           ###   ########.fr        #
+#    Updated: 2023/10/28 19:56:32 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,6 +85,7 @@ SRCS = main.c \
 	   handle_io_redirections.c \
 	   handle_expansion.c \
 	   handle_parenthesis.c \
+	   handle_empty_node.c \
 	   \
 	   buck_up_fd.c \
 	   recover_fd.c \

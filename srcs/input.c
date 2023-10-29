@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/27 18:38:43 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:03:36 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@
 #include "parse.h"
 #include "traverse.h"
 #include "error_minishell.h"
+#include "free_minishell.h"
 #include "ft_signal.h"
 #include "libft.h"
+#include "ft_printf.h"
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <errno.h>
-
-// for debug
-#include "debug.h"
-#include "ft_printf.h"
 
 /**
  * @brief lets_go_shell関数では、<command-line>の文字列に対して、
@@ -45,12 +43,8 @@ int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 	t_ast	*ast;
 
 	g_flag = 0;
-	debug_input(line);// debug
 	tokens = token_controller(line);
-	debug_token(tokens);// debug
 	ast = parse(tokens);
-	ft_dprintf(g_fd_log, ">> g_flag = %d\n", g_flag);// debug
-	debug_ast(ast);// debug
 	if (g_flag == 0)
 		status = traverse_ast(ast, env_wrapper);
 	else
@@ -72,7 +66,7 @@ int	lets_go_shell(char *line, t_envwrap *env_wrapper)
  */
 int	input(t_envwrap *env_wrapper)
 {
-	char	*line;
+	char		*line;
 	t_sigaction	sa_int;
 	t_sigaction	ignore_action;
 
@@ -83,21 +77,18 @@ int	input(t_envwrap *env_wrapper)
 		line = readline(PROMPT);
 		sig_signal_initializer(&sa_int, SIGINT, HANDLE_IGN);
 		if (line == NULL)
-			ft_exit(env_wrapper->exit_code, env_wrapper);
-		ft_dprintf(g_fd_log, "line[%s] [%p] *line[%c]\n", line, line, *line);
+		{
+			ft_dprintf(STDOUT_FILENO, "exit\n");
+			break ;
+		}
 		if (*line == '\0')
 		{
 			free (line);
 			continue ;
 		}
 		add_history(line);
-		// if (^Dがきたら)  .....
-		// if (lineの最後の文字がエスケープ文字'\'だったら）.....
 		env_wrapper->exit_code = lets_go_shell(line, env_wrapper);
-		debug_status("lets_go_shell", env_wrapper->exit_code);// debug
-		debug_leaks("lets_go_shell", "minishell");// debug
 		free (line);
 	}
-	//	erro handle (^D が２回続いて入力された場合)
 	return (env_wrapper->exit_code);
 }

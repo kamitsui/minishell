@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:12:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 13:40:54 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:00:18 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
  */
 #include "parse.h"
 #include "traverse.h"
-
-#include "debug.h"
-#include "ft_printf.h"
 
 /**
  * @brief 抽象構文木のノード全てを走査して、順番に実行していく再帰関数
@@ -56,8 +53,6 @@ int	traverse_ast(t_ast *node, t_envwrap *env_wrapper)
 	}
 	return (env_wrapper->exit_code);
 }
-//debug code
-			//debug_status("traverse_ast", env_wrapper->exit_code);// debug
 // reference ... enum e_NodeType
 //enum	e_NodeType
 //{

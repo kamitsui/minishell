@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:58:10 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/24 19:02:13 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:44:34 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 #include "parse.h"
 #include "libft.h"
 #include <stdlib.h>
-
-// for debug
-#include "debug.h"
-#include "ft_printf.h"
 
 char	*get_redirection_value(char **tokens)
 {

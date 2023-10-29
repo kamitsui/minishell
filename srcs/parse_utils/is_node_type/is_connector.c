@@ -6,16 +6,12 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:04:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 20:05:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:47:34 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include <stdbool.h>
-
-// for debug
-#include "debug.h"// debug
-#include "ft_printf.h"// debug
 
 bool	is_connector(const char *token)
 {

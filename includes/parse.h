@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/25 23:59:42 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:04:11 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ enum	e_NodeType
 # define BIT_VAR				0x00800000
 
 # define BIT_PARENTHESIS		0x01000000
+
+# define BIT_EMPTY				0x02000000
 
 /**
  * @brief コネクタータイプの種類数
@@ -164,7 +166,6 @@ char	*str_join_to_out(const char *s1, const char *s2, size_t len2);
 void	add_token(t_string *str, char *tokens);
 void	add_redirection_token(t_string *str, char ***tokens);
 void	add_file_token(t_string *str, char ***tokens);
-
 
 /**
  * @brief 現在のトークンがオペレーターかどうか調べる関数

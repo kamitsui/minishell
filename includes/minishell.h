@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:49:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 21:24:30 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/28 21:05:04 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_string
  * @brief mainからで使う関数
  */
 int			input(t_envwrap *env_wrapper);
-int	lets_go_shell(char *line, t_envwrap *env_wrapper);
+int			lets_go_shell(char *line, t_envwrap *env_wrapper);
 
 t_envwrap	*create_env_list(char **environ);
 

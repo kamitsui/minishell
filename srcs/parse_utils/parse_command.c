@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:29:42 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 19:40:15 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:47:54 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@
 #include "libft.h"
 #include "parse.h"
 #include <stdlib.h>
-
-// for debug
-#include "ft_printf.h"// debug
-#include "debug.h"// debug
 
 /**
  * @brief \<command>のノードを作る関数
@@ -56,5 +52,3 @@ t_ast	*parse_command(char ***tokens, char *head_value)
 	node->children[node->num_children - 1] = command_node;
 	return (node);
 }
-// debug code
-//	debug_parse("parse_command", node);// debug

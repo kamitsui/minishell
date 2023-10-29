@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 15:12:54 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:52:41 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@
 #include	"parse.h"
 #include	<stdlib.h>
 #include	<string.h>
-
-#include	"ft_printf.h"// debug
-#include	"debug.h"// debug
 
 /**
  * @brief \<command-line>から各トークンを抽出して、
@@ -57,5 +54,3 @@ t_ast	*parse(char **tokens)
 	}
 	return (ast);
 }
-//debug code
-//		debug_parse("parse", node);// debug

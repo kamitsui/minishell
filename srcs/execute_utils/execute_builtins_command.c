@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:45:22 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 18:02:23 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:51:33 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 #include "environ.h"
 #include "builtins.h"
 #include "libft.h"
-
-// for debug
-#include "ft_printf.h"
-#include "debug.h"
 
 int	execute_builtins_command(t_ast *node, t_envwrap *env_wrapper)
 {
@@ -42,7 +38,3 @@ int	execute_builtins_command(t_ast *node, t_envwrap *env_wrapper)
 	}
 	return (status);
 }
-// debug code
-//			ft_dprintf(g_fd_log, ">> call ft_%s\n", str_builtins[i]);//debug
-//	debug_status("builtins_command", status);// debug
-//	debug_leaks("builtins_command", "minishell");// debug

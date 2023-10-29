@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 14:22:49 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/26 18:12:09 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/29 12:53:29 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@
 #include "readline/readline.h"
 #include "readline/history.h"
 #include <string.h>
-
-// for debug
-#include "ft_printf.h"
-#include "debug.h"
 
 // void	sig_handle_ctrl_d
 
