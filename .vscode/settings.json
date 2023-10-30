@@ -1,5 +1,9 @@
 {
 	"C_Cpp.errorSquiggles": "enabled",
 	"C_Cpp.intelliSenseEngineFallback": "enabled",
-	"C_Cpp.default.compilerPath": "/usr/bin/cc"
+	"C_Cpp.default.compilerPath": "/usr/bin/cc",
+	"files.associations": {
+		"*.c": "c",
+		"error_minishell.h": "c"
+	}
 }

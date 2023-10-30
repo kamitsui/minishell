@@ -41,6 +41,7 @@ SRCS = main.c \
 	   tokenize_lstiter_funcs.c \
 	   tokenize_markers.c \
 	   tokenize_utils.c \
+	   tokenize_flg_utils.c \
 	   \
 	   expansion.c \
 	   \
@@ -272,23 +273,3 @@ CFLAGS = -Wall -g3 -O0 -fno-omit-frame-pointer
 endif
 
 .PHONY: debug asan all clean fclean re bonus
-
-token:
-	cc -Wall -Wextra -g3 -O0 -fsanitize=address ./srcs/token/tokenize.c ./srcs/token/tokenize_utils.c \
-	./srcs/token/tokenize_lstiter_funcs.c ./srcs/token/tokenize_markers.c ./srcs/token/tokenize_is_flg.c \
-	./srcs/environ/env_lstiter_funcs.c ./srcs/environ/env_utils.c ./srcs/environ/environ.c ./srcs/environ/ft_pwd.c \
-	./srcs/environ/ft_cd.c ./srcs/environ/ft_env.c ./srcs/environ/ft_export.c ./srcs/environ/ft_unset.c \
-	-Iincludes -Ilibft -Ift_printf/includes ./libft/libft.a ./ft_printf/libftprintf.a -lreadline \
-	-o token
-#	./srcs/token/token_expansion.c \
-
-leak:
-	cc -Wall -Wextra -g3 -O0 ./srcs/token/tokenize.c ./srcs/token/tokenize_utils.c \
-	./srcs/token/tokenize_lstiter_funcs.c ./srcs/token/tokenize_markers.c ./srcs/token/tokenize_is_flg.c \
-	./srcs/environ/env_lstiter_funcs.c ./srcs/environ/env_utils.c ./srcs/environ/environ.c ./srcs/environ/ft_pwd.c \
-	./srcs/environ/ft_cd.c ./srcs/environ/ft_env.c ./srcs/environ/ft_export.c ./srcs/environ/ft_unset.c \
-	-Iincludes -Ilibft -Ift_printf/includes ./libft/libft.a ./ft_printf/libftprintf.a -lreadline \
-	-o token
-.PHONY: token leak
-
-expand:

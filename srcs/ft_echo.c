@@ -65,12 +65,3 @@ void	ft_echo(char **argv)
 		i++;
 	}
 }
-
-// int	main(void)
-// {
-// 	char	**cmd;
-
-// 	cmd = ft_split("     -n -n     -n hello   -n        world", ' ');
-// 	// cmd = ft_split("", ' ');
-// 	ft_echo(cmd);
-// }
