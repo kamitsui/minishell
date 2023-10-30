@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 12:52:16 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 13:24:57 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
  */
 static void	child_process(t_command command)
 {
-	char	*file;
+	char		*file;
 	t_sigaction	sa_int;
 	t_sigaction	sa_quit;
 
