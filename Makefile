@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/30 15:25:19 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/30 18:27:09 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,6 +133,9 @@ SRCS = main.c \
 	   is_builtins_command.c \
 	   \
 	   signal.c \
+	   sig_handler_normal.c \
+	   sig_handler_heredoc.c \
+	   sig_exit_signum.c \
 	   \
 	   error.c \
 	   free_utils.c \
