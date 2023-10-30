@@ -6,14 +6,25 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 13:13:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/25 14:02:09 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/30 17:21:55 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 #include "libft.h"
 
-//todo need to separate the func to meet norm.
+static void	add_idx(t_token *token, t_flg closing_flg, size_t *i, bool *to_join)
+{
+	token->concat_idx = *i;
+	if (*to_join == false)
+		*to_join = true;
+	else if (*to_join == true && token->flg == closing_flg)
+	{
+		*to_join = false;
+		*i += 1;
+	}
+}
+
 void	tkn_mark_quote_to_concatinate(t_list *cmdlst)
 {
 	t_token	*token;
@@ -35,14 +46,7 @@ void	tkn_mark_quote_to_concatinate(t_list *cmdlst)
 		}
 		if (token->flg == opening_flg || to_join == true)
 		{
-			token->concat_idx = i;
-			if (to_join == false)
-				to_join = true;
-			else if (to_join == true && token->flg == closing_flg)
-			{
-				to_join = false;
-				i++;
-			}
+			add_idx(token, closing_flg, &i, &to_join);
 		}
 		cmdlst = cmdlst->next;
 	}
