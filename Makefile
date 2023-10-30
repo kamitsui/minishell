@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/30 12:29:53 by mogawa           ###   ########.fr        #
+#    Updated: 2023/10/30 14:07:47 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS = main.c \
 	   parse_simple_command.c \
 	   parse_io_redirections.c \
 	   parse_executable.c \
+	   add_node_children.c \
 	   \
 	   get_command_value.c \
 	   get_executable_value.c \

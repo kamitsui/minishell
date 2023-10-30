@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/28 21:04:11 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:06:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ struct s_ast
  * ノードのタイプと値を引数で受け取り、ノードの構造体にセットする
  */
 t_ast	*create_node(enum e_NodeType type, char *value);
+void	add_node_children(
+			t_ast *node, enum e_NodeType new_node_type, char *value);
 
 /**
  * @brief parse関数はトークンの情報を解析し、

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 20:40:29 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:19:25 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,25 @@ static void	call_parse_executable(t_ast *node, char ***tokens)
 	char	*value;
 	t_ast	*executable_node;
 
-	value = get_executable_value(*tokens);
-	executable_node = parse_executable(tokens);
-	node->num_children++;
-	node->children = (t_ast **)ft_realloc_tentative(node->children,
-			node->num_children * sizeof(t_ast *),
-			(node->num_children - 1) * sizeof(t_ast *));
-	node->children[node->num_children - 1] = executable_node;
-	free(value);
+	while (is_end(**tokens) == false && is_connector(**tokens) == false
+		&& is_pipe(**tokens) == false)
+	{
+		if (is_redirection(**tokens) == true)
+		{
+			(*tokens)++;
+			if (is_end(**tokens) == false)
+				(*tokens)++;
+			continue ;
+		}
+		value = get_executable_value(*tokens);
+		executable_node = parse_executable(tokens);
+		node->num_children++;
+		node->children = (t_ast **)ft_realloc_tentative(node->children,
+				node->num_children * sizeof(t_ast *),
+				(node->num_children - 1) * sizeof(t_ast *));
+		node->children[node->num_children - 1] = executable_node;
+		free(value);
+	}
 }
 
 /**
@@ -79,19 +90,6 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 	if (is_pipe(**tokens) == true)
 		handle_syntax_error(**tokens);
 	else
-	{
-		while (is_end(**tokens) == false && is_connector(**tokens) == false
-			&& is_pipe(**tokens) == false)
-		{
-			if (is_redirection(**tokens) == true)
-			{
-				(*tokens) ++;
-				if (is_end(**tokens) == false)
-					(*tokens) ++;
-				continue ;
-			}
-			call_parse_executable(node, tokens);
-		}
-	}
+		call_parse_executable(node, tokens);
 	return (node);
 }

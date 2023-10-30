@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_add_to_buff.c                                  :+:      :+:    :+:   */
+/*   add_node_children.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 18:01:18 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 14:26:27 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/30 14:06:52 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/30 14:06:55 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parse.h"
-#include "minishell.h"
 #include "error_minishell.h"
+#include <stdlib.h>
 
-void	str_add_to_buff(t_string *str, char c)
+void	add_node_children(
+			t_ast *node, enum e_NodeType new_node_type, char *value)
 {
-	if (str->len == BUFF_SIZE)
-	{
-		str->out = str_join_to_out(str->out, str->buffer, str->len);
-		if (str->out == NULL)
-			ft_perror_exit("function fail : str_join_to_out");
-		ft_bzero(&str->buffer, BUFF_SIZE);
-		str->len = 0;
-	}
-	str->buffer[str->len] = c;
-	str->len++;
-	str->out_len++;
+	t_ast	*new_node;
+
+	new_node = create_node(new_node_type, value);
+	node->num_children++;
+	node->children = (t_ast **)ft_realloc_tentative(node->children,
+			node->num_children * sizeof(t_ast *),
+			(node->num_children - 1) * sizeof(t_ast *));
+	node->children[node->num_children - 1] = new_node;
 }

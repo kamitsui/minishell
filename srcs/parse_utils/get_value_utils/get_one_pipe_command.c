@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:17:33 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 21:04:46 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:21:57 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_one_pipe_command_value(char **tokens)
 		&& is_pipe(*tokens) == false)
 	{
 		if (str.out_len > 0)
-			str_add_to_buff(&str, ' ');// 見やすくするように区切り文字追加
+			str_add_to_buff(&str, ' ');
 		i = 0;
 		while ((*tokens)[i] != '\0')
 		{
