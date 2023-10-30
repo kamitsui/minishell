@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 10:08:45 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 17:19:32 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:28:45 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ void	handle_empty_node(t_ast **node, t_envwrap *env_wrapper);
  * @brief traverse_ast関数内で行う各ノードタイプ毎の関数を関数ポインタとして使う
  * （ステートマシンの制御手法）
  */
-typedef int	(*t_handle_node)(t_ast *node, t_envwrap *env_wrapper);
+typedef int		(*t_handle_node)(t_ast *node, t_envwrap *env_wrapper);
 
 int		buck_up_fd(int fd);
 void	recover_fd(int prev_fd, int recover_fd);
 
-typedef int	(*t_select_redirection)(char *);
+typedef int		(*t_select_redirection)(char *);
 int		input_redirection(char *file_name);
 int		here_doc(char *end_of_block);
 int		out_redirection_trunc(char *file_name);
@@ -85,7 +85,7 @@ enum e_exp_state
 typedef struct s_exp_sm
 {
 	enum e_exp_state	state;
-	t_string		str;
+	t_string			str;
 }	t_exp_sm;
 
 typedef size_t	(*t_f_exp)(char *, t_exp_sm *, t_envwrap *);
