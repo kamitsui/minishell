@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 13:03:36 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:08:18 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ int	input(t_envwrap *env_wrapper)
 
 	while (1)
 	{
-		sig_signal_initializer(&sa_int, SIGINT, HANDLE_NORMAL);
-		sig_signal_initializer(&ignore_action, SIGQUIT, HANDLE_IGN);
+		signal_initializer(&sa_int, SIGINT, HANDLE_NORMAL);
+		signal_initializer(&ignore_action, SIGQUIT, HANDLE_IGN);
 		line = readline(PROMPT);
-		sig_signal_initializer(&sa_int, SIGINT, HANDLE_IGN);
+		signal_initializer(&sa_int, SIGINT, HANDLE_IGN);
 		if (line == NULL)
 		{
 			ft_dprintf(STDOUT_FILENO, "exit\n");

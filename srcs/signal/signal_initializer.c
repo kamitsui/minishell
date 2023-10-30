@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   signal_initializer.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 14:22:49 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/30 18:32:31 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:09:07 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "error_minishell.h"
 
-void	sig_signal_initializer(
+void	signal_initializer(
 			t_sigaction *act, int sig_type, t_Handler_Type type)
 {
 	static t_sig_handler	f_sig_handler[HANDLE_IGN]

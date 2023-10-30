@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:40:52 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 17:16:58 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:09:39 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	here_doc(char *end_of_block)
 		perror("fork");
 	else if (pid == 0)
 	{
-		sig_signal_initializer(&act_sigint, SIGINT, HANDLE_HEREDOC);
+		signal_initializer(&act_sigint, SIGINT, HANDLE_HEREDOC);
 		close(pipefd[READ_END]);
 		write_to_pipefd(pipefd[WRITE_END], end_of_block);
 	}
