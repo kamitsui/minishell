@@ -6,16 +6,15 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 19:23:19 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 12:51:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:12:57 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
-#include "minishell.h"
 #include "error_minishell.h"
 #include "libft.h"
 
-char	*dup_env_element(t_env *env_node)
+static char	*get_env_element(t_env *env_node)
 {
 	char	*env_element;
 
@@ -31,35 +30,9 @@ char	*dup_env_element(t_env *env_node)
 	return (env_element);
 }
 
-void	copy_env_element(char buff[BUFF_SIZE], t_env *env_node)
-{
-	size_t	buff_size;
-
-	buff_size = sizeof(char [BUFF_SIZE]);
-	ft_strlcpy(buff, env_node->key, buff_size);
-	ft_strlcat(buff, "=", buff_size);
-	ft_strlcat(buff, env_node->val, buff_size);
-}
-
-char	*get_env_element(char buff[BUFF_SIZE], t_env *env_node)
-{
-	size_t	len;
-
-	len = ft_strlen(env_node->key) + ft_strlen(env_node->val);
-	if (len + 1 > BUFF_SIZE)
-		return (dup_env_element(env_node));
-	else
-	{
-		copy_env_element(buff, env_node);
-		return (buff);
-	}
-}
-
 char	**convert_env_list_to_two_darray(t_list *env_list)
 {
 	char		**env;
-	char		*env_element;
-	char		buff[BUFF_SIZE];
 	t_list		*crnt;
 	const int	lstsize = ft_lstsize(env_list);
 	int			i;
@@ -73,10 +46,7 @@ char	**convert_env_list_to_two_darray(t_list *env_list)
 	crnt = env_list;
 	while (i < lstsize)
 	{
-		env_element = get_env_element((char *)buff, crnt->content);
-		env[i] = ft_strdup(env_element);
-		if (sizeof(env_element) > BUFF_SIZE)
-			free(env_element);
+		env[i] = get_env_element(crnt->content);
 		crnt = crnt->next;
 		i++;
 	}
