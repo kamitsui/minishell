@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   call_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:17:23 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 13:04:29 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:58:47 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,24 @@ static int	handle_error_export(char *unexpected_token)
 
 int	call_export(t_ast *node, t_envwrap *env_wrapper)
 {
-	char	*key_or_full;
-	char	*val_or_null;
+	char	*envline;
 	size_t	i;
 	int		status;
 
 	status = EXIT_SUCCESS;
-	key_or_full = NULL;
-	val_or_null = NULL;
+	envline = NULL;
 	if (node->num_children == 0)
-		ft_export(env_wrapper, key_or_full, val_or_null);
+		ft_export(env_wrapper, envline);
 	else
 	{
 		i = 0;
 		while (i < node->num_children)
 		{
-			key_or_full = node->children[i]->value;
-			if (is_valid_export_variable(key_or_full) == true)
-				ft_export(env_wrapper, key_or_full, val_or_null);
+			envline = node->children[i]->value;
+			if (is_valid_export_variable(envline) == true)
+				ft_export(env_wrapper, envline);
 			else
-				status = handle_error_export(key_or_full);
+				status = handle_error_export(envline);
 			i++;
 		}
 	}

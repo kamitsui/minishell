@@ -6,11 +6,10 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:58:19 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/20 14:42:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:27:09 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "ft_exit.h"// remove by kamitsui ( compile error : file not found )
 #include "environ.h"
 
 void	ft_exit(int status, t_envwrap *env_wrap)

@@ -6,14 +6,15 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 22:52:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/25 12:47:03 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/30 13:40:57 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
+#include "error_minishell.h"
 
 //! for debug purpose - delete when submit
-void	_tkn_print_list(void *content)
+void	_tkn_print_list(void *content)//!
 {
 	t_token	*token;
 
@@ -37,18 +38,6 @@ void	_tkn_delete_list(void *content)
 	token = NULL;
 }
 
-// void	_tkn_assign_flg_to_char(void *content)
-// {
-// 	t_token	*token;
-// 	char	c;
-
-// 	if (!content)
-// 		return ;
-// 	token = content;
-// 	c = token->word[0];
-// 	token->flg = tkn_assign_flg_to_c(c);
-// }
-
 void	_tkn_assign_flg_to_str(void *content)
 {
 	t_token	*token;
@@ -61,7 +50,6 @@ void	_tkn_assign_flg_to_str(void *content)
 	token->flg = tkn_assign_flg_to_word(word);
 }
 
-// classify single and double ampersand and pipe
 void	_tkn_reassign_flg_to_operator(void *content)
 {
 	t_token	*token;
@@ -90,21 +78,12 @@ void	*_tkn_dup_content(void *content)
 		return (NULL);
 	oldnode = content;
 	newnode = ft_calloc(1, sizeof(t_token));
-	//todo error handle
+	if (!newnode)
+		ft_errno_exit("ft_calloc");
 	newnode->concat_idx = oldnode->concat_idx;
 	newnode->flg = oldnode->flg;
 	newnode->word = ft_strdup(oldnode->word);
+	if (!newnode->word)
+		ft_errno_exit("ft_strdup");
 	return ((void *)newnode);
 }
-
-// void   t_token_assign_flg_to_list(void *content)
-// {
-// 	t_token *token;
-// 	char    *word;
-
-// 	if (!content)
-// 		return ;
-// 	token = content;
-// 	word = token->word;
-// 	token->flg = tkn_get_correct_flg(word);
-// }

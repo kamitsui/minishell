@@ -6,18 +6,29 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:31:11 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/20 14:39:43 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:05:50 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cd.h"
 #include "environ.h"
-#include "libft.h"
+
+static void	update_pwd_oldpwd(t_envwrap *env_wrap, char *oldpath)
+{
+	char	*newpwd;
+	char	*oldpwd;
+
+	newpwd = ft_strjoin("PWD=", env_wrap->cwd);
+	oldpwd = ft_strjoin("OLDPWD=", oldpath);
+	free(oldpath);
+	ft_export(env_wrap, newpwd);
+	ft_export(env_wrap, oldpwd);
+}
 
 static int	ft_chdir(char *path, t_envwrap *env_wrap)
 {
 	int		sys_rtn;
-	char	*tmp;
+	char	*oldpath;
 
 	sys_rtn = chdir(path);
 	if (sys_rtn == SYSCALL_FAILED)
@@ -25,22 +36,16 @@ static int	ft_chdir(char *path, t_envwrap *env_wrap)
 		perror("cd");
 		return (SYSCALL_FAILED);
 	}
-	tmp = env_wrap->cwd;
+	oldpath = env_wrap->cwd;
 	env_wrap->cwd = ft_getcwd(env_wrap);
-	ft_export(env_wrap, "PWD", env_wrap->cwd);
-	ft_export(env_wrap, "OLDPWD", tmp);
-	// printf("PWD[%s]\nOLDPWD[%s]\n", env_get_value_by_key(env_wrap->env,"PWD"), env_get_value_by_key(env_wrap->env, "OLDPWD"));//! delete
-	free(tmp);
+	update_pwd_oldpwd(env_wrap, oldpath);
 	return (SYSCALL_SUCCESS);
 }
 
-//todo error handling not implimented
-//void	ft_cd(char *path, t_envwrap *env_wrap)
-int	ft_cd(char *path, t_envwrap *env_wrap)// fix return value type
+int	ft_cd(char *path, t_envwrap *env_wrap)
 {
 	char	*new_path;
 	int		sys_rtn;
-//	static const char	*error_msg = "No such file or directory";// added kamitsui
 
 	if (path == NULL)
 	{
@@ -51,9 +56,7 @@ int	ft_cd(char *path, t_envwrap *env_wrap)// fix return value type
 	{
 		sys_rtn = ft_chdir(path, env_wrap);
 	}
-	if (sys_rtn == SYSCALL_FAILED)// enable kamitsui
+	if (sys_rtn == SYSCALL_FAILED)
 		return (EXIT_FAILURE);
-//	(void)sys_rtn;// Add by kamitsui (compile error : use of undeclared identifier 'sys_rtn')
-//	return (sys_rtn);// 返すべき？？　未確認　by kamitsui
-	return (EXIT_SUCCESS);// added kamitsui
+	return (EXIT_SUCCESS);
 }
