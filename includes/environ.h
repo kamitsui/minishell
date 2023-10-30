@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:21:15 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 14:26:45 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:56:59 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_unset(t_envwrap *env_wrap, char *tgt_key);
 
 //* env_utils
 char	*env_get_value_by_key(t_list *env_head, char *key);
-t_env	*env_create_node_from_char(char *key_or_full, char *val_or_null);
+t_env	*env_create_node_from_char(char *envline);
 void	env_delete_t_envwrap(t_envwrap *env_wrap);
 
 //* env ft_lstiter funcs
@@ -63,7 +63,7 @@ void	_env_print_with_export(void *content);
 
 //* ft_export
 // void	ft_export(t_list **env_head, char *new_env);
-void	ft_export(t_envwrap *env_wrap, char *key_or_full, char *val_or_null);
+void	ft_export(t_envwrap *env_wrap, char *envline);
 
 //* ft_exit
 void	ft_exit(int status, t_envwrap *env_wrap);

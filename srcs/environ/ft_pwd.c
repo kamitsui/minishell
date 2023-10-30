@@ -6,13 +6,11 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 09:47:36 by mogawa            #+#    #+#             */
-/*   Updated: 2023/09/30 20:28:36 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/30 18:26:11 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
-// #include "ft_pwd.h"
-#include "libft.h"
 
 char	*ft_getcwd(t_envwrap *env_wrap)
 {
@@ -37,7 +35,6 @@ char	*ft_getcwd(t_envwrap *env_wrap)
 	return (abs_path);
 }
 
-//! 環境変数からｇ取る必要かも？folderが削除されたあとのPWDの挙動。
 void	ft_pwd(t_envwrap *env_wrap)
 {
 	char	*abs_path;

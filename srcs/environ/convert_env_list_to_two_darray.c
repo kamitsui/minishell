@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   convert_env_list_to_two_darray.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 19:23:19 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 12:51:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:36:16 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
 #include "minishell.h"
 #include "error_minishell.h"
-#include "libft.h"
 
 char	*dup_env_element(t_env *env_node)
 {
