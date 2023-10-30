@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/30 14:07:47 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/30 15:25:19 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,6 +95,12 @@ SRCS = main.c \
 	   here_doc.c \
 	   out_redirection.c \
 	   \
+	   exp_dquote.c \
+	   exp_letter.c \
+	   exp_squote.c \
+	   exp_var.c \
+	   count_variable_char.c \
+	   \
 	   exec_file.c \
 	   execute_command.c \
 	   get_arguments.c \
@@ -156,6 +162,7 @@ SRCS_DIR = ./srcs \
 		   ./srcs/execute_utils \
 		   ./srcs/traverse_utils \
 		   ./srcs/traverse_utils/fd_utils \
+		   ./srcs/traverse_utils/exp_state_machine_utils \
 		   ./srcs/environ \
 		   ./srcs/environ_utils \
 		   ./srcs/builtins \
