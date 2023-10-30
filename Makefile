@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/28 19:56:32 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/30 12:29:53 by mogawa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,9 @@ LIB_PRINTF_INC_DIR = $(LIB_PRINTF_DIR)/includes
 LIB_PRINTF = $(LIB_PRINTF_DIR)/libftprintf.a
 
 # Readline
+BREW_PATH = $(shell brew --prefix)
 LIB_RL = libreadline.dylib
-LIB_RL_DYLIB_PATH = $(shell find /opt/homebrew -name $(LIB_RL) 2>/dev/null)
+LIB_RL_DYLIB_PATH = $(shell find $(BREW_PATH) -name $(LIB_RL) 2>/dev/null)
 LIB_RL_LIB_DIR = $(dir $(LIB_RL_DYLIB_PATH))
 LIB_RL_INC_DIR = $(subst /lib/,/include,$(LIB_RL_LIB_DIR))
 
