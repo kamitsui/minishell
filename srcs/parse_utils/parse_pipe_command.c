@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:44:56 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 12:48:15 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:20:25 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ t_ast	*parse_pipe_command(char ***tokens, char *head_value)
 	node = create_node(NODE_PIPE_COM, head_value);
 	while (is_end(**tokens) == false && is_connector(**tokens) == false)
 	{
-		if (is_pipe(**tokens) == true && node->num_children > 0 && !is_end(**tokens))
+		if (is_pipe(**tokens) == true
+			&& node->num_children > 0 && !is_end(**tokens))
 			(*tokens)++;
 		value = get_simple_command_value(*tokens);
 		command_node = parse_simple_command(tokens, value);
 		node->num_children++;
-		node->children = (t_ast **)realloc(node->children,
-				node->num_children * sizeof(t_ast *));// use ft_realloc
+		node->children = (t_ast **)ft_realloc_tentative(node->children,
+				node->num_children * sizeof(t_ast *),
+				(node->num_children - 1) * sizeof(t_ast *));
 		node->children[node->num_children - 1] = command_node;
 		free(value);
 	}

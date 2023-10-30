@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_add_to_buff.c                                  :+:      :+:    :+:   */
+/*   count_variable_char.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 18:01:18 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 14:26:27 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/30 15:13:00 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/30 15:16:06 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "meta_minishell.h"
 #include "libft.h"
-#include "parse.h"
-#include "minishell.h"
-#include "error_minishell.h"
 
-void	str_add_to_buff(t_string *str, char c)
+static bool	is_allowed_variable_char(char c)
 {
-	if (str->len == BUFF_SIZE)
+	return (ft_isalnum(c) == true
+		|| c == META_UNDER_CHR || c == META_QUESTION_CHR);
+}
+
+size_t	count_variable_char(char *value)
+{
+	size_t	len;
+
+	len = 0;
+	if (ft_strncmp(value, "$?", 2) == 0)
+		len = 2;
+	else
 	{
-		str->out = str_join_to_out(str->out, str->buffer, str->len);
-		if (str->out == NULL)
-			ft_perror_exit("function fail : str_join_to_out");
-		ft_bzero(&str->buffer, BUFF_SIZE);
-		str->len = 0;
+		len++;
+		while (is_allowed_variable_char(value[len]) == true)
+		{
+			len++;
+			if (value[len] == META_QUESTION_CHR)
+				break ;
+		}
 	}
-	str->buffer[str->len] = c;
-	str->len++;
-	str->out_len++;
+	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:39:31 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/17 02:57:09 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:34:31 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	handle_connector(t_ast *node, t_envwrap *env_wrapper)
 		if (env_wrapper->exit_code != EXIT_SUCCESS)
 			return (EXIT_FAILURE);
 	}
-	else// (node->flag & BIT_OR_LIST)
+	else
 	{
 		if (env_wrapper->exit_code == EXIT_SUCCESS)
 			return (EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:11:45 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/23 19:51:45 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:21:06 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_executable_value(char **tokens)
 	{
 		if (is_redirection(*tokens) == true)
 		{
-			tokens += 2;//　エラーケースは未想定　例えば”>>"のみ
+			tokens += 2;
 			continue ;
 		}
 		add_token(&str, *tokens);

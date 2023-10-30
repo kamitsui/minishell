@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:25:44 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 12:57:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:21:34 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int	out_redirection_trunc(char *file_name, t_envwrap *env_wrapper)
+int	out_redirection_trunc(char *file_name)
 {
 	int	fdout;
 	int	status;
 
-	(void)env_wrapper;// case of no expansion
 	status = EXIT_FAILURE;
 	if (access(file_name, F_OK) == 0
 		&& access(file_name, W_OK) == -1)
@@ -46,12 +45,11 @@ int	out_redirection_trunc(char *file_name, t_envwrap *env_wrapper)
 	return (status);
 }
 
-int	out_redirection_append(char *file_name, t_envwrap *env_wrapper)
+int	out_redirection_append(char *file_name)
 {
 	int	fdout;
 	int	status;
 
-	(void)env_wrapper;// case of no expansion
 	status = EXIT_FAILURE;
 	if (access(file_name, F_OK) == 0
 		&& access(file_name, W_OK) == -1)

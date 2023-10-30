@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:55:37 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 12:57:54 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:03:53 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 static char	*get_token_in_parenthesis(char *value)
 {
 	t_string	str;
-	size_t	i;
-	char	*end;
+	size_t		i;
+	char		*end;
 
 	init_t_string(&str);
 	end = ft_strrchr(value, META_ROUND_BRACKET_RIGHT);

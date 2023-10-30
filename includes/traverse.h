@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 10:08:45 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/28 21:06:48 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:28:45 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		handle_command(t_ast *node, t_envwrap *env_wrapper);
 
 int		handle_simple_command(t_ast *node, t_envwrap *env_wrapper);
 
-int		handle_io_redirections(t_ast *node, t_envwrap *env_wrapper);
+int		handle_io_redirections(t_ast *node);
 
 # define PROMPT_HERE_DOC	"> "
 # define READ_END	0
@@ -61,15 +61,38 @@ void	handle_empty_node(t_ast **node, t_envwrap *env_wrapper);
  * @brief traverse_ast関数内で行う各ノードタイプ毎の関数を関数ポインタとして使う
  * （ステートマシンの制御手法）
  */
-typedef int	(*t_handle_node)(t_ast *node, t_envwrap *env_wrapper);
+typedef int		(*t_handle_node)(t_ast *node, t_envwrap *env_wrapper);
 
 int		buck_up_fd(int fd);
 void	recover_fd(int prev_fd, int recover_fd);
 
-typedef int	(*t_select_redirection)(char *, t_envwrap *);
-int		input_redirection(char *file_name, t_envwrap *env_wrapper);
-int		here_doc(char *end_of_block, t_envwrap *env_wrapper);
-int		out_redirection_trunc(char *file_name, t_envwrap *env_wrapper);
-int		out_redirection_append(char *file_name, t_envwrap *env_wrapper);
+typedef int		(*t_select_redirection)(char *);
+int		input_redirection(char *file_name);
+int		here_doc(char *end_of_block);
+int		out_redirection_trunc(char *file_name);
+int		out_redirection_append(char *file_name);
+
+// ----------- for handle_expansion.c -----------------
+enum e_exp_state
+{
+	EXP_LETTER,
+	EXP_DQUOTE,
+	EXP_SQUOTE,
+	EXP_VAR,
+	EXP_END
+};
+
+typedef struct s_exp_sm
+{
+	enum e_exp_state	state;
+	t_string			str;
+}	t_exp_sm;
+
+typedef size_t	(*t_f_exp)(char *, t_exp_sm *, t_envwrap *);
+size_t	exp_letter(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
+size_t	exp_dquote(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
+size_t	exp_squote(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
+size_t	exp_var(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
+size_t	count_variable_char(char *value);
 
 #endif

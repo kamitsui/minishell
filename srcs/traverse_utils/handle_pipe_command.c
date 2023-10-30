@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:45:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 12:58:19 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:04:23 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ static pid_t	create_process_in_pipe_com(
 	if (pid == -1)
 		ft_perror_exit("fork");
 	else if (pid == 0)
-		child_process_in_pipe_com(
-						pipefd, i, node, env_wrapper);
+		child_process_in_pipe_com(pipefd, i, node, env_wrapper);
 	else
 		parent_process_in_pipe_com(pipefd);
 	return (pid);

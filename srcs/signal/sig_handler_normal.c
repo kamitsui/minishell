@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_add_to_buff.c                                  :+:      :+:    :+:   */
+/*   sig_handler_normal.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 18:01:18 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 14:26:27 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/30 18:17:17 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/30 21:10:23 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "parse.h"
-#include "minishell.h"
-#include "error_minishell.h"
+#include <unistd.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
-void	str_add_to_buff(t_string *str, char c)
+static void	_sigint_normal(void)
 {
-	if (str->len == BUFF_SIZE)
-	{
-		str->out = str_join_to_out(str->out, str->buffer, str->len);
-		if (str->out == NULL)
-			ft_perror_exit("function fail : str_join_to_out");
-		ft_bzero(&str->buffer, BUFF_SIZE);
-		str->len = 0;
-	}
-	str->buffer[str->len] = c;
-	str->len++;
-	str->out_len++;
+	ft_putchar_fd('\n', STDERR_FILENO);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+}
+
+// type == HANDLE_NORMAL
+void	sig_handler_normal(int sig, siginfo_t *siginfo, void *ucontext)
+{
+	_sigint_normal();
+	(void)sig;
+	(void)siginfo;
+	(void)ucontext;
 }

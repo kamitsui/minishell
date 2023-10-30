@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 12:52:16 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:08:00 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@
  */
 static void	child_process(t_command command)
 {
-	char	*file;
+	char		*file;
 	t_sigaction	sa_int;
 	t_sigaction	sa_quit;
 
-	sig_signal_initializer(&sa_int, SIGINT, HANDLE_EXIT_SIGNUM);
-	sig_signal_initializer(&sa_quit, SIGQUIT, HANDLE_NORMAL);
+	signal_initializer(&sa_int, SIGINT, HANDLE_EXIT_SIGNUM);
+	signal_initializer(&sa_quit, SIGQUIT, HANDLE_NORMAL);
 	file = command.args[0];
 	exec_file(file, command.args, command.env);
 	ft_dprintf(STDERR_FILENO, "%s: %s: command not found\n", NAME, file);

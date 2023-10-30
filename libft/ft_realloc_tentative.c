@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_add_to_buff.c                                  :+:      :+:    :+:   */
+/*   ft_realloc_tentative.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 18:01:18 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 14:26:27 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/29 14:07:35 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/30 20:28:26 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
-#include "parse.h"
-#include "minishell.h"
-#include "error_minishell.h"
 
-void	str_add_to_buff(t_string *str, char c)
+void	*ft_realloc_tentative(void *ptr, size_t new_size, size_t old_size)
 {
-	if (str->len == BUFF_SIZE)
+	void	*new_ptr;
+
+	if (ptr == NULL)
+		return ((void *)malloc(new_size));
+	if (new_size == 0 || old_size > new_size)
+		return (NULL);
+	new_ptr = (void *)malloc(new_size);
+	if (new_ptr == NULL)
+		return (NULL);
+	else
 	{
-		str->out = str_join_to_out(str->out, str->buffer, str->len);
-		if (str->out == NULL)
-			ft_perror_exit("function fail : str_join_to_out");
-		ft_bzero(&str->buffer, BUFF_SIZE);
-		str->len = 0;
+		ft_memcpy(new_ptr, ptr, old_size);
+		free(ptr);
 	}
-	str->buffer[str->len] = c;
-	str->len++;
-	str->out_len++;
+	return (new_ptr);
 }

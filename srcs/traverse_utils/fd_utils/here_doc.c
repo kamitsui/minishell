@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:40:52 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 18:39:19 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:09:39 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,15 @@ static void	write_to_pipefd(int fd, char *end_of_block)
 	}
 	free(line);
 	close(fd);
-	exit(EXIT_SUCCESS);// exit(6);// ?????
+	exit(EXIT_SUCCESS);
 }
 
-int	here_doc(char *end_of_block, t_envwrap *env_wrapper)
+int	here_doc(char *end_of_block)
 {
 	int			pipefd[2];
 	pid_t		pid;
 	t_sigaction	act_sigint;
 
-	(void)env_wrapper;
 	if (pipe(pipefd) == -1)
 		perror("pipe");
 	pid = fork();
@@ -54,7 +53,7 @@ int	here_doc(char *end_of_block, t_envwrap *env_wrapper)
 		perror("fork");
 	else if (pid == 0)
 	{
-		sig_signal_initializer(&act_sigint, SIGINT, HANDLE_HEREDOC);
+		signal_initializer(&act_sigint, SIGINT, HANDLE_HEREDOC);
 		close(pipefd[READ_END]);
 		write_to_pipefd(pipefd[WRITE_END], end_of_block);
 	}

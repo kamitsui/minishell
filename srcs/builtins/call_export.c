@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:17:23 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 18:58:47 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/29 22:18:12 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "error_minishell.h"
 #include "ft_printf.h"
 
-static bool	is_valid_export_variable(char *str)
+bool	is_valid_export_variable(char *str)
 {
 	if (*str == '=' || ft_isdigit(*str) == true)
 		return (false);

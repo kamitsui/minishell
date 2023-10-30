@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_operator.c                                  :+:      :+:    :+:   */
+/*   sig_exit_signum.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 03:01:02 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 15:34:01 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/10/30 18:22:19 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/10/30 18:29:18 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
-#include "traverse.h"
+#include <signal.h>
+#include <stdlib.h>
 
-int	handle_operator(t_ast *node, t_envwrap *env_wrapper)
+// type == HANDLE_EXIT_SIGNUM
+void	sig_exit_signum(int sig, siginfo_t *siginfo, void *ucontext)
 {
-	if (node->flag & BIT_PARENTHESIS)
-		return (env_wrapper->exit_code);
-	else
-		return (env_wrapper->exit_code);
+	(void)siginfo;
+	(void)ucontext;
+	exit(sig);
 }

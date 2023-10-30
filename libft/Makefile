@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/08/14 21:22:43 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/10/29 20:42:57 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ FILES		=	ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint ft_strlen ft_mem
 				ft_count_words ft_islower ft_isupper ft_isxdigit \
 				ft_itoa_binary ft_strdel ft_strjoin_free \
 				ft_strncat ft_strnequ ft_strnew ft_strnlen ft_strtok ft_strtol \
-				ft_substr_exist ft_isenclosed
+				ft_substr_exist ft_isenclosed ft_realloc_tentative
 SRCS_DIR	=	./
 SRCS		=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS		=	$(SRCS:.c=.o)
