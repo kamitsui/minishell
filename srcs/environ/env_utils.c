@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:33:31 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/24 07:58:03 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/10/30 13:14:46 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_env	*env_create_node_from_char(char *key_or_full, char *val_or_null)
 //	char	*key;// disable by kamitsui ( compile error : unused variable )
 //	char	*value;// disable by kamitsui ( compile error : unused variable )
 	int		idx_of_equal;
+int   res = 0;//! fix later
 	t_env	*node;
 //	size_t	i;// disable by kamitsui ( compile error : unused variable )
 
@@ -45,10 +46,18 @@ t_env	*env_create_node_from_char(char *key_or_full, char *val_or_null)
 		return (NULL);
 	if (val_or_null == NULL)
 	{
-		idx_of_equal = ft_strchr(key_or_full, '=') - key_or_full;
-		//todo error handle
-		node->key = ft_substr(key_or_full, 0, idx_of_equal);
-		node->val = ft_strdup(&key_or_full[idx_of_equal + 1]);
+		res = ft_strchr(key_or_full, '=');
+		if (!res)
+		{
+			node->key = ft_strdup(key_or_full);
+			node->val = ft_strdup("");
+		}
+		else
+		{
+			idx_of_equal = ft_strchr(key_or_full, '=') - key_or_full;
+			node->val = ft_strdup(&key_or_full[idx_of_equal + 1]);
+			node->key = ft_substr(key_or_full, 0, idx_of_equal);
+		}
 	}
 	else
 	{
