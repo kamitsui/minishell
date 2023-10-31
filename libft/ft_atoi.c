@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:50:40 by mogawa            #+#    #+#             */
-/*   Updated: 2023/08/10 22:07:24 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:55:49 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@
 //		return (0);
 //}
 
-//static long	ft_check_overflow_atoi(bool is_minus, long num, int base, char c)
+//static long	ft_check_overflow_atoi(
+//					bool is_minus, long num, int base, char c)
 //{
 //	long	digit;
 //

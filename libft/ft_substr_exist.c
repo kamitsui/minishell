@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:27:09 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/14 15:08:59 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:56:50 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ bool	ft_substr_exist(char *haystack, char *needle)
 	size_t	len;
 
 	len = ft_strlen(haystack);
-	return (ft_strnstr(haystack, needle, len) != NULL ||
-			ft_strnstr(haystack, needle, len) != NULL);
+	return (ft_strnstr(haystack, needle, len) != NULL
+		|| ft_strnstr(haystack, needle, len) != NULL);
 }
