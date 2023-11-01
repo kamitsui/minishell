@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:21:15 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 18:56:59 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/01 17:06:35 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	_env_print_with_export(void *content);
 void	ft_export(t_envwrap *env_wrap, char *envline);
 
 //* ft_exit
-void	ft_exit(int status, t_envwrap *env_wrap);
+void	ft_exit(int status);
 
 // env_listからchar **env(二次元配列)にコンバートする関数
 char	**convert_env_list_to_two_darray(t_list *env);

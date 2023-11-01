@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   call_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:16:27 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 13:00:55 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:10:56 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	call_exit(t_ast *node, t_envwrap *env_wrapper)
 	int		status;
 	char	*value;
 
+	(void) env_wrapper;
 	status = EXIT_SUCCESS;
 	value = NULL;
 	if (node->num_children > 0)
@@ -69,7 +70,7 @@ int	call_exit(t_ast *node, t_envwrap *env_wrapper)
 				value = node->children[0]->value;
 				status = (int)ft_strtol(value, NULL, 10);
 			}
-			ft_exit(status, env_wrapper);
+			ft_exit(status);
 		}
 	}
 	else

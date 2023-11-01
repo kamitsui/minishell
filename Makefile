@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/10/30 21:06:40 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/11/01 17:09:36 by mogawa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -187,8 +187,7 @@ vpath %.c $(SRCS_DIR) $(SRCS_B_DIR)
 
 # Compile
 CC			=	cc
-# CFLAGS		=	-Wall -Wextra -Werror
-CFLAGS		=	-Wall -Wextra
+CFLAGS		=	-Wall -Wextra -Werror
 CF_LINK		=	-lreadline
 CF_DEP		=	-MMD -MP -MF $(@:$(OBJS_DIR)/%.o=$(DEPS_DIR)/%.d)
 CF_DYLIB = -L$(LIB_RL_LIB_DIR)

@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/30 14:15:45 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/01 17:11:44 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,6 @@ char	**token_controller(char *cmdline)
 	tokenized_lst_head = tkn_concater(tokenized_lst_head);
 	tkn_del_one_by_flg(&tokenized_lst_head, space);
 	dptr_cmds = tkn_create_dptrchar_from_list(tokenized_lst_head->next);
-	ft_lstiter(tokenized_lst_head, _tkn_delete_list);
+	ft_lstclear(&tokenized_lst_head, _tkn_delete_list);
 	return (dptr_cmds);
 }
