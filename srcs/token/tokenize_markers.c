@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 13:13:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/30 17:21:55 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/02 16:14:46 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	tkn_mark_to_concat_on_flg(t_list *cmdlst, t_flg const to_concat[])
 	size_t	i;
 	size_t	idx;
 
-	idx = 0;
+	idx = 1;
 	crnt = cmdlst->next;
 	while (crnt)
 	{
