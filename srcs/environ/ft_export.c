@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:49:27 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/30 19:06:10 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/02 12:36:30 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void	add_new_env_node_to_list(t_envwrap *env_wrap, t_list *to_add)
 			prev = crnt->prev;
 			to_add->prev = prev;
 			to_add->next = next;
-			next->prev = to_add;
+			if (next != NULL)
+				next->prev = to_add;
 			prev->next = to_add;
 			ft_lstdelone(crnt, _env_del_content);
 			return ;
