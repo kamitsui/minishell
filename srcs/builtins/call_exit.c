@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:16:27 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/01 17:10:56 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/02 15:18:04 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,22 @@ static void	handle_error_nurmeric_args(char *value)
 	exit (255);
 }
 
+static int	get_status(t_ast *node)
+{
+	int	status;
+
+	status = EXIT_SUCCESS;
+	if (node->num_children == 1)
+		status = (int)ft_strtol(node->children[0]->value, NULL, 10);
+	return (status);
+}
+
 int	call_exit(t_ast *node, t_envwrap *env_wrapper)
 {
 	int		status;
 	char	*value;
 
 	(void) env_wrapper;
-	status = EXIT_SUCCESS;
 	value = NULL;
 	if (node->num_children > 0)
 		value = node->children[0]->value;
@@ -65,11 +74,7 @@ int	call_exit(t_ast *node, t_envwrap *env_wrapper)
 			handle_error_too_many_args(STR_EXIT);
 		else
 		{
-			if (node->num_children == 1)
-			{
-				value = node->children[0]->value;
-				status = (int)ft_strtol(value, NULL, 10);
-			}
+			status = get_status(node);
 			ft_exit(status);
 		}
 	}

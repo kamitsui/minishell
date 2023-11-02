@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/11/01 17:09:36 by mogawa           ###   ########.fr        #
+#    Updated: 2023/11/02 15:45:24 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SRCS = main.c \
 	   is_squote.c \
 	   is_dquote.c \
 	   is_variable.c \
+	   is_tilde.c \
 	   is_end.c \
 	   is_include_redirection.c \
 	   is_include_pipe_command.c \
@@ -100,6 +101,7 @@ SRCS = main.c \
 	   exp_letter.c \
 	   exp_squote.c \
 	   exp_var.c \
+	   exp_tilde.c \
 	   count_variable_char.c \
 	   \
 	   exec_file.c \
@@ -250,6 +252,7 @@ asan: fclean
 clean:
 	rm -rf $(OBJS_DIR) $(DEPS_DIR) $(OBJS_GNL_DIR) $(DEPS_GNL_DIR)
 	make -C ./libft clean
+	make -C ./ft_printf clean
 
 # Clean and remove target
 fclean: clean
