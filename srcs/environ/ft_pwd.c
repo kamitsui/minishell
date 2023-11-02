@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 09:47:36 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/30 18:26:11 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/02 15:07:07 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 char	*ft_getcwd(t_envwrap *env_wrap)
 {
 	char	*abs_path;
-	char	*buf;
 
-	buf = NULL;
-	abs_path = getcwd(buf, UNDEFINED);
+	abs_path = getcwd(NULL, UNDEFINED);
 	if (abs_path == NULL)
 	{
 		abs_path = env_get_value_by_key(env_wrap->env, "PWD");
