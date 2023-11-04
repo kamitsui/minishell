@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 10:37:40 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 14:24:29 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:33:10 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char	*get_substr_env(char *name, char *env[])
 			break ;
 		i++;
 	}
+	if (env[i] == NULL)
+		return (ft_strdup(""));
 	dir = (char *)ft_strdup(env[i] + name_len + 1);
 	if (dir == NULL)
 		return (NULL);
