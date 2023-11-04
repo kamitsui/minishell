@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 21:08:18 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/02 12:59:12 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 
 	g_flag = 0;
 	tokens = token_controller(line);
+	if (tokens == NULL)
+		return (env_wrapper->exit_code);
 	ast = parse(tokens);
 	if (g_flag == 0)
 		status = traverse_ast(ast, env_wrapper);

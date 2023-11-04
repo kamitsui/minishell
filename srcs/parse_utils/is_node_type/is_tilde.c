@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_add_to_buff.c                                  :+:      :+:    :+:   */
+/*   is_tilde.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 18:01:18 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/02 14:27:07 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/11/02 13:19:42 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/11/02 15:57:37 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "meta_minishell.h"
 #include "libft.h"
-#include "parse.h"
-#include "minishell.h"
-#include "error_minishell.h"
+#include <stdbool.h>
 
-void	str_add_to_buff(t_string *str, char c)
+bool	is_tilde(const char *token)
 {
-	if (str->len == BUFF_SIZE)
-	{
-		str->out = str_join_to_out(str->out, str->buffer, str->len);
-		if (str->out == NULL)
-			ft_perror_exit("str_join_to_out");
-		ft_bzero(&str->buffer, BUFF_SIZE);
-		str->len = 0;
-	}
-	str->buffer[str->len] = c;
-	str->len++;
-	str->out_len++;
+	if (token == NULL)
+		return (false);
+	return (ft_strcmp(token, META_TILDE) == 0
+		|| ft_strncmp(token, "~/", 2) == 0);
 }

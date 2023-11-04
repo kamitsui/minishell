@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 10:08:45 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 17:28:45 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:55:00 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ enum e_exp_state
 	EXP_DQUOTE,
 	EXP_SQUOTE,
 	EXP_VAR,
+	EXP_TILDE,
 	EXP_END
 };
 
@@ -93,6 +94,7 @@ size_t	exp_letter(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
 size_t	exp_dquote(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
 size_t	exp_squote(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
 size_t	exp_var(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
+size_t	exp_tilde(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
 size_t	count_variable_char(char *value);
 
 #endif

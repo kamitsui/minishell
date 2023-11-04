@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 14:06:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:22:31 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ enum	e_NodeType
 
 # define NUM_NOT_STRING		4
 # define NUM_REDIRECTION	4
-# define NUM_EXPANSION		3
+# define NUM_EXPANSION		4
 # define NUM_GET_FLAG		10
 
 /**
@@ -186,6 +186,8 @@ bool	is_expansion(const char *token);
 bool	is_dquote(const char *token);
 bool	is_squote(const char *token);
 bool	is_variable(const char *token);
+bool	is_tilde(const char *token);
+
 bool	is_end(const char *token);
 
 bool	is_include_redirection(char **tokens);

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:09:06 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 15:33:28 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:26:17 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void	expansion(char **value, t_envwrap *env_wrapper)
 	t_exp_sm		machine;
 	char			*current_value;
 	size_t			ret;
-	static t_f_exp	f_expansion[4]
-		= {exp_letter, exp_dquote, exp_squote, exp_var};
+	static t_f_exp	f_expansion[EXP_END]
+		= {exp_letter, exp_dquote, exp_squote, exp_var, exp_tilde};
 
 	init_exp_sm(&machine);
 	current_value = *value;

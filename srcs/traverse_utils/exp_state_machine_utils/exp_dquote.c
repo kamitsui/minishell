@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:20:12 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 17:12:55 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:45:00 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "expansion.h"
 #include "traverse.h"
 #include "meta_minishell.h"
+#include "error_minishell.h"
 
 static size_t	add_dquote_token(
 				char *value, t_exp_sm *machine, t_envwrap *env_wrapper)
@@ -29,6 +30,8 @@ static size_t	add_dquote_token(
 		if (value[i] == '$' && len_var > 1)
 		{
 			str_dquote = ft_strndup(value + i, len_var);
+			if (str_dquote == NULL)
+				ft_perror_exit("ft_strndup");
 			expand_dollar_sign_on_char(&str_dquote, env_wrapper);
 			add_token(&machine->str, str_dquote);
 			free(str_dquote);
