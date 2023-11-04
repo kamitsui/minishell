@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 18:58:10 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/01 17:11:44 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/05 05:26:19 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	tkn_concat_id_initializer(t_list *dummyhead)
 {
 	t_list	*crnt;
 	t_token	*token;
-	size_t	i;
+	int		i;
 
 	crnt = dummyhead->next;
 	i = 0;
@@ -86,7 +86,7 @@ void	tkn_concat_id_initializer(t_list *dummyhead)
 	{
 		token = crnt->content;
 		token->concat_idx = i;
-		if (i > SIZE_MAX - 1)
+		if (i > INT_MAX - 1)
 		{
 			ft_perror_exit("number of chars in input passed \
 									the max allowed amount");
