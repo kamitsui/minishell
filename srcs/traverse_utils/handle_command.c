@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 17:18:48 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/05 19:42:23 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,22 @@
 #include "error_minishell.h"
 #include "ft_printf.h"
 #include <signal.h>
+#include <termios.h>
+#include <unistd.h>
 
 int	handle_executable(t_ast *node, t_envwrap *env_wrapper)
 {
-	int	status;
+	int				status;
+	struct termios	term_attr;
 
+	tcgetattr(STDIN_FILENO, &term_attr);
 	if (node->flag & BIT_EMPTY)
 		return (EXIT_SUCCESS);
 	if (is_builtins_command(node->value) == true)
 		status = execute_builtins_command(node, env_wrapper);
 	else
 		status = execute_command(node, env_wrapper);
+	tcsetattr(STDIN_FILENO, TCSANOW, &term_attr);
 	if (status == (0x80 | SIGINT))
 		ft_printf("\n");
 	if (status == (0x80 | SIGQUIT))
