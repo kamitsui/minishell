@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 22:52:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/30 13:40:57 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/05 05:18:53 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	_tkn_print_list(void *content)//!
 	if (!content)
 		return ;
 	token = content;
-	printf("list:[%s](flg:%d/catidx:%zu)\n", \
+	printf("list:[%s](flg:%d/catidx:%d)\n", \
 			token->word, token->flg, token->concat_idx);
 }
 

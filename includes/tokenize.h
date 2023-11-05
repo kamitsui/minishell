@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/30 14:21:47 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/05 05:10:46 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_token
 {
 	char	*word;
 	t_flg	flg;
-	size_t	concat_idx;
+	int		concat_idx;
 }	t_token;
 
 typedef struct s_cmd
