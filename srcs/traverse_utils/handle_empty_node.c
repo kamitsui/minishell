@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:09:06 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 17:03:25 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/05 12:27:48 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ static void	adjust_executable_node(t_ast **node)
 		extract_argument_node(*node, tmp, &i);
 	free((*node)->value);
 	free((*node)->children);
+	free(*node);
 	*node = tmp;
 }
 
