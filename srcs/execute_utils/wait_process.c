@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 20:07:43 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/26 17:47:11 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:06:40 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int	wait_process(pid_t pid, int num_commands)
 	int	i;
 	int	status;
 
+	waitpid(pid, &status, 0);
 	i = 0;
 	while (i < num_commands - 1)
 	{
 		waitpid(-1, &status, 0);
 		i++;
 	}
-	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
