@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 20:07:43 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/06 15:06:40 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:30:32 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
  * 最後の終了ステータスを返す関数
  */
 #include <sys/wait.h>
+#include <stddef.h>
 
 /**
  * @brief コマンドの数分だけコマンド実行プロセスの終了を待ち、
@@ -35,7 +36,7 @@ int	wait_process(pid_t pid, int num_commands)
 	i = 0;
 	while (i < num_commands - 1)
 	{
-		waitpid(-1, &status, 0);
+		wait(NULL);
 		i++;
 	}
 	if (WIFEXITED(status))
