@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:52:12 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 22:18:22 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/04 21:48:49 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define STR_UNSET		"unset"
 # define STR_EXPORT		"export"
 # define STR_EXIT		"exit"
+
+# define OPTION_ECHO	"n"
 
 int		call_echo(t_ast *node, t_envwrap *env_wrapper);
 int		call_cd(t_ast *node, t_envwrap *env_wrapper);
