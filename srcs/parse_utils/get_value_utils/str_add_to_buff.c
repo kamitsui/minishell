@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:01:18 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/02 14:27:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/06 19:26:47 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void	str_add_to_buff(t_string *str, char c)
 {
-	if (str->len == BUFF_SIZE)
+	if (str->len == BUFF_SIZE - 1)
 	{
 		str->out = str_join_to_out(str->out, str->buffer, str->len);
 		if (str->out == NULL)
