@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:44:56 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/07 13:53:55 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:14:06 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,23 @@
 #include "libft.h"
 #include "parse.h"
 #include "error_minishell.h"
+#include "ft_signal.h"
 #include <stdlib.h>
+
+static void	add_simple_command_node(char ***tokens, t_ast *node)
+{
+	char	*value;
+	t_ast	*command_node;
+
+	value = get_simple_command_value(*tokens);
+	command_node = parse_simple_command(tokens, value);
+	node->num_children++;
+	node->children = (t_ast **)ft_realloc_tentative(node->children,
+			node->num_children * sizeof(t_ast *),
+			(node->num_children - 1) * sizeof(t_ast *));
+	node->children[node->num_children - 1] = command_node;
+	free(value);
+}
 
 /**
  * @brief \<pipe-command> のノードを作る関数
@@ -32,8 +48,6 @@
 t_ast	*parse_pipe_command(char ***tokens, char *head_value)
 {
 	t_ast	*node;
-	t_ast	*command_node;
-	char	*value;
 
 	node = create_node(NODE_PIPE_COM, head_value);
 	while (is_end(**tokens) == false && is_connector(**tokens) == false)
@@ -43,17 +57,12 @@ t_ast	*parse_pipe_command(char ***tokens, char *head_value)
 			(*tokens)++;
 		if (**tokens == NULL)
 		{
-			handle_syntax_error(**tokens);
+			handle_syntax_error(NULL);
 			break ;
 		}
-		value = get_simple_command_value(*tokens);
-		command_node = parse_simple_command(tokens, value);
-		node->num_children++;
-		node->children = (t_ast **)ft_realloc_tentative(node->children,
-				node->num_children * sizeof(t_ast *),
-				(node->num_children - 1) * sizeof(t_ast *));
-		node->children[node->num_children - 1] = command_node;
-		free(value);
+		add_simple_command_node(tokens, node);
+		if (g_flag == SIGINT)
+			break ;
 	}
 	return (node);
 }
