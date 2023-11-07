@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:45:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 17:04:23 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/06 22:24:19 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ static void	parent_process_in_pipe_com(int pipefd[2])
 {
 	close(pipefd[WRITE_END]);
 	if (dup2(pipefd[READ_END], STDIN_FILENO) == -1)
-	{
-		close(pipefd[READ_END]);
 		perror("dup2");
-	}
+	close(pipefd[READ_END]);
 	return ;
 }
 

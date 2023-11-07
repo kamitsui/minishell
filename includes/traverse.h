@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 10:08:45 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/02 13:55:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/06 22:33:29 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int		handle_io_redirections(t_ast *node);
 int		handle_pipe_command(t_ast *pipe_node, t_envwrap *env_wrapper);
 int		handle_parenthesis(t_ast *node, t_envwrap *env_wrapper);
 
+void	handle_here_doc(t_ast *node, t_envwrap *env_wrapper);
 void	handle_expansion(t_ast *node, t_envwrap *env_wrapper);
 void	handle_empty_node(t_ast **node, t_envwrap *env_wrapper);
 
