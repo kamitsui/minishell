@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:44:56 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 14:20:25 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/07 13:53:55 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
  */
 #include "libft.h"
 #include "parse.h"
+#include "error_minishell.h"
 #include <stdlib.h>
 
 /**
@@ -40,6 +41,11 @@ t_ast	*parse_pipe_command(char ***tokens, char *head_value)
 		if (is_pipe(**tokens) == true
 			&& node->num_children > 0 && !is_end(**tokens))
 			(*tokens)++;
+		if (**tokens == NULL)
+		{
+			handle_syntax_error(**tokens);
+			break ;
+		}
 		value = get_simple_command_value(*tokens);
 		command_node = parse_simple_command(tokens, value);
 		node->num_children++;
