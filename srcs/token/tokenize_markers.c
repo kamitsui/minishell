@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 13:13:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/09 06:46:20 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/09 07:35:39 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 #include "libft.h"
 #include "error_minishell.h"
 #include "ft_printf.h"
+#include "ft_signal.h"
 
 static void	check_paired(bool no_pair)
 {
 	if (no_pair == true)
 	{
 		ft_dprintf(STDERR_FILENO, "No closing quote\n");
-		exit(EXIT_FAILURE);
+		g_flag = EXIT_FAILURE;
 	}
 }
 
@@ -65,6 +66,8 @@ void	tkn_mark_quote_to_concatinate(t_list *cmdlst)
 		cmdlst = cmdlst->next;
 	}
 	check_paired(no_pair);
+	if (g_flag == EXIT_FAILURE)
+		return ;
 	idx--;
 }
 
