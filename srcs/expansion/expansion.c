@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 11:06:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/08 19:50:30 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/08 20:44:47 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	get_end(char const *str, size_t end, char sign)
 	{
 		if (str[end] == '?')
 			return (end + 1);
-		while (str[end] && (ft_isalnum(str[end])))
+		while (str[end] && (ft_isalnum(str[end]) || str[end] == '_'))
 			end++;
 	}
 	else
