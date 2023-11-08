@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/11/09 05:11:51 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/11/09 06:53:47 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,6 +107,7 @@ SRCS = main.c \
 	   \
 	   get_string.c \
 	   input_from_stdin.c \
+	   expansion_in_here_doc.c \
 	   \
 	   exec_file.c \
 	   execute_command.c \

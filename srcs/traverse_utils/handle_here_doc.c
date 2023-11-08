@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:44:55 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/09 05:12:29 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/09 06:47:18 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,14 @@ void	handle_here_doc(t_ast *node, t_envwrap *env_wrapper)
 
 	g_flag = 0;
 	if (node->type == NODE_COMMAND && node->num_children > 1)
+	{
 		if (node->children[0]->flag & BIT_HERE_DOC)
+		{
+			if (node->children[1]->flag & BIT_EXPANSION)
+				expansion_in_here_doc(&node->children[1]->value);
 			input_and_update(&node->children[1]->value);
+		}
+	}
 	if (g_flag != 0)
 		return ;
 	i = 0;
