@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 20:41:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/08 16:21:51 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/08 16:36:39 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	**get_alter_env(void)
 	dummy_env[2] = ft_strdup(\
 			"PATH=/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.");
 	pwd = getcwd(NULL, 0);
-	dummy_env[3] = ft_strdup(ft_strjoin("PWD=", pwd));
+	dummy_env[3] = ft_strjoin("PWD=", pwd);
 	free(pwd);
 	i = 0;
 	while (i < 3)
@@ -63,7 +63,6 @@ int	main(int argc, char *argv[], char *env[])
 {
 	int			status;
 	t_envwrap	*env_wrapper;
-	char		**environ;
 
 	if (*env == NULL)
 		env = get_alter_env();
