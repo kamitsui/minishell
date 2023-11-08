@@ -6,12 +6,13 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 22:52:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/05 05:18:53 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/09 06:51:31 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenize.h"
 #include "error_minishell.h"
+#include "ft_printf.h"
 
 //! for debug purpose - delete when submit
 void	_tkn_print_list(void *content)//!
@@ -21,7 +22,7 @@ void	_tkn_print_list(void *content)//!
 	if (!content)
 		return ;
 	token = content;
-	printf("list:[%s](flg:%d/catidx:%d)\n", \
+	ft_printf("list:[%s](flg:%d/catidx:%d)\n", \
 			token->word, token->flg, token->concat_idx);
 }
 
