@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/05 05:10:46 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/08 14:37:30 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,6 @@ typedef struct s_token
 	t_flg	flg;
 	int		concat_idx;
 }	t_token;
-
-typedef struct s_cmd
-{
-	t_list		*cmdline;
-	t_list		*input;
-	t_list		*output;
-	t_flg		flg;
-	char		**cmddpter;
-	char		*cmdname;
-}	t_cmd;
 
 void	_tkn_print_list(void *content);//! debug purpose so to be deleted
 void	_tkn_delete_list(void *content);
