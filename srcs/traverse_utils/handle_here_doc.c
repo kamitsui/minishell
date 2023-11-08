@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:44:55 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/07 14:12:50 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/09 03:57:33 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,22 @@ static char	*get_string(int fd)
 	return (saved);
 }
 
+static void	child_process_heredoc(int pipefd[], char *end_of_block)
+{
+	t_sigaction	act_sigint_child;
+
+	signal_initializer(&act_sigint_child, SIGINT, HANDLE_HEREDOC_CHILD);
+	close(pipefd[READ_END]);
+	input_from_stdin(pipefd[WRITE_END], end_of_block);
+}
+
 void	input_and_update(char **end_of_block)
 {
 	int			pipefd[2];
 	pid_t		pid;
-	t_sigaction	act_sigint;
+	t_sigaction	act_sigint_parent;
 
+	signal_initializer(&act_sigint_parent, SIGINT, HANDLE_HEREDOC_PARENT);
 	if (pipe(pipefd) == -1)
 		perror("pipe");
 	pid = fork();
@@ -75,9 +85,8 @@ void	input_and_update(char **end_of_block)
 		perror("fork");
 	else if (pid == 0)
 	{
-		signal_initializer(&act_sigint, SIGINT, HANDLE_HEREDOC);
-		close(pipefd[READ_END]);
-		input_from_stdin(pipefd[WRITE_END], *end_of_block);
+		signal_initializer(&act_sigint_parent, SIGINT, HANDLE_IGN);
+		child_process_heredoc(pipefd, *end_of_block);
 	}
 	else
 	{
@@ -87,7 +96,7 @@ void	input_and_update(char **end_of_block)
 		*end_of_block = get_string(pipefd[READ_END]);
 		close(pipefd[READ_END]);
 	}
-	signal_initializer(&act_sigint, SIGINT, HANDLE_IGN);
+	signal_initializer(&act_sigint_parent, SIGINT, HANDLE_IGN);
 }
 
 void	handle_here_doc(t_ast *node, t_envwrap *env_wrapper)
@@ -97,10 +106,14 @@ void	handle_here_doc(t_ast *node, t_envwrap *env_wrapper)
 	if (node->type == NODE_COMMAND && node->num_children > 1)
 		if (node->children[0]->flag & BIT_HERE_DOC)
 			input_and_update(&node->children[1]->value);
+	if (g_flag != 0)
+		return ;
 	i = 0;
 	while (i < node->num_children && node->type <= NODE_REDIRECTION)
 	{
 		handle_here_doc(node->children[i], env_wrapper);
+		if (g_flag != 0)
+			break ;
 		i++;
 	}
 }
