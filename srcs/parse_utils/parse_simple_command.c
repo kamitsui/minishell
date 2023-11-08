@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 14:19:25 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/08 11:37:48 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 	}
 	if (is_parenthesis(**tokens) == true)
 	{
+		handle_syntax_error(head_value);
 		node->flag |= BIT_PARENTHESIS;
 		(*tokens)++;
 		return (node);
