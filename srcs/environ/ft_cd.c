@@ -6,12 +6,13 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:31:11 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/02 15:18:48 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/08 17:51:38 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cd.h"
 #include "environ.h"
+#include "execute.h"
 
 static void	update_pwd_oldpwd(t_envwrap *env_wrap, char *oldpath, char *newpath)
 {
@@ -34,7 +35,10 @@ static int	ft_chdir(char *path, t_envwrap *env_wrap)
 	char	*oldpath;
 	char	*newpath;
 
-	sys_rtn = chdir(path);
+	if (path[0] == '/')
+		sys_rtn = chdir(path);
+	else
+		sys_rtn = chdir(join_path(env_wrap->cwd, path));
 	if (sys_rtn == SYSCALL_FAILED)
 	{
 		perror("cd");
