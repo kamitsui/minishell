@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 13:13:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/09 07:35:39 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/09 08:32:59 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	tkn_mark_quote_to_concatinate(t_list *cmdlst)
 	to_join = false;
 	no_pair = false;
 	cmdlst = cmdlst->next;
+	opening_flg = end;
 	while (cmdlst)
 	{
 		if (to_join == false && flg_is_quote(((t_token *)cmdlst->content)->flg))
