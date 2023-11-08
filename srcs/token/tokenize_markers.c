@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 13:13:43 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/09 08:32:59 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/09 08:36:56 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@
 #include "ft_printf.h"
 #include "ft_signal.h"
 
-static void	check_paired(bool no_pair)
+static bool	check_paired(bool no_pair)
 {
 	if (no_pair == true)
 	{
 		ft_dprintf(STDERR_FILENO, "No closing quote\n");
 		g_flag = EXIT_FAILURE;
+		return (false);
 	}
+	else
+		return (true);
 }
 
 static bool	add_idx(t_token *token, t_flg closing_flg, int *idx, bool *to_join)
@@ -66,8 +69,7 @@ void	tkn_mark_quote_to_concatinate(t_list *cmdlst)
 			no_pair = add_idx(cmdlst->content, closing, &idx, &to_join);
 		cmdlst = cmdlst->next;
 	}
-	check_paired(no_pair);
-	if (g_flag == EXIT_FAILURE)
+	if (!check_paired(no_pair))
 		return ;
 	idx--;
 }
