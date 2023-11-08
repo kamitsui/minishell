@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/06 22:27:52 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/08 18:54:40 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,22 @@ int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 	return (status);
 }
 
+static char	*call_readline(t_envwrap *env_wrapper)
+{
+	char		*line;
+	t_sigaction	sa_int;
+	t_sigaction	ignore_action;
+
+	g_flag = 0;
+	signal_initializer(&sa_int, SIGINT, HANDLE_NORMAL);
+	signal_initializer(&ignore_action, SIGQUIT, HANDLE_IGN);
+	line = readline(PROMPT);
+	if (g_flag > 0)
+		env_wrapper->exit_code = g_flag;
+	signal_initializer(&sa_int, SIGINT, HANDLE_IGN);
+	return (line);
+}
+
 /**
  * @brief プロンプト表示、<command-line>入力、<command-line>処理を行う関数\n
  * "exit"が入力されるまで上記処理を繰り返します\n
@@ -70,15 +86,10 @@ int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 int	input(t_envwrap *env_wrapper)
 {
 	char		*line;
-	t_sigaction	sa_int;
-	t_sigaction	ignore_action;
 
 	while (1)
 	{
-		signal_initializer(&sa_int, SIGINT, HANDLE_NORMAL);
-		signal_initializer(&ignore_action, SIGQUIT, HANDLE_IGN);
-		line = readline(PROMPT);
-		signal_initializer(&sa_int, SIGINT, HANDLE_IGN);
+		line = call_readline(env_wrapper);
 		if (line == NULL)
 		{
 			ft_dprintf(STDOUT_FILENO, "exit\n");
