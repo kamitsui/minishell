@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 19:23:19 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/08 17:12:55 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/08 19:46:49 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*get_env_element(t_env *env_node)
 	env_element = ft_strjoin_free(env_element, "=");
 	if (env_element == NULL)
 		ft_errno_exit("ft_strjoin_free");
-	if (ft_strcmp(env_node->val, "") != 0)
+	if (env_node->val != NULL)
 		env_element = ft_strjoin_free(env_element, env_node->val);
 	if (env_element == NULL)
 		ft_errno_exit("ft_strjoin_free");
