@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:33:31 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/31 15:42:03 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/08 14:51:28 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ t_env	*env_create_node_from_char(char *envline)
 	if (loc_of_equal == NULL)
 	{
 		node->key = ft_strdup(envline);
-		node->val = ft_strdup("");
-		if (!node->key || !node->val)
+		node->val = NULL;
+		if (!node->key)
 			ft_errno_exit("ft_strdup");
 	}
 	else
