@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:31:11 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/08 20:24:14 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/08 22:14:25 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,13 @@ static void	update_pwd_oldpwd(t_envwrap *env_wrap, char *oldpath, char *newpath)
 	free(oldpwd);
 }
 
-static char	**get_abs_path(char *path, char *cwd)
-{
-	return (path);
-	//todo 
-}
-
 static int	ft_chdir(char *path, t_envwrap *env_wrap)
 {
 	int		sys_rtn;
 	char	*oldpath;
 	char	*newpath;
 
-	if (path[0] == '/')
-		sys_rtn = chdir(path);
-	else
-		sys_rtn = chdir(get_abs_path(path, env_wrap->cwd));
-		// sys_rtn = chdir(join_path(env_wrap->cwd, path));
+	sys_rtn = chdir(path);
 	if (sys_rtn == SYSCALL_FAILED)
 	{
 		perror("cd");
