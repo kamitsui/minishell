@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/08 16:25:22 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:30:07 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,9 @@ static void	call_parse_executable(t_ast *node, char ***tokens)
 			continue ;
 		}
 		if (**tokens == NULL)
-		{
 			handle_syntax_error(**tokens);
+		if (g_flag == SIGINT)
 			break ;
-		}
 		add_executable_node(tokens, node);
 	}
 }
