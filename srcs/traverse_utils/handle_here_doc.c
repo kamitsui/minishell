@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:44:55 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/09 03:57:33 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/09 05:12:29 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,49 +19,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static void	input_from_stdin(int fd, char *end_of_block)
-{
-	char	*line;
-
-	write(STDIN_FILENO, PROMPT_HERE_DOC, ft_strlen(PROMPT_HERE_DOC));
-	line = get_next_line(STDIN_FILENO);
-	while (line != NULL)
-	{
-		if (ft_strncmp(line, end_of_block, ft_strlen(line) - 1) == 0)
-			break ;
-		write(fd, line, ft_strlen(line));
-		free(line);
-		write(STDIN_FILENO, PROMPT_HERE_DOC, ft_strlen(PROMPT_HERE_DOC));
-		line = get_next_line(STDIN_FILENO);
-	}
-	free(line);
-	close(fd);
-	exit(EXIT_SUCCESS);
-}
-
-static char	*get_string(int fd)
-{
-	char	buffer[BUFF_SIZE + 1];
-	ssize_t	bytes_read;
-	char	*saved;
-
-	saved = ft_strnew(1);
-	if (fd < 0 || BUFF_SIZE <= 0)
-		return (NULL);
-	bytes_read = read(fd, buffer, BUFF_SIZE);
-	if (bytes_read < 0)
-		return (NULL);
-	while (bytes_read > 0)
-	{
-		buffer[bytes_read] = '\0';
-		saved = ft_strjoin_free(saved, buffer);
-		bytes_read = read(fd, buffer, BUFF_SIZE);
-		if (bytes_read < 0)
-			ft_errno_exit("read");
-	}
-	return (saved);
-}
-
 static void	child_process_heredoc(int pipefd[], char *end_of_block)
 {
 	t_sigaction	act_sigint_child;
@@ -71,13 +28,24 @@ static void	child_process_heredoc(int pipefd[], char *end_of_block)
 	input_from_stdin(pipefd[WRITE_END], end_of_block);
 }
 
+static void	parent_process_heredoc(int pipefd[], pid_t pid, char **end_of_block)
+{
+	g_flag = wait_process(pid, 1);
+	close(pipefd[WRITE_END]);
+	free(*end_of_block);
+	*end_of_block = get_string(pipefd[READ_END]);
+	close(pipefd[READ_END]);
+}
+
 void	input_and_update(char **end_of_block)
 {
 	int			pipefd[2];
 	pid_t		pid;
 	t_sigaction	act_sigint_parent;
+	t_sigaction	act_sigquit;
 
 	signal_initializer(&act_sigint_parent, SIGINT, HANDLE_HEREDOC_PARENT);
+	signal_initializer(&act_sigquit, SIGQUIT, HANDLE_IGN);
 	if (pipe(pipefd) == -1)
 		perror("pipe");
 	pid = fork();
@@ -89,13 +57,7 @@ void	input_and_update(char **end_of_block)
 		child_process_heredoc(pipefd, *end_of_block);
 	}
 	else
-	{
-		g_flag = wait_process(pid, 1);
-		close(pipefd[WRITE_END]);
-		free(*end_of_block);
-		*end_of_block = get_string(pipefd[READ_END]);
-		close(pipefd[READ_END]);
-	}
+		parent_process_heredoc(pipefd, pid, end_of_block);
 	signal_initializer(&act_sigint_parent, SIGINT, HANDLE_IGN);
 }
 
@@ -103,6 +65,7 @@ void	handle_here_doc(t_ast *node, t_envwrap *env_wrapper)
 {
 	size_t	i;
 
+	g_flag = 0;
 	if (node->type == NODE_COMMAND && node->num_children > 1)
 		if (node->children[0]->flag & BIT_HERE_DOC)
 			input_and_update(&node->children[1]->value);

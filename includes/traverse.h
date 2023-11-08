@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 10:08:45 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/06 22:33:29 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/09 05:12:45 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,9 @@ size_t	exp_squote(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
 size_t	exp_var(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
 size_t	exp_tilde(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
 size_t	count_variable_char(char *value);
+
+// ----------- for handle_here_doc.c -----------------
+char	*get_string(int fd);
+void	input_from_stdin(int fd, char *end_of_block);
 
 #endif

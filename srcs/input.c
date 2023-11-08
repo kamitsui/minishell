@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/08 18:54:40 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/09 05:00:52 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,21 @@ int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 	int		status;
 	char	**tokens;
 	t_ast	*ast;
+	int		tmp_flag;
 
 	g_flag = 0;
 	tokens = token_controller(line);
 	if (tokens == NULL)
 		return (env_wrapper->exit_code);
 	ast = parse(tokens);
+	tmp_flag = g_flag;
 	handle_here_doc(ast, env_wrapper);
-	if (g_flag == 0)
+	if (g_flag == 0 && tmp_flag == 0)
 		status = traverse_ast(ast, env_wrapper);
+	else if (g_flag == EXIT_FAILURE)
+		status = EXIT_FAILURE;
 	else
-		status = g_flag;
+		status = tmp_flag;
 	free_two_darray(tokens);
 	free_ast(ast);
 	return (status);
