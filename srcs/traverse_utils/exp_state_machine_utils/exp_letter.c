@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 14:38:46 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/02 14:46:55 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/09 06:22:46 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "meta_minishell.h"
 #include "traverse.h"
 
-static size_t	check_valid_quote_value(char *value, t_exp_sm *machine)
+size_t	check_valid_quote_value(char *value, t_exp_sm *machine)
 {
 	size_t	len;
 

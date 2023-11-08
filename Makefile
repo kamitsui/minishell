@@ -105,6 +105,10 @@ SRCS = main.c \
 	   exp_tilde.c \
 	   count_variable_char.c \
 	   \
+	   get_string.c \
+	   input_from_stdin.c \
+	   expansion_in_here_doc.c \
+	   \
 	   exec_file.c \
 	   execute_command.c \
 	   get_arguments.c \
@@ -170,6 +174,7 @@ SRCS_DIR = ./srcs \
 		   ./srcs/traverse_utils \
 		   ./srcs/traverse_utils/fd_utils \
 		   ./srcs/traverse_utils/exp_state_machine_utils \
+		   ./srcs/traverse_utils/here_doc_utils \
 		   ./srcs/environ \
 		   ./srcs/environ_utils \
 		   ./srcs/builtins \

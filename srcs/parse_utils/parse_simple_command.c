@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 14:19:25 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:30:07 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,23 @@ static void	call_parse_io_redirections(t_ast *node, char ***tokens)
 	free(value);
 }
 
-static void	call_parse_executable(t_ast *node, char ***tokens)
+static void	add_executable_node(char ***tokens, t_ast *node)
 {
 	char	*value;
 	t_ast	*executable_node;
 
+	value = get_executable_value(*tokens);
+	executable_node = parse_executable(tokens);
+	node->num_children++;
+	node->children = (t_ast **)ft_realloc_tentative(node->children,
+			node->num_children * sizeof(t_ast *),
+			(node->num_children - 1) * sizeof(t_ast *));
+	node->children[node->num_children - 1] = executable_node;
+	free(value);
+}
+
+static void	call_parse_executable(t_ast *node, char ***tokens)
+{
 	while (is_end(**tokens) == false && is_connector(**tokens) == false
 		&& is_pipe(**tokens) == false)
 	{
@@ -50,14 +62,11 @@ static void	call_parse_executable(t_ast *node, char ***tokens)
 				(*tokens)++;
 			continue ;
 		}
-		value = get_executable_value(*tokens);
-		executable_node = parse_executable(tokens);
-		node->num_children++;
-		node->children = (t_ast **)ft_realloc_tentative(node->children,
-				node->num_children * sizeof(t_ast *),
-				(node->num_children - 1) * sizeof(t_ast *));
-		node->children[node->num_children - 1] = executable_node;
-		free(value);
+		if (**tokens == NULL)
+			handle_syntax_error(**tokens);
+		if (g_flag == SIGINT)
+			break ;
+		add_executable_node(tokens, node);
 	}
 }
 
@@ -81,6 +90,7 @@ t_ast	*parse_simple_command(char ***tokens, char *head_value)
 	}
 	if (is_parenthesis(**tokens) == true)
 	{
+		handle_syntax_error(head_value);
 		node->flag |= BIT_PARENTHESIS;
 		(*tokens)++;
 		return (node);

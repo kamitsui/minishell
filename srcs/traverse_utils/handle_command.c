@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/05 19:42:23 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/09 03:26:21 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	handle_executable(t_ast *node, t_envwrap *env_wrapper)
 	struct termios	term_attr;
 
 	tcgetattr(STDIN_FILENO, &term_attr);
-	if (node->flag & BIT_EMPTY)
+	if (((node->flag & BIT_EMPTY) > 0)
+		&& ((node->flag & (BIT_DQUOTE | BIT_SQUOTE)) == 0))
 		return (EXIT_SUCCESS);
 	if (is_builtins_command(node->value) == true)
 		status = execute_builtins_command(node, env_wrapper);

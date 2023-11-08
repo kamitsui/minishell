@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 21:08:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/08 11:25:42 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ int	execute_command(t_ast *command_node, t_envwrap *env_wrapper)
 	command.cmd_name = command_node->value;
 	get_arguments(&command, command_node);
 	command.env = convert_env_list_to_two_darray(env_wrapper->env->next);
+	if (command.env == NULL)
+	{
+		ft_dprintf(STDERR_FILENO, "environ variable is empty\n");
+		return (EXIT_FAILURE);
+	}
 	pid = fork();
 	if (pid == -1)
 		ft_perror_exit("fork");

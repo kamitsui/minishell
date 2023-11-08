@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */
+/*   Created: 2023/08/10 12:29:35 by kamitsui          #+#    #+#             */`
 /*   Updated: 2023/11/09 07:36:09 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -41,6 +41,7 @@ int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 	int		status;
 	char	**tokens;
 	t_ast	*ast;
+	int		tmp_flag;
 
 	g_flag = 0;
 	tokens = token_controller(line);
@@ -51,14 +52,33 @@ int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 		return (env_wrapper->exit_code);
 	}
 	ast = parse(tokens);
+	tmp_flag = g_flag;
 	handle_here_doc(ast, env_wrapper);
-	if (g_flag == 0)
+	if (g_flag == 0 && tmp_flag == 0)
 		status = traverse_ast(ast, env_wrapper);
+	else if (g_flag == EXIT_FAILURE)
+		status = EXIT_FAILURE;
 	else
-		status = g_flag;
+		status = tmp_flag;
 	free_two_darray(tokens);
 	free_ast(ast);
 	return (status);
+}
+
+static char	*call_readline(t_envwrap *env_wrapper)
+{
+	char		*line;
+	t_sigaction	sa_int;
+	t_sigaction	ignore_action;
+
+	g_flag = 0;
+	signal_initializer(&sa_int, SIGINT, HANDLE_NORMAL);
+	signal_initializer(&ignore_action, SIGQUIT, HANDLE_IGN);
+	line = readline(PROMPT);
+	if (g_flag > 0)
+		env_wrapper->exit_code = g_flag;
+	signal_initializer(&sa_int, SIGINT, HANDLE_IGN);
+	return (line);
 }
 
 /**
@@ -74,15 +94,10 @@ int	lets_go_shell(char *line, t_envwrap *env_wrapper)
 int	input(t_envwrap *env_wrapper)
 {
 	char		*line;
-	t_sigaction	sa_int;
-	t_sigaction	ignore_action;
 
 	while (1)
 	{
-		signal_initializer(&sa_int, SIGINT, HANDLE_NORMAL);
-		signal_initializer(&ignore_action, SIGQUIT, HANDLE_IGN);
-		line = readline(PROMPT);
-		signal_initializer(&sa_int, SIGINT, HANDLE_IGN);
+		line = call_readline(env_wrapper);
 		if (line == NULL)
 		{
 			ft_dprintf(STDOUT_FILENO, "exit\n");
