@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/11/09 08:24:30 by mogawa           ###   ########.fr        #
+#    Updated: 2023/11/10 14:02:53 by mogawa           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -164,7 +164,6 @@ SRCS_B =
 
 # Directories
 SRCS_DIR = ./srcs \
-		   ./srcs/token \
 		   ./srcs/expansion \
 		   ./srcs/tokenize_utils \
 		   ./srcs/parse_utils \
@@ -175,7 +174,6 @@ SRCS_DIR = ./srcs \
 		   ./srcs/traverse_utils/fd_utils \
 		   ./srcs/traverse_utils/exp_state_machine_utils \
 		   ./srcs/traverse_utils/here_doc_utils \
-		   ./srcs/environ \
 		   ./srcs/environ_utils \
 		   ./srcs/builtins \
 		   ./srcs/signal \
@@ -195,7 +193,7 @@ vpath %.c $(SRCS_DIR) $(SRCS_B_DIR)
 
 # Compile
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g3
+CFLAGS		=	-Wall -Wextra -Werror
 CF_LINK		=	-lreadline
 CF_DEP		=	-MMD -MP -MF $(@:$(OBJS_DIR)/%.o=$(DEPS_DIR)/%.d)
 CF_DYLIB = -L$(LIB_RL_LIB_DIR)
@@ -235,13 +233,6 @@ $(NAME): $(LIBFT) $(LIB_PRINTF) $(OBJS_GNL) $(OBJS)
 	$(CC) $(CFLAGS) $(CF_LINK) $(CF_DYLIB) \
 		$(OBJS) $(OBJS_GNL) $(LIB_PRINTF) -o $(NAME)
 
-# Bonus Target
-bonus: $(NAME)_bonus
-
-# Bonus Target
-$(NAME)_bonus: $(LIBFT) $(LIB_PRINTF) $(OBJS_B)
-	$(CC) $(CFLAGS) $(CF_LINK) $(CF_DYLIB) $(OBJS_B) $(LIBFT_PRINTF) -o $(NAME)_bonus
-
 # Library target
 $(LIB_PRINTF): $(LIBFT)
 	$(MAKE) -C $(LIB_PRINTF_DIR)
@@ -264,7 +255,6 @@ clean:
 fclean: clean
 	$(RM) $(LIBFT) $(LIB_PRINTF)
 	$(RM) $(NAME)
-#	$(RM) $(NAME)_bonus
 
 # Rebuild target
 re: fclean all
@@ -280,4 +270,4 @@ ifdef WITH_DEBUG
 CFLAGS = -Wall -g3 -O0 -fno-omit-frame-pointer
 endif
 
-.PHONY: debug asan all clean fclean re bonus
+.PHONY: debug asan all clean fclean re
