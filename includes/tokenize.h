@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:48:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/08 14:37:30 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/10 13:19:17 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define TOKENIZE_H
 
 # include "libft.h"
-# include "environ.h"
 
 typedef enum e_flg
 {
@@ -44,12 +43,10 @@ typedef struct s_token
 	int		concat_idx;
 }	t_token;
 
-void	_tkn_print_list(void *content);//! debug purpose so to be deleted
+void	_tkn_print_list(void *content);
 void	_tkn_delete_list(void *content);
-void	_tkn_assign_flg_to_char(void *content);
 void	_tkn_reassign_flg_to_operator(void *content);
 void	_tkn_assign_flg_to_str(void *content);
-void	*_tkn_dup_content(void *content);
 bool	flg_is_operator(t_flg flg);
 bool	flg_is_quote(t_flg div);
 t_flg	tkn_assign_flg_to_word(char *s);
