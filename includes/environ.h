@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:21:15 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/01 17:06:35 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/10 13:27:12 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # define ENVIRON_H
 
 # include <stdlib.h>
-// # include <stdbool.h>
 # include "libft.h"
 
 // for ft_pwd
@@ -54,7 +53,6 @@ void	ft_unset(t_envwrap *env_wrap, char *tgt_key);
 //* env_utils
 char	*env_get_value_by_key(t_list *env_head, char *key);
 t_env	*env_create_node_from_char(char *envline);
-void	env_delete_t_envwrap(t_envwrap *env_wrap);
 
 //* env ft_lstiter funcs
 void	_env_del_content(void *content);
@@ -62,7 +60,6 @@ void	_env_print_lst(void *content);
 void	_env_print_with_export(void *content);
 
 //* ft_export
-// void	ft_export(t_list **env_head, char *new_env);
 void	ft_export(t_envwrap *env_wrap, char *envline);
 
 //* ft_exit
