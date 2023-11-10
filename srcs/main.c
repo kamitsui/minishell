@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 20:41:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/08 16:38:51 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/10 13:03:01 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static char	**get_alter_env(void)
 	dummy_env[4] = NULL;
 	return (dummy_env);
 }
-
 
 /**
  * @brief minishellの入口　環境変数のデータをinput関数へ渡して、

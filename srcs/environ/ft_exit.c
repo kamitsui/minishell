@@ -6,12 +6,11 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:58:19 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/01 17:06:14 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/10 13:05:04 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
-
 
 void	ft_exit(int status)
 {
