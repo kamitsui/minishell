@@ -6,11 +6,10 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 11:06:25 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/08 20:44:47 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/10 13:46:53 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expansion.h"
 #include "environ.h"
 #include "libft.h"
 #include "error_minishell.h"

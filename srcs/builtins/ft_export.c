@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:49:27 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/08 19:44:21 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/10 13:36:00 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,6 @@ static void	add_new_env_node_to_list(t_envwrap *env_wrap, t_list *to_add)
 	ft_lstadd_back(&env_wrap->env, to_add);
 }
 
-/*
-@param1 env_wrap
-@param2 "key for env" OR "FULL env line"
-@param3 "val for env" OR NULL
-@brief	
-print out env if param2 == NULL
-set new env based on
-if param3 == NULL, use param2 as full line
-else
-use param2 as key and param3 as value
-*/
 void	ft_export(t_envwrap *env_wrap, char *envline)
 {
 	t_list	*new_list_node;

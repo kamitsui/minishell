@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 14:22:48 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/09 04:01:26 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/10 14:04:55 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define FT_SIGNAL_H
 
 # include <signal.h>
-# include <stdlib.h>
-# include <stdbool.h>
 
 typedef struct sigaction	t_sigaction;
 volatile sig_atomic_t		g_flag;

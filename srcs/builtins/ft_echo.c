@@ -6,10 +6,11 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:10:56 by mogawa            #+#    #+#             */
-/*   Updated: 2023/10/29 21:11:43 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:51:20 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdbool.h>
 #include "ft_echo.h"
 #include "libft.h"
 
@@ -41,7 +42,6 @@ static size_t	get_arg_start_idx(char **argv)
 	return (i);
 }
 
-//! no error handling implimented. no error exit implimented.
 void	ft_echo(char **argv)
 {
 	const size_t	last_idx = get_last_idx(argv);

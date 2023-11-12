@@ -6,13 +6,12 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:31:11 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/09 01:48:20 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:55:07 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cd.h"
 #include "environ.h"
-#include "execute.h"
 #include "ft_printf.h"
 
 static void	update_pwd_oldpwd(t_envwrap *env_wrap, char *oldpath, char *newpath)

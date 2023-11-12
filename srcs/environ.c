@@ -6,12 +6,11 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:28:22 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/08 16:26:29 by mogawa           ###   ########.fr       */
+/*   Updated: 2023/11/10 13:31:40 by mogawa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
-#include "ft_cd.h"
 #include "error_minishell.h"
 
 t_envwrap	*create_env_list(char **environ)
