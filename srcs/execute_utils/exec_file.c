@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:47:01 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/13 07:46:11 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 08:38:38 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include "error_minishell.h"
 #include "ft_printf.h"
 #include <stdlib.h>
-#include <stdbool.h>
 #include <unistd.h>
 #include <sys/errno.h>
 #include <limits.h>
