@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:17:23 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 22:18:12 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:42:57 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	handle_error_export(char *unexpected_token)
 	const char	*message = MSG_NOT_VALID;
 
 	ft_dprintf(STDERR_FILENO,
-		"%s: %s: `%s': %s\n", NAME, "export", unexpected_token, message);
+		"%s: %s: `%s': %s\n", PROGRAM_NAME, "export", unexpected_token, message);
 	return (EXIT_FAILURE);
 }
 

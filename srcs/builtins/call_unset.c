@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:17:56 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 22:35:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:43:35 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 static int	handle_error_unset(char *value)
 {
 	ft_dprintf(STDERR_FILENO, "%s: %s: `%s': %s\n",
-		NAME, STR_UNSET, value, "not a valid identifier");
+		PROGRAM_NAME, STR_UNSET, value, "not a valid identifier");
 	return (EXIT_FAILURE);
 }
 

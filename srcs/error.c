@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:05:41 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/28 21:51:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:45:00 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,14 @@
 #include <string.h>
 #include <unistd.h>
 
-/**
- * @brief システムコール以外のエラー処理。標準エラー出力へのメッセージ出力と、
- * エラーコードを終了ステータスとして返す関数。
- *
- * @param error_code エラー判定の内容
- */
-void	handle_error(int error_code)
-{
-	static char	*msg[ERR_NUM] = {MSG_ARG, MSG_CREATE_ENV};
-
-	ft_dprintf(STDERR_FILENO, msg[error_code]);
-	exit(error_code);
-}
-
 void	handle_syntax_error(char *unexpected_token)
 {
 	const char	*message = MSG_SYNTAX_ERR;
 
 	if (unexpected_token == NULL)
 		unexpected_token = MSG_NEW_LINE;
-	ft_dprintf(STDERR_FILENO, "%s: %s `%s'\n", NAME, message, unexpected_token);
+	ft_dprintf(STDERR_FILENO, "%s: %s `%s'\n",
+		PROGRAM_NAME, message, unexpected_token);
 	g_flag = SIGINT;
 }
 
@@ -54,7 +41,8 @@ void	put_error_message_from_errno(char *cause)
 
 	error_number = errno;
 	error_message = strerror(error_number);
-	ft_dprintf(STDERR_FILENO, "%s: %s: %s\n", NAME, cause, error_message);
+	ft_dprintf(STDERR_FILENO, "%s: %s: %s\n",
+		PROGRAM_NAME, cause, error_message);
 }
 
 /**

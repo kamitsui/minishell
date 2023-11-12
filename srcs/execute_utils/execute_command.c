@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:16:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/08 11:25:42 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:45:21 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "tokenize.h"
 #include "ft_printf.h"
 #include "ft_signal.h"
+#include "free_minishell.h"
 #include <unistd.h>
 #include <signal.h>
 
@@ -38,7 +39,8 @@ static void	child_process(t_command command)
 	signal_initializer(&sa_quit, SIGQUIT, HANDLE_NORMAL);
 	file = command.args[0];
 	exec_file(file, command.args, command.env);
-	ft_dprintf(STDERR_FILENO, "%s: %s: command not found\n", NAME, file);
+	ft_dprintf(STDERR_FILENO,
+		"%s: %s: command not found\n", PROGRAM_NAME, file);
 	exit (127);
 }
 

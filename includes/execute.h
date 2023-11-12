@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:59:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 20:16:27 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:34:02 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # define EXECUTE_H
 
 # include "parse.h"
-# include "free_minishell.h"
 # include "environ.h"
 
 /**

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:51:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 18:40:43 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:45:39 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	execute_script_file(char *file, t_envwrap *env_wrapper)
 	arguments[1] = NULL;
 	env = convert_env_list_to_two_darray(env_wrapper->env->next);
 	exec_file(path, arguments, env);
-	ft_dprintf(STDERR_FILENO, "%s: %s: No such file or directory\n", NAME, file);
+	ft_dprintf(STDERR_FILENO,
+		"%s: %s: No such file or directory\n", PROGRAM_NAME, file);
 	return (127);
 }

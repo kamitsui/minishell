@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 17:47:01 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/04 14:36:56 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:46:11 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void	exec_in_current_dir(char *file, char *arguments[], char *env[])
 	if (access(path, F_OK | X_OK) == 0)
 		execve(path, arguments, env);
 	free(path);
-	ft_dprintf(STDERR_FILENO, "%s: %s: No such file or directory\n", NAME, file);
+	ft_dprintf(STDERR_FILENO,
+		"%s: %s: No such file or directory\n", PROGRAM_NAME, file);
 	exit (127);
 }
 
@@ -94,7 +95,8 @@ void	exec_file(char *file, char *arguments[], char *env[])
 		if (access(file, F_OK | X_OK) == 0)
 		{
 			execve(file, arguments, env);
-			ft_dprintf(STDERR_FILENO, "%s: %s: is a directory\n", NAME, file);
+			ft_dprintf(STDERR_FILENO,
+				"%s: %s: is a directory\n", PROGRAM_NAME, file);
 			exit (126);
 		}
 		put_error_message_from_errno(file);
