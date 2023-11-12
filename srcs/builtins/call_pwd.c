@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:18:50 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 17:59:04 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 08:32:17 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,3 @@ int	call_pwd(t_ast *node, t_envwrap *env_wrapper)
 	ft_pwd(env_wrapper);
 	return (EXIT_SUCCESS);
 }
-// pwd の失敗ケースは存在しないのでは？？？
