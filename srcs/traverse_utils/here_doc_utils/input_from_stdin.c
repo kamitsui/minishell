@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 05:12:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/13 09:57:20 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 10:19:17 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	input_from_stdin(int fd, char *end_of_block)
 	while (line != NULL)
 	{
 		len = ft_strlen(end_of_block);
-		if (ft_strncmp(line, end_of_block, len - 1) == 0
+		if (ft_strncmp(line, end_of_block, len) == 0
 			&& line[len] == '\n')
 			break ;
 		write(fd, line, ft_strlen(line));
