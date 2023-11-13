@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 23:04:36 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/27 20:28:32 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:47:09 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,43 +17,12 @@
 #ifndef ERROR_MINISHELL_H
 # define ERROR_MINISHELL_H
 
-/**
- * @brief minishell実行時に引数が渡された時のエラーメッセージ
- * @note 要検討（引数を渡してもいいのでは？未調査）
- */
-# define MSG_ARG		"Error: argument out of specification\
-							-> Usage \"./minishell\"\n"
+# include "minishell.h"
 
-# define MSG_CREATE_ENV	"Error: create_env_list function\n"
 # define MSG_SIGQUIT	"Quit: 3\n"
 
-/**
- * @brief handle_error関数に渡すエラーコード
- * @details
- * ERR_ARG : minishell実行時に引数が存在した時のエラー処理\n
- * ERR_READLINE : read_line関数のエラー処理\n
- * ERR_CREATE_ENV : create_env_list関数のエラー処理\n
- * ERR_NUM : put_error_message関数（error_code関数のヘルパー関数）で使用
- * @note 要検討（ERR_ARGはいらないかも...）
- */
-enum	e_error_code
-{
-	ERR_ARG,
-	ERR_CREATE_ENV,
-	ERR_NUM
-};
-
-/**
- * @brief システムコール失敗時のエラーメッセージに使う
- */
-# define NAME			"minishell"
-
-/**
- * @brief システムコール以外のエラー処理。標準エラー出力へのメッセージ出力と、
- * エラーコードを終了ステータスとして返す関数。
- */
-void	handle_error(int error_code);
 void	handle_syntax_error(char *unexpected_token);
+
 # define MSG_SYNTAX_ERR	"syntax error near unexpected token"
 # define MSG_NEW_LINE	"newline"
 # define MSG_NOT_VALID	"not a valid identifier"

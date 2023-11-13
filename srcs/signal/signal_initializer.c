@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 14:22:49 by mogawa            #+#    #+#             */
-/*   Updated: 2023/11/09 03:58:47 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:25:13 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 #include "libft.h"
 #include "error_minishell.h"
 
+/**
+ * @brief シグナルの初期化関数
+ *
+ * @param act セットするシグアクションの構造体
+ * @param sig_type 初期化の対象となるシグナル
+ * @param type セットしたいシグナルハンドラーの種類
+ */
 void	signal_initializer(
 			t_sigaction *act, int sig_type, t_Handler_Type type)
 {

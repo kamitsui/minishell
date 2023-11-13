@@ -6,7 +6,7 @@
 #    By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 16:04:53 by mogawa            #+#    #+#              #
-#    Updated: 2023/11/10 14:02:53 by mogawa           ###   ########.fr        #
+#    Updated: 2023/11/13 09:33:17 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,6 +104,7 @@ SRCS = main.c \
 	   exp_var.c \
 	   exp_tilde.c \
 	   count_variable_char.c \
+	   init_exp_sm.c \
 	   \
 	   get_string.c \
 	   input_from_stdin.c \

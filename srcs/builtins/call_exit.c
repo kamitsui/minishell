@@ -6,7 +6,7 @@
 /*   By: mogawa <mogawa@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:16:27 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/02 15:18:04 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:42:44 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ static void	handle_error_too_many_args(char *value)
 {
 	ft_dprintf(STDERR_FILENO, "%s\n", STR_EXIT);
 	ft_dprintf(STDERR_FILENO, "%s: %s: %s\n",
-		NAME, value, "too many arguments");
+		PROGRAM_NAME, value, "too many arguments");
 }
 
 static void	handle_error_nurmeric_args(char *value)
 {
 	ft_dprintf(STDERR_FILENO, "%s\n", STR_EXIT);
 	ft_dprintf(STDERR_FILENO, "%s: %s: %s\n",
-		NAME, value, "numeric argument required");
+		PROGRAM_NAME, value, "numeric argument required");
 	exit (255);
 }
 

@@ -6,15 +6,13 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 05:09:33 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/09 05:14:25 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:55:45 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "traverse.h"
 #include "libft.h"
-#include "get_next_line.h"
 #include "error_minishell.h"
-#include <stdlib.h>
+#include "minishell.h"
 #include <unistd.h>
 
 char	*get_string(int fd)

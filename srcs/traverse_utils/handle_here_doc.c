@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 21:44:55 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/09 06:47:18 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:48:58 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	parent_process_heredoc(int pipefd[], pid_t pid, char **end_of_block)
 	close(pipefd[READ_END]);
 }
 
-void	input_and_update(char **end_of_block)
+static void	input_and_update(char **end_of_block)
 {
 	int			pipefd[2];
 	pid_t		pid;
@@ -50,7 +50,7 @@ void	input_and_update(char **end_of_block)
 		perror("pipe");
 	pid = fork();
 	if (pid == -1)
-		perror("fork");
+		ft_errno_exit("fork");
 	else if (pid == 0)
 	{
 		signal_initializer(&act_sigint_parent, SIGINT, HANDLE_IGN);

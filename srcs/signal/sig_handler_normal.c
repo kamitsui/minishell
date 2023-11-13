@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:17:17 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/08 18:41:28 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:18:15 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,13 @@ static void	_sigint_normal(void)
 	rl_redisplay();
 }
 
-// type == HANDLE_NORMAL
+/**
+ * @brief minishellのプロンプト入力時の、SIGINTに対するシグナルハンドラー
+ *
+ * @param sig SIGINT
+ * @param siginfo 不使用
+ * @param ucontext 不使用
+ */
 void	sig_handler_normal(int sig, siginfo_t *siginfo, void *ucontext)
 {
 	_sigint_normal();

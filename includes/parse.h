@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/02 13:22:31 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 08:52:53 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,8 @@ enum	e_NodeType
 };
 
 /**
- * @brief [<simple-command>] + [<io-redirection>]*
- * @detail
- * <sinmple-command> が1個 もしくは\n
- * <io-redirection> が1~n個　もしくは\n
- * <io-redirection> + <simple-command> が1個　順序不同\n
+ * @detail ノードの情報を node->flag にBIT単位で情報を付与する。
+ * 使う時はexpansionやコマンド実行する時など、情報を参照して処理を変える。
  */
 # define BIT_OPERATOR			0x00000001
 # define BIT_COMMAND			0x00000002
@@ -90,7 +87,6 @@ enum	e_NodeType
  * @details get_node_flag関数 で使用 ( create_node.c 内のヘルパー関数 )
  */
 
-# define NUM_NOT_STRING		4
 # define NUM_REDIRECTION	4
 # define NUM_EXPANSION		4
 # define NUM_GET_FLAG		10
@@ -153,24 +149,33 @@ t_ast	*parse_io_redirections(char **tokens, char *head_value);
 t_ast	*parse_file(char **tokens);
 t_ast	*parse_executable(char ***tokens);
 
+/**
+ * @brief ノードを作るときに、対象となるトークンを取り出す関数
+ */
 char	*get_command_value(char **tokens);
 char	*get_pipe_command_value(char **tokens);
 char	*get_one_pipe_command_value(char **tokens);
 char	*get_simple_command_value(char **tokens);
 char	*get_redirection_value(char **tokens);
-char	*get_redirection_value_in_simple_command(char **tokens);
 char	*get_one_redirection_value(char **tokens);
 char	*get_executable_value(char **tokens);
 
+/**
+ * @brief t_stringの構造体を使った関数（基本関数）
+ */
 void	init_t_string(t_string *str);
 void	str_add_to_buff(t_string *str, char c);
 char	*str_join_to_out(const char *s1, const char *s2, size_t len2);
+
+/**
+ * @brief t_stringの構造体を使った関数（応用関数）
+ */
 void	add_token(t_string *str, char *tokens);
 void	add_redirection_token(t_string *str, char ***tokens);
 void	add_file_token(t_string *str, char ***tokens);
 
 /**
- * @brief 現在のトークンがオペレーターかどうか調べる関数
+ * @brief ノードの種類を調べる関数
  */
 bool	is_connector(const char *token);
 bool	is_and_list(const char *token);

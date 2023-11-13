@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   call_pwd.c                                         :+:      :+:    :+:   */
+/*   init_exp_sm.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/21 17:18:50 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/13 08:32:17 by kamitsui         ###   ########.fr       */
+/*   Created: 2023/11/13 09:31:57 by kamitsui          #+#    #+#             */
+/*   Updated: 2023/11/13 09:34:20 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
-#include "environ.h"
+#include "traverse.h"
 
-int	call_pwd(t_ast *node, t_envwrap *env_wrapper)
+void	init_exp_sm(t_exp_sm *machine)
 {
-	(void)node;
-	ft_pwd(env_wrapper);
-	return (EXIT_SUCCESS);
+	machine->state = EXP_LETTER;
+	init_t_string(&machine->str);
 }

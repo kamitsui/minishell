@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 10:06:24 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/21 14:51:30 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:19:13 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,56 +14,56 @@
  * @file debug.h
  * @brief 各種デバッグ関数を使用するための関数宣言
  */
-#ifndef DEBUG_H
-# define DEBUG_H
-
-# include "tokenize.h"
-# include "parse.h"
-# include "execute.h"
-# include <fcntl.h>
-
-int	g_fd_log;// disable when review
-int	g_flag_debug;// disable when review
-
-enum e_flag_debug
-{
-	DEBUG_OFF,
-	DEBUG_ON
-};
-
-# define DEBUG_COLOR "\n\x1B[100m\x1B[37m"
-
-void	enable_debug(int flag);
-
-int		open_log(const char *file_name, int oflag);
-
-/**
- * @brief 文字列をデバッグ出力
- */
-void	debug_input(char *line);
-
-/**
- * @brief tokenize関数で生成されたトークンをデバッグ出力
- */
-void	debug_token(char **tokens);
-
-void	debug_env_two_darray(char **tokens);
-
-/**
- * @brief parse関数で生成されたASTをデバッグ出力\n
- * 全てのノードと子ノードをデバッグ出力する
- */
-void	debug_ast(t_ast *ast);
-
-void	debug_parse(const char *call_by, t_ast *node);
-void	debug_flag(t_ast *node);
-
-/**
- * @brief execute関数内で実行するコマンドの要素をデバッグ出力
- */
-void	debug_command(t_command *command);
-
-void	debug_status(const char *call_by, int status);
-void	debug_leaks(char *call_by_func, char *target);
-
-#endif
+//#ifndef DEBUG_H
+//# define DEBUG_H
+//
+//# include "tokenize.h"
+//# include "parse.h"
+//# include "execute.h"
+//# include <fcntl.h>
+//
+//int	g_fd_log;// disable when review
+//int	g_flag_debug;// disable when review
+//
+//enum e_flag_debug
+//{
+//	DEBUG_OFF,
+//	DEBUG_ON
+//};
+//
+//# define DEBUG_COLOR "\n\x1B[100m\x1B[37m"
+//
+//void	enable_debug(int flag);
+//
+//int		open_log(const char *file_name, int oflag);
+//
+///**
+// * @brief 文字列をデバッグ出力
+// */
+//void	debug_input(char *line);
+//
+///**
+// * @brief tokenize関数で生成されたトークンをデバッグ出力
+// */
+//void	debug_token(char **tokens);
+//
+//void	debug_env_two_darray(char **tokens);
+//
+///**
+// * @brief parse関数で生成されたASTをデバッグ出力\n
+// * 全てのノードと子ノードをデバッグ出力する
+// */
+//void	debug_ast(t_ast *ast);
+//
+//void	debug_parse(const char *call_by, t_ast *node);
+//void	debug_flag(t_ast *node);
+//
+///**
+// * @brief execute関数内で実行するコマンドの要素をデバッグ出力
+// */
+//void	debug_command(t_command *command);
+//
+//void	debug_status(const char *call_by, int status);
+//void	debug_leaks(char *call_by_func, char *target);
+//
+//#endif

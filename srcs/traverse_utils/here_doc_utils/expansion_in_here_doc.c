@@ -6,14 +6,11 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 05:29:04 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/09 06:52:42 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:54:10 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
-#include "environ.h"
 #include "expansion.h"
-#include "error_minishell.h"
 #include "meta_minishell.h"
 #include "traverse.h"
 
