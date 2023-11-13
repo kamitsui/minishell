@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:55:37 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 17:03:53 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:39:01 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,14 @@ static char	*get_token_in_parenthesis(char *value)
 	return (str.out);
 }
 
-int	sub_minishell(char *value, t_envwrap *env_wrapper)
+static int	sub_minishell(char *value, t_envwrap *env_wrapper)
 {
 	char	*token;
-	int		pipefd[2];
 	pid_t	pid;
 
 	token = get_token_in_parenthesis(value);
 	if (is_parenthesis(token) == true)
 		return (EXIT_FAILURE);
-	if (pipe(pipefd) == -1)
-		ft_perror_exit("pipe");
 	pid = fork();
 	if (pid == -1)
 		ft_perror_exit("fork");

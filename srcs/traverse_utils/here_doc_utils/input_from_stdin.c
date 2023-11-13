@@ -6,14 +6,13 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 05:12:08 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/09 05:58:12 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:57:20 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "traverse.h"
 #include "libft.h"
 #include "get_next_line.h"
-#include <stdlib.h>
 #include <unistd.h>
 
 void	input_from_stdin(int fd, char *end_of_block)

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 10:08:45 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/13 08:08:41 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:42:39 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	init_exp_sm(t_exp_sm *machine);
 
 typedef size_t	(*t_f_exp)(char *, t_exp_sm *, t_envwrap *);
 size_t	exp_letter(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
-size_t	check_valid_quote_value(char *value, t_exp_sm *machine);
 size_t	exp_dquote(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
 size_t	exp_squote(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);
 size_t	exp_var(char *value, t_exp_sm *machine, t_envwrap *env_wrapper);

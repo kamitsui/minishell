@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:04:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/09 03:26:21 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:28:01 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #include <termios.h>
 #include <unistd.h>
 
-int	handle_executable(t_ast *node, t_envwrap *env_wrapper)
+static int	handle_executable(t_ast *node, t_envwrap *env_wrapper)
 {
 	int				status;
 	struct termios	term_attr;

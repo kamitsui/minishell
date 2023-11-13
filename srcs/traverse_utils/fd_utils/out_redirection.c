@@ -6,14 +6,13 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:25:44 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/30 17:21:34 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:52:22 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
 #include "error_minishell.h"
 #include <fcntl.h>
-#include <stdio.h>
 #include <unistd.h>
 
 int	out_redirection_trunc(char *file_name)

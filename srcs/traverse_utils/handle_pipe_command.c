@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:45:34 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/06 22:24:19 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:40:40 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static pid_t	create_process_in_pipe_com(
 	return (pid);
 }
 
-int	handle_one_pipe_command(t_ast *node, t_envwrap *env_wrapper)
+static int	handle_one_pipe_command(t_ast *node, t_envwrap *env_wrapper)
 {
 	int		pipefd[2];
 	size_t	i;

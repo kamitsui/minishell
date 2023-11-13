@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:09:06 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/09 06:52:59 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:32:33 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 #include "error_minishell.h"
 #include "meta_minishell.h"
 #include "traverse.h"
-
-void	init_exp_sm(t_exp_sm *machine)
-{
-	machine->state = EXP_LETTER;
-	init_t_string(&machine->str);
-}
 
 static void	expansion(char **value, t_envwrap *env_wrapper)
 {
