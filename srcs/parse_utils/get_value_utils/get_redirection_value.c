@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:58:10 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/10/29 12:44:34 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 08:52:33 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,6 @@
 #include <stdlib.h>
 
 char	*get_redirection_value(char **tokens)
-{
-	t_string	str;
-
-	init_t_string(&str);
-	while (is_connector(*tokens) == false && is_end(*tokens) == false)
-	{
-		if (is_pipe(*tokens) == true)
-		{
-			while (is_connector(*tokens) == false && is_end(*tokens) == false
-				&& is_include_pipe_command(tokens) == true)
-				tokens++;
-		}
-		if (is_redirection(*tokens) == true)
-		{
-			add_redirection_token(&str, &tokens);
-			add_file_token(&str, &tokens);
-		}
-		else
-			tokens++;
-	}
-	str.out = str_join_to_out(str.out, str.buffer, str.len);
-	return (str.out);
-}
-
-char	*get_redirection_value_in_simple_command(char **tokens)
 {
 	t_string	str;
 

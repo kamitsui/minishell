@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:27:05 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/08 16:30:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 08:52:16 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	call_parse_io_redirections(t_ast *node, char ***tokens)
 	char	*value;
 	t_ast	*redirection_node;
 
-	value = get_redirection_value_in_simple_command(*tokens);
+	value = get_redirection_value(*tokens);
 	redirection_node = parse_io_redirections(*tokens, value);
 	node->num_children++;
 	node->children = (t_ast **)ft_realloc_tentative(node->children,

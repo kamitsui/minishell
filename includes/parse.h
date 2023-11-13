@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:04:14 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/11/13 08:14:01 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/11/13 08:52:53 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,6 @@ char	*get_pipe_command_value(char **tokens);
 char	*get_one_pipe_command_value(char **tokens);
 char	*get_simple_command_value(char **tokens);
 char	*get_redirection_value(char **tokens);
-char	*get_redirection_value_in_simple_command(char **tokens);
 char	*get_one_redirection_value(char **tokens);
 char	*get_executable_value(char **tokens);
 
